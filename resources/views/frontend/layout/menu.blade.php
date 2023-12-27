@@ -102,7 +102,7 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-lg-3">
-                                        <div class="wsus__mega_menu_colum">
+                                        <div class="wsus__mega_menu_colum ">
                                             <h4>women</h4>
                                             <ul class="wsis__mega_menu_item">
                                                 <li><a href="#">New Arrivals</a></li>

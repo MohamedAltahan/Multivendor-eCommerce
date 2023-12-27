@@ -49,7 +49,25 @@
                 @include('admin.layouts.sidebar')
                 <!-- Main Content -->
                 <div class="main-content">
-                    @yield('content')
+
+                    <!-- Main Content -->
+                    <section class="section">
+                        <div class="section-header">
+                            <h1>@yield('mainTitle')</h1>
+                        </div>
+
+                        <div class="section-body">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="card">
+                                        @yield('content')
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
                 </div>
                 @include('admin.layouts.footer')
             </div>
