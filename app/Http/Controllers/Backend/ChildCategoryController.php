@@ -34,7 +34,7 @@ class ChildCategoryController extends Controller
     //get sub categories-----------------------------------------------------
     public function getSubCategories(Request $request)
     {
-        return $subCategories = SubCategory::where('category_id', $request->id)->where('status', 'active')->get();
+        return  SubCategory::where('category_id', $request->id)->get();
     }
 
     /**
@@ -68,9 +68,9 @@ class ChildCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        $categories = Category::all();
         $childCategory = ChildCategory::findOrFail($id);
-        $subCategories = SubCategory::where('category_id', $childCategory->category_id)->where('status', 'active')->get();
+        $categories = Category::all();
+        $subCategories = SubCategory::where('category_id', $childCategory->category_id)->get();
         return view('admin.child-category.edit', compact('categories', 'childCategory', 'subCategories'));
     }
 

@@ -13,6 +13,11 @@
             @csrf
 
             <div class="form-group">
+                <label for="">Banner previvew</label>
+                <br>
+                <img width="150px" src="{{ asset('uploads/' . $profile->banner) }}" alt="">
+            </div>
+            <div class="form-group">
                 <x-form.input name="banner" label="Banner Image" type="file" accept="image/*" class="form-control" />
             </div>
 

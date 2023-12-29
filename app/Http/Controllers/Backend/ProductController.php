@@ -1,0 +1,133 @@
+<?php
+
+namespace App\Http\Controllers\Backend;
+
+use App\DataTables\ProductDataTable;
+use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\ChildCategory;
+use App\Models\Product;
+use App\Models\SubCategory;
+use App\Traits\fileUploadTrait;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
+class ProductController extends Controller
+{
+    use fileUploadTrait;
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(ProductDataTable $dataTable)
+    {
+        return $dataTable->render('admin.product.index');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $product = new Product();
+        $categories = Category::get();
+        $brands = Brand::get();
+        return view('admin.product.create', compact('categories', 'brands', 'product'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+
+        $request->validate([
+            'image' => ['required', 'image', 'max:3000'],
+            'name' => ['required', 'max:200'],
+            'category_id' => ['required'],
+            'brand_id' => ['required'],
+            'price' => ['required'],
+            'quantity' => ['required'],
+            'short_description' => ['required', 'max: 600'],
+            'long_description' => ['required'],
+            'seo_title' => ['nullable', 'max:200'],
+            'seo_description' => ['nullable', 'max:250'],
+            'status' => ['required']
+        ]);
+        $product = new Product();
+        $productData = $request->except('image');
+        $productData['image'] = $this->fileUplaod($request, 'myDisk', 'product', 'image');
+        $productData['slug'] = Str::slug($request->name);
+        $productData['vendor_id'] = Auth::user()->vendor->id;
+        $product->create($productData);
+        toastr('Created successfully');
+        return redirect()->route('admin.products.index');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $product = Product::findOrFail($id);
+        $categories = Category::get();
+        $subCategories = SubCategory::where('category_id', $product->category_id)->get();
+        $childCategories = ChildCategory::where('sub_category_id', $product->sub_category_id)->get();
+        $brands = Brand::get();
+        return view('admin.product.edit', compact('product', 'categories', 'subCategories', 'childCategories', 'brands'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $request->validate([
+            'image' => ['image', 'max:3000'],
+            'name' => ['required', 'max:200'],
+            'category_id' => ['required'],
+            'brand_id' => ['required'],
+            'price' => ['required'],
+            'quantity' => ['required'],
+            'short_description' => ['required', 'max: 600'],
+            'long_description' => ['required'],
+            'seo_title' => ['nullable', 'max:200'],
+            'seo_description' => ['nullable', 'max:250'],
+            'status' => ['required']
+        ]);
+        $product = Product::find($id);
+        $productData = $request->except('image');
+
+        if ($request->hasFile('image')) {
+            $oldImagePath = $product->image;
+            $productData['image'] = $this->fileUpdate($request, 'myDisk', 'product', 'image', $oldImagePath);
+        }
+        $productData['slug'] = Str::slug($request->name);
+        $productData['vendor_id'] = Auth::user()->vendor->id;
+        $product->update($productData);
+        toastr('Updated successfully');
+        return redirect()->route('admin.products.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+    // get sub categories using ajax ------------------------------------------------
+    public function getchildCategories(Request $request)
+    {
+        return ChildCategory::where('sub_category_id', $request->id)->get();
+    }
+}

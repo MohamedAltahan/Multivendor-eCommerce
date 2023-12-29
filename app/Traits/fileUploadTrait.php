@@ -30,7 +30,7 @@ trait fileUploadTrait
         //takes (folderName,name of the disk )to store the file and returns the path
         // store() creates random rename to the file
         $path = $file->store($folderName, ['disk' => $diskName]);
-        //delete the old file from storage
+        //delete the old file from storage if exist
         if ($oldFileName != null && Storage::disk($diskName)->exists($oldFileName)) {
             Storage::disk($diskName)->delete($oldFileName);
         }

@@ -6,9 +6,11 @@ use App\Http\Controllers\Backend\AdminVendorProfileContorller;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\childCategoryController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Models\Brand;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -36,4 +38,8 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     //vendor Profile routes---------------------------------------------------------
     // Route::put('vendor/change-status', [BrandController::class, 'changeStatus'])->name('brand.change-status');
     Route::resource('vendor-profile', AdminVendorProfileContorller::class);
+    //products routes---------------------------------------------------------
+    // Route::put('vendor/change-status', [BrandController::class, 'changeStatus'])->name('brand.change-status');
+    Route::get('product/get-child-categories', [ProductController::class, 'getChildCategories'])->name('product.get-child-categories');
+    Route::resource('products', ProductController::class);
 });
