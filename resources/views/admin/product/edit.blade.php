@@ -24,38 +24,36 @@
             </div>
 
             <div class="row">
-                <div class="col-md-3">
+
+                <div class="col-md-2">
                     <div class="form-group">
                         <x-form.input name="price" label="Price" value="{{ old('price', $product->price) }}"
                             class="form-control" />
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="form-group">
                         <x-form.input name="offer_price" label="Offer price"
                             value="{{ old('offer_price', $product->offer_price) }}" class="form-control" />
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="form-group">
                         <x-form.input name="offer_start_date" type='date' label="Offer start date"
                             value="{{ old('offer_start_date', $product->offer_start_date) }}" class="form-control" />
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="form-group">
                         <x-form.input name="offer_end_date" type='date' label="Offer end data"
                             value="{{ old('offer_end_date', $product->offer_end_date) }}" class="form-control" />
                     </div>
                 </div>
-            </div>{{-- /row --}}
 
-            <div class="row">
-
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="">Product type</label>
                         <select name="product_type" class="form-control">
@@ -67,8 +65,7 @@
                         </select>
                     </div>
                 </div>
-
-            </div> {{-- /row  --}}
+            </div>{{-- /row --}}
 
             <div class="row">
                 <div class="col-md-4">
