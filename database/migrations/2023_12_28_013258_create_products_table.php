@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->text('image');
+            $table->text('image')->nullable();
+            $table->string('product_key');
             $table->foreignId('vendor_id')->constrained('vendors');
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('sub_category_id')->nullable()->constrained('sub_categories');
@@ -26,8 +27,8 @@ return new class extends Migration
             $table->text('long_description');
             $table->text('video_link')->nullable();
             $table->string('sku')->nullable();
-            $table->double('price');
-            $table->double('offer_price')->nullable();
+            $table->float('price');
+            $table->float('offer_price')->nullable();
             $table->date('offer_start_date')->nullable();
             $table->date('offer_end_date')->nullable();
             $table->enum('status', ['active', 'inactive']);

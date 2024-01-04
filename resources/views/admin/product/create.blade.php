@@ -6,13 +6,19 @@
         <h4>Create product</h4>
     </div>
     <div class="card-body">
-        <form action="{{ route('admin.products.store') }}" method="post" enctype="multipart/form-data">
+        {{-- used to append product photos after upload then using ajax --}}
+        <div id="product_images"></div>
+
+        <form class="dropzone mb-3" method="POST" id='myDropzone' enctype="multipart/form-data"
+            action="{{ route('admin.product.upload.images', $product_key) }}">
+            @csrf
+        </form>
+        {{-- <button type="submit" id="submit-all"> upload image</button> --}}
+
+        <form id="main-form" action="{{ route('admin.products.store') }}" method="post" enctype="multipart/form-data">
             @csrf
 
-            <div class="form-group">
-                <x-form.input name="image" label="Image" type="file" accept="image/*" class="form-control" />
-            </div>
-
+            <x-form.input name='product_key' type='hidden' value='{{ $product_key }}' />
             <div class="form-group">
                 <x-form.input name="name" label="Product name" value="{{ old('name', $product->name) }}"
                     label='Product name' class="form-control" />
@@ -61,10 +67,6 @@
                 </div>
 
             </div>{{-- /row --}}
-
-
-
-
 
             <div class="row">
                 <div class="col-md-4">
@@ -153,81 +155,294 @@
             </div>
 
             <div class="form-group">
-                <label for="">Status</label>
+                <label for="">Product Status</label>
                 <select name="status" id="" class="form-control ">
                     <option value="active" @selected(old('status', $product->status) == 'active')>Active</option>
                     <option value="inactive" @selected(old('status', $product->status) == 'inactive')>Inactive</option>
                 </select>
             </div>
-
-            <button type="submit" class="btn btn-primary">Create</button>
         </form>
+
+
+
+        <div class="col-12 ">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title" style="font-size: 20px;color:rgb(103, 103, 255)">
+                        Add more attribute like (color, size, ....)
+                    </div>
+
+                    <div id="accordion">
+
+                        <div class="accordion">
+                            <div class="accordion-header collapsed" role="button" data-toggle="collapse"
+                                data-target="#panel-body-1" aria-expanded="false">
+                                <h4>Chose from saved attributes
+                                </h4>
+                            </div>
+                            <div class="accordion-body collapse" id="panel-body-1" data-parent="#accordion">
+                                <h4>No attribute yet please add new attribute below</h4>
+                            </div>
+                        </div>
+
+                        <div class="accordion">
+
+                            <div class="accordion-header collapsed" role="button" data-toggle="collapse"
+                                data-target="#panel-body-2" aria-expanded="false">
+                                <h4>Click to Create new attributes like (color, size,..)
+                                </h4>
+                            </div>
+
+                            <div class="accordion-body collapse" id="panel-body-2" data-parent="#accordion">
+
+                                @csrf
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <x-form.input id="attribute" class=" form-control"
+                                            placeholder="Attribute like (color) " />
+                                    </div>
+
+                                    <div class="form-group col-md-6 ">
+                                        <x-form.input class="form-control" id="value"
+                                            placeholder="values like 'red-blue-green' separated by -" />
+                                    </div>
+
+                                    <div class="form-group col-md-2 ">
+                                        <button class="btn btn-primary add-variant-type">Save</button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="accordion">
+                            <div class="accordion-header collapsed" role="button" data-toggle="collapse"
+                                data-target="#panel-body-3" aria-expanded="false">
+                                <h4>Click to Create new attributes like (color, size,..)
+                                </h4>
+                            </div>
+
+                            <div class="accordion-body collapse" id="panel-body-3" data-parent="#accordion">
+                                <div class="row">
+                                    <div class="form-group col-md-2 ">
+                                        <x-form.input class="form-control" name="quantity" placeholder="Quantity" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6 ">
+                                        <x-form.input class="form-control" name="price" placeholder="Price" />
+                                    </div>
+                                    <div class="form-group col-md-6 ">
+                                        <x-form.input class="form-control" name="offer_price"
+                                            placeholder="Offer price" />
+                                    </div>
+                                </div>
+
+                                <label for="">Description</label>
+                                <textarea name="description" class="summernote"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <button type="submit" form="main-form" class="btn btn-primary">Create</button>
     </div>
-    {{-- scripts------------------------------------------------------------------------ --}}
+    {{-- ================================================================================================ --}}
+    {{-- push styles---------------------------------------------------------------------- --}}
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('backend/assets/css/dropzone.min.css') }}">
+    @endpush
+    {{-- push scripts----------------------------------------------------------------------- --}}
     @push('scripts')
+        {{-- dropZone scripts--------------------------- --}}
+        <script src="{{ asset('backend/assets/js/dropzone.min.js') }}"></script>
+
         <script>
-            $(document).ready(function() {
-                //get sub categories-----------------------------------------------------
-                $('body').on('change', '.main-category', function(e) {
-                    let id = $(this).val();
-                    $.ajax({
-                        method: 'GET',
-                        url: '{{ route('admin.get-sub-categories') }}',
-                        data: {
-                            id
-                        },
-                        success: function(data) {
-                            $('.sub-category').html(
-                                `<option value="">Select sub category</option>`);
-                            $('.child-category').html(
-                                `<option value="">Select child category</option>`);
-                            if (Object.entries(data).length === 0) {
-                                $('.sub-category').append(
-                                    `<option value="">No sub category</option>`
-                                );
-                            } else {
-                                $.each(data, function(index, item) {
-                                    $('.sub-category').append(
-                                        `<option value="${item.id}">${item.name}</option>`
-                                    );
-                                })
-                            }
-                        },
-                        error: function() {
-                            alert("e");
+            Dropzone.options.myDropzone = {
+
+                paramName: "file", // The name that will be used to transfer the file (by default is 'file')
+                maxFilesize: 10, // MB
+                acceptedFiles: 'image/*',
+                addRemoveLinks: true, //to add remove or cance buttons
+                //------------------------------------------------------
+                //if true the files will be upload once you chose it automatically'defaul:true'
+                //when you are ready to submit simply call myDropzone.processQueue().
+                // autoProcessQueue: false,
+                //-------------------------------------------------------
+                maxFiles: 20, //max number of uploaded files per product
+                //uploadMultiple: true, //upload all the file in one request or more it depends on 'parallelUploads' 'default:false'
+                parallelUploads: 20,
+                thumbnailWidth: 120, //default thumbnail width 120
+                thumbnailHeight: 120, //default thumbnail hieght 120
+                //----------------force rezise image---------------------------
+                resizeWidth: 200, //it cares about aspect when it resize ^_^
+                resizeHeight: null,
+                resizeQuality: 0.8, //defaul is 0.8 (from the original quality)
+                //-------------------------------------------------------------
+
+                init: function() {
+
+                    // var submitButton = document.querySelector("#submit-all")
+
+                    // if (autoProcessQueue: false)you well need this button to start upload manualy
+                    // submitButton.addEventListener("click", function() {
+                    //     myDropzone.processQueue(); // Tell Dropzone to process all queued files.
+                    // });
+
+                    // after each photo upload check state if the queue
+                    this.on("success", function() {
+                        //if all files have been uploaded
+                        if (this.getUploadingFiles().length == 0) {
+                            $.ajax({
+                                method: 'GET',
+                                url: '{{ route('admin.product.get-product-images') }}',
+                                data: {
+                                    product_key: '{{ $product_key }}'
+                                },
+                                success: function(data) {
+                                    $('#product_images').html(data);
+                                },
+                                error: function() {
+                                    alert('wait a while');
+                                }
+                            })
                         }
-                    })
+                    });
+                    // after upload all file clear drop box
+                    this.on("complete", function() {
+                        this.removeAllFiles();
+                    });
+
+
+                }
+            };
+        </script>
+        {{-- delete image by ajax--------------------------------------------------------/ --}}
+        <script>
+            $('body').on('click', '.delete-image', function(e) {
+                e.preventDefault();
+                //disable all delete buttons until the next request
+                $('.delete-image').prop('disabled', true);
+                $.ajax({
+                    method: 'DELETE',
+                    url: "{{ route('admin.product.delete-product-image') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        id: $(this).attr('id'),
+                        product_key: '{{ $product_key }}',
+                    },
+                    success: function(data) {
+                        $('#product_images').html(data);
+                    },
+                    error: function() {
+                        alert('Error');
+                    }
                 })
-                //get child categories--------------------------------------------------
-                $('body').on('change', '.sub-category', function(e) {
-                    let id = $(this).val();
-                    $.ajax({
-                        method: 'GET',
-                        url: '{{ route('admin.product.get-child-categories') }}',
-                        data: {
-                            id
-                        },
-                        success: function(data) {
-                            $('.child-category').html(
-                                `<option value="">Select child category</option>`);
-                            if (Object.entries(data).length === 0) {
-                                $('.child-category').append(
-                                    `<option value="">No child category</option>`
+            });
+        </script>
+        {{-- add product variant by ajax--------------------------------------------------------/ --}}
+        <script>
+            $('body').on('click', '.add-variant-type', function(e) {
+                e.preventDefault();
+                attribute = $('#attribute').val();
+                value = $('#value').val();
+                if (attribute == '') {
+                    alert("please enter the an 'attribute'")
+                    return false;
+                }
+                if (value == '') {
+                    alert("please enter the a 'value'")
+                    return false;
+                }
+                $.ajax({
+                    method: 'POST',
+                    url: "{{ route('admin.product-variant-types.store') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        product_key: '{{ $product_key }}',
+                        attribute: attribute,
+                        value: value,
+                    },
+                    success: function(data) {
+                        console.log(data);
+                    },
+                    error: function() {
+                        alert('Error');
+                    }
+                })
+            });
+        </script>
+
+        {{-- other scripts==================================================================== --}}
+        <script>
+            //get sub categories-----------------------------------------------------
+            $('body').on('change', '.main-category', function(e) {
+                let id = $(this).val();
+                $.ajax({
+                    method: 'GET',
+                    url: '{{ route('admin.get-sub-categories') }}',
+                    data: {
+                        id
+                    },
+                    success: function(data) {
+                        $('.sub-category').html(
+                            `<option value="">Select sub category</option>`);
+                        $('.child-category').html(
+                            `<option value="">Select child category</option>`);
+                        if (Object.entries(data).length === 0) {
+                            $('.sub-category').append(
+                                `<option value="">No sub category</option>`
+                            );
+                        } else {
+                            $.each(data, function(index, item) {
+                                $('.sub-category').append(
+                                    `<option value="${item.id}">${item.name}</option>`
                                 );
-                            } else {
-
-                                $.each(data, function(index, item) {
-                                    $('.child-category').append(
-                                        `<option value="${item.id}">${item.name}</option>`
-                                    );
-                                })
-                            }
-
-                        },
-                        error: function() {
-                            alert("e");
+                            })
                         }
-                    })
+                    },
+                    error: function() {
+                        alert("Error");
+                    }
+                })
+            })
+            //get child categories--------------------------------------------------
+            $('body').on('change', '.sub-category', function(e) {
+                let id = $(this).val();
+                $.ajax({
+                    method: 'GET',
+                    url: '{{ route('admin.product.get-child-categories') }}',
+                    data: {
+                        id
+                    },
+                    success: function(data) {
+                        $('.child-category').html(
+                            `<option value="">Select child category</option>`);
+                        if (Object.entries(data).length === 0) {
+                            $('.child-category').append(
+                                `<option value="">No child category</option>`
+                            );
+                        } else {
+
+                            $.each(data, function(index, item) {
+                                $('.child-category').append(
+                                    `<option value="${item.id}">${item.name}</option>`
+                                );
+                            })
+                        }
+
+                    },
+                    error: function() {
+                        alert("Error");
+                    }
                 })
             })
         </script>

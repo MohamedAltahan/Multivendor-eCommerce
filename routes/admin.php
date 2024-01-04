@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\childCategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ProductVariantTypesController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Models\Brand;
@@ -39,7 +40,16 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     // Route::put('vendor/change-status', [BrandController::class, 'changeStatus'])->name('brand.change-status');
     Route::resource('vendor-profile', AdminVendorProfileContorller::class);
     //products routes---------------------------------------------------------
+    //product images**
+    Route::get('products/get-prodcut-images', [ProductController::class, 'getProductImages'])->name('product.get-product-images');
+    Route::delete('products/delete-product-image', [ProductController::class, 'deleteProductImage'])->name('product.delete-product-image');
+    Route::post('products/product-images-uplaod/{product}', [ProductController::class, 'uploadProductImages'])->name('product.upload.images');
+    //product**
     // Route::put('vendor/change-status', [BrandController::class, 'changeStatus'])->name('brand.change-status');
     Route::get('product/get-child-categories', [ProductController::class, 'getChildCategories'])->name('product.get-child-categories');
     Route::resource('products', ProductController::class);
+    //product variant types
+    Route::resource('product-variant-types', ProductVariantTypesController::class);
+    //product variant
+    Route::resource('product-variant', ProductController::class);
 });

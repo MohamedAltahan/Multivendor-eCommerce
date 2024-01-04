@@ -8,10 +8,12 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\Product;
+use App\Models\ProductImages;
 use App\Models\SubCategory;
 use App\Traits\fileUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -22,6 +24,7 @@ class ProductController extends Controller
      */
     public function index(ProductDataTable $dataTable)
     {
+
         return $dataTable->render('admin.product.index');
     }
 
@@ -33,7 +36,9 @@ class ProductController extends Controller
         $product = new Product();
         $categories = Category::get();
         $brands = Brand::get();
-        return view('admin.product.create', compact('categories', 'brands', 'product'));
+        //used to connect the product with its images
+        $product_key = uniqid();
+        return view('admin.product.create', compact('categories', 'brands', 'product', 'product_key'));
     }
 
     /**
@@ -43,7 +48,6 @@ class ProductController extends Controller
     {
 
         $request->validate([
-            'image' => ['required', 'image', 'max:3000'],
             'name' => ['required', 'max:200'],
             'category_id' => ['required'],
             'brand_id' => ['required'],
@@ -58,6 +62,7 @@ class ProductController extends Controller
         $product = new Product();
         $productData = $request->except('image');
         $productData['image'] = $this->fileUplaod($request, 'myDisk', 'product', 'image');
+        $productData['product_key'] = $request->product_key;
         $productData['slug'] = Str::slug($request->name);
         $productData['vendor_id'] = Auth::user()->vendor->id;
         $product->create($productData);
@@ -129,5 +134,36 @@ class ProductController extends Controller
     public function getchildCategories(Request $request)
     {
         return ChildCategory::where('sub_category_id', $request->id)->get();
+    }
+    //product image upload---------------------------------------------------------
+    public function uploadProductImages(Request $request, $id)
+    {
+        if ($request->hasFile('file')) {
+            $imagePath = $this->fileUplaod($request, 'myDisk', 'prodctsGallery', 'file');
+
+            $productImages = new ProductImages();
+            $productImages['name'] = $imagePath;
+            $productImages['product_key'] = $id;
+            $productImages->save();
+
+            return response($productImages->id);
+        } else {
+            return response(['e' => 'e']);
+        }
+    }
+    //get Product Images using ajax---------------------------------------------------------
+    public function getProductImages(Request $request)
+    {
+        $productImages = ProductImages::where('product_key', $request->product_key)->get();
+        return view('admin.product.images', compact('productImages'));
+    }
+    //get Product Images using ajax---------------------------------------------------------
+    public function deleteProductImage(Request $request)
+    {
+        $product_image = ProductImages::findOrFail($request->id);
+        $product_image->delete();
+        $this->deleteFile('myDisk', $product_image->name);
+        $productImages = ProductImages::where('product_key', $request->product_key)->get();
+        return view('admin.product.images', compact('productImages'));
     }
 }
