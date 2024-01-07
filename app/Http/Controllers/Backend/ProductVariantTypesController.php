@@ -30,11 +30,25 @@ class ProductVariantTypesController extends Controller
     public function store(Request $request)
     {
         if ($request->value != '' && $request->attribute != '') {
-            $value = explode('-', $request->value);
-            $variant = new ProductVariantType();
-        }
 
-        return $value;
+            $values = explode('-', $request->value);
+
+            $trimSpaces = array_map(function ($value) {
+                return trim($value);
+            }, $values);
+
+            $filteredValues = array_filter($trimSpaces, function ($value) {
+                return $value != '';
+            });
+
+            foreach ($filteredValues as $value) {
+                $variant = new ProductVariantType();
+                $variant->attribute = $request->attribute;
+                $variant->value = trim($value);
+                $variant->save();
+            }
+            return $filteredValues;
+        }
     }
 
     /**
@@ -67,5 +81,19 @@ class ProductVariantTypesController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    //get product attributes by ajax
+    public function getProductAttributes()
+    {
+        $allAttributes = ProductVariantType::get('attribute');
+        $attributeGroups = $allAttributes->groupBy('attribute');
+        return view('admin.product.attributes', compact('attributeGroups'));
+    }
+    //getProductAttributesValues
+    public function getProductAttributesValues(Request $request)
+    {
+        $attribute = $request->attribute;
+        $values = ProductVariantType::where('attribute', $attribute)->get('value');
+        return view('admin.product.attribute-values', compact('values', 'attribute'));
     }
 }

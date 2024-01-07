@@ -24,7 +24,6 @@ class ProductController extends Controller
      */
     public function index(ProductDataTable $dataTable)
     {
-
         return $dataTable->render('admin.product.index');
     }
 

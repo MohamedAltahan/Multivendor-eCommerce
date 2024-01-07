@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class ProductVariantType extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'value', 'attribute_code'];
+    protected $fillable = ['attribute', 'value', 'attribute_code'];
 }

@@ -164,96 +164,8 @@
         </form>
 
 
-
-        <div class="col-12 ">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-title" style="font-size: 20px;color:rgb(103, 103, 255)">
-                        Add more attribute like (color, size, ....)
-                    </div>
-
-                    <div id="accordion">
-
-                        <div class="accordion">
-                            <div class="accordion-header collapsed" role="button" data-toggle="collapse"
-                                data-target="#panel-body-1" aria-expanded="false">
-                                <h4>Chose from saved attributes
-                                </h4>
-                            </div>
-                            <div class="accordion-body collapse" id="panel-body-1" data-parent="#accordion">
-                                <h4>No attribute yet please add new attribute below</h4>
-                            </div>
-                        </div>
-
-                        <div class="accordion">
-
-                            <div class="accordion-header collapsed" role="button" data-toggle="collapse"
-                                data-target="#panel-body-2" aria-expanded="false">
-                                <h4>Click to Create new attributes like (color, size,..)
-                                </h4>
-                            </div>
-
-                            <div class="accordion-body collapse" id="panel-body-2" data-parent="#accordion">
-
-                                @csrf
-                                <div class="row">
-                                    <div class="form-group col-md-4">
-                                        <x-form.input id="attribute" class=" form-control"
-                                            placeholder="Attribute like (color) " />
-                                    </div>
-
-                                    <div class="form-group col-md-6 ">
-                                        <x-form.input class="form-control" id="value"
-                                            placeholder="values like 'red-blue-green' separated by -" />
-                                    </div>
-
-                                    <div class="form-group col-md-2 ">
-                                        <button class="btn btn-primary add-variant-type">Save</button>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="accordion">
-                            <div class="accordion-header collapsed" role="button" data-toggle="collapse"
-                                data-target="#panel-body-3" aria-expanded="false">
-                                <h4>Click to Create new attributes like (color, size,..)
-                                </h4>
-                            </div>
-
-                            <div class="accordion-body collapse" id="panel-body-3" data-parent="#accordion">
-                                <div class="row">
-                                    <div class="form-group col-md-2 ">
-                                        <x-form.input class="form-control" name="quantity" placeholder="Quantity" />
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="form-group col-md-6 ">
-                                        <x-form.input class="form-control" name="price" placeholder="Price" />
-                                    </div>
-                                    <div class="form-group col-md-6 ">
-                                        <x-form.input class="form-control" name="offer_price"
-                                            placeholder="Offer price" />
-                                    </div>
-                                </div>
-
-                                <label for="">Description</label>
-                                <textarea name="description" class="summernote"></textarea>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-
         <button type="submit" form="main-form" class="btn btn-primary">Create</button>
+
     </div>
     {{-- ================================================================================================ --}}
     {{-- push styles---------------------------------------------------------------------- --}}
@@ -348,38 +260,8 @@
                 })
             });
         </script>
-        {{-- add product variant by ajax--------------------------------------------------------/ --}}
-        <script>
-            $('body').on('click', '.add-variant-type', function(e) {
-                e.preventDefault();
-                attribute = $('#attribute').val();
-                value = $('#value').val();
-                if (attribute == '') {
-                    alert("please enter the an 'attribute'")
-                    return false;
-                }
-                if (value == '') {
-                    alert("please enter the a 'value'")
-                    return false;
-                }
-                $.ajax({
-                    method: 'POST',
-                    url: "{{ route('admin.product-variant-types.store') }}",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        product_key: '{{ $product_key }}',
-                        attribute: attribute,
-                        value: value,
-                    },
-                    success: function(data) {
-                        console.log(data);
-                    },
-                    error: function() {
-                        alert('Error');
-                    }
-                })
-            });
-        </script>
+
+
 
         {{-- other scripts==================================================================== --}}
         <script>
@@ -397,7 +279,7 @@
                             `<option value="">Select sub category</option>`);
                         $('.child-category').html(
                             `<option value="">Select child category</option>`);
-                        if (Object.entries(data).length === 0) {
+                        if (Object.values(data).length === 0) {
                             $('.sub-category').append(
                                 `<option value="">No sub category</option>`
                             );
@@ -424,9 +306,10 @@
                         id
                     },
                     success: function(data) {
+                        // clear field before add new data
                         $('.child-category').html(
                             `<option value="">Select child category</option>`);
-                        if (Object.entries(data).length === 0) {
+                        if (Object.values(data).length === 0) {
                             $('.child-category').append(
                                 `<option value="">No child category</option>`
                             );
