@@ -67,6 +67,7 @@ class ProductVariantController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
         $request->validate([
             'name' => ['required', 'max:200'],
             'status' => ['required']
