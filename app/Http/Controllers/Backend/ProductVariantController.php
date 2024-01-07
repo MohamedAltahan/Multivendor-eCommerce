@@ -73,7 +73,7 @@ class ProductVariantController extends Controller
         ]);
         $variant =  ProductVariant::findOrFail($id);
         $variant->update($request->all());
-        toastr('Updated successfully');
+        toastr('Updated Successfully');
         return redirect()->route('admin.product-variant.index', ['product_id' => $variant->id]);
     }
 
