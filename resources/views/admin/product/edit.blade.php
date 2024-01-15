@@ -2,6 +2,33 @@
 @section('mainTitle', 'Product')
 @section('content')
 
+    <div id="product_images">
+        <div class="card">
+            <div class="card-body">
+                <div class="gallery gallery-md">
+                    @foreach ($productImages as $productImage)
+                        <div style="display:inline-block; height: 100px ;width:100px; background: url({!! asset('uploads/' . $productImage->name) !!}); "
+                            class="mx-1 my-1">
+                            <button id="{{ $productImage->id }}" class="fas fa-times-circle delete-image"
+                                style="color: red; font-size:25px; background-color: transparent;  border: none;cursor:pointer;"></button>
+                        </div>
+                        {{-- <form method="POST" action="{{ route('admin.product.delete-product-image', $productImage->id) }}"
+                    id="delete-form">
+                    @csrf
+                    @method('delete')
+                </form> --}}
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form class="dropzone mb-3" method="POST" id='myDropzone' enctype="multipart/form-data"
+        action="{{ route('admin.product.upload.images', $product->product_key) }}">
+        @csrf
+    </form>
+
+
     <div class="card-header">
         <h4>Edit product</h4>
     </div>
@@ -9,14 +36,7 @@
         <form action="{{ route('admin.products.update', $product->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div>
-                <label for="">Image preview</label>
-                <br>
-                <img width="200px" src="{{ asset('uploads/' . $product->image) }}" alt="image">
-            </div>
-            <div class="form-group">
-                <x-form.input name="image" label="Image" type="file" accept="image/*" class="form-control" />
-            </div>
+
 
             <div class="form-group">
                 <x-form.input name="name" label="Product name" value="{{ old('name', $product->name) }}"
@@ -175,8 +195,76 @@
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
     </div>
+    {{-- styles-------------------------------------------------------------------------- --}}
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('backend/assets/css/dropzone.min.css') }}">
+    @endpush
     {{-- scripts------------------------------------------------------------------------ --}}
     @push('scripts')
+        {{-- dropZone scripts--------------------------- --}}
+        <script src="{{ asset('backend/assets/js/dropzone.min.js') }}"></script>
+
+        <script>
+            Dropzone.options.myDropzone = {
+
+                paramName: "file", // The name that will be used to transfer the file (by default is 'file')
+                maxFilesize: 10, // MB
+                acceptedFiles: 'image/*',
+                addRemoveLinks: true, //to add remove or cance buttons
+                //------------------------------------------------------
+                //if true the files will be upload once you chose it automatically'defaul:true'
+                //when you are ready to submit simply call myDropzone.processQueue().
+                // autoProcessQueue: false,
+                //-------------------------------------------------------
+                maxFiles: 20, //max number of uploaded files per product
+                //uploadMultiple: true, //upload all the file in one request or more it depends on 'parallelUploads' 'default:false'
+                parallelUploads: 20,
+                thumbnailWidth: 120, //default thumbnail width 120
+                thumbnailHeight: 120, //default thumbnail hieght 120
+                //----------------force rezise image---------------------------
+                resizeWidth: 200, //it cares about aspect when it resize ^_^
+                resizeHeight: null,
+                resizeQuality: 0.8, //defaul is 0.8 (from the original quality)
+                //-------------------------------------------------------------
+
+                init: function() {
+
+                    // var submitButton = document.querySelector("#submit-all")
+
+                    // if (autoProcessQueue: false)you well need this button to start upload manualy
+                    // submitButton.addEventListener("click", function() {
+                    //     myDropzone.processQueue(); // Tell Dropzone to process all queued files.
+                    // });
+
+                    // after each photo upload check state if the queue
+                    this.on("success", function() {
+                        //if all files have been uploaded
+                        if (this.getUploadingFiles().length == 0) {
+                            $.ajax({
+                                method: 'GET',
+                                url: '{{ route('admin.product.get-product-images') }}',
+                                data: {
+                                    product_key: '{{ $product->product_key }}'
+                                },
+                                success: function(data) {
+                                    $('#product_images').html(data);
+                                },
+                                error: function() {
+                                    alert('wait a while');
+                                }
+                            })
+                        }
+                    });
+                    // after upload all file clear drop box
+                    this.on("complete", function() {
+                        this.removeAllFiles();
+                    });
+
+
+                }
+            };
+        </script>
+
         <script>
             $(document).ready(function() {
                 //get sub categories-----------------------------------------------------
@@ -210,6 +298,28 @@
                         }
                     })
                 })
+                //-- delete image by ajax--------------------------------------------------------/ --
+                $('body').on('click', '.delete-image', function(e) {
+                    e.preventDefault();
+                    //disable all delete buttons until the next request
+                    $('.delete-image').prop('disabled', true);
+                    $.ajax({
+                        method: 'DELETE',
+                        url: "{{ route('admin.product.delete-product-image') }}",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            id: $(this).attr('id'),
+                            product_key: '{{ $product->product_key }}',
+                        },
+                        success: function(data) {
+                            $('#product_images').html(data);
+                        },
+                        error: function() {
+                            alert('Error');
+                        }
+                    })
+                });
+
                 //get child categories--------------------------------------------------
                 $('body').on('change', '.sub-category', function(e) {
                     let id = $(this).val();

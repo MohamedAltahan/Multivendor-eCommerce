@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\childCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductVariantController;
+use App\Http\Controllers\Backend\ProductVariantDetailsController;
 use App\Http\Controllers\Backend\ProductVariantTypesController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -54,6 +55,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::post('products/product-images-uplaod/{product}', [ProductController::class, 'uploadProductImages'])->name('product.upload.images');
     //product**
     Route::get('product/get-child-categories', [ProductController::class, 'getChildCategories'])->name('product.get-child-categories');
+    Route::put('product/change-status', [ProductController::class, 'changeStatus'])->name('product.change-status');
     Route::resource('products', ProductController::class);
     //product get attribute values ajax
     Route::get('product/get-attribute-values', [ProductVariantTypesController::class, 'getProductAttributesValues'])->name('product.get-attribute-values');
@@ -63,8 +65,14 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::resource('product-variant-types', ProductVariantTypesController::class);
 
     //product variant==============================================================================================
-    Route::put('product-variant/change-status', [ProductVariantController::class, 'changeStatus'])->name('product-variant.change-status');
-    Route::post('product-variant/upload-attribute-image', [ProductVariantController::class, 'uploadAttributeImage'])->name('product.upload-attribute-image');
-    //product variant
     Route::resource('product-variant', ProductVariantController::class);
+
+    //product variant details==============================================================================================
+    Route::get('product/product-variant-details/{productId}/{variantId}', [ProductVariantDetailsController::class, 'index'])->name('product.product-variant-details');
+    Route::get('product/product-variant-details/create/{productId}/{variantId}', [ProductVariantDetailsController::class, 'create'])->name('product.product-variant-details.create');
+    Route::post('product/product-variant-details', [ProductVariantDetailsController::class, 'store'])->name('product.product-variant-details.store');
+    Route::get('product/product-variant-details-edit/{VariantDetailsId}', [ProductVariantDetailsController::class, 'edit'])->name('product.product-variant-details.edit');
+    Route::put('product/product-variant-details-update/{VariantDetailsId}', [ProductVariantDetailsController::class, 'update'])->name('product.product-variant-details.update');
+    Route::delete('product/product-variant-details/{VariantDetailsId}/', [ProductVariantDetailsController::class, 'destroy'])->name('product.product-variant-details.destroy');
+    Route::put('product/product-variant-details-status/change-status', [ProductVariantDetailsController::class, 'changeStatus'])->name('product.product-variant-details.change-status');
 });

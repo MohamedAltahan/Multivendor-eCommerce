@@ -1,10 +1,15 @@
 @extends('admin.layouts.master')
-@section('mainTitle', 'Product')
+@section('mainTitle', 'Product-Variants')
 @section('content')
+    <div class="mt-2 ml-2">
+        <a href="{{ route('admin.product-variant.index', ['product_id' => $product->id]) }}" class="btn btn-primary"><i
+                class="fas fa-arrow-left">Back</i></a>
+    </div>
     <div class="card-header">
-        <h4>All products</h4>
+        <h4> variants for : {{ $variant->name }}</h4>
         <div class="card-header-action">
-            <a href="{{ route('admin.products.create') }}" class="btn btn-primary">+ Create New</a>
+            <a href="{{ route('admin.product.product-variant-details.create', ['productId' => $product->id, 'variantId' => $variant->id]) }}"
+                class="btn btn-primary">+Create New</a>
         </div>
     </div>
     <div class="card-body">
@@ -21,7 +26,7 @@
                     let id = $(this).data('id');
                     $.ajax({
                         method: 'PUT',
-                        url: "{{ route('admin.product.change-status') }}",
+                        url: "{{ route('admin.product.product-variant-details.change-status') }}",
                         data: {
                             // status is the name of the value "ischecked" in you php function
                             status: isChecked,

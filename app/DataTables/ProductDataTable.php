@@ -40,6 +40,9 @@ class ProductDataTable extends DataTable
             })
             ->addColumn('image', function ($query) {
                 $productImage = ProductImages::where('product_key', $query->product_key)->first();
+                if ($productImage == null) {
+                    return 'no image';
+                }
                 return "<img width='100px' src='" . asset('uploads/' . $productImage->name) . "'></img>";
             })
             ->addColumn('type', function ($query) {

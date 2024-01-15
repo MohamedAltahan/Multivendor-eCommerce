@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\Product;
 use App\Models\ProductImages;
+use App\Models\ProductVariant;
+use App\Models\ProductVariantDetails;
 use App\Models\SubCategory;
 use App\Traits\fileUploadTrait;
 use Illuminate\Http\Request;
@@ -32,6 +34,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+
         $product = new Product();
         $categories = Category::get();
         $brands = Brand::get();
@@ -87,7 +90,8 @@ class ProductController extends Controller
         $subCategories = SubCategory::where('category_id', $product->category_id)->get();
         $childCategories = ChildCategory::where('sub_category_id', $product->sub_category_id)->get();
         $brands = Brand::get();
-        return view('admin.product.edit', compact('product', 'categories', 'subCategories', 'childCategories', 'brands'));
+        $productImages = ProductImages::where('product_key', $product->product_key)->get();
+        return view('admin.product.edit', compact('product', 'categories', 'subCategories', 'childCategories', 'brands', 'productImages'));
     }
 
     /**
@@ -127,7 +131,15 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // dd($id);
+        $product = Product::findOrFail($id);
+        //delete product images
+        ProductImages::where('product_key', $product->product_key)->delete();
+        //delete variant details
+        $variants = ProductVariantDetails::where('product_id', $product->id)->delete();
+        //delete product itself
+        $product->delete();
+        return response(['status' => 'success', 'message' => 'Deleted successfully']);
     }
     // get sub categories using ajax ------------------------------------------------
     public function getchildCategories(Request $request)
@@ -164,5 +176,15 @@ class ProductController extends Controller
         $this->deleteFile('myDisk', $product_image->name);
         $productImages = ProductImages::where('product_key', $request->product_key)->get();
         return view('admin.product.images', compact('productImages'));
+    }
+    //change status using ajax request--------------------------------------------------
+    public function changeStatus(Request $request)
+    {
+        $product = Product::findOrFail($request->id);
+
+        $request->status == "true" ? $product->status = 'active' : $product->status = 'inactive';
+        $product->save();
+
+        return response(['message' => 'Status has been updated']);
     }
 }

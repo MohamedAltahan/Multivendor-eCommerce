@@ -9,4 +9,10 @@ class ProductVariant extends Model
 {
     use HasFactory;
     protected $fillable = ['product_id', 'name', 'status'];
+
+
+    public function productVariantDetails()
+    {
+        return $this->hasMany(ProductVariantDetails::class, 'product_variant_id', 'id');
+    }
 }
