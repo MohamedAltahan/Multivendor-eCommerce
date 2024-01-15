@@ -18,6 +18,7 @@ class VendorShopProfileSeeder extends Seeder
         Vendor::insert([
             [
                 'banner' => 'Admin',
+                'shop_name' => 'new vendor shop',
                 'phone' => '545412',
                 'email' => 'vendor@gmail.com',
                 'address' => 'usa',

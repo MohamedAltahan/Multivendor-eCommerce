@@ -22,11 +22,17 @@
             </div>
 
             <div class="form-group">
+                <x-form.input name="shop_name" label="Shop name" value="{{ $profile->shop_name }}" class="form-control" />
+            </div>
+
+            <div class="form-group">
                 <x-form.input name="phone" label="Phone" value="{{ $profile->phone }}" class="form-control" />
             </div>
+
             <div class="form-group">
                 <x-form.input name="email" label="Email" value="{{ $profile->email }}" class="form-control" />
             </div>
+
             <div class="form-group">
                 <x-form.input name="address" label="Address" value="{{ $profile->address }}" class="form-control" />
             </div>

@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\fileUploadTrait;
 
 class VendorShopProfileController extends Controller
 {
+    use fileUploadTrait;
     /**
      * Display a listing of the resource.
      */
@@ -31,7 +33,26 @@ class VendorShopProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'banner' => ['nullable', 'image', 'max:2000'],
+            'shop_name' => ['required', 'max:255'],
+            'phone' => ['required', 'max:50'],
+            'email' => ['required', 'email', 'max:200'],
+            'address' => ['required'],
+            'description' => ['required'],
+            'fb_link' => ['nullable', 'url'],
+            'insta_link' => ['nullable', 'url'],
+            'tw_link' => ['nullable', 'url'],
+        ]);
+        $vendor = Vendor::where('user_id', Auth::user()->id)->first();
+        $vendorData = $request->except('banner');
+        if ($request->hasFile('banner')) {
+            $oldBannerPath = $vendor->banner;
+            $vendorData['banner'] = $this->fileUpdate($request, 'myDisk', 'vendor-banner', 'banner', $oldBannerPath);
+        }
+        $vendor->update($vendorData);
+        toastr('Updated successfully');
+        return redirect()->back();
     }
 
     /**

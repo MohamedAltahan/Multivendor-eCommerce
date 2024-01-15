@@ -35,6 +35,7 @@ class AdminVendorProfileContorller extends Controller
     {
         $request->validate([
             'banner' => ['nullable', 'image', 'max:2000'],
+            'shop_name' => ['required', 'max:255'],
             'phone' => ['required', 'max:50'],
             'email' => ['required', 'email', 'max:200'],
             'address' => ['required'],

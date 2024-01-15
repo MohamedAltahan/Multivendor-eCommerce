@@ -18,6 +18,7 @@ class AdminProfileSeeder extends Seeder
         Vendor::insert([
             [
                 'banner' => 'Admin',
+                'shop_name' => 'new admin shop',
                 'phone' => '545412',
                 'email' => 'admin@gmail.com',
                 'address' => 'usa',

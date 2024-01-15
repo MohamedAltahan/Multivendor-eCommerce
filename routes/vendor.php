@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\VendorController;
+use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\VendorProfileController;
 use App\Http\Controllers\Backend\VendorShopProfileController;
 use Illuminate\Support\Facades\Route;
@@ -14,4 +15,6 @@ Route::group(['middleware' => ['auth', 'role:vendor'], 'prefix' => 'vendor', 'as
     Route::post('profile', [VendorProfileController::class, 'passwordUpdate'])->name('password.update');
     // vendor shop profile=============================================================
     Route::resource('shop-profile', VendorShopProfileController::class);
+    // product ========================================================================
+    Route::resource('products', VendorProductController::class);
 });
