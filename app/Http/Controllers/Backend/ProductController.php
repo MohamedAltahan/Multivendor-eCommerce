@@ -63,10 +63,11 @@ class ProductController extends Controller
         ]);
         $product = new Product();
         $productData = $request->except('image');
-        $productData['image'] = $this->fileUplaod($request, 'myDisk', 'product', 'image');
+        // $productData['image'] = $this->fileUplaod($request, 'myDisk', 'product', 'image');
         $productData['product_key'] = $request->product_key;
         $productData['slug'] = Str::slug($request->name);
         $productData['vendor_id'] = Auth::user()->vendor->id;
+        $productData['is_approved'] = 'yes';
         $product->create($productData);
         toastr('Created successfully');
         return redirect()->route('admin.products.index');
@@ -121,6 +122,7 @@ class ProductController extends Controller
         }
         $productData['slug'] = Str::slug($request->name);
         $productData['vendor_id'] = Auth::user()->vendor->id;
+        $productData['is_approved'] = 'yes';
         $product->update($productData);
         toastr('Updated successfully');
         return redirect()->route('admin.products.index');
@@ -146,7 +148,7 @@ class ProductController extends Controller
     {
         return ChildCategory::where('sub_category_id', $request->id)->get();
     }
-    //product image upload---------------------------------------------------------
+    //product image upload for dropzone request--------------------------------------
     public function uploadProductImages(Request $request, $id)
     {
         if ($request->hasFile('file')) {
@@ -168,6 +170,7 @@ class ProductController extends Controller
         $productImages = ProductImages::where('product_key', $request->product_key)->get();
         return view('admin.product.images', compact('productImages'));
     }
+
     //get Product Images using ajax---------------------------------------------------------
     public function deleteProductImage(Request $request)
     {
@@ -177,6 +180,7 @@ class ProductController extends Controller
         $productImages = ProductImages::where('product_key', $request->product_key)->get();
         return view('admin.product.images', compact('productImages'));
     }
+
     //change status using ajax request--------------------------------------------------
     public function changeStatus(Request $request)
     {

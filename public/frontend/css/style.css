@@ -9408,4 +9408,12 @@ a:not([href]):not([class]):hover {
     color: #08c;
 }
 
+.right {
+    text-align: right;
+    margin-bottom: 20px;
+}
+#flexSwitchCheckDefault {
+    height: 20px;
+    width: 50px;
+}
 /* extra css end here */

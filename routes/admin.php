@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::get('product/get-child-categories', [ProductController::class, 'getChildCategories'])->name('product.get-child-categories');
     Route::put('product/change-status', [ProductController::class, 'changeStatus'])->name('product.change-status');
     Route::resource('products', ProductController::class);
-    //product get attribute values ajax
+    //product get attribute values ajaxz
     Route::get('product/get-attribute-values', [ProductVariantTypesController::class, 'getProductAttributesValues'])->name('product.get-attribute-values');
     //product get attributes types ajax
     Route::get('product/get-attributes', [ProductVariantTypesController::class, 'getProductAttributes'])->name('product.get-attributes');
@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::resource('product-variant-types', ProductVariantTypesController::class);
 
     //product variant==============================================================================================
+    Route::put('product-variant-status/change-status', [ProductVariantController::class, 'changeStatus'])->name('product-variant.change-status');
     Route::resource('product-variant', ProductVariantController::class);
 
     //product variant details==============================================================================================

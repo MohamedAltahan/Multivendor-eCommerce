@@ -8,7 +8,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
             rel="stylesheet">
         <title>One Shop || e-Commerce HTML Template</title>
-        <link rel="icon" type="image/png" href="">
+        {{-- <link rel="icon" type="image/png" href=""> --}}
         <link rel="stylesheet" href="{{ asset('frontend/css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/css/select2.min.css') }}">
@@ -23,9 +23,13 @@
         <link rel="stylesheet" href="{{ asset('frontend/css/jquery.classycountdown.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/css/venobox.min.css') }}">
         <link rel="stylesheet" href="{{ asset('backend/assets/modules/summernote/summernote-bs4.css') }}">
-
+        <link rel="stylesheet" href="{{ asset('backend/assets/css/jquery.dataTables.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/assets/css/dataTables.bootstrap5.min.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/assets/css/components.css') }}">
+
+        @stack('styles')
         <!-- <link rel="stylesheet" href="css/rtl.css"> -->
     </head>
 
@@ -98,6 +102,8 @@
         {{-- summernote --}}
         <script src="{{ asset('backend/assets/modules/summernote/summernote-bs4.js') }}"></script>
 
+        <script src="{{ asset('backend/assets/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('backend/assets/js/dataTables.bootstrap5.min.js') }}"></script>
         <!--main/custom js-->
         <script src="{{ asset('frontend/js/main.js') }}"></script>
         <script>
@@ -105,6 +111,7 @@
                 height: 100
             });
         </script>
+        @stack('scripts')
     </body>
 
 </html>
