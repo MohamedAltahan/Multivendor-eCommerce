@@ -8,7 +8,7 @@
         <h4>All variants for : {{ $product->name }}</h4>
         <div class="card-header-action">
             <a href="{{ route('admin.product-variant.create', ['product_id' => $product->id]) }}" class="btn btn-primary">+
-                Create New</a>
+                Create new variant</a>
         </div>
     </div>
     <div class="card-body">

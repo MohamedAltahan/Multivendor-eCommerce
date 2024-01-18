@@ -2,8 +2,8 @@
 
 namespace App\DataTables;
 
-use App\Models\ProductImages;
 use App\Models\ProductVariant;
+use App\Models\VendorProuductVariant;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
@@ -14,7 +14,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ProductVariantDataTable extends DataTable
+class VendorProductVariantDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,26 +23,23 @@ class ProductVariantDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $variantOptions = "<a href='" . route('admin.product.product-variant-details', ['productId' => request()->product_id, 'variantId' => $query->id])  . "'class='btn btn-sm ml-1 my-1 btn-success'><i class='far fa-edit'></i>Add variant</a>";
-                $editBtn = "<a href='" . route('admin.product-variant.edit', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-edit'></i>Edit</a>";
-                $deleteBtn = "<a href='" . route('admin.product-variant.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
+                $variantOptions = "<a href='" . route('vendor.product.product-variant-details.index', ['productId' => request()->product_id, 'variantId' => $query->id])  . "'class='btn btn-sm ml-1 my-1 btn-success'><i class='far fa-edit'></i>Add variant</a>";
+                $editBtn = "<a href='" . route('vendor.product-variant.edit', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-edit'></i>Edit</a>";
+                $deleteBtn = "<a href='" . route('vendor.product-variant.destroy', $query->id)  . "'class='btn btn-sm mx-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
 
                 return $editBtn . $deleteBtn . $variantOptions;
             })
             ->addColumn('status', function ($query) {
                 if ($query->status == 'active') {
-                    $button = '<label class="custom-switch mt-2">
-                        <input checked type="checkbox" name="custom-switch-checkbox" data-id="' . $query->id . '" class="change-status custom-switch-input">
-                        <span class="custom-switch-indicator"></span>
-                      </label>';
+                    $button = '<div class="form-check form-switch">
+                        <input checked class="form-check-input change-status" type="checkbox" data-id="' . $query->id . '" role="switch" id="flexSwitchCheckDefault">
+                        </div>';
                 } else {
-                    $button = '<label class="custom-switch mt-2">
-                        <input type="checkbox" name="custom-switch-checkbox" data-id="' . $query->id . '" class="change-status custom-switch-input ">
-                        <span class="custom-switch-indicator"></span>
-                      </label>';
+                    $button = '<div class="form-check form-switch">
+                        <input class="form-check-input change-status" type="checkbox" data-id="' . $query->id . '" role="switch" id="flexSwitchCheckDefault">
+                        </div>';
                 }
 
                 return $button;
@@ -65,10 +62,9 @@ class ProductVariantDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('productvariant-table')
+            ->setTableId('vendorprouductvariant-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(0)
             //->dom('Bfrtip')
             ->orderBy(1)
             ->selectStyleSingle()
@@ -104,6 +100,6 @@ class ProductVariantDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'ProductVariant_' . date('YmdHis');
+        return 'VendorProuductVariant_' . date('YmdHis');
     }
 }

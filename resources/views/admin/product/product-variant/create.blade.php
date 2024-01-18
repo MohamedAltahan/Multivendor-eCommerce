@@ -17,6 +17,10 @@
             </div>
 
             <div class="form-group">
+                <x-form.input value="{{ Auth::user()->vendor->id }}" name="vendor_id" type="hidden" class="form-control" />
+            </div>
+
+            <div class="form-group">
                 <x-form.input name="name" label="Name" class="form-control" />
             </div>
 

@@ -3,6 +3,7 @@
 
     <head>
         <meta charset="UTF-8">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport"
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
@@ -28,6 +29,9 @@
         <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
         <link rel="stylesheet" href="{{ asset('backend/assets/css/components.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/assets/css/sweetalert2.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/assets/css/toastr.min.css') }}">
+
 
         @stack('styles')
         <!-- <link rel="stylesheet" href="css/rtl.css"> -->
@@ -101,15 +105,73 @@
         <script src="{{ asset('frontend/js/jquery.classycountdown.js') }}"></script>
         {{-- summernote --}}
         <script src="{{ asset('backend/assets/modules/summernote/summernote-bs4.js') }}"></script>
+        <script src="{{ asset('backend/assets/js/sweetalert2.all.min.js') }}"></script>
 
         <script src="{{ asset('backend/assets/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('backend/assets/js/dataTables.bootstrap5.min.js') }}"></script>
         <!--main/custom js-->
         <script src="{{ asset('frontend/js/main.js') }}"></script>
+        <script src="{{ asset('backend/assets/js/toastr.min.js') }}"></script>
+
         <script>
             $('.summernote').summernote({
                 height: 100
             });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $('body').on('click', '.delete-item', function(event) {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    event.preventDefault();
+                    let deleteUrl = $(this).attr('href');
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                type: 'DELETE',
+                                url: deleteUrl,
+                                cache: false,
+                                success: function(data) {
+                                    if (data.status == 'success') {
+                                        Swal.fire({
+                                            title: "Deleted!",
+                                            text: data.message,
+                                            icon: "success"
+                                        });
+                                        window.location.reload();
+                                    } else if (data.status == 'error') {
+                                        Swal.fire({
+                                            title: "Not Deleted!",
+                                            text: data.message,
+                                            icon: "fail"
+                                        });
+                                    }
+                                },
+                                error: function(xhn, status, error) {}
+                            })
+                        }
+                    });
+                })
+            });
+        </script>
+        <script>
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    toastr.error("{{ $error }}")
+                @endforeach
+            @endif
         </script>
         @stack('scripts')
     </body>
