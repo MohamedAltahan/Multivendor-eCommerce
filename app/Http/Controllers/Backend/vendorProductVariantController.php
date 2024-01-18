@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\ProductVariantDetails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class vendorProductVariantController extends Controller
 {
@@ -17,6 +18,9 @@ class vendorProductVariantController extends Controller
     public function index(Request $request, VendorProductVariantDataTable $dataTable)
     {
         $product = Product::findOrFail($request->product_id);
+        if ($product->vendor_id != Auth::user()->vendor->id) {
+            abort(404);
+        }
         return $dataTable->render('vendor.product.product-variant.index', compact('product'));
     }
 
@@ -58,7 +62,11 @@ class vendorProductVariantController extends Controller
      */
     public function edit(string $id)
     {
+
         $variant = ProductVariant::findOrFail($id);
+        if ($variant->vendor_id != Auth::user()->vendor->id) {
+            abort(404);
+        }
         return view('vendor.product.product-variant.edit', compact('variant'));
     }
 
@@ -72,6 +80,9 @@ class vendorProductVariantController extends Controller
             'status' => ['required']
         ]);
         $variant =  ProductVariant::findOrFail($id);
+        if ($variant->vendor_id != Auth::user()->vendor->id) {
+            abort(404);
+        }
         $variant->update($request->all());
         toastr('Updated Successfully');
         return redirect()->route('vendor.product-variant.index', ['product_id' => $variant->id]);
@@ -83,6 +94,9 @@ class vendorProductVariantController extends Controller
     public function destroy(string $id)
     {
         $variant = ProductVariant::findOrFail($id);
+        if ($variant->vendor_id != Auth::user()->vendor->id) {
+            abort(404);
+        }
         $variantValuesCheckExist = ProductVariantDetails::where('product_variant_id', $variant->id)->count();
         if ($variantValuesCheckExist > 0) {
             return response(['status' => 'error', 'message' => 'this variant contains items inside, you must delete them first']);

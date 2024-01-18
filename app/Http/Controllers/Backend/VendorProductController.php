@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\Product;
 use App\Models\ProductImages;
+use App\Models\ProductVariantDetails;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Traits\fileUploadTrait;
@@ -61,6 +62,7 @@ class VendorProductController extends Controller
         $productData = $request->except('image');
         // $productData['image'] = $this->fileUplaod($request, 'myDisk', 'product', 'image');
         $productData['product_key'] = $request->product_key;
+        $productData['is_approved'] = 'pending';
         $productData['slug'] = Str::slug($request->name);
         $productData['vendor_id'] = Auth::user()->vendor->id;
         $product->create($productData);
@@ -136,7 +138,17 @@ class VendorProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        if ($product->vendor_id != Auth::user()->vendor->id) {
+            abort(404);
+        }
+        //delete product images
+        ProductImages::where('product_key', $product->product_key)->delete();
+        //delete variant details
+        $variants = ProductVariantDetails::where('product_id', $product->id)->delete();
+        //delete product itself
+        $product->delete();
+        return response(['status' => 'success', 'message' => 'Deleted successfully']);
     }
 
     //product image upload for dropzone request--------------------------------------
@@ -144,7 +156,6 @@ class VendorProductController extends Controller
     {
         if ($request->hasFile('file')) {
             $imagePath = $this->fileUplaod($request, 'myDisk', 'prodctsGallery', 'file');
-
             $productImages = new ProductImages();
             $productImages['name'] = $imagePath;
             $productImages['product_key'] = $id;

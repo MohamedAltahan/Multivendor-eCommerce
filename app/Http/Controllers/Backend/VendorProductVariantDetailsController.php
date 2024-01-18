@@ -45,7 +45,7 @@ class VendorProductVariantDetailsController extends Controller
     public function edit($variantDetailsId)
     {
         $variantDetails = ProductVariantDetails::findOrFail($variantDetailsId);
-        return view('admin.product.product-variant-details.edit', compact('variantDetails'));
+        return view('vendor.product.variant-details.edit', compact('variantDetails'));
     }
 
     public function update(Request $request, $variantDetailsId)
@@ -60,7 +60,7 @@ class VendorProductVariantDetailsController extends Controller
         $variantValue =  ProductVariantDetails::findOrFail($variantDetailsId);
         $variantValue->update($request->all());
         toastr('Updated successfully');
-        return redirect()->route('admin.product.product-variant-details', ['productId' => $variantValue->productVariant->product_id, 'variantId' => $variantValue->product_variant_id]);
+        return redirect()->route('vendor.product.product-variant-details.index', ['productId' => $variantValue->productVariant->product_id, 'variantId' => $variantValue->product_variant_id]);
     }
     //change status using ajax request--------------------------------------------------
     public function changeStatus(Request $request)

@@ -43,7 +43,6 @@
                                     <div class="form-group my-2">
                                         <label for="">Is default</label>
                                         <select name="is_default" id="inputStatus" class="form-control">
-                                            <option value="">None</option>
                                             <option value="yes">Yes</option>
                                             <option value="no">No</option>
                                         </select>

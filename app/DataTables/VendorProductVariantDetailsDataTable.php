@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Models\ProductVariantDetails;
 use App\Models\VendorProductVariantDetail;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -22,16 +23,44 @@ class VendorProductVariantDetailsDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'vendorproductvariantdetails.action')
+            ->addColumn('action', function ($query) {
+                $editBtn = "<a href='" . route('vendor.product.product-variant-details.edit', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-edit'></i>Edit</a>";
+                $deleteBtn = "<a href='" . route('vendor.product.product-variant-details.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
+
+                return $editBtn . $deleteBtn;
+            })
+            ->addColumn('variant_name', function ($query) {
+                return $query->productVariant->name;
+            })
+            ->addColumn('is_default', function ($query) {
+                if ($query->is_default == 'yes') {
+                    return '<i class="badge bg-success">Default</i>';
+                } else {
+                    return '<i class="badge bg-danger">No</i>';
+                }
+            })
+            ->addColumn('status', function ($query) {
+                if ($query->status == 'active') {
+                    $button = '<div class="form-check form-switch">
+                        <input checked class="form-check-input change-status" type="checkbox" data-id="' . $query->id . '" role="switch" id="flexSwitchCheckDefault">
+                        </div>';
+                } else {
+                    $button = '<div class="form-check form-switch">
+                        <input class="form-check-input change-status" type="checkbox" data-id="' . $query->id . '" role="switch" id="flexSwitchCheckDefault">
+                        </div>';
+                }
+                return $button;
+            })
+            ->rawColumns(['action', 'status', 'is_default'])
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(VendorProductVariantDetail $model): QueryBuilder
+    public function query(ProductVariantDetails $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->where('product_variant_id', request()->variantId)->where('product_id', request()->productId)->newQuery();
     }
 
     /**
@@ -40,20 +69,20 @@ class VendorProductVariantDetailsDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('vendorproductvariantdetails-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('vendorproductvariantdetails-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            //->dom('Bfrtip')
+            ->orderBy(0)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            ]);
     }
 
     /**
@@ -62,15 +91,17 @@ class VendorProductVariantDetailsDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('variant_value'),
+            Column::make('variant_name'),
+            Column::make('price'),
+            Column::make('is_default'),
+            Column::make('status'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(180)
+                ->addClass('text-center'),
         ];
     }
 
