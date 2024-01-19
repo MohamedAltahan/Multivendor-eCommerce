@@ -121,8 +121,6 @@ class ProductController extends Controller
             $productData['image'] = $this->fileUpdate($request, 'myDisk', 'product', 'image', $oldImagePath);
         }
         $productData['slug'] = Str::slug($request->name);
-        $productData['vendor_id'] = Auth::user()->vendor->id;
-        $productData['is_approved'] = 'yes';
         $product->update($productData);
         toastr('Updated successfully');
         return redirect()->route('admin.products.index');

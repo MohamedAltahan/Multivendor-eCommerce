@@ -15,4 +15,9 @@ class Product extends Model
         'offer_end_date', 'status', 'product_type',
         'is_approved', 'seo_title', 'seo_description', 'slug'
     ];
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class, 'vendor_id', 'id');
+    }
 }

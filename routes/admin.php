@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\AdminVendorProfileContorller;
+use App\Http\Controllers\Backend\AllVendorsProductsController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\childCategoryController;
@@ -76,4 +77,9 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::put('product/product-variant-details-update/{VariantDetailsId}', [ProductVariantDetailsController::class, 'update'])->name('product.product-variant-details.update');
     Route::delete('product/product-variant-details/{VariantDetailsId}/', [ProductVariantDetailsController::class, 'destroy'])->name('product.product-variant-details.destroy');
     Route::put('product/product-variant-details-status/change-status', [ProductVariantDetailsController::class, 'changeStatus'])->name('product.product-variant-details.change-status');
+    //all vendors products=================================================================================================
+    Route::get('product/all-vendors', [AllVendorsProductsController::class, 'index'])->name('all-vendors-products.index');
+    Route::get('vendor-products/{vendorId}', [AllVendorsProductsController::class, 'getVendorProducts'])->name('get-vendor-products');
+    Route::get('pending-products', [AllVendorsProductsController::class, 'pendingProducts'])->name('pending-products.index');
+    Route::put('change-approval-status', [AllVendorsProductsController::class, 'changeApprovalStatus'])->name('change-approval-status');
 });

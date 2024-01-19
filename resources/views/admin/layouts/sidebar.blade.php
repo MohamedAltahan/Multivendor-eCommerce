@@ -49,14 +49,33 @@
                 </ul>
             </li>
             {{-- Manage product---------------------------------------------------- --}}
-            <li class="dropdown {{ setActive(['admin.brand.*', 'admin.products.*']) }}">
+            <li
+                class="dropdown {{ setActive([
+                    'admin.brand.*',
+                    'admin.products.*',
+                    'admin.product-variant.*',
+                    'admin.product.product-variant-details.*',
+                    'admin.get-vendor-products*',
+                    'admin.all-vendors-products.*',
+                    'admin.pending-products.*',
+                ]) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Manage products</span></a>
                 <ul class="dropdown-menu">
                     <li class="dropdown {{ setActive(['admin.brand.*']) }}"><a class="nav-link"
                             href="{{ route('admin.brand.index') }}">Brands</a></li>
-                    <li class="dropdown {{ setActive(['admin.products.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.products.index') }}">Products</a></li>
+                    <li
+                        class="dropdown {{ setActive(['admin.products*', 'admin.product-variant.*', 'admin.product.product-variant-details.*']) }}">
+                        <a class="nav-link" href="{{ route('admin.products.index') }}">My shop products</a>
+                    </li>
+                    <li
+                        class="dropdown {{ setActive(['admin.all-vendors-products.*', 'admin.get-vendor-products*']) }}">
+                        <a class="nav-link" href="{{ route('admin.all-vendors-products.index') }}">All vendors
+                            products</a>
+                    </li>
+                    <li class="dropdown {{ setActive(['admin.pending-products.*']) }} ">
+                        <a class="nav-link" href="{{ route('admin.pending-products.index') }}">Pending products</a>
+                    </li>
                 </ul>
             </li>
             {{-- Manage vendors---------------------------------------------------- --}}

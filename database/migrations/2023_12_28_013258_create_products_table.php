@@ -33,7 +33,7 @@ return new class extends Migration
             $table->date('offer_end_date')->nullable();
             $table->enum('status', ['active', 'inactive']);
             $table->enum('product_type', ['new', 'featured', 'top', 'best'])->nullable();
-            $table->enum('is_approved', ['yes', 'no', 'pending'])->default('pending');
+            $table->enum('is_approved', ['yes', 'not_approved', 'pending'])->default('pending');
             $table->string('seo_title')->nullable();
             $table->text('seo_description')->nullable();
             $table->timestamps();
