@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\AllVendorsProductsController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\childCategoryController;
+use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductVariantController;
 use App\Http\Controllers\Backend\ProductVariantDetailsController;
@@ -82,4 +83,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::get('vendor-products/{vendorId}', [AllVendorsProductsController::class, 'getVendorProducts'])->name('get-vendor-products');
     Route::get('pending-products', [AllVendorsProductsController::class, 'pendingProducts'])->name('pending-products.index');
     Route::put('change-approval-status', [AllVendorsProductsController::class, 'changeApprovalStatus'])->name('change-approval-status');
+    //flash sale===========================================================================================================
+    Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale.index');
+    Route::put('flash-sale', [FlashSaleController::class, 'update'])->name('flash-sale.update');
 });
