@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('flash_sale_items', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
+            $table->integer('flash_sale_id');
             $table->enum('show_at_home', ['yes', 'no']);
             $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
