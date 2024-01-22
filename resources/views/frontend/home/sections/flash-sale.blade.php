@@ -7,42 +7,71 @@
                         <div class="wsus__flash_coundown">
                             <span class=" end_text">flash sale</span>
                             <div class="simply-countdown simply-countdown-one"></div>
-                            <a class="common_btn" href="#">see more <i class="fas fa-caret-right"></i></a>
+                            <a class="common_btn" href="{{ route('flash-sale') }}">see more <i
+                                    class="fas fa-caret-right"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row flash_sell_slider">
-                <div class="col-xl-3 col-sm-6 col-lg-4">
-                    <div class="wsus__product_item">
-                        <span class="wsus__new">New</span>
-                        <span class="wsus__minus">-20%</span>
-                        <a class="wsus__pro_link" href="product_details.html">
-                            <img src="images/pro3.jpg" alt="product" class="img-fluid w-100 img_1" />
-                            <img src="images/pro3_3.jpg" alt="product" class="img-fluid w-100 img_2" />
-                        </a>
-                        <ul class="wsus__single_pro_icon">
-                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                                        class="far fa-eye"></i></a></li>
-                            <li><a href="#"><i class="far fa-heart"></i></a></li>
-                            <li><a href="#"><i class="far fa-random"></i></a>
-                        </ul>
-                        <div class="wsus__product_details">
-                            <a class="wsus__category" href="#">Electronics </a>
-                            <p class="wsus__pro_rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>(133 review)</span>
-                            </p>
-                            <a class="wsus__pro_name" href="#">hp 24" FHD monitore</a>
-                            <p class="wsus__price">$159 <del>$200</del></p>
-                            <a class="add_cart" href="#">add to cart</a>
+                @foreach ($flashSaleProducts as $product)
+                    {{-- @dd($product->product->images()->pluck('name')); --}}
+                    <div class="col-xl-3 col-sm-6 col-lg-4">
+                        <div class="wsus__product_item">
+                            <span class="wsus__new">{{ $product->product->product_type }}</span>
+                            @if (checkDiscount($product->product))
+                                <span
+                                    class="wsus__minus">-{{ calcDiscountPercentage($product->product->price, $product->product->offer_price) }}%
+                                </span>
+                            @endif
+                            <a class="wsus__pro_link" href="product_details.html">
+
+                                <img src="{{ asset('uploads/' . @$product->product->images()->pluck('name')[0]) }}"
+                                    alt="product" class="img-fluid w-100 img_1" />
+                                {{-- if there is no second image preview the same image as a second --}}
+                                @if ($product->product->images()->pluck('name')->count() == 1)
+                                    <img src="{{ asset('uploads/' . @$product->product->images()->pluck('name')[0]) }}"
+                                        alt="product" class="img-fluid w-100 img_2" />
+                                    {{-- if no image preview the default image --}}
+                                @elseif ($product->product->images()->pluck('name')->count() == 0)
+                                    <img src="{{ asset('uploads/' . @$product->product->images()->pluck('name')[0]) }}"
+                                        alt="product" class="img-fluid w-100 img_1" />
+                                @else
+                                    <img src="{{ asset('uploads/' . @$product->product->images()->pluck('name')[1]) }}"
+                                        alt="product" class="img-fluid w-100 img_2" />
+                                @endif
+                            </a>
+                            <ul class="wsus__single_pro_icon">
+                                <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                                            class="far fa-eye"></i></a></li>
+                                <li><a href="#"><i class="far fa-heart"></i></a></li>
+                                <li><a href="#"><i class="far fa-random"></i></a>
+                            </ul>
+                            <div class="wsus__product_details">
+                                <a class="wsus__category" href="#">Electronics </a>
+                                <p class="wsus__pro_rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>(133 review)</span>
+                                </p>
+                                <a class="wsus__pro_name" href="#">{{ $product->product->name }}</a>
+
+                                @if (checkDiscount($product->product))
+                                    <p class="wsus__price">{{ $product->product->offer_price }}
+                                        <del>{{ $product->product->price }}</del>
+                                    </p>
+                                @else
+                                    <p class="wsus__price">{{ $product->product->price }}</p>
+                                @endif
+
+                                <a class="add_cart" href="#">add to cart</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

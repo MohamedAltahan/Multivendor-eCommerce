@@ -1626,7 +1626,7 @@ PRODUCT MODAL VIEW END
 .wsus__new {
     position: absolute;
     background: #08c;
-    width: auto;
+    width: 100px;
     height: 25px;
     text-align: center;
     line-height: 25px;
@@ -1784,7 +1784,7 @@ PRODUCT MODAL VIEW END
 }
 
 .wsus__product_details .wsus__price del {
-    color: #ff7676;
+    color: rgb(60, 0, 255);
     margin-left: 10px;
     font-size: 16px;
     font-weight: 500;
@@ -8618,7 +8618,7 @@ header .wsus__call_text a:hover {
 /* product start */
 .wsus__new,
 .wsus__minus {
-    width: 50px;
+    width: auto;
     border-radius: 30px;
     opacity: 0.3;
     transition: all linear 0.3s;
@@ -9414,6 +9414,6 @@ a:not([href]):not([class]):hover {
 }
 #flexSwitchCheckDefault {
     height: 20px;
-    width: 50px;
+    width: 150px;
 }
 /* extra css end here */
