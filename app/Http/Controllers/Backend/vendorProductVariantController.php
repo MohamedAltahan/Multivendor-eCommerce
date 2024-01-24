@@ -97,7 +97,7 @@ class vendorProductVariantController extends Controller
         if ($variant->vendor_id != Auth::user()->vendor->id) {
             abort(404);
         }
-        $variantValuesCheckExist = ProductVariantDetails::where('product_variant_id', $variant->id)->count();
+        $variantValuesCheckExist = ProductVariantDetails::where('product_variant_type_id', $variant->id)->count();
         if ($variantValuesCheckExist > 0) {
             return response(['status' => 'error', 'message' => 'this variant contains items inside, you must delete them first']);
         }

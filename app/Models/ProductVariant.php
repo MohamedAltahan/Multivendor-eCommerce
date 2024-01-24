@@ -13,6 +13,16 @@ class ProductVariant extends Model
 
     public function productVariantDetails()
     {
-        return $this->hasMany(ProductVariantDetails::class, 'product_variant_id', 'id');
+        return $this->hasMany(ProductVariantDetails::class, 'product_variant_type_id', 'id');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(ProductVariantType::class, 'product_variant_type_id', 'id');
+    }
+
+    public function values()
+    {
+        return $this->hasMany(ProductVariantDetails::class, 'product_variant_type_id', 'product_variant_type_id');
     }
 }

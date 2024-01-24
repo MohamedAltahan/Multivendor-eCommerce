@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\ProductVariantDetails;
+use App\Models\ProductVariantType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductVariantController extends Controller
 {
@@ -35,13 +37,13 @@ class ProductVariantController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
-            'product_id' => ['integer', 'required'],
-            'vendor_id' => ['integer', 'required'],
             'name' => ['required', 'max:200'],
             'status' => ['required']
         ]);
-        $variant = new ProductVariant();
+        $request['vendor_id'] = Auth::user()->vendor->id;
+        $variant = new ProductVariantType();
         $variant->create($request->all());
         toastr('Created successfully');
         return redirect()->route('admin.product-variant.index', ['product_id' => $request->product_id]);
@@ -60,7 +62,7 @@ class ProductVariantController extends Controller
      */
     public function edit(string $id)
     {
-        $variant = ProductVariant::findOrFail($id);
+        $variant = ProductVariantType::findOrFail($id);
         return view('admin.product.product-variant.edit', compact('variant'));
     }
 
@@ -74,7 +76,7 @@ class ProductVariantController extends Controller
             'name' => ['required', 'max:200'],
             'status' => ['required']
         ]);
-        $variant =  ProductVariant::findOrFail($id);
+        $variant =  ProductVariantType::findOrFail($id);
         $variant->update($request->all());
         toastr('Updated Successfully');
         return redirect()->route('admin.product-variant.index', ['product_id' => $variant->id]);
@@ -85,8 +87,8 @@ class ProductVariantController extends Controller
      */
     public function destroy(string $id)
     {
-        $variant = ProductVariant::findOrFail($id);
-        $variantValuesCheckExist = ProductVariantDetails::where('product_variant_id', $variant->id)->count();
+        $variant = ProductVariantType::findOrFail($id);
+        $variantValuesCheckExist = ProductVariantDetails::where('product_variant_type_id', $variant->id)->count();
         if ($variantValuesCheckExist > 0) {
             return response(['status' => 'error', 'message' => 'this variant contains items inside, you must delete them first']);
         }
@@ -97,7 +99,7 @@ class ProductVariantController extends Controller
     //change status using ajax request--------------------------------------------------
     public function changeStatus(Request $request)
     {
-        $variant = ProductVariant::findOrFail($request->id);
+        $variant = ProductVariantType::findOrFail($request->id);
 
         $request->status == "true" ? $variant->status = 'active' : $variant->status = 'inactive';
         $variant->save();

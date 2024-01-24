@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('product_variants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products');
-            $table->string('name');
-            $table->integer('vendor_id');
-            $table->enum('status', ['active', 'inactive']);
+            $table->string('product_variant_type_id');
             $table->timestamps();
         });
     }

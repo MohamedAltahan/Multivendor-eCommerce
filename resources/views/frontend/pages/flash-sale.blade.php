@@ -1,31 +1,24 @@
 @extends('frontend.layout.master')
 @section('content')
-    <!--============================
-                                                                                BREADCRUMB START
-                                                                            ==============================-->
+    <!--============================ BREADCRUMB START ==============================-->
     <section id="wsus__breadcrumb">
         <div class="wsus_breadcrumb_overlay">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4>offer detaila</h4>
+                        <h4>Flash Sale</h4>
                         <ul>
-                            <li><a href="#">daily deals</a></li>
-                            <li><a href="#">offer details</a></li>
+                            <li><a href="{{ url('/') }}">Home</a></li>
+                            <li><a href="javascript::">Flash Sale</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--============================
-                                                                                BREADCRUMB END
-                                                                            ==============================-->
+    <!--============================ BREADCRUMB END=======================================-->
 
-
-    <!--============================
-                                                                                DAILY DEALS DETAILS START
-                                                                            ==============================-->
+    <!--============================DAILY DEALS DETAILS START==============================-->
     <section id="wsus__daily_deals">
         <div class="container">
             <div class="wsus__offer_details_area">
@@ -75,11 +68,12 @@
                             <div class="wsus__product_item">
                                 <span class="wsus__new">{{ $product->product->product_type }}</span>
                                 @if (checkDiscount($product->product))
-                                    <span
-                                        class="wsus__minus">-{{ calcDiscountPercentage($product->product->price, $product->product->offer_price) }}%
+                                    <span class="wsus__minus">
+                                        -{{ calcDiscountPercentage($product->product->price, $product->product->offer_price) }}%
                                     </span>
                                 @endif
-                                <a class="wsus__pro_link" href="product_details.html">
+                                <a class="wsus__pro_link"
+                                    href="{{ route('show-product-details', $product->product->slug) }}">
 
                                     <img src="{{ asset('uploads/' . @$product->product->images()->pluck('name')[0]) }}"
                                         alt="product" class="img-fluid w-100 img_1" />
@@ -112,7 +106,8 @@
                                         <i class="fas fa-star-half-alt"></i>
                                         <span>(133 review)</span>
                                     </p>
-                                    <a class="wsus__pro_name" href="#">{{ $product->product->name }}</a>
+                                    <a class="wsus__pro_name"
+                                        href="{{ route('show-product-details', $product->product->slug) }}">{{ $product->product->name }}</a>
 
                                     @if (checkDiscount($product->product))
                                         <p class="wsus__price">{{ $product->product->offer_price }}
@@ -138,8 +133,8 @@
         </div>
     </section>
     <!--============================
-                                                                                DAILY DEALS DETAILS END
-                                                                            ==============================-->
+                                                                                                                    DAILY DEALS DETAILS END
+                                                                                                                ==============================-->
 @endsection
 @push('scripts')
     <script>

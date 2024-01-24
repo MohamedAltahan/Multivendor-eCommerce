@@ -22,8 +22,8 @@
                                     </div>
 
                                     <div class="form-group my-2">
-                                        <x-form.input name="product_variant_id" type="hidden" value="{{ $variant->id }}"
-                                            class="form-control" />
+                                        <x-form.input name="product_variant_type_id" type="hidden"
+                                            value="{{ $variant->id }}" class="form-control" />
                                     </div>
 
                                     <div class="form-group my-2">

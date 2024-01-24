@@ -195,9 +195,9 @@
                 thumbnailWidth: 120, //default thumbnail width 120
                 thumbnailHeight: 120, //default thumbnail hieght 120
                 //----------------force rezise image---------------------------
-                resizeWidth: 200, //it cares about aspect when it resize ^_^
+                resizeWidth: 600, //it cares about aspect when it resize ^_^
                 resizeHeight: null,
-                resizeQuality: 0.8, //defaul is 0.8 (from the original quality)
+                resizeQuality: 1, //defaul is 0.8 (from the original quality)
                 //-------------------------------------------------------------
 
                 init: function() {

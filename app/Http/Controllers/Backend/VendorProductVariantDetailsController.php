@@ -28,7 +28,7 @@ class VendorProductVariantDetailsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'product_variant_id' => ['required', 'integer'],
+            'product_variant_type_id' => ['required', 'integer'],
             'product_id' => ['required', 'integer'],
             'price' => ['required', 'numeric'],
             'variant_value' => ['required', 'max:200'],
@@ -39,7 +39,7 @@ class VendorProductVariantDetailsController extends Controller
         $variantValues = new ProductVariantDetails();
         $variantValues->create($request->all());
         toastr('Created successfully');
-        return redirect()->route('vendor.product.product-variant-details.index', ['productId' => $request->product_id, 'variantId' => $request->product_variant_id]);
+        return redirect()->route('vendor.product.product-variant-details.index', ['productId' => $request->product_id, 'variantId' => $request->product_variant_type_id]);
     }
 
     public function edit($variantDetailsId)
@@ -60,7 +60,7 @@ class VendorProductVariantDetailsController extends Controller
         $variantValue =  ProductVariantDetails::findOrFail($variantDetailsId);
         $variantValue->update($request->all());
         toastr('Updated successfully');
-        return redirect()->route('vendor.product.product-variant-details.index', ['productId' => $variantValue->productVariant->product_id, 'variantId' => $variantValue->product_variant_id]);
+        return redirect()->route('vendor.product.product-variant-details.index', ['productId' => $variantValue->productVariant->product_id, 'variantId' => $variantValue->product_variant_type_id]);
     }
     //change status using ajax request--------------------------------------------------
     public function changeStatus(Request $request)

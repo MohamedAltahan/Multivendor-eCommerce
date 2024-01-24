@@ -29,26 +29,6 @@ class ProductVariantTypesController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->value != '' && $request->attribute != '') {
-
-            $values = explode('-', $request->value);
-
-            $trimSpaces = array_map(function ($value) {
-                return trim($value);
-            }, $values);
-
-            $filteredValues = array_filter($trimSpaces, function ($value) {
-                return $value != '';
-            });
-
-            foreach ($filteredValues as $value) {
-                $variant = new ProductVariantType();
-                $variant->attribute = $request->attribute;
-                $variant->value = trim($value);
-                $variant->save();
-            }
-            return $filteredValues;
-        }
     }
 
     /**

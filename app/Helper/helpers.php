@@ -19,15 +19,15 @@ function setActive(array $routes)
 function checkDiscount($product)
 {
     $currentDate = date('Y-m-d');
-    //dd($currentDate);
-    // // $start_offer_date = Carbon::parse($product->start_offer_date);
-    // dd(Carbon::parse($product->start_offer_date)->gt(Carbon::now()));
-    if (
-        $currentDate >= $product->offer_start_date &&
-        $currentDate <= $product->offer_end_date &&
-        $product->offer_price != null
-    ) {
-        return true;
+
+    if ($product->offer_price != null) {
+        //if date fields are null means that product offer is valid forever
+        if ($product->offer_start_date == null &&  $product->offer_end_date == null) {
+            return true;
+        }
+        if ($currentDate >= $product->offer_start_date && $currentDate <= $product->offer_end_date) {
+            return true;
+        }
     }
     return false;
 }

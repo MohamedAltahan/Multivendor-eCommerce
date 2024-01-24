@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\ProductImages;
 use App\Models\ProductVariant;
+use App\Models\ProductVariantType;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
@@ -54,7 +55,7 @@ class ProductVariantDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(ProductVariant $model): QueryBuilder
+    public function query(ProductVariantType $model): QueryBuilder
     {
         return $model->where('vendor_id', Auth::user()->vendor->id)->newQuery();
     }

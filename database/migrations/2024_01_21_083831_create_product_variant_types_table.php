@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('product_variant_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('value');
-            $table->string('attribute_code');
+            $table->string('vendor_id');
+            $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
         });
     }

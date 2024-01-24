@@ -30,7 +30,7 @@ class ProductVariantDetailsDataTable extends DataTable
                 return $editBtn . $deleteBtn;
             })
             ->addColumn('variant_name', function ($query) {
-                return $query->productVariant->name;
+                return $query->variantType->name;
             })
             ->addColumn('is_default', function ($query) {
                 if ($query->is_default == 'yes') {
@@ -63,7 +63,7 @@ class ProductVariantDetailsDataTable extends DataTable
      */
     public function query(ProductVariantDetails $model): QueryBuilder
     {
-        return $model->where('product_variant_id', request()->variantId)->where('product_id', request()->productId)->newQuery();
+        return $model->where('product_variant_type_id', request()->variantId)->where('product_id', request()->productId)->newQuery();
     }
 
     /**

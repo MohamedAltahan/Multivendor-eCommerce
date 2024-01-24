@@ -12,13 +12,11 @@
         <form action="{{ route('admin.product-variant.store') }}" method="POST">
             @csrf
 
+            {{-- used when you return to index page --}}
             <div class="form-group">
                 <x-form.input value="{{ $product->id }}" name="product_id" type="hidden" class="form-control" />
             </div>
 
-            <div class="form-group">
-                <x-form.input value="{{ Auth::user()->vendor->id }}" name="vendor_id" type="hidden" class="form-control" />
-            </div>
 
             <div class="form-group">
                 <x-form.input name="name" label="Name" class="form-control" />

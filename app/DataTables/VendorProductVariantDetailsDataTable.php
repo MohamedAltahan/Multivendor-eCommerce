@@ -60,7 +60,7 @@ class VendorProductVariantDetailsDataTable extends DataTable
      */
     public function query(ProductVariantDetails $model): QueryBuilder
     {
-        return $model->where('product_variant_id', request()->variantId)->where('product_id', request()->productId)->newQuery();
+        return $model->where('product_variant_type_id', request()->variantId)->where('product_id', request()->productId)->newQuery();
     }
 
     /**
