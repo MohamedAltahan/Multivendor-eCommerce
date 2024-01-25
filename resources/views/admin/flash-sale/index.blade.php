@@ -10,7 +10,7 @@
             <form action="{{ route('admin.flash-sale.update') }}" method="POST">
                 @csrf
                 @method('PUT')
-                <x-form.input label='Flash Sale End Date' value="{{ @$flashSale->end_flash_date }}"
+                <x-form.input label='Flash Sale End Date' value="{{ @$flashSaleDate->end_flash_date }}"
                     class="form-control datepicker" name="end_flash_date" />
                 <button class="btn btn-primary my-4">Save</button>
             </form>

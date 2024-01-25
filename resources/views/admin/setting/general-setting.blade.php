@@ -6,12 +6,12 @@
                 @method('PUT')
                 <div class="form-group">
                     <x-form.input class="form-control" name="site_name" label='Site Name'
-                        value="{{ $setting->site_name }}" />
+                        value="{{ @$setting->site_name }}" />
                 </div>
 
                 <div class="form-group">
                     <x-form.input class="form-control" name="contact_email" label='Contact Email'
-                        value="{{ $setting->contact_email }}" />
+                        value="{{ @$setting->contact_email }}" />
                 </div>
 
                 <div class="form-group">
@@ -19,8 +19,9 @@
                     <select name="currency" id="" class="form-control select2">
                         <option value="">Select Currenct</option>
                         @foreach (config('setting.currency_list') as $currency => $symbol)
-                            <option @selected($setting->currency == $symbol) value="{{ $symbol }}">{{ $currency }}
-                                ({{ $symbol }})</option>
+                            <option @selected(@$setting->currency == $symbol) value="{{ $symbol }}">{{ $currency }}
+                                ({{ $symbol }})
+                            </option>
                         @endforeach
                     </select>
                     <x-form.error name='currency' message={{ $message }} />
@@ -29,8 +30,8 @@
                 <div class="form-group">
                     <label for="">Layout direction</label>
                     <select name="layout" id="" class="form-control ">
-                        <option @selected($setting->layout == 'ltr') value="ltr">LTR</option>
-                        <option @selected($setting->layout == 'rtl') value="rtl">RTL</option>
+                        <option @selected(@$setting->layout == 'ltr') value="ltr">LTR</option>
+                        <option @selected(@$setting->layout == 'rtl') value="rtl">RTL</option>
                     </select>
                     <x-form.error name='layout' message={{ $message }} />
                 </div>
@@ -40,7 +41,7 @@
                     <select name="time_zone" id="" class="form-control select2">
                         <option value="">Select Time Zone</option>
                         @foreach (config('setting.time_zone') as $timeZone => $value)
-                            <option @selected($setting->time_zone == $timeZone) value="{{ $timeZone }}">{{ $timeZone }}
+                            <option @selected(@$setting->time_zone == $timeZone) value="{{ $timeZone }}">{{ $timeZone }}
                             </option>
                         @endforeach
                     </select>

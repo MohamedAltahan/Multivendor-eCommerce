@@ -99,11 +99,14 @@
                                         href="{{ route('show-product-details', $product->product->slug) }}">{{ $product->product->name }}</a>
 
                                     @if (checkDiscount($product->product))
-                                        <p class="wsus__price">{{ $product->product->offer_price }}
-                                            <del>{{ $product->product->price }}</del>
+                                        <p class="wsus__price"><span
+                                                class="currency_color">{{ $setting->currency }}</span>{{ $product->product->offer_price }}
+                                            <del>{{ $setting->currency }}{{ $product->product->price }}</del>
                                         </p>
                                     @else
-                                        <p class="wsus__price">{{ $product->product->price }}</p>
+                                        <p class="wsus__price"><span
+                                                class="currency_color">{{ $setting->currency }}</span>{{ $product->product->price }}
+                                        </p>
                                     @endif
 
                                     <a class="add_cart" href="#">add to cart</a>
@@ -127,9 +130,9 @@
     <script>
         $(document).ready(function() {
             simplyCountdown(".simply-countdown-one", {
-                year: {{ date('Y', strtotime($flashSaleDate->end_flash_date)) }}, //2022
-                month: {{ date('m', strtotime($flashSaleDate->end_flash_date)) }}, //2
-                day: {{ date('d', strtotime($flashSaleDate->end_flash_date)) }}, //5
+                year: {{ date('Y', strtotime(@$flashSaleDate->end_flash_date)) }}, //2022
+                month: {{ date('m', strtotime(@$flashSaleDate->end_flash_date)) }}, //2
+                day: {{ date('d', strtotime(@$flashSaleDate->end_flash_date)) }}, //5
             });
         });
     </script>

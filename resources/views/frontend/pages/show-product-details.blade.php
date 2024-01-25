@@ -190,14 +190,17 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-xl-5 col-md-7 col-lg-7">
                         <div class="wsus__pro_details_text">
                             <a class="title" href="javascrip:;">{{ $product->name }}</a>
                             <p class="wsus__stock_area"><span class="in_stock">in stock</span> (167 item)</p>
                             @if (checkDiscount($product))
-                                <h4>{{ $product->offer_price }} <del>{{ $product->price }}</del></h4>
+                                <h4><span class="currency_color">{{ $setting->currency }}</span>{{ $product->offer_price }}
+                                    <del>{{ $setting->currency }}</>{{ $product->price }}</del>
+                                </h4>
                             @else
-                                <h4>{{ $product->price }}</h4>
+                                <h4><span class="currency_color">{{ $setting->currency }}</span>{{ $product->price }}</h4>
                             @endif
                             <p class="review">
                                 <i class="fas fa-star"></i>

@@ -15,7 +15,8 @@
                                         <div class="wsus__single_slider_text">
                                             <h3>{!! $slider->type !!}</h3>
                                             <h1>{!! $slider->title !!}</h1>
-                                            <h6>Start at ${{ $slider->starting_price }}</h6>
+                                            <h6>Start at {{ $setting->currency }} {{ $slider->starting_price }}
+                                            </h6>
                                             <a class="common_btn" href="{{ $slider->banner_url }}">shop now</a>
                                         </div>
                                     </div>

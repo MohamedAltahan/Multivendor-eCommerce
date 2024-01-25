@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sliders', function (Blueprint $table) {
             $table->id();
-            $table->text('banner')->nullable();
+            $table->text('banner_image')->nullable();
             $table->string('type')->nullable();
             $table->string('title')->nullable();
             $table->string('starting_price')->nullable();
