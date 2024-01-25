@@ -14,6 +14,7 @@ class ShowProductController extends Controller
     {
         $flashSaleDate = FlashSale::first();
         $product = Product::with('brand', 'images')->where('slug', $slug)->where('status', 'active')->first();
+        dd($product);
         return view('frontend.pages.show-product-details', compact('product', 'flashSaleDate'));
     }
 }

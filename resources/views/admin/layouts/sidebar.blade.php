@@ -89,6 +89,9 @@
                             href="{{ route('admin.vendor-profile.index') }}">Vendors profile</a></li>
                 </ul>
             </li>
+            {{-- settings================================================================= --}}
+            <li><a href="{{ route('admin.settings.index') }}" class="nav-link"><i
+                        class="far fa-square"></i><span>Settings</span></a></li>
 
         </ul>
     </aside>

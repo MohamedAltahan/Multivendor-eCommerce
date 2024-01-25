@@ -70,7 +70,6 @@
 
     @push('styles')
         <link rel="stylesheet" href="{{ asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.css') }}">
-        <link rel="stylesheet" href="{{ asset('backend/assets/modules/select2/dist/css/select2.min.css') }}">
     @endpush
 
     @push('scripts')
@@ -126,6 +125,5 @@
             })
         </script>
         <script src="{{ asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
-        <script src="{{ asset('backend/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
     @endpush
 @endsection

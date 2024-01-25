@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductVariantController;
 use App\Http\Controllers\Backend\ProductVariantDetailsController;
 use App\Http\Controllers\Backend\ProductVariantTypesController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Models\Brand;
@@ -90,4 +91,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::put('flash-sale/show_at_home_status', [FlashSaleController::class, 'changeShowAtHomeStatus'])->name('flash-sale.show-at-home-status');
     Route::put('flash-sale/status', [FlashSaleController::class, 'changeStatus'])->name('flash-sale.change-status');
     Route::delete('flash-sale/{id}', [FlashSaleController::class, 'destroy'])->name('flash-sale.destroy');
+    //settigs========================================================================================================
+    Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::put('general-settnig-update', [SettingController::class, 'generalSettingUpdate'])->name('general-setting-update.index');
 });

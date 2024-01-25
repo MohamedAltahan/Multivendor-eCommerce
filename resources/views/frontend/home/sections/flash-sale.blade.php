@@ -85,7 +85,6 @@
                     year: {{ date('Y', strtotime($flashSaleDate->end_flash_date)) }}, //2022
                     month: {{ date('m', strtotime($flashSaleDate->end_flash_date)) }}, //2
                     day: {{ date('d', strtotime($flashSaleDate->end_flash_date)) }}, //5
-                    // enableUtc: true,
                 });
             });
         </script>
