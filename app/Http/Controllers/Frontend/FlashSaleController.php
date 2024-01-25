@@ -16,10 +16,10 @@ class FlashSaleController extends Controller
         $flashSaleProducts = FlashSaleItem::where('status', 'active')->with(
             [
                 'product' => function ($query) {
-                    $query->with('images');
+                    $query->with('firstImage');
                 }
             ]
-        )->paginate(1);
+        )->paginate();
         return view('frontend.pages.flash-sale', compact('flashSaleDate', 'flashSaleProducts'));
     }
 }

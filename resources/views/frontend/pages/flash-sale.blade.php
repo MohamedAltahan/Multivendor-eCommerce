@@ -72,24 +72,13 @@
                                         -{{ calcDiscountPercentage($product->product->price, $product->product->offer_price) }}%
                                     </span>
                                 @endif
+
                                 <a class="wsus__pro_link"
                                     href="{{ route('show-product-details', $product->product->slug) }}">
-
-                                    <img src="{{ asset('uploads/' . @$product->product->images()->pluck('name')[0]) }}"
-                                        alt="product" class="img-fluid w-100 img_1" />
-                                    {{-- if there is no second image preview the same image as a second --}}
-                                    @if ($product->product->images()->pluck('name')->count() == 1)
-                                        <img src="{{ asset('uploads/' . @$product->product->images()->pluck('name')[0]) }}"
-                                            alt="product" class="img-fluid w-100 img_2" />
-                                        {{-- if no image preview the default image --}}
-                                    @elseif ($product->product->images()->pluck('name')->count() == 0)
-                                        <img src="{{ asset('uploads/' . @$product->product->images()->pluck('name')[0]) }}"
-                                            alt="product" class="img-fluid w-100 img_1" />
-                                    @else
-                                        <img src="{{ asset('uploads/' . @$product->product->images()->pluck('name')[1]) }}"
-                                            alt="product" class="img-fluid w-100 img_2" />
-                                    @endif
+                                    <img src="{{ asset('uploads/' . @$product->product->firstImage->name) }}" alt="product"
+                                        class="img-fluid w-100 img_1" />
                                 </a>
+
                                 <ul class="wsus__single_pro_icon">
                                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
                                                 class="far fa-eye"></i></a></li>
@@ -132,9 +121,7 @@
             </div>
         </div>
     </section>
-    <!--============================
-                                                                                                                    DAILY DEALS DETAILS END
-                                                                                                                ==============================-->
+    <!--============================ DAILY DEALS DETAILS END  ==============================-->
 @endsection
 @push('scripts')
     <script>
