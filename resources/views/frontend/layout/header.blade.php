@@ -104,12 +104,10 @@
                 </ul>
                 <h5>sub total <span>$3540</span></h5>
                 <div class="wsus__minicart_btn_area">
-                    <a class="common_btn" href="cart_view.html">view cart</a>
+                    <a class="common_btn" href="{{ route('cart-details') }}">view cart</a>
                     <a class="common_btn" href="check_out.html">checkout</a>
                 </div>
             </div>
 
         </header>
-        <!--============================
-        HEADER END
-    ==============================-->
+        <!--============================  HEADER END ==============================-->

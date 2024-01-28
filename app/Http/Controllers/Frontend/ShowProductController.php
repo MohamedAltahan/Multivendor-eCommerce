@@ -13,7 +13,10 @@ class ShowProductController extends Controller
     public function showProductDetails(string $slug)
     {
         $flashSaleDate = FlashSale::first();
-        $product = Product::with('brand', 'images')->where('slug', $slug)->where('status', 'active')->first();
+        $product = Product::with(['brand', 'images', 'variants' => function ($query) {
+            $query->with('type');
+        }])->where('slug', $slug)->where('status', 'active')->first();
+
         return view('frontend.pages.show-product-details', compact('product', 'flashSaleDate'));
     }
 }

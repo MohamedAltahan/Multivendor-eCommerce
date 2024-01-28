@@ -9435,4 +9435,19 @@ a:not([href]):not([class]):hover {
     margin-right: 10px;
 }
 
+.product-qty-wrapper {
+    display: flex;
+}
+.input-cart-qty {
+    width: 45px;
+    height: 35px;
+    padding: 5px;
+    margin-top: 1px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.wsus__cart_list .wsus__pro_select {
+    width: 160px;
+}
+
 /* extra css end here */

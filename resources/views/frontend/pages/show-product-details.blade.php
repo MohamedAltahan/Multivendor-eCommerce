@@ -222,11 +222,20 @@
                                 <div class="wsus__selectbox">
                                     <div class="row">
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                        @foreach ($product->variants()->with('type')->get() as $variant)
+                                        {{-- inorder to not repeat variant type you have groupby 'variant type id ' --}}
+                                        @foreach ($product->variants()->get()->groupBy('product_variant_type_id') as $key => $variant)
+                                            @php
+                                                // to convert collection to object
+                                                $variant = $variant->first();
+                                            @endphp
+
                                             <div class="col-xl-6 col-sm-6">
-                                                <div class="mb-2">select {{ $variant->type->name }} :</div>
+                                                <div class="mb-2">select
+                                                    {{ $variant->type()->where('id', $key)->value('name') }} :</div>
+                                                {{-- @dd($variant->values) --}}
                                                 <select class="form-control" name="variants_id[]">
-                                                    @foreach ($variant->values as $value)
+                                                    {{-- using relation values --}}
+                                                    @foreach ($variant->values()->where('product_id', $product->id)->get() as $value)
                                                         <option value="{{ $value->id }}">{{ $value->variant_value }}
                                                             (+{{ $setting->currency . $value->price }})
                                                         </option>
@@ -873,7 +882,7 @@
                     data: formData,
                     url: '{{ route('add-to-cart') }}',
                     success: function(data) {
-
+                        toastr.success(data.message)
                     },
                     erorr: function(data) {
 

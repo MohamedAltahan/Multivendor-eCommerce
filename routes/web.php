@@ -49,8 +49,12 @@ Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login'
 Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale');
 //view product detials=========================================================================
 Route::get('show-product-details/{slug}', [ShowProductController::class, 'showProductDetails'])->name('show-product-details');
-//Add to cart==================================================================================
+// cart==================================================================================
 Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
+Route::get('cart-details', [CartController::class, 'cartDetails'])->name('cart-details');
+Route::post('cart-update-quantity', [CartController::class, 'cartUpdateQuantity'])->name('cart-update-quantity');
+Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clear-cart');
+Route::get('remove-cart-product/{rowId}', [CartController::class, 'removeCartProduct'])->name('remove-cart-product');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
