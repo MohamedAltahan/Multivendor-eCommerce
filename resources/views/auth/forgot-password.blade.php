@@ -1,4 +1,7 @@
 @extends('frontend.layout.master')
+@section('title')
+    {{ $setting->site_name }} - Forget password
+@endsection
 @section('content')
     <!--============================BREADCRUMB START==============================-->
     <section id="wsus__breadcrumb">

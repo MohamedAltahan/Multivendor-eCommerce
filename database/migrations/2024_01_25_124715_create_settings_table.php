@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('contact_email');
             $table->string('currency');
             $table->string('time_zone');
+            $table->string('currency_symbol')->nullable();
             $table->timestamps();
         });
     }

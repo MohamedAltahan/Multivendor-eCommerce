@@ -1,4 +1,7 @@
 @extends('frontend.layout.master')
+@section('title')
+    {{ $setting->site_name }} - Product Details
+@endsection
 @section('content')
     <!--==========================PRODUCT MODAL VIEW START===========================-->
     <section class="product_popup_modal">
@@ -215,35 +218,40 @@
                                 <h5>offer ending time: : </h5>
                                 <div class="simply-countdown simply-countdown-one"></div>
                             </div>
-                            <div class="wsus__selectbox">
-                                <div class="row">
-                                    @foreach ($product->variants()->with('type')->get() as $variant)
-                                        <div class="col-xl-6 col-sm-6">
-                                            <div class="mb-2">select {{ $variant->type->name }} :</div>
-                                            <select class="form-control" name="state">
-                                                @foreach ($variant->values as $value)
-                                                    <option>{{ $value->variant_value }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    @endforeach
+                            <form class="shopping-cart-form" action="">
+                                <div class="wsus__selectbox">
+                                    <div class="row">
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        @foreach ($product->variants()->with('type')->get() as $variant)
+                                            <div class="col-xl-6 col-sm-6">
+                                                <div class="mb-2">select {{ $variant->type->name }} :</div>
+                                                <select class="form-control" name="variants_id[]">
+                                                    @foreach ($variant->values as $value)
+                                                        <option value="{{ $value->id }}">{{ $value->variant_value }}
+                                                            (+{{ $setting->currency . $value->price }})
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="wsus__quentity">
-                                <h5>quentity :</h5>
-                                <form class="select_number">
-                                    <input class="number_area" type="text" min="1" max="100"
-                                        value="1" />
-                                </form>
+                                <div class="wsus__quentity">
+                                    <h5>quentity :</h5>
+                                    <div class="select_number">
+                                        <input class="number_area" name="quantity" type="text" min="1"
+                                            max="100" value="1" />
+                                    </div>
+                                </div>
 
-                            </div>
-                            <ul class="wsus__button_area">
-                                <li><a class="add_cart" href="#">add to cart</a></li>
-                                <li><a class="buy_now" href="#">buy now</a></li>
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="#"><i class="far fa-random"></i></a></li>
-                            </ul>
+                                <ul class="wsus__button_area">
+                                    <li><button type="submit" class="add_cart">add to cart</button></li>
+                                    <li><a class="buy_now" href="#">buy now</a></li>
+                                    <li><a href="#"><i class="fal fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="far fa-random"></i></a></li>
+                                </ul>
+                            </form>
 
                             <p class="brand_model"><span>brand :</span> {{ $product->brand->name }}</p>
 
@@ -848,5 +856,30 @@
                 // enableUtc: true,
             });
         });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.shopping-cart-form').on('submit', function(e) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                e.preventDefault();
+                let formData = $(this).serialize();
+                let _token = "{{ csrf_token() }}"
+                $.ajax({
+                    method: 'POST',
+                    data: formData,
+                    url: '{{ route('add-to-cart') }}',
+                    success: function(data) {
+
+                    },
+                    erorr: function(data) {
+
+                    },
+                })
+            })
+        })
     </script>
 @endpush

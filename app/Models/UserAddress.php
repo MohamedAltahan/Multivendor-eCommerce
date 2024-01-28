@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Setting extends Model
+class UserAddress extends Model
 {
     use HasFactory;
-    protected $fillable = ['currency_symbol', 'site_name', 'layout', 'contact_email', 'currency', 'time_zone'];
+    protected $fillable = ['user_id', 'name', 'email', 'phone', 'country', 'state', 'city', 'zip_code', 'address'];
 }

@@ -1,4 +1,7 @@
 @extends('vendor.layouts.master')
+@section('title')
+    {{ $setting->site_name }} - Product
+@endsection
 @section('content')
     <!--============================= DASHBOARD START  ==============================-->
     <section id="wsus__dashboard">

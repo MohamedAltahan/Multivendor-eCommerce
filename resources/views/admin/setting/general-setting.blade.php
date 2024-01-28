@@ -15,6 +15,11 @@
                 </div>
 
                 <div class="form-group">
+                    <x-form.input class="form-control" name="currency_symbol" label='Currency_symbol'
+                        value="{{ @$setting->currency_symbol }}" />
+                </div>
+
+                <div class="form-group">
                     <label for="">Default Currency</label>
                     <select name="currency" id="" class="form-control select2">
                         <option value="">Select Currenct</option>

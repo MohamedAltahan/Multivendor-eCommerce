@@ -1,8 +1,9 @@
 @extends('frontend.dashboard.layouts.master')
+@section('title')
+    {{ $setting->site_name }} - Profile
+@endsection
 @section('content')
-    <!--=============================
-                                                                                                                                                                                                                                                                                                            DASHBOARD START
-                                                                                                                                                                                                                                                                                                          ==============================-->
+    <!--=============================  DASHBOARD START  ==============================-->
     <section id="wsus__dashboard">
         <div class="container-fluid">
             @include('frontend.dashboard.layouts.sidebar')
@@ -103,6 +104,6 @@
         </div>
     </section>
     <!--=============================
-                                                                                                                                                                                                                                                                                                            DASHBOARD START
-                                                                                                                                                                                                                                                                                                          ==============================-->
+                                                                                                                                                                                                                                                                                                                DASHBOARD START
+                                                                                                                                                                                                                                                                                                              ==============================-->
 @endsection

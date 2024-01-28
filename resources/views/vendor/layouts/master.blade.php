@@ -8,7 +8,7 @@
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
             rel="stylesheet">
-        <title>One Shop || e-Commerce HTML Template</title>
+        <title>@yield('title')</title>
         {{-- <link rel="icon" type="image/png" href=""> --}}
         <link rel="stylesheet" href="{{ asset('frontend/css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
@@ -106,7 +106,6 @@
         {{-- summernote --}}
         <script src="{{ asset('backend/assets/modules/summernote/summernote-bs4.js') }}"></script>
         <script src="{{ asset('backend/assets/js/sweetalert2.all.min.js') }}"></script>
-
         <script src="{{ asset('backend/assets/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('backend/assets/js/dataTables.bootstrap5.min.js') }}"></script>
         <!--main/custom js-->

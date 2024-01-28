@@ -18,6 +18,7 @@ class SettingController extends Controller
     {
         $request->validate([
             'site_name' => ['required', 'max:200'],
+            'currency_symbol' => ['required', 'max:20'],
             'layout' => ['required', 'max:200'],
             'contact_email' => ['required', 'max:200'],
             'currency' => ['required', 'max:200'],
