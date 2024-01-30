@@ -22,7 +22,6 @@
     </section>
     <!--============================BREADCRUMB END ==============================-->
 
-
     <!--============================ CART VIEW PAGE START  ==============================-->
     <section id="wsus__cart_view">
         <div class="container">
@@ -78,7 +77,7 @@
                                             <td class="wsus__pro_select">
                                                 <div class="product-qty-wrapper">
                                                     <button class="btn btn-danger qty-decrement">-</button>
-                                                    <input class="form-control input-cart-qty" type="text"
+                                                    <input readonly class="form-control input-cart-qty" type="text"
                                                         data-rowid="{{ $item->rowId }}" min="1"max="100"
                                                         value="{{ $item->qty }}" />
                                                     <button class="btn btn-success qty-increment">+</button>
@@ -101,6 +100,7 @@
                                                 Cart is empty!
                                             </td>
                                         </tr>
+                                        {{ session()->forget('coupon') }}
                                     @endforelse
 
                                 </tbody>
@@ -111,17 +111,20 @@
                 <div class="col-xl-3">
                     <div class="wsus__cart_list_footer_button" id="sticky_sidebar">
                         <h6>total cart</h6>
-                        <p>subtotal: <span>$124.00</span></p>
-                        <p>delivery: <span>$00.00</span></p>
-                        <p>discount: <span>$10.00</span></p>
-                        <p class="total"><span>total:</span> <span>$134.00</span></p>
+                        <p>subtotal: <span class="cart_subtotal"> {{ $setting->currency }} {{ calcCartTotal() }}</span>
+                        </p>
+                        <p>Coupon(-): <span id="cart_discount">{{ $setting->currency }}{{ getMainCartDiscount() }}</span>
+                        </p>
+                        <p class="total"><span>total:</span> <span
+                                id="cart_total">{{ $setting->currency }}{{ getMainCartTotal() }}</span></p>
 
-                        <form>
-                            <input type="text" placeholder="Coupon Code">
+                        <form id="coupon_form">
+                            <input type="text" placeholder="Coupon Code" name="coupon_code"
+                                value="{{ session()->has('coupon') ? session()->get('coupon')['code'] : '' }}">
                             <button type="submit" class="common_btn">apply</button>
                         </form>
                         <a class="common_btn mt-4 w-100 text-center" href="check_out.html">checkout</a>
-                        <a class="common_btn mt-1 w-100 text-center" href="product_grid_view.html"><i
+                        <a class="common_btn mt-1 w-100 text-center" href="{{ url('/') }}"><i
                                 class="fab fa-shopify"></i> go shop</a>
                     </div>
                 </div>
@@ -179,7 +182,7 @@
                 let quantity = parseInt(input.val()) - 1;
                 let rowId = input.data('rowid')
                 if (quantity < 1) {
-                    quentity = 1;
+                    quantity = 1;
                 }
                 input.val(quantity);
                 updateCartQty(rowId, quantity)
@@ -225,19 +228,68 @@
                         _token: "{{ csrf_token() }}"
                     },
                     success: function(data) {
-                        console.log(data)
                         if (data.status == 'success') {
                             let totalPriceInput = $('#' + rowId).text(
                                 "{{ $setting->currency }}" + data.totalPrice);
                             toastr.success(data.message);
+                            getCartSubtotal();
+                            calcCouponDiscount();
+                        } else if (data.status == 'error') {
+                            toastr.error(data.message)
                         }
                     },
                     erorr: function(data) {}
                 })
             }
 
-            // ==========================================================================
+            // get subtotal of cart=======================================================
+            function getCartSubtotal() {
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('get-cart-subtotal') }}",
+                    success: function(data) {
+                        $('.cart_subtotal').text("{{ $setting->currency }}" + data);
+                    },
+                    erorr: function(data) {
 
+                    },
+                })
+            }
+
+            //apply coupon on cart=========================================================
+            $('#coupon_form').on('submit', function(e) {
+                e.preventDefault();
+                let formData = $(this).serialize();
+                $.ajax({
+                    url: "{{ route('apply-coupon') }}",
+                    data: formData,
+                    success: function(data) {
+                        if (data.status == 'error') {
+                            toastr.error(data.message);
+                        } else if (data.status == 'success') {
+                            toastr.success(data.message)
+                            calcCouponDiscount();
+                        }
+                    },
+                    erorr: function(data) {},
+                })
+            })
+
+            //calc coupon discount==============================================================
+            function calcCouponDiscount() {
+                $.ajax({
+                    url: "{{ route('coupon-calculation') }}",
+                    success: function(data) {
+                        if (data.status == 'success') {
+                            $('#cart_discount').text("{{ $setting->currency }}" + data.discount)
+                            $('#cart_total').text("{{ $setting->currency }}" + data.total)
+                        } else if (data.status == 'error') {
+
+                        }
+                    },
+                    erorr: function(data) {},
+                })
+            }
         })
     </script>
 @endpush

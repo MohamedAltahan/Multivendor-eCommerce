@@ -9449,5 +9449,9 @@ a:not([href]):not([class]):hover {
 .wsus__cart_list .wsus__pro_select {
     width: 160px;
 }
+.wsus__mini_cart .wsus__cart_img img {
+    height: auto;
+    object-fit: cover;
+}
 
 /* extra css end here */

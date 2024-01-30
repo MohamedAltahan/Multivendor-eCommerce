@@ -55,6 +55,13 @@ Route::get('cart-details', [CartController::class, 'cartDetails'])->name('cart-d
 Route::post('cart-update-quantity', [CartController::class, 'cartUpdateQuantity'])->name('cart-update-quantity');
 Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clear-cart');
 Route::get('remove-cart-product/{rowId}', [CartController::class, 'removeCartProduct'])->name('remove-cart-product');
+Route::get('get-cart-count', [CartController::class, 'getCartCount'])->name('get-cart-count');
+Route::get('get-cart-products', [CartController::class, 'getCartProducts'])->name('get-cart-products');
+Route::get('get-cart-subtotal', [CartController::class, 'calcCartTotal'])->name('get-cart-subtotal');
+Route::post('remove-side-cart-product', [CartController::class, 'removeSideCartProduct'])->name('remove-side-cart-product');
+//apply coupon on cart
+Route::get('apply-coupon', [CartController::class, 'applyCoupon'])->name('apply-coupon');
+Route::get('coupon-calculation', [CartController::class, 'couponCalculation'])->name('coupon-calculation');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

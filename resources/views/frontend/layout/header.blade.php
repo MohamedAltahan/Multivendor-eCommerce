@@ -39,70 +39,47 @@
                             <ul class="wsus__icon_area">
                                 <li><a href="wishlist.html"><i class="fal fa-heart"></i><span>05</span></a></li>
                                 <li><a href="compare.html"><i class="fal fa-random"></i><span>03</span></a></li>
-                                <li><a class="wsus__cart_icon" href="#"><i
-                                            class="fal fa-shopping-bag"></i><span>04</span></a></li>
+                                <li><a class="wsus__cart_icon" href="#"><i class="fal fa-shopping-bag"></i><span
+                                            class="cart-count-icon">{{ Cart::count() }}</span></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="wsus__mini_cart">
                 <h4>shopping cart <span class="wsus_close_mini_cart"><i class="far fa-times"></i></span></h4>
-                <ul>
-                    <li>
-                        <div class="wsus__cart_img">
-                            <a href="#"><img src="images/tab_2.jpg" alt="product" class="img-fluid w-100"></a>
-                            <a class="wsis__del_icon" href="#"><i class="fas fa-minus-circle"></i></a>
-                        </div>
-                        <div class="wsus__cart_text">
-                            <a class="wsus__cart_title" href="#">apple 9.5" 7 serise tab with full view
-                                display</a>
-                            <p>$140 <del>$150</del></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="wsus__cart_img">
-                            <a href="#"><img src="images/pro4.jpg" alt="product" class="img-fluid w-100"></a>
-                            <a class="wsis__del_icon" href="#"><i class="fas fa-minus-circle"></i></a>
-                        </div>
-                        <div class="wsus__cart_text">
-                            <a class="wsus__cart_title" href="#">men's fashion casual watch</a>
-                            <p>$130</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="wsus__cart_img">
-                            <a href="#"><img src="images/pro2.jpg" alt="product" class="img-fluid w-100"></a>
-                            <a class="wsis__del_icon" href="#"><i class="fas fa-minus-circle"></i></a>
-                        </div>
-                        <div class="wsus__cart_text">
-                            <a class="wsus__cart_title" href="#">men's casual shoes</a>
-                            <p>$140 <del>$150</del></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="wsus__cart_img">
-                            <a href="#"><img src="images/pro9.jpg" alt="product" class="img-fluid w-100"></a>
-                            <a class="wsis__del_icon" href="#"><i class="fas fa-minus-circle"></i></a>
-                        </div>
-                        <div class="wsus__cart_text">
-                            <a class="wsus__cart_title" href="#">men's fashion casual sholder bag</a>
-                            <p>$140</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="wsus__cart_img">
-                            <a href="#"><img src="images/tab_2.jpg" alt="product" class="img-fluid w-100"></a>
-                            <a class="wsis__del_icon" href="#"><i class="fas fa-minus-circle"></i></a>
-                        </div>
-                        <div class="wsus__cart_text">
-                            <a class="wsus__cart_title" href="#">apple 9.5" 7 serise tab with full view
-                                display</a>
-                            <p>$140 <del>$150</del></p>
-                        </div>
-                    </li>
-                </ul>
-                <h5>sub total <span>$3540</span></h5>
+                <div class="side_cart_wrapper">
+                    <ul>
+                        @forelse (Cart::content() as $item)
+                            <li id="product_{{ $item->rowId }}">
+                                <div class="wsus__cart_img">
+                                    <a href="{{ route('show-product-details', $item->options->slug) }}"><img
+                                            src="{{ asset('uploads/' . $item->options->image) }}" alt="product"
+                                            class="img-fluid w-100"></a>
+                                    <a class="wsis__del_icon " id="side-cart-remove-product"
+                                        data-id="{{ $item->rowId }}" href="#"><i
+                                            class="fas fa-minus-circle"></i></a>
+                                </div>
+
+                                <div class="wsus__cart_text">
+                                    <a class="wsus__cart_title"
+                                        href="{{ route('show-product-details', $item->options->slug) }}">{{ $item->name }}</a>
+                                    <p>{{ $item->price }} * {{ $item->qty }} =
+                                        {{ $setting->currency . $item->price * $item->qty }}
+                                    </p>
+
+                                </div>
+                            </li>
+
+                        @empty
+                            <h5 class="text-primary " style="justify-content: center">Cart is empty</h5>
+                        @endforelse
+                    </ul>
+                    <h5>sub total <span>{{ calcCartTotal() }}</span></h5>
+                </div>
+
+
                 <div class="wsus__minicart_btn_area">
                     <a class="common_btn" href="{{ route('cart-details') }}">view cart</a>
                     <a class="common_btn" href="check_out.html">checkout</a>

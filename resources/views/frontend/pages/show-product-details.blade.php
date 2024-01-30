@@ -197,13 +197,20 @@
                     <div class="col-xl-5 col-md-7 col-lg-7">
                         <div class="wsus__pro_details_text">
                             <a class="title" href="javascrip:;">{{ $product->name }}</a>
-                            <p class="wsus__stock_area"><span class="in_stock">in stock</span> (167 item)</p>
+                            @if ($product->quantity > 0)
+                                <p class="wsus__stock_area"><span class="in_stock">in stock</span>
+                                    ({{ $product->quantity }} item in stock)</p>
+                            @elseif($product->name == 0)
+                                <p class="wsus__stock_area"><span class="in_stock">out of stock</span>
+                                    ({{ $product->quantity }} item in stock)</p>
+                            @endif
                             @if (checkDiscount($product))
                                 <h4><span class="currency_color">{{ $setting->currency }}</span>{{ $product->offer_price }}
                                     <del>{{ $setting->currency }}</>{{ $product->price }}</del>
                                 </h4>
                             @else
-                                <h4><span class="currency_color">{{ $setting->currency }}</span>{{ $product->price }}</h4>
+                                <h4><span class="currency_color">{{ $setting->currency }}</span>{{ $product->price }}
+                                </h4>
                             @endif
                             <p class="review">
                                 <i class="fas fa-star"></i>
@@ -228,20 +235,21 @@
                                                 // to convert collection to object
                                                 $variant = $variant->first();
                                             @endphp
-
-                                            <div class="col-xl-6 col-sm-6">
-                                                <div class="mb-2">select
-                                                    {{ $variant->type()->where('id', $key)->value('name') }} :</div>
-                                                {{-- @dd($variant->values) --}}
-                                                <select class="form-control" name="variants_id[]">
-                                                    {{-- using relation values --}}
-                                                    @foreach ($variant->values()->where('product_id', $product->id)->get() as $value)
-                                                        <option value="{{ $value->id }}">{{ $value->variant_value }}
-                                                            (+{{ $setting->currency . $value->price }})
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                            @if ($variant->status != 'inactive')
+                                                <div class="col-xl-6 col-sm-6">
+                                                    <div class="mb-2">select
+                                                        {{ $variant->type()->where('id', $key)->value('name') }} :</div>
+                                                    <select class="form-control" name="variants_id[]">
+                                                        {{-- using relation values --}}
+                                                        @foreach ($variant->values()->where('product_id', $product->id)->get() as $value)
+                                                            <option value="{{ $value->id }}">
+                                                                {{ $value->variant_value }}
+                                                                (+{{ $setting->currency . $value->price }})
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            @endif
                                         @endforeach
                                     </div>
                                 </div>
@@ -865,30 +873,5 @@
                 // enableUtc: true,
             });
         });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('.shopping-cart-form').on('submit', function(e) {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                e.preventDefault();
-                let formData = $(this).serialize();
-                let _token = "{{ csrf_token() }}"
-                $.ajax({
-                    method: 'POST',
-                    data: formData,
-                    url: '{{ route('add-to-cart') }}',
-                    success: function(data) {
-                        toastr.success(data.message)
-                    },
-                    erorr: function(data) {
-
-                    },
-                })
-            })
-        })
     </script>
 @endpush

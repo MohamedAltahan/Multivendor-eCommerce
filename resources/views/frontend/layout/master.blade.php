@@ -183,7 +183,10 @@
                 })
             });
         </script>
+
         @stack('scripts')
+
+        @include('frontend.pages.side-cart-scripts')
     </body>
 
 </html>

@@ -73,7 +73,21 @@
                                     </p>
                                 @endif
 
-                                <a class="add_cart" href="#">add to cart</a>
+                                {{-- <form class="shopping-cart-form" action="">
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="qty" value="1">
+                                    @foreach ($product->variants()->get()->groupBy('product_variant_type_id') as $key => $variant)
+                                        <select class="d-none" name="variants_id[]">
+                                 @foreach ($variant->values()->where('product_id', $product->id)->get() as $value)
+                                                <option value="{{ $value->id }}">{{ $value->variant_value }}
+                                                    (+{{ $setting->currency . $value->price }})
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endforeach
+                                    <button type="submit" class="add_cart" href="#">add to cart</button>
+                                </form> --}}
+
                             </div>
                         </div>
                     </div>
