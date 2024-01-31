@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\PaymentController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ShowProductController;
@@ -41,6 +43,12 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::post('profile', [UserProfileController::class, 'passwordUpdate'])->name('password.update');
     //addresses==================================================================================
     Route::resource('address', UserAddressController::class);
+    //checkout===================================================================================
+    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('checkout/address-create', [CheckoutController::class, 'createAddress'])->name('checkout.create.address');
+    Route::post('checkout/submit-checkout', [CheckoutController::class, 'submitCheckout'])->name('checkout.submit-checkout');
+    //payment======================================================================================
+    Route::post('payment', [PaymentController::class, 'index'])->name('payment');
 });
 
 //login for admins=============================================================================

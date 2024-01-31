@@ -70,7 +70,7 @@ function getMainCartTotal()
     }
 }
 
-// get total amount ================================================================
+// get total amount after discount ================================================================
 function getMainCartDiscount()
 {
     if (Session::has('coupon')) {
