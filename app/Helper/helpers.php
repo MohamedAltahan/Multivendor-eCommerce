@@ -33,14 +33,14 @@ function checkDiscount($product)
     }
     return false;
 }
-//discount percentage=================================================================
+//discount percentage depend on original price and discount price================
 function calcDiscountPercentage($originalPrice, $discountPrice)
 {
     $discountAmount = $originalPrice - $discountPrice;
     return ceil(($discountAmount / $originalPrice) * 100);
 }
 
-//total for whole cart=============================================================
+//total for whole cart before discount===========================================
 function calcCartTotal()
 {
     $cartProducts = Cart::content();
@@ -51,7 +51,7 @@ function calcCartTotal()
     return $totalCartPrice;
 }
 
-// get total amount ================================================================
+// get total amount  after discount ===============================================
 function getMainCartTotal()
 {
     if (Session::has('coupon')) {
@@ -70,7 +70,7 @@ function getMainCartTotal()
     }
 }
 
-// get total amount after discount ================================================================
+// get  discount ================================================================
 function getMainCartDiscount()
 {
     if (Session::has('coupon')) {

@@ -240,6 +240,8 @@
                         },
                         success: function(data) {
                             $('#submit_checkout_form').html('Done');
+                            //goto payment page
+                            window.location.href = data.redirect_to_payment_url;
                         },
                         error: function(data) {
 

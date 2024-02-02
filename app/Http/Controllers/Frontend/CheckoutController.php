@@ -53,6 +53,6 @@ class CheckoutController extends Controller
 
         $address = UserAddress::findOrFail($request->shipping_address_id)->toArray();
         Session::put('address', $address);
-        return response(['status' => 'success', 'redirect_url' => route('user.payment')]);
+        return response(['status' => 'success', 'redirect_to_payment_url' => route('user.payment')]);
     }
 }

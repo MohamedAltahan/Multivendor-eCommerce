@@ -48,7 +48,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::post('checkout/address-create', [CheckoutController::class, 'createAddress'])->name('checkout.create.address');
     Route::post('checkout/submit-checkout', [CheckoutController::class, 'submitCheckout'])->name('checkout.submit-checkout');
     //payment======================================================================================
-    Route::post('payment', [PaymentController::class, 'index'])->name('payment');
+    Route::get('payment', [PaymentController::class, 'index'])->name('payment');
 });
 
 //login for admins=============================================================================
