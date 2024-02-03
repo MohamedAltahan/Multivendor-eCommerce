@@ -51,7 +51,7 @@ function calcCartTotal()
     return $totalCartPrice;
 }
 
-// get total amount  after discount ===============================================
+// get total amount  after coupone discount ===============================================
 function getMainCartTotal()
 {
     if (Session::has('coupon')) {
@@ -70,7 +70,7 @@ function getMainCartTotal()
     }
 }
 
-// get  discount ================================================================
+// get coupone discount ================================================================
 function getMainCartDiscount()
 {
     if (Session::has('coupon')) {
@@ -85,4 +85,21 @@ function getMainCartDiscount()
     } else {
         return 0;
     }
+}
+
+//get shipping fee======================================================
+function getShippingFee()
+{
+    if (Session::has('shipping_method')) {
+        return Session::get('shipping_method')['cost'];
+    } else {
+        return 0;
+    }
+}
+
+//get final payment amount(total+coupon+shipping fee)
+
+function  finalPaymentAmount()
+{
+    return getMainCartTotal() + getShippingFee();
 }
