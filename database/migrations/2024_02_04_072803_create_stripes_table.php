@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paypal_settings', function (Blueprint $table) {
+        Schema::create('stripe_settings', function (Blueprint $table) {
             $table->id();
             $table->enum('status', ['enable', 'disable']);
             $table->enum('mode', ['sandbox', 'live']);
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paypal_settings');
+        Schema::dropIfExists('stripes');
     }
 };

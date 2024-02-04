@@ -177,4 +177,10 @@ class PaymentController extends Controller
         Session::forget('shipping_method');
         Session::forget('coupon');
     }
+
+    //stripe payment============================================================================
+    function payWithStripe(Request $request)
+    {
+        dd($request->all());
+    }
 }//end class

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
@@ -50,10 +51,14 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     //payment======================================================================================
     Route::get('payment', [PaymentController::class, 'index'])->name('payment');
     Route::get('payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
-    //paypal routes
+    //paypal --------------------------------------------
     Route::get('paypal/payment', [PaymentController::class, 'payWithPaypal'])->name('paypal.payment');
     Route::get('paypal/success', [PaymentController::class, 'paypalSuccess'])->name('paypal.success');
-    Route::get('paypal/cance', [PaymentController::class, 'paypalCancel'])->name('paypal.cancel');
+    Route::get('paypal/cancel', [PaymentController::class, 'paypalCancel'])->name('paypal.cancel');
+    //stripe----------------------------------------------
+    Route::get('stripe/payment', [PaymentController::class, 'payWithStripe'])->name('stripe.payment');
+    Route::get('stripe/success', [PaymentController::class, 'stripeSuccess'])->name('stripe.success');
+    Route::get('stripe/cancel', [PaymentController::class, 'stripeCancel'])->name('stripe.cancel');
 });
 
 //login for admins=============================================================================

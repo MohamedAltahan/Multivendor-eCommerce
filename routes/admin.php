@@ -19,6 +19,7 @@ use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\ShippingRule;
 use App\Http\Controllers\Backend\ShippingRuleController;
 use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Models\Brand;
 use App\Models\Product;
@@ -108,4 +109,6 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     // Payment setting=============================================================================================
     Route::get('payment-setting', [PaymentSettingController::class, 'index'])->name('payment-setting.index');
     Route::resource('paypal-setting', PaypalSettingContrller::class);
+    //Stripe ---------------------------------------------
+    Route::put('stripe-setting/{id}', [StripeSettingController::class, 'update'])->name('stripe-setting.update');
 });
