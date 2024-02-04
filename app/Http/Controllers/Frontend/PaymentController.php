@@ -3,8 +3,15 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\PaypalSetting;
+use App\Models\Product;
+use App\Models\Setting;
+use App\Models\Transaction;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
@@ -34,7 +41,6 @@ class PaymentController extends Controller
         //calc final payable amount depends on exchange rate
         $finalTotal = round(finalPaymentAmount() * $paypalSetting->exchange_rate, 2);
 
-
         $response = $provider->createOrder([
             'intent' => 'CAPTURE',
             'application_context' => [
@@ -51,7 +57,6 @@ class PaymentController extends Controller
             ]
         ]);
 
-
         if (isset($response['id']) && $response['id'] != null) {
 
             foreach ($response['links'] as $link) {
@@ -65,7 +70,6 @@ class PaymentController extends Controller
     }
 
     //paypalconfiguration===================================================
-
     function paypalConfig()
     {
         $paypalSetting = PaypalSetting::first();
@@ -103,15 +107,74 @@ class PaymentController extends Controller
         $response = $provider->capturePaymentOrder($request->token);
 
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+            $paypalSetting = PaypalSetting::first();
+            $finalTotal = round(finalPaymentAmount() * $paypalSetting->exchange_rate, 2);
+            $this->storeOrder('paypal', 'done', $response['id'], $finalTotal, $paypalSetting->currency);
+            $this->clearSession();
             return redirect()->route('user.payment.success');
         }
 
         return redirect()->route('user.paypal.cancel');
     }
+
     //paypal success user will be redirected to this ===============================================
     function paypalCancel(Request $request)
     {
-        toastr('Something went wrong, please try again');
+        toastr('Something went wrong, please try again', 'error', 'error');
         return redirect()->route('user.payment');
+    }
+
+    //store order====================================================================================
+    function storeOrder($paymentMethod, $paymentStatus, $transactionId, $paidAmount, $localCurrencyName)
+    {
+        $setting = Setting::first();
+
+        $order = new Order();
+        $order->invoice_id = uniqid();
+        $order->user_id = Auth::user()->id;
+        $order->sub_total = getMainCartTotal();
+        $order->final_total = finalPaymentAmount();
+        $order->currency = $setting->currency; //default for the website
+        $order->product_quantity = Cart::content()->count();
+        $order->payment_method  = $paymentMethod;
+        $order->payment_status  = $paymentStatus;
+        $order->order_address = json_encode(Session::get('address'));
+        $order->shipping_method = json_encode(Session::get('shipping_method'));
+        $order->coupon = json_encode(Session::get('coupon'));
+        $order->order_status = 0;
+        $order->save();
+
+        //store order products------------
+        foreach (Cart::content() as $item) {
+            $product = Product::find($item->id);
+            $orderProduct = new OrderProduct();
+            $orderProduct->order_id = $order->id;
+            $orderProduct->product_id = $product->id;
+            $orderProduct->vendor_id = $product->vendor_id;
+            $orderProduct->product_name = $product->name;
+            $orderProduct->variants = json_encode($item->options->variants);
+            $orderProduct->unit_price = $item->price;
+            $orderProduct->qty = $item->qty;
+            $orderProduct->save();
+        }
+
+        //transaction
+        $transaction = new Transaction();
+        $transaction->order_id = $order->id;
+        $transaction->transaction_id = $transactionId;
+        $transaction->payment_method = $paymentMethod;
+        $transaction->final_price = finalPaymentAmount();
+        $transaction->final_price_in_local_currency = $paidAmount;
+        $transaction->local_currency_name = $localCurrencyName;
+        $transaction->save();
+    }
+
+    //clear session==========================================================================
+    function clearSession()
+    {
+        Cart::destroy();
+        Session::forget('address');
+        Session::forget('shipping_method');
+        Session::forget('coupon');
     }
 }//end class

@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_products', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->integer('order_id');
-            $table->integer('product_id');
-            $table->integer('vendor_id');
-            $table->string('product_name');
-            $table->text('variants');
-            $table->float('variants_total')->nullable();
-            $table->float('unit_price');
-            $table->integer('qty');
+            $table->integer('transaction_id');
+            $table->string('payment_method');
+            $table->float('final_price'); //using default currency for gateway
+            $table->float('final_price_in_local_currency'); //using local currency
+            $table->string('local_currency_name'); //using local currency
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_products');
+        Schema::dropIfExists('transactions');
     }
 };
