@@ -114,4 +114,6 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::put('stripe-setting/{id}', [StripeSettingController::class, 'update'])->name('stripe-setting.update');
     //Order=========================================================================================================
     Route::resource('order', OrderController::class);
+    Route::get('order-status', [OrderController::class, 'changeOrderStatus'])->name('order.status');
+    Route::get('payment-status', [OrderController::class, 'changePaymentStatus'])->name('payment.status');
 });

@@ -132,7 +132,7 @@ class PaymentController extends Controller
         $order = new Order();
         $order->invoice_id = uniqid();
         $order->user_id = Auth::user()->id;
-        $order->sub_total = getMainCartTotal();
+        $order->sub_total = calcCartTotal();
         $order->final_total = finalPaymentAmount();
         $order->currency = $setting->currency; //default for the website
         $order->product_quantity = Cart::content()->count();

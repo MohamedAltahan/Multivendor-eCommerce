@@ -15,4 +15,14 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    function transaction()
+    {
+        return $this->hasOne(Transaction::class);
+    }
+
+    function orderProducts()
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
 }

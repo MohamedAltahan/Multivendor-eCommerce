@@ -23,7 +23,7 @@ class OrderDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $editBtn = "<a href='" . route('admin.product-variant.edit', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-eye'></i>Details</a>";
+                $editBtn = "<a href='" . route('admin.order.show', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-eye'></i>Details</a>";
                 $deleteBtn = "<a href='" . route('admin.product-variant.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
                 $statusBtn = "<a href='" . route('admin.product-variant.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-warning delete-item'><i class='fas fa-truck'></i></a>";
 
@@ -40,9 +40,9 @@ class OrderDataTable extends DataTable
             })
             ->addColumn('payment_status', function ($query) {
                 if ($query->payment_status == 'completed') {
-                    return "<span class='badge bg-warning'>completed</span>";
+                    return "<i class='badge bg-success'>completed</i>";
                 } else {
-                    return "<span class='badge bg-danger'>pending</span>";
+                    return "<i class='badge bg-danger'>pending</i>";
                 }
             })
             ->rawColumns(['action', 'payment_status'])

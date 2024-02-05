@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\DataTables\OrderDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -37,7 +38,8 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $order = Order::findOrFail($id);
+        return view('admin.order.show', compact('order'));
     }
 
     /**
@@ -62,5 +64,22 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    //change order status ===========================================================================
+    function changeOrderStatus(Request $request)
+    {
+        $order = Order::findOrFail($request->orderId);
+        $order->order_status = $request->status;
+        $order->save();
+        return response(['status' => 'success', 'message' => 'Updated successfully']);
+    }
+
+    //change payment status ===========================================================================
+    function changePaymentStatus(Request $request)
+    {
+        $order = Order::findOrFail($request->orderId);
+        $order->payment_status = $request->status;
+        $order->save();
+        return response(['status' => 'success', 'message' => 'Payment updated successfully']);
     }
 }
