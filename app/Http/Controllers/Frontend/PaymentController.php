@@ -109,7 +109,7 @@ class PaymentController extends Controller
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
             $paypalSetting = PaypalSetting::first();
             $finalTotal = round(finalPaymentAmount() * $paypalSetting->exchange_rate, 2);
-            $this->storeOrder('paypal', 'done', $response['id'], $finalTotal, $paypalSetting->currency);
+            $this->storeOrder('paypal', 'completed', $response['id'], $finalTotal, $paypalSetting->currency);
             $this->clearSession();
             return redirect()->route('user.payment.success');
         }
@@ -141,7 +141,7 @@ class PaymentController extends Controller
         $order->order_address = json_encode(Session::get('address'));
         $order->shipping_method = json_encode(Session::get('shipping_method'));
         $order->coupon = json_encode(Session::get('coupon'));
-        $order->order_status = 0;
+        $order->order_status = 'pending';
         $order->save();
 
         //store order products------------
