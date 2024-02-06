@@ -22,6 +22,7 @@ use App\Http\Controllers\Backend\ShippingRuleController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\TransactionController;
 use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -116,4 +117,6 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::resource('order', OrderController::class);
     Route::get('order-status', [OrderController::class, 'changeOrderStatus'])->name('order.status');
     Route::get('payment-status', [OrderController::class, 'changePaymentStatus'])->name('payment.status');
+    //order transaction=========================================================================================================
+    Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
 });

@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Order;
+use App\Models\VendorOrder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +13,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class OrderDataTable extends DataTable
+class VendorOrderDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -24,7 +25,7 @@ class OrderDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
                 $editBtn = "<a href='" . route('admin.order.show', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-eye'></i>Details</a>";
-                $deleteBtn = "<a href='" . route('admin.order.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
+                $deleteBtn = "<a href='" . route('admin.order.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 mx-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
                 $statusBtn = "<a href='" . route('admin.product-variant.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-warning delete-item'><i class='fas fa-truck'></i></a>";
 
                 return $editBtn . $deleteBtn . $statusBtn;
@@ -54,7 +55,6 @@ class OrderDataTable extends DataTable
      */
     public function query(Order $model): QueryBuilder
     {
-
         return $model->newQuery();
     }
 
@@ -64,11 +64,11 @@ class OrderDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('order-table')
+            ->setTableId('vendororder-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            ->orderBy(0)
+            ->orderBy(1)
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
@@ -98,7 +98,7 @@ class OrderDataTable extends DataTable
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(180)
+                ->width(200)
                 ->addClass('text-center'),
 
         ];
@@ -109,6 +109,6 @@ class OrderDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Order_' . date('YmdHis');
+        return 'VendorOrder_' . date('YmdHis');
     }
 }

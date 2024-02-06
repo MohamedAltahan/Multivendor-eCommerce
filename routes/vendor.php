@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\VendorController;
+use App\Http\Controllers\Backend\VendorOrderController;
 use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\vendorProductVariantController;
 use App\Http\Controllers\Backend\VendorProductVariantDetailsController;
@@ -44,4 +45,6 @@ Route::group(['middleware' => ['auth', 'role:vendor'], 'prefix' => 'vendor', 'as
     Route::put('product/product-variant-details-update/{VariantDetailsId}', [VendorProductVariantDetailsController::class, 'update'])->name('product.product-variant-details.update');
     Route::delete('product/product-variant-details/{VariantDetailsId}/', [VendorProductVariantDetailsController::class, 'destroy'])->name('product.product-variant-details.destroy');
     Route::put('product/product-variant-details-status/change-status', [VendorProductVariantDetailsController::class, 'changeStatus'])->name('product.product-variant-details.change-status');
+    // orders===============================================================================
+    Route::get('orders', [VendorOrderController::class, 'index'])->name('orders.index');
 });

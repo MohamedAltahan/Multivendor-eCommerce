@@ -110,8 +110,11 @@
                 </ul>
             </li>
             {{-- settings================================================================= --}}
-            <li><a href="{{ route('admin.settings.index') }}" class="nav-link"><i
-                        class="far fa-square"></i><span>Settings</span></a></li>
+            <li class="{{ setActive(['admin.settings.index']) }}"><a href="{{ route('admin.settings.index') }}"
+                    class="nav-link "><i class="far fa-square"></i><span>Settings</span></a></li>
+            {{-- transactions================================================================= --}}
+            <li class="{{ setActive(['admin.transaction']) }}"><a href="{{ route('admin.transaction') }}"
+                    class="nav-link"><i class="far fa-square"></i><span>Transactions</span></a></li>
 
         </ul>
     </aside>
