@@ -47,4 +47,6 @@ Route::group(['middleware' => ['auth', 'role:vendor'], 'prefix' => 'vendor', 'as
     Route::put('product/product-variant-details-status/change-status', [VendorProductVariantDetailsController::class, 'changeStatus'])->name('product.product-variant-details.change-status');
     // orders===============================================================================
     Route::get('orders', [VendorOrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/show/{id}', [VendorOrderController::class, 'show'])->name('orders.show');
+    Route::get('orders/status/{id}', [VendorOrderController::class, 'orderStatus'])->name('orders.status');
 });

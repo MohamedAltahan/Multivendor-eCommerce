@@ -14,7 +14,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class VendorOrderDataTable extends DataTable
+class UserOrderDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -25,7 +25,7 @@ class VendorOrderDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $detailsBtn = "<a href='" . route('vendor.orders.show', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-eye'></i>Details</a>";
+                $detailsBtn = "<a href='" . route('user.orders.show', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-eye'></i>Details</a>";
                 return $detailsBtn;
             })
             ->addColumn('customer', function ($query) {
@@ -53,9 +53,7 @@ class VendorOrderDataTable extends DataTable
      */
     public function query(Order $model): QueryBuilder
     {
-        return $model::whereHas('orderProducts', function ($query) {
-            $query->where('vendor_id', Auth::user()->id);
-        })->newQuery();
+        return $model::where('user_id', Auth::user()->id)->newQuery();
     }
 
     /**

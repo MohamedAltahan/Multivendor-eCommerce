@@ -296,6 +296,7 @@
                     }
                 })
             })
+
             //get child categories--------------------------------------------------
             $('body').on('change', '.sub-category', function(e) {
                 let id = $(this).val();

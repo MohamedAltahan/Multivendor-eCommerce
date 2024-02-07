@@ -25,6 +25,7 @@
                             </li> --}}
 
             <li class="menu-header">Starter</li>
+
             {{-- category----------------------------------------------------- --}}
             <li
                 class="dropdown {{ setActive(['admin.category.*', 'admin.sub-category.*', 'admin.child-category.*']) }}">
@@ -39,6 +40,7 @@
                             href="{{ route('admin.child-category.index') }}">Child Category</a></li>
                 </ul>
             </li>
+
             {{-- order----------------------------------------------------- --}}
             <li class="dropdown {{ setActive(['admin.order.*', 'admin.sub-category.*', 'admin.child-category.*']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
@@ -52,15 +54,21 @@
                             href="{{ route('admin.child-category.index') }}">Child Category</a></li>
                 </ul>
             </li>
-            {{-- slider---------------------------------------------------- --}}
-            <li class="dropdown {{ setActive(['admin.slider.*']) }}">
+
+            {{-- Manage website---------------------------------------------------- --}}
+            <li class="dropdown {{ setActive(['admin.slider.*', 'admin.home-page-setting.*']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Manage website</span></a>
                 <ul class="dropdown-menu">
                     <li class="dropdown {{ setActive(['admin.slider.*']) }}"><a class="nav-link"
                             href="{{ route('admin.slider.index') }}">Slider</a></li>
                 </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.home-page-setting.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.home-page-setting') }}">Home page setting</a></li>
+                </ul>
             </li>
+
             {{-- Manage product---------------------------------------------------- --}}
             <li
                 class="dropdown {{ setActive([
@@ -91,6 +99,7 @@
                     </li>
                 </ul>
             </li>
+
             {{-- Manage E-commerce---------------------------------------------------- --}}
             <li
                 class="dropdown {{ setActive(['admin.vendor-profile.*', 'admin.coupons.*', 'admin.shipping-rule.*', 'admin.payment-setting.*']) }}">
@@ -109,9 +118,11 @@
                             href="{{ route('admin.payment-setting.index') }}">Payment Setting</a></li>
                 </ul>
             </li>
+
             {{-- settings================================================================= --}}
             <li class="{{ setActive(['admin.settings.index']) }}"><a href="{{ route('admin.settings.index') }}"
                     class="nav-link "><i class="far fa-square"></i><span>Settings</span></a></li>
+
             {{-- transactions================================================================= --}}
             <li class="{{ setActive(['admin.transaction']) }}"><a href="{{ route('admin.transaction') }}"
                     class="nav-link"><i class="far fa-square"></i><span>Transactions</span></a></li>

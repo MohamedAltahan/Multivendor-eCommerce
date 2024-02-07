@@ -26,7 +26,11 @@ class TransactionDataTable extends DataTable
             ->addColumn('invoice_id', function ($query) {
                 return $query->order->invoice_id;
             })
-
+            ->filterColumn('invoice_id', function ($query, $keyword) {
+                $query->whereHas('order', function ($query) use ($keyword) {
+                    $query->where('invoice_id', 'like', "%$keyword%");
+                });
+            })
             ->setRowId('id');
     }
 
