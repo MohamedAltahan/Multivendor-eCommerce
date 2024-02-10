@@ -183,7 +183,11 @@
                 })
             });
         </script>
-
+        <script>
+            $(document).ready(function() {
+                $('.auto_click').click();
+            })
+        </script>
         @stack('scripts')
 
         @include('frontend.pages.side-cart-scripts')

@@ -4,6 +4,7 @@
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 function setActive(array $routes)
 {
@@ -22,7 +23,7 @@ function checkDiscount($product)
 {
     $currentDate = date('Y-m-d');
 
-    if ($product->offer_price != null) {
+    if (isset($product->offer_price)) {
         //if date fields are null means that product offer is valid forever
         if ($product->offer_start_date == null &&  $product->offer_end_date == null) {
             return true;
@@ -102,4 +103,10 @@ function getShippingFee()
 function  finalPaymentAmount()
 {
     return getMainCartTotal() + getShippingFee();
+}
+
+//limit text
+function limitText($text, $limit = 20)
+{
+    return Str::limit($text, $limit);
 }

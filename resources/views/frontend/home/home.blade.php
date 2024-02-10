@@ -158,23 +158,23 @@
     {{-- end flash sale  --}}
 
     {{-- top category products --}}
-    {{-- @include('frontend.home.sections.top-category-products') --}}
+    @include('frontend.home.sections.top-category-products')
     {{-- end top category products --}}
 
     {{-- brand-slider --}}
-    {{-- @include('frontend.home.sections.brand-slider') --}}
+    @include('frontend.home.sections.brand-slider')
     {{-- end brand-slider --}}
 
     {{-- single banner --}}
-    {{-- @include('frontend.home.sections.single-banner') --}}
+    @include('frontend.home.sections.single-banner')
     {{-- end single banner --}}
 
     {{-- hot deals --}}
-    {{-- @include('frontend.home.sections.hot-deals') --}}
+    @include('frontend.home.sections.hot-deals')
     {{-- end hot deals --}}
 
     {{-- category-product-slider-one --}}
-    {{-- @include('frontend.home.sections.category-product-slider-one') --}}
+    @include('frontend.home.sections.category-product-slider-one')
     {{-- end category-product-slider-one --}}
 
     {{-- category-product-slider-two --}}
