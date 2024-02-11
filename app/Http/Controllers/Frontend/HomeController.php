@@ -17,6 +17,7 @@ class HomeController extends Controller
     {
         $productsSliderOne = HomePageSetting::where('key', 'products_slider_one')->first();
         $productsSliderTwo = HomePageSetting::where('key', 'products_slider_two')->first();
+        $productsSliderThree = HomePageSetting::where('key', 'products_slider_three')->first();
         $sliders = Slider::where('status', 'active')->orderBy('serial', 'ASC')->get();
         $flashSaleDate = FlashSale::first();
         $popularCategories = HomePageSetting::where('key', 'popular_category_section')->first();
@@ -34,6 +35,7 @@ class HomeController extends Controller
         return view('frontend.home.home', compact(
             'productsSliderTwo',
             'productsSliderOne',
+            'productsSliderThree',
             'typebasedProducts',
             'brands',
             'sliders',

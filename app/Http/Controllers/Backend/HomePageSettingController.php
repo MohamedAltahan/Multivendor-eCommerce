@@ -13,9 +13,16 @@ class HomePageSettingController extends Controller
     {
         $productCategorySectionOne = HomePageSetting::where('key', 'products_slider_one')->first();
         $productCategorySectionTwo = HomePageSetting::where('key', 'products_slider_two')->first();
+        $productCategorySectionThree = HomePageSetting::where('key', 'products_slider_three')->first();
         $categories = Category::where('status', 'active')->get();
         $popularCategorySection = HomePageSetting::where('key', 'popular_category_section')->first();
-        return view('admin.home-page-setting.index', compact('productCategorySectionOne', 'productCategorySectionTwo', 'categories', 'popularCategorySection'));
+        return view('admin.home-page-setting.index', compact(
+            'productCategorySectionOne',
+            'productCategorySectionTwo',
+            'categories',
+            'popularCategorySection',
+            'productCategorySectionThree',
+        ));
     }
 
     function updatePopularCategorySection(Request $request)
@@ -102,6 +109,28 @@ class HomePageSettingController extends Controller
 
         HomePageSetting::updateOrCreate(
             ['key' => 'products_slider_two'],
+            ['value' => json_encode($data)]
+        );
+        toastr('Updated successfully', 'success', 'success');
+        return redirect()->back();
+    }
+
+    //===================================================================
+    function updateProductsSliderThree(Request $request)
+    {
+        $request->validate(
+            ['main_category3' => ['required']],
+            ['main_category3.required' => 'Category field is required']
+        );
+
+        $data = [
+            'main_category' => $request->main_category3,
+            'sub_category' => $request->sub_category3,
+            'child_category' => $request->child_category3,
+        ];
+
+        HomePageSetting::updateOrCreate(
+            ['key' => 'products_slider_three'],
             ['value' => json_encode($data)]
         );
         toastr('Updated successfully', 'success', 'success');

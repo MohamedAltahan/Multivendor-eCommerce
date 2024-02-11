@@ -186,7 +186,7 @@
     {{-- end large banner --}}
 
     {{-- weekly best items --}}
-    {{-- @include('frontend.home.sections.weekly-best-items') --}}
+    @include('frontend.home.sections.weekly-best-items')
     {{-- end weekly best items --}}
 
     {{-- services --}}
