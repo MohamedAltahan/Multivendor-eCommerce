@@ -15,6 +15,8 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $productsSliderOne = HomePageSetting::where('key', 'products_slider_one')->first();
+        $productsSliderTwo = HomePageSetting::where('key', 'products_slider_two')->first();
         $sliders = Slider::where('status', 'active')->orderBy('serial', 'ASC')->get();
         $flashSaleDate = FlashSale::first();
         $popularCategories = HomePageSetting::where('key', 'popular_category_section')->first();
@@ -29,7 +31,16 @@ class HomeController extends Controller
             ]
         )->get();
 
-        return view('frontend.home.home', compact('typebasedProducts', 'brands', 'sliders', 'flashSaleDate', 'flashSaleProducts', 'popularCategories'));
+        return view('frontend.home.home', compact(
+            'productsSliderTwo',
+            'productsSliderOne',
+            'typebasedProducts',
+            'brands',
+            'sliders',
+            'flashSaleDate',
+            'flashSaleProducts',
+            'popularCategories'
+        ));
     }
 
     function getTypeBaseProducts()

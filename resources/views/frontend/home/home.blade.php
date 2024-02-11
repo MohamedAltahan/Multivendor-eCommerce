@@ -178,7 +178,7 @@
     {{-- end category-product-slider-one --}}
 
     {{-- category-product-slider-two --}}
-    {{-- @include('frontend.home.sections.category-product-slider-two') --}}
+    @include('frontend.home.sections.category-product-slider-two')
     {{-- end category-product-slider-two --}}
 
     {{-- large banner --}}

@@ -124,4 +124,5 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::get('home-page-setting', [HomePageSettingController::class, 'index'])->name('home-page-setting');
     Route::put('popular-category-section', [HomePageSettingController::class, 'updatePopularCategorySection'])->name('popular-category-section');
     Route::put('products-slider-one', [HomePageSettingController::class, 'updateProductsSliderOne'])->name('products-slider-one');
+    Route::put('products-slider-two', [HomePageSettingController::class, 'updateProductsSlidertwo'])->name('products-slider-two');
 });

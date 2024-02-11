@@ -12,9 +12,10 @@ class HomePageSettingController extends Controller
     function index()
     {
         $productCategorySectionOne = HomePageSetting::where('key', 'products_slider_one')->first();
+        $productCategorySectionTwo = HomePageSetting::where('key', 'products_slider_two')->first();
         $categories = Category::where('status', 'active')->get();
         $popularCategorySection = HomePageSetting::where('key', 'popular_category_section')->first();
-        return view('admin.home-page-setting.index', compact('productCategorySectionOne', 'categories', 'popularCategorySection'));
+        return view('admin.home-page-setting.index', compact('productCategorySectionOne', 'productCategorySectionTwo', 'categories', 'popularCategorySection'));
     }
 
     function updatePopularCategorySection(Request $request)
@@ -63,7 +64,7 @@ class HomePageSettingController extends Controller
         toastr('Updated successfully', 'success', 'success');
         return redirect()->back();
     }
-
+    //=======================================================
     function updateProductsSliderOne(Request $request)
     {
         $request->validate(
@@ -79,6 +80,28 @@ class HomePageSettingController extends Controller
 
         HomePageSetting::updateOrCreate(
             ['key' => 'products_slider_one'],
+            ['value' => json_encode($data)]
+        );
+        toastr('Updated successfully', 'success', 'success');
+        return redirect()->back();
+    }
+
+    //===================================================================
+    function updateProductsSliderTwo(Request $request)
+    {
+        $request->validate(
+            ['main_category2' => ['required']],
+            ['main_category2.required' => 'Category field is required']
+        );
+
+        $data = [
+            'main_category' => $request->main_category2,
+            'sub_category' => $request->sub_category2,
+            'child_category' => $request->child_category2,
+        ];
+
+        HomePageSetting::updateOrCreate(
+            ['key' => 'products_slider_two'],
             ['value' => json_encode($data)]
         );
         toastr('Updated successfully', 'success', 'success');
