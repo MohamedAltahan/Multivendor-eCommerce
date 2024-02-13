@@ -69,8 +69,10 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
 Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
 //flash sale===================================================================================
 Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale');
-//view product detials=========================================================================
+// products =========================================================================
+Route::get('products', [ShowProductController::class, 'productsIndex'])->name('products.index');
 Route::get('show-product-details/{slug}', [ShowProductController::class, 'showProductDetails'])->name('show-product-details');
+Route::get('change-product-list-view', [ShowProductController::class, 'changeListView'])->name('change-product-list-view');
 // cart==================================================================================
 Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
 Route::get('cart-details', [CartController::class, 'cartDetails'])->name('cart-details');
