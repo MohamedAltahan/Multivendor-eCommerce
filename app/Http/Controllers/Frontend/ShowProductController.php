@@ -74,7 +74,21 @@ class ShowProductController extends Controller
                 return $query->where('price', '>=', $startPrice)->where('price', '<=', $endPrice);
             })
                 ->paginate(12);
+        } elseif ($request->has('search')) {
+
+            $products = Product::where(['status' => 'active', 'is_approved' => 'yes'])->where(
+                function ($query) use ($request) {
+                    $query->where('name', 'like', '%' . $request->search . '%')
+                        ->orwhere('long_description', 'like', '%' . $request->search . '%')
+                        ->orWhereHas('category', function ($query) use ($request) {
+                            $query->where('name', 'like', '%' . $request->search . '%')
+                                ->orwhere('long_description', 'like', '%' . $request->search . '%');
+                        });
+                }
+            )
+                ->paginate(12);
         } else {
+
             $products = Product::where([
                 'status' => 'active',
                 'is_approved' => 'yes'
