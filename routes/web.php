@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\ShowProductController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
+use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -63,7 +64,11 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     // orders===============================================================================
     Route::get('orders', [UserOrderController::class, 'index'])->name('orders.index');
     Route::get('orders/show/{id}', [UserOrderController::class, 'show'])->name('orders.show');
-});
+    // wishlist===============================================================================
+    Route::get('wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::get('wishlist/add-product', [WishlistController::class, 'addToWishlist'])->name('wishlist.store');
+    Route::get('wishlist/remove-product/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+}); //end group
 
 //login for admins=============================================================================
 Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');

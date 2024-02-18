@@ -81,7 +81,27 @@
             })
         }
 
+        //add product to wishlist===============================================
+        $('.add_to_wishlist').on('click', function(e) {
+            e.preventDefault();
+            let product_id = $(this).data('id');
+            $.ajax({
+                url: "{{ route('user.wishlist.store') }}",
+                data: {
+                    product_id
+                },
+                success: function(data) {
+                    if (data.status == 'success') {
+                        toastr.success(data.message);
+                    } else if (data.status == 'error') {
+                        toastr.error(data.message);
+                    }
+                },
+                error: function(data) {
 
+                }
+            })
+        })
 
     })
 </script>

@@ -69,6 +69,20 @@
                 </ul>
             </li>
 
+            {{-- Manage footer---------------------------------------------------- --}}
+            <li class="dropdown {{ setActive(['admin.footer.*']) }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                    <span>Website footer</span></a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.footer.index']) }}"><a class="nav-link"
+                            href="{{ route('admin.footer.index') }}">Footer info</a></li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.home-page-setting.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.home-page-setting') }}">Home page setting</a></li>
+                </ul>
+            </li>
+
             {{-- Manage product---------------------------------------------------- --}}
             <li
                 class="dropdown {{ setActive([

@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\childCategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\FlashSaleController;
+use App\Http\Controllers\Backend\FooterController;
 use App\Http\Controllers\Backend\HomePageSettingController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentSettingController;
@@ -88,11 +89,13 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::put('product/product-variant-details-update/{VariantDetailsId}', [ProductVariantDetailsController::class, 'update'])->name('product.product-variant-details.update');
     Route::delete('product/product-variant-details/{VariantDetailsId}/', [ProductVariantDetailsController::class, 'destroy'])->name('product.product-variant-details.destroy');
     Route::put('product/product-variant-details-status/change-status', [ProductVariantDetailsController::class, 'changeStatus'])->name('product.product-variant-details.change-status');
+
     //all vendors products=================================================================================================
     Route::get('product/all-vendors', [AllVendorsProductsController::class, 'index'])->name('all-vendors-products.index');
     Route::get('vendor-products/{vendorId}', [AllVendorsProductsController::class, 'getVendorProducts'])->name('get-vendor-products');
     Route::get('pending-products', [AllVendorsProductsController::class, 'pendingProducts'])->name('pending-products.index');
     Route::put('change-approval-status', [AllVendorsProductsController::class, 'changeApprovalStatus'])->name('change-approval-status');
+
     //flash sale===========================================================================================================
     Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale.index');
     Route::put('flash-sale', [FlashSaleController::class, 'update'])->name('flash-sale.update');
@@ -100,30 +103,40 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::put('flash-sale/show_at_home_status', [FlashSaleController::class, 'changeShowAtHomeStatus'])->name('flash-sale.show-at-home-status');
     Route::put('flash-sale/status', [FlashSaleController::class, 'changeStatus'])->name('flash-sale.change-status');
     Route::delete('flash-sale/{id}', [FlashSaleController::class, 'destroy'])->name('flash-sale.destroy');
+
     //settigs========================================================================================================
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('general-settnig-update', [SettingController::class, 'generalSettingUpdate'])->name('general-setting-update.index');
+
     //Coupons========================================================================================================
     Route::put('coupons/change-status', [CouponController::class, 'changeStatus'])->name('coupons.change-status');
     Route::resource('coupons', CouponController::class);
+
     //shipping========================================================================================================
     Route::put('shipping-rule/change-status', [ShippingRuleController::class, 'changeStatus'])->name('shipping-rule.change-status');
     Route::resource('shipping-rule', ShippingRuleController::class);
+
     // Payment setting=============================================================================================
     Route::get('payment-setting', [PaymentSettingController::class, 'index'])->name('payment-setting.index');
     Route::resource('paypal-setting', PaypalSettingContrller::class);
     //Stripe ---------------------------------------------
     Route::put('stripe-setting/{id}', [StripeSettingController::class, 'update'])->name('stripe-setting.update');
+
     //Order=========================================================================================================
     Route::resource('order', OrderController::class);
     Route::get('order-status', [OrderController::class, 'changeOrderStatus'])->name('order.status');
     Route::get('payment-status', [OrderController::class, 'changePaymentStatus'])->name('payment.status');
+
     //order transaction=========================================================================================================
     Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
+
     //Home page setting=========================================================================================================
     Route::get('home-page-setting', [HomePageSettingController::class, 'index'])->name('home-page-setting');
     Route::put('popular-category-section', [HomePageSettingController::class, 'updatePopularCategorySection'])->name('popular-category-section');
     Route::put('products-slider-one', [HomePageSettingController::class, 'updateProductsSliderOne'])->name('products-slider-one');
     Route::put('products-slider-two', [HomePageSettingController::class, 'updateProductsSlidertwo'])->name('products-slider-two');
     Route::put('products-slider-tree', [HomePageSettingController::class, 'updateProductsSliderThree'])->name('products-slider-three');
+
+    //footer============================================================================================
+    Route::resource('footer', FooterController::class);
 });
