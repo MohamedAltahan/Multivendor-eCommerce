@@ -70,16 +70,21 @@
             </li>
 
             {{-- Manage footer---------------------------------------------------- --}}
-            <li class="dropdown {{ setActive(['admin.footer.*']) }}">
+            <li
+                class="dropdown {{ setActive(['admin.footer.*', 'admin.footer-socials.*', 'admin.footer-grid-two.*']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Website footer</span></a>
                 <ul class="dropdown-menu">
                     <li class="dropdown {{ setActive(['admin.footer.index']) }}"><a class="nav-link"
-                            href="{{ route('admin.footer.index') }}">Footer info</a></li>
+                            href="{{ route('admin.footer.index') }}"> contact info</a></li>
                 </ul>
                 <ul class="dropdown-menu">
-                    <li class="dropdown {{ setActive(['admin.home-page-setting.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.home-page-setting') }}">Home page setting</a></li>
+                    <li class="dropdown {{ setActive(['admin.footer-socials.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.footer-socials.index') }}"> social buttons</a></li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.footer-grid-two.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.footer-grid-two.index') }}"> section two</a></li>
                 </ul>
             </li>
 

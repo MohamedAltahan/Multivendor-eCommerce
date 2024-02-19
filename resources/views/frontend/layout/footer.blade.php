@@ -1,3 +1,7 @@
+@php
+    $footerInfo = App\models\Footer::first();
+    $footerSocialButtons = App\models\FooterSocial::where('status', 'active')->get();
+@endphp
 <!--============================ FOOTER PART START ==============================-->
 <footer class="footer_2">
     <div class="container">
@@ -5,20 +9,19 @@
             <div class="col-xl-3 col-sm-7 col-md-6 col-lg-3">
                 <div class="wsus__footer_content">
                     <a class="wsus__footer_2_logo" href="#">
-                        <img src="images/logo_2.png" alt="logo">
+                        <img src="{{ asset('uploads/' . @$footerInfo->logo) }}" alt="logo">
                     </a>
-                    <a class="action" href="callto:+8896254857456"><i class="fas fa-phone-alt"></i>
-                        +8896254857456</a>
-                    <a class="action" href="mailto:example@gmail.com"><i class="far fa-envelope"></i>
-                        example@gmail.com</a>
-                    <p><i class="fal fa-map-marker-alt"></i> San Francisco City Hall, San Francisco, CA</p>
+                    <a class="action" href="callto:{{ @$footerInfo->phone }}"><i class="fas fa-phone-alt"></i>
+                        {{ @$footerInfo->phone }}</a>
+                    <a class="action" href="mailto:{{ @$footerInfo->email }}"><i class="far fa-envelope"></i>
+                        {{ @$footerInfo->email }}</a>
+                    <p><i class="fal fa-map-marker-alt"></i> {{ @$footerInfo->address }}</p>
                     <ul class="wsus__footer_social">
-                        <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a class="whatsapp" href="#"><i class="fab fa-whatsapp"></i></a></li>
-                        <li><a class="pinterest" href="#"><i class="fab fa-pinterest-p"></i></a>
-                        </li>
-                        <li><a class="behance" href="#"><i class="fab fa-behance"></i></a></li>
+                        @foreach ($footerSocialButtons as $button)
+                            <li><a title="{{ $button->name }}" class="facebook" href="{{ $button->link }}"><i
+                                        class="{{ $button->icon }}"></i></a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -72,13 +75,11 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="wsus__copyright d-flex justify-content-center">
-                        <p>Copyright © 2021 Sazao shop. All Rights Reserved.</p>
+                        <p>{{ @$footerInfo->copyright }}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </footer>
-<!--============================
-        FOOTER PART END
-    ==============================-->
+<!--============================ FOOTER PART END ==============================-->
