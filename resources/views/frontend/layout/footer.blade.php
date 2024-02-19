@@ -1,6 +1,8 @@
 @php
     $footerInfo = App\models\Footer::first();
     $footerSocialButtons = App\models\FooterSocial::where('status', 'active')->get();
+    $footerSectionTwolinks = App\Models\FooterGridTwoLink::where('status', 'active')->get();
+    $footerSectionTwoTitle = App\models\FooterTitle::first();
 @endphp
 <!--============================ FOOTER PART START ==============================-->
 <footer class="footer_2">
@@ -27,15 +29,13 @@
             </div>
             <div class="col-xl-2 col-sm-5 col-md-4 col-lg-2">
                 <div class="wsus__footer_content">
-                    <h5>Company</h5>
+                    <h5>{{ $footerSectionTwoTitle->footer_section_two_title }}</h5>
                     <ul class="wsus__footer_menu">
-                        <li><a href="#"><i class="fas fa-caret-right"></i> About Us</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Career</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Contact Us</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Affilate</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Order History</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
+                        @foreach ($footerSectionTwolinks as $link)
+                            <li><a href="{{ $link->link }}"><i class="fas fa-caret-right"></i>
+                                    {{ $link->name }}</a></li>
+                        @endforeach
+
                     </ul>
                 </div>
             </div>

@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('footer_grid_twos', function (Blueprint $table) {
+        Schema::create('footer_titles', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('link');
-            $table->enum('status', ['active', 'inactive']);
+            $table->string('footer_section_two_title')->nullable();
+            $table->string('footer_section_three_title')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('footer_grid_twos');
+        Schema::dropIfExists('footer_titles');
     }
 };

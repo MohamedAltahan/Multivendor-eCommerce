@@ -10,7 +10,7 @@ use App\Http\Controllers\Backend\childCategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\FooterController;
-use App\Http\Controllers\Backend\FooterGridTwoController;
+use App\Http\Controllers\Backend\FooterGridTwoLinkController;
 use App\Http\Controllers\Backend\FooterSocialController;
 use App\Http\Controllers\Backend\HomePageSettingController;
 use App\Http\Controllers\Backend\OrderController;
@@ -144,7 +144,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     //footer socials----------------------------------
     Route::put('change-status', [FooterSocialController::class, 'changeStatus'])->name('footer-socials.change-status');
     Route::resource('footer-socials', FooterSocialController::class);
-    Route::put('change-status', [FooterGridTwoController::class, 'changeStatus'])->name('footer-grid-two.change-status');
-    Route::put('change-title', [FooterGridTwoController::class, 'changeTitle'])->name('footer-grid-two.change-title');
-    Route::resource('footer-grid-two', FooterGridTwoController::class);
+    Route::put('change-status', [FooterGridTwoLinkController::class, 'changeStatus'])->name('footer-grid-two.change-status');
+    Route::put('change-title', [FooterGridTwoLinkController::class, 'changeTitle'])->name('footer-grid-two.change-title');
+    Route::resource('footer-grid-two', FooterGridTwoLinkController::class);
 });

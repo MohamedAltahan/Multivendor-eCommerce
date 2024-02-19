@@ -11,7 +11,8 @@
             @method('PUT')
             <div class="row">
                 <div class="col-md-6">
-                    <x-form.input name="title" placeholder="Enter section name" />
+                    <x-form.input name="title" value="{{ $footerTitleSctionTwo->footer_section_two_title }}"
+                        placeholder="Enter section name" />
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>

@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\DataTables\FooterGridTwoDataTable;
+use App\DataTables\FooterGridTwoLinkDataTable;
 use App\Http\Controllers\Controller;
-use App\Models\FooterGridTwo;
+use App\Models\FooterGridTwoLink;
+use App\Models\footerTitle;
 use Illuminate\Http\Request;
 
-class FooterGridTwoController extends Controller
+class FooterGridTwoLinkController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(FooterGridTwoDataTable $dataTable)
+    public function index(FooterGridTwoLinkDataTable $dataTable)
     {
-        return $dataTable->render('admin.footer.footer-grid-two.index');
+        $footerTitleSctionTwo = footerTitle::first();
+        return $dataTable->render('admin.footer.footer-grid-two.index', compact('footerTitleSctionTwo'));
     }
 
     /**
@@ -36,7 +38,7 @@ class FooterGridTwoController extends Controller
             'status' => ['in:active,inactive'],
         ]);
 
-        $footeritem = new FooterGridTwo();
+        $footeritem = new FooterGridTwoLink();
         $footeritem->create($request->all());
         toastr('Crated successfully', 'success', 'success');
         return redirect()->route('admin.footer-grid-two.index');
@@ -48,7 +50,7 @@ class FooterGridTwoController extends Controller
      */
     public function edit(string $id)
     {
-        $footerItem = FooterGridTwo::findOrFail($id);
+        $footerItem = FooterGridTwoLink::findOrFail($id);
         return view('admin.footer.footer-grid-two.edit', compact('footerItem'));
     }
 
@@ -63,7 +65,7 @@ class FooterGridTwoController extends Controller
             'status' => ['in:active,inactive'],
         ]);
 
-        $footeritem =  FooterGridTwo::findOrFail($id);
+        $footeritem =  FooterGridTwoLink::findOrFail($id);
         $footeritem->update($request->all());
         toastr('Crated successfully', 'success', 'success');
         return redirect()->route('admin.footer-grid-two.index');
@@ -74,7 +76,7 @@ class FooterGridTwoController extends Controller
      */
     public function destroy(string $id)
     {
-        $footerButtons =  FooterGridTwo::findOrFail($id);
+        $footerButtons =  FooterGridTwoLink::findOrFail($id);
         $footerButtons->delete();
 
         return response(['status' => 'success', 'message' => 'Deleted successfully']);
@@ -83,7 +85,7 @@ class FooterGridTwoController extends Controller
     //change status using ajax request--------------------------------------------------
     public function changeStatus(Request $request)
     {
-        $category = FooterGridTwo::findOrFail($request->id);
+        $category = FooterGridTwoLink::findOrFail($request->id);
 
         $request->status == "true" ? $category->status = 'active' : $category->status = 'inactive';
         $category->save();
@@ -91,8 +93,18 @@ class FooterGridTwoController extends Controller
         return response(['message' => 'Status has been updated']);
     }
 
-    //change status using ajax request--------------------------------------------------
+    //==========================================================================
     public function changeTitle(Request $request)
     {
+        $request->validate([
+            'title' => ['required', 'max:200'],
+        ]);
+
+        footerTitle::updateOrCreate(
+            ['id' => 1],
+            ['footer_section_two_title' => $request->title]
+        );
+        toastr('Updated Successfully', 'success', 'success');
+        return redirect()->back();
     }
 }

@@ -2,7 +2,8 @@
 
 namespace App\DataTables;
 
-use App\Models\FooterGridTwo;
+
+use App\Models\FooterGridTwoLink;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +13,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class FooterGridTwoDataTable extends DataTable
+class FooterGridTwoLinkDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -49,7 +50,7 @@ class FooterGridTwoDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(FooterGridTwo $model): QueryBuilder
+    public function query(FooterGridTwoLink $model): QueryBuilder
     {
         return $model->newQuery();
     }
