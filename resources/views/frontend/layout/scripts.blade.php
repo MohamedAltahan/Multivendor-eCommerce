@@ -103,5 +103,38 @@
             })
         })
 
-    })
+
+        //news letter =======================================================
+        $('#newsLetterForm').on('submit', function(e) {
+            e.preventDefault();
+            let data = $(this).serialize();
+
+            $.ajax({
+                method: 'POST',
+                url: '{{ route('newsletter-subscribe') }}',
+                data: data,
+                beforeSend: function() {
+                    $('.subscribe_btn').text('Sending...')
+                },
+                success: function(data) {
+                    if (data.status == 'success') {
+                        toastr.success(data.message);
+                    } else if (data.status == 'error') {
+                        toastr.error(data.message);
+                    }
+                    $('.subscribe_btn').text('Subscribe');
+                    $('.newsletter').val('');
+                },
+                error: function(data) {
+                    let errors = data.responseJSON.errors;
+                    if (errors) {
+                        $.each(errors, function(key, value) {
+                            toastr.error(value);
+                        })
+                    }
+                    $('.subscribe_btn').text('Subscribe');
+                }
+            })
+        })
+    }) //document.ready
 </script>

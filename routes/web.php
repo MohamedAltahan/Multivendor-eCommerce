@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\NewsLetterController;
 use App\Http\Controllers\Frontend\ShowProductController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
@@ -72,12 +73,15 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
 
 //login for admins=============================================================================
 Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
+
 //flash sale===================================================================================
 Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale');
+
 // products =========================================================================
 Route::get('products', [ShowProductController::class, 'productsIndex'])->name('products.index');
 Route::get('show-product-details/{slug}', [ShowProductController::class, 'showProductDetails'])->name('show-product-details');
 Route::get('change-product-list-view', [ShowProductController::class, 'changeListView'])->name('change-product-list-view');
+
 // cart==================================================================================
 Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
 Route::get('cart-details', [CartController::class, 'cartDetails'])->name('cart-details');
@@ -88,10 +92,14 @@ Route::get('get-cart-count', [CartController::class, 'getCartCount'])->name('get
 Route::get('get-cart-products', [CartController::class, 'getCartProducts'])->name('get-cart-products');
 Route::get('get-cart-subtotal', [CartController::class, 'calcCartTotal'])->name('get-cart-subtotal');
 Route::post('remove-side-cart-product', [CartController::class, 'removeSideCartProduct'])->name('remove-side-cart-product');
-//apply coupon on cart
+
+//apply coupon on cart====================================================================
 Route::get('apply-coupon', [CartController::class, 'applyCoupon'])->name('apply-coupon');
 Route::get('coupon-calculation', [CartController::class, 'couponCalculation'])->name('coupon-calculation');
 
+// news letter ===========================================================================
+Route::post('newsletter-subscribe', [NewsLetterController::class, 'newsLetterSubscribe'])->name('newsletter-subscribe');
+Route::get('newsletter-verify/{token}', [NewsLetterController::class, 'newsLetterEmailVerification'])->name('newsletter-verify');
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/vendor.php';

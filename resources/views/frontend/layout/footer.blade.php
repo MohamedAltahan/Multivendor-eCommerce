@@ -3,6 +3,8 @@
     $footerSocialButtons = App\models\FooterSocial::where('status', 'active')->get();
     $footerSectionTwolinks = App\Models\FooterGridTwoLink::where('status', 'active')->get();
     $footerSectionTwoTitle = App\models\FooterTitle::first();
+    $footerSectionThreelinks = App\Models\FooterGridThreeLink::where('status', 'active')->get();
+    $footerSectionThreeTitle = App\models\FooterTitle::first();
 @endphp
 <!--============================ FOOTER PART START ==============================-->
 <footer class="footer_2">
@@ -35,21 +37,17 @@
                             <li><a href="{{ $link->link }}"><i class="fas fa-caret-right"></i>
                                     {{ $link->name }}</a></li>
                         @endforeach
-
                     </ul>
                 </div>
             </div>
             <div class="col-xl-2 col-sm-5 col-md-4 col-lg-2">
                 <div class="wsus__footer_content">
-                    <h5>Company</h5>
+                    <h5>{{ $footerSectionThreeTitle->footer_section_three_title }}</h5>
                     <ul class="wsus__footer_menu">
-                        <li><a href="#"><i class="fas fa-caret-right"></i> About Us</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Career</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Contact Us</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Affilate</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Order History</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
+                        @foreach ($footerSectionThreelinks as $link)
+                            <li><a href="{{ $link->link }}"><i class="fas fa-caret-right"></i>
+                                    {{ $link->name }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -58,9 +56,10 @@
                     <h3>Subscribe To Our Newsletter</h3>
                     <p>Get all the latest information on Events, Sales and Offers.
                         Get all the latest information on Events.</p>
-                    <form>
-                        <input type="text" placeholder="Search...">
-                        <button type="submit" class="common_btn">subscribe</button>
+                    <form action="{{ route('newsletter-subscribe') }}" method="POST" id="newsLetterForm">
+                        @csrf
+                        <input type="text" class="newsletter" placeholder="Email" name="subscriber_email">
+                        <button type="submit" class="common_btn subscribe_btn">subscribe</button>
                     </form>
                     <div class="footer_payment">
                         <p>We're using safe payment for :</p>

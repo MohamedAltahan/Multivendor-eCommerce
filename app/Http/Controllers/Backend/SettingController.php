@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmailConfiguration;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
@@ -11,9 +12,11 @@ class SettingController extends Controller
     public function index()
     {
         $setting = Setting::first();
-        return view('admin.setting.index', compact('setting'));
+        $emailSettings = EmailConfiguration::first();
+        return view('admin.setting.index', compact('setting', 'emailSettings'));
     }
 
+    //===============================================================
     public function generalSettingUpdate(Request $request)
     {
         $request->validate([
@@ -29,5 +32,24 @@ class SettingController extends Controller
         toastr('Updated successfully', 'success', 'success');
         return redirect()->back();
         // return view('admin.setting.index');
+    }
+
+    //=============================================================
+    function stmpSettingUpdate(Request $request)
+    {
+        $request->validate([
+            'sender_email' => ['required', 'email'],
+            'host' => ['required', 'max:200'],
+            'username' => ['required', 'max:200'],
+            'password' => ['required', 'max:200'],
+            'port' => ['required', 'max:200'],
+            'encryption' => ['required', 'max:200'],
+        ]);
+        EmailConfiguration::updateOrCreate(
+            ['id' => 1],
+            $request->all()
+        );
+        toastr('Updated successfully', 'success', 'success');
+        return redirect()->back();
     }
 }

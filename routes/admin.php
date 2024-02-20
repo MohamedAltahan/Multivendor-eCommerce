@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\FooterController;
 use App\Http\Controllers\Backend\FooterGridTwoLinkController;
+use App\Http\Controllers\Backend\FooterGridThreeLinkController;
 use App\Http\Controllers\Backend\FooterSocialController;
 use App\Http\Controllers\Backend\HomePageSettingController;
 use App\Http\Controllers\Backend\OrderController;
@@ -109,6 +110,9 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     //settigs========================================================================================================
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('general-settnig-update', [SettingController::class, 'generalSettingUpdate'])->name('general-setting-update.index');
+    //stmp email setting--------------------------------
+    Route::put('stmp-setting-update', [SettingController::class, 'stmpSettingUpdate'])->name('stmp-setting-update');
+
 
     //Coupons========================================================================================================
     Route::put('coupons/change-status', [CouponController::class, 'changeStatus'])->name('coupons.change-status');
@@ -140,11 +144,17 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::put('products-slider-tree', [HomePageSettingController::class, 'updateProductsSliderThree'])->name('products-slider-three');
 
     //footer============================================================================================
+    //footer contact info
     Route::resource('footer', FooterController::class);
-    //footer socials----------------------------------
+    //footer social buttons---------------------------
     Route::put('change-status', [FooterSocialController::class, 'changeStatus'])->name('footer-socials.change-status');
     Route::resource('footer-socials', FooterSocialController::class);
+    //footer section2---------------------------------
     Route::put('change-status', [FooterGridTwoLinkController::class, 'changeStatus'])->name('footer-grid-two.change-status');
     Route::put('change-title', [FooterGridTwoLinkController::class, 'changeTitle'])->name('footer-grid-two.change-title');
     Route::resource('footer-grid-two', FooterGridTwoLinkController::class);
+    //footer section3---------------------------------
+    Route::put('section-three-change-status', [FooterGridThreeLinkController::class, 'changeStatus'])->name('footer-grid-three.change-status');
+    Route::put('section-three-change-title', [FooterGridThreeLinkController::class, 'changeTitle'])->name('footer-grid-three.change-title');
+    Route::resource('footer-grid-three', FooterGridThreeLinkController::class);
 });

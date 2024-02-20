@@ -190,7 +190,7 @@
         </script>
         @stack('scripts')
 
-        @include('frontend.pages.side-cart-scripts')
+        @include('frontend.layout.scripts')
     </body>
 
 </html>
