@@ -27,6 +27,7 @@ use App\Http\Controllers\Backend\ShippingRuleController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\SubscriberController;
 use App\Http\Controllers\Backend\TransactionController;
 use App\Models\Brand;
 use App\Models\Product;
@@ -157,4 +158,8 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::put('section-three-change-status', [FooterGridThreeLinkController::class, 'changeStatus'])->name('footer-grid-three.change-status');
     Route::put('section-three-change-title', [FooterGridThreeLinkController::class, 'changeTitle'])->name('footer-grid-three.change-title');
     Route::resource('footer-grid-three', FooterGridThreeLinkController::class);
-});
+    //newsletter subscribers---------------------------
+    Route::get('subscribers', [SubscriberController::class, 'index'])->name('subscribers.index');
+    Route::delete('subscribers/{id}', [SubscriberController::class, 'destroy'])->name('subscribers.destroy');
+    Route::post('subscribers-send-mail', [SubscriberController::class, 'sendMail'])->name('subscribers-send-mail');
+});//end group

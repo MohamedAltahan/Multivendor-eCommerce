@@ -71,7 +71,7 @@
 
             {{-- Manage footer---------------------------------------------------- --}}
             <li
-                class="dropdown {{ setActive(['admin.footer.*', 'admin.footer-socials.*', 'admin.footer-grid-two.*', 'admin.footer-grid-three.*']) }}">
+                class="dropdown {{ setActive(['admin.subscribers.*', 'admin.footer.*', 'admin.footer-socials.*', 'admin.footer-grid-two.*', 'admin.footer-grid-three.*']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Website footer</span></a>
                 <ul class="dropdown-menu">
@@ -89,6 +89,10 @@
                 <ul class="dropdown-menu">
                     <li class="dropdown {{ setActive(['admin.footer-grid-three.*']) }}"><a class="nav-link"
                             href="{{ route('admin.footer-grid-three.index') }}"> section three</a></li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.subscribers.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.subscribers.index') }}"> Subscribers</a></li>
                 </ul>
             </li>
 
@@ -126,7 +130,8 @@
             {{-- Manage E-commerce---------------------------------------------------- --}}
             <li
                 class="dropdown {{ setActive(['admin.vendor-profile.*', 'admin.coupons.*', 'admin.shipping-rule.*', 'admin.payment-setting.*']) }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                        class="fas fa-columns"></i>
                     <span>Ecommerce</span></a>
                 <ul class="dropdown-menu">
                     <li class="dropdown {{ setActive(['admin.vendor-profile.*']) }}"><a class="nav-link"
