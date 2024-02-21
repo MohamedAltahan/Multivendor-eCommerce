@@ -148,8 +148,13 @@
             </li>
 
             {{-- settings================================================================= --}}
-            <li class="{{ setActive(['admin.settings.index']) }}"><a href="{{ route('admin.settings.index') }}"
+            <li class="{{ setActive(['admin.settings.*']) }}"><a href="{{ route('admin.settings.index') }}"
                     class="nav-link "><i class="far fa-square"></i><span>Settings</span></a></li>
+
+            {{-- advertisement================================================================= --}}
+            <li class="{{ setActive(['admin.advertisement.*']) }}"><a
+                    href="{{ route('admin.advertisement.index') }}" class="nav-link "><i
+                        class="far fa-square"></i><span>Advertisement</span></a></li>
 
             {{-- transactions================================================================= --}}
             <li class="{{ setActive(['admin.transaction']) }}"><a href="{{ route('admin.transaction') }}"

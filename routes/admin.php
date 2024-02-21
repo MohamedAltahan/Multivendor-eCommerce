@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\AdminVendorProfileContorller;
+use App\Http\Controllers\Backend\AdvertisementController;
 use App\Http\Controllers\Backend\AllVendorsProductsController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
@@ -162,4 +163,8 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::get('subscribers', [SubscriberController::class, 'index'])->name('subscribers.index');
     Route::delete('subscribers/{id}', [SubscriberController::class, 'destroy'])->name('subscribers.destroy');
     Route::post('subscribers-send-mail', [SubscriberController::class, 'sendMail'])->name('subscribers-send-mail');
+    //advertisement==========================================================================================
+    Route::get('advertisement', [AdvertisementController::class, 'index'])->name('advertisement.index');
+    Route::put('advertisement/homepage-banner1', [AdvertisementController::class, 'homePageBanner1'])->name('homepage-banner1');
+    Route::put('advertisement/homepage-banner2', [AdvertisementController::class, 'homePageBanner2'])->name('homepage-banner2');
 });//end group
