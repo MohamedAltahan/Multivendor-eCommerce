@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Advertisement;
 use App\Models\Brand;
 use App\Models\FlashSale;
 use App\Models\FlashSaleItem;
@@ -32,6 +33,10 @@ class HomeController extends Controller
             ]
         )->get();
 
+        $banner1 = Advertisement::where('key', 'homepage_banner1')->first();
+        $banner1 = @json_decode($banner1->value, true);
+        $banner2 = Advertisement::where('key', 'homepage_banner2')->first();
+        $banner2 = @json_decode($banner2->value, true);
         return view('frontend.home.home', compact(
             'productsSliderTwo',
             'productsSliderOne',
@@ -41,7 +46,9 @@ class HomeController extends Controller
             'sliders',
             'flashSaleDate',
             'flashSaleProducts',
-            'popularCategories'
+            'popularCategories',
+            'banner1',
+            'banner2',
         ));
     }
 

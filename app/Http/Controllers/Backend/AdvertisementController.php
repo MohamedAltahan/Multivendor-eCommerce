@@ -17,7 +17,7 @@ class AdvertisementController extends Controller
         $banner1 = @json_decode($banner1->value, true);
         $banner2 = Advertisement::where('key', 'homepage_banner2')->first();
         $banner2 = @json_decode($banner2->value, true);
-        // dd($banner2);
+
         return view('admin.advertisement.index', compact('banner1', 'banner2'));
     }
 

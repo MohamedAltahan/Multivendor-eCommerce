@@ -170,7 +170,7 @@
     {{-- end single banner --}}
 
     {{-- hot deals --}}
-    @include('frontend.home.sections.hot-deals')
+    {{-- @include('frontend.home.sections.hot-deals') --}}
     {{-- end hot deals --}}
 
     {{-- category-product-slider-one --}}
