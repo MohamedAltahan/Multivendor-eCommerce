@@ -96,6 +96,16 @@
                 </ul>
             </li>
 
+            {{-- Manage footer---------------------------------------------------- --}}
+            <li class="dropdown {{ setActive([]) }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                    <span>Vendor requests</span></a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.footer.index']) }}"><a class="nav-link"
+                            href="{{ route('admin.footer.index') }}"> Pending vendors</a></li>
+                </ul>
+            </li>
+
             {{-- Manage product---------------------------------------------------- --}}
             <li
                 class="dropdown {{ setActive([

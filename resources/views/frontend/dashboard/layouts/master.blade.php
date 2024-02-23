@@ -26,6 +26,8 @@
         <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
         <link rel="stylesheet" href="{{ asset('backend/assets/css/toastr.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/assets/css/jquery.dataTables.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/assets/css/dataTables.bootstrap5.min.css') }}">
         @stack('styles')
         <!-- <link rel="stylesheet" href="css/rtl.css"> -->
     </head>
@@ -100,6 +102,8 @@
         <script src="{{ asset('frontend/js/main.js') }}"></script>
         <script src="{{ asset('backend/assets/js/sweetalert2.all.min.js') }}"></script>
         <script src="{{ asset('backend/assets/js/toastr.min.js') }}"></script>
+        <script src="{{ asset('backend/assets/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('backend/assets/js/dataTables.bootstrap5.min.js') }}"></script>
         {{-- toastr notifications --}}
         <script>
             @if ($errors->any())

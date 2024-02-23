@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\StripeSettingController;
+use App\Http\Controllers\Frontend\BecomeVendorRequestController;
 use App\Http\Controllers\Frontend\UserOrderController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\CartController;
@@ -70,6 +71,12 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::get('wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
     Route::get('wishlist/add-product', [WishlistController::class, 'addToWishlist'])->name('wishlist.store');
     Route::get('wishlist/remove-product/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+    //review =================================================================================
+    Route::post('review', [ReviewController::class, 'create'])->name('review.create');
+    Route::get('reviews', [ReviewController::class, 'index'])->name('review.index');
+    //become a vendor request===============================================================
+    Route::get('become-a-vendor-request', [BecomeVendorRequestController::class, 'index'])->name('become-a-vendor-request');
+    Route::post('become-a-vendor-request', [BecomeVendorRequestController::class, 'create'])->name('become-a-vendor-request.create');
 }); //end group
 
 //login for admins=============================================================================
@@ -101,10 +108,11 @@ Route::get('coupon-calculation', [CartController::class, 'couponCalculation'])->
 // news letter ===========================================================================
 Route::post('newsletter-subscribe', [NewsLetterController::class, 'newsLetterSubscribe'])->name('newsletter-subscribe');
 Route::get('newsletter-verify/{token}', [NewsLetterController::class, 'newsLetterEmailVerification'])->name('newsletter-verify');
+//vendors pages===========================================================================
+Route::get('vendors', [HomeController::class, 'vendorPage'])->name('vendors.page');
+Route::get('vendor-products/{id}', [HomeController::class, 'vendorProducts'])->name('vendor-products');
 
-//review =================================================================================
-Route::post('review', [ReviewController::class, 'create'])->name('review.create');
-Route::get('reviews', [ReviewController::class, 'index'])->name('review.index');
+
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/vendor.php';

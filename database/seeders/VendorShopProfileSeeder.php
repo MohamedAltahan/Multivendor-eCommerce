@@ -24,6 +24,7 @@ class VendorShopProfileSeeder extends Seeder
                 'address' => 'usa',
                 'description' => 'description',
                 'user_id' => $user->id,
+                'status' => 'pending',
             ]
         ]);
     }

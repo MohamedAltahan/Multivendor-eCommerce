@@ -10,6 +10,7 @@ use App\Models\FlashSaleItem;
 use App\Models\HomePageSetting;
 use App\Models\Product;
 use App\Models\Slider;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -64,5 +65,18 @@ class HomeController extends Controller
         $typebasedProducts['top'] = Product::where(['product_type' => 'top', 'is_approved' => 'yes', 'status' => 'active'])
             ->orderBy('id', 'DESC')->take(8)->get();
         return $typebasedProducts;
+    }
+
+    function vendorPage()
+    {
+        $vendors = Vendor::paginate(20);
+        return view('frontend.pages.vendor', compact('vendors'));
+    }
+
+    function vendorProducts($id)
+    {
+        $products = Product::where(['vendor_id' => $id, 'is_approved' => 'yes', 'status' => 'active'])->paginate(16);
+        $vendor = Vendor::findOrFail($id);
+        return view('frontend.pages.vendor-products', compact('products', 'vendor'));
     }
 }
