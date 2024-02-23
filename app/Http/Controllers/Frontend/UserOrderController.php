@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Fronend;
+namespace App\Http\Controllers\Frontend;
 
 use App\DataTables\UserOrderDataTable;
 use App\Http\Controllers\Controller;

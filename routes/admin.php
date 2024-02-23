@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\Backend\AdminReviewController;
 use App\Http\Controllers\Backend\AdminVendorProfileContorller;
 use App\Http\Controllers\Backend\AdvertisementController;
 use App\Http\Controllers\Backend\AllVendorsProductsController;
@@ -167,4 +168,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::get('advertisement', [AdvertisementController::class, 'index'])->name('advertisement.index');
     Route::put('advertisement/homepage-banner1', [AdvertisementController::class, 'homePageBanner1'])->name('homepage-banner1');
     Route::put('advertisement/homepage-banner2', [AdvertisementController::class, 'homePageBanner2'])->name('homepage-banner2');
+    // reviews==================================================================================================
+    Route::get('reviews', [AdminReviewController::class, 'index'])->name('reviews.index');
+    Route::put('reviews/change-status', [AdminReviewController::class, 'changeStatus'])->name('reviews.change-status');
 });//end group

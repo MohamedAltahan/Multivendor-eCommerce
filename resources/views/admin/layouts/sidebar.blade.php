@@ -106,6 +106,7 @@
                     'admin.get-vendor-products*',
                     'admin.all-vendors-products.*',
                     'admin.pending-products.*',
+                    'admin.reviews.*',
                 ]) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Manage products</span></a>
@@ -123,6 +124,9 @@
                     </li>
                     <li class="dropdown {{ setActive(['admin.pending-products.*']) }} ">
                         <a class="nav-link" href="{{ route('admin.pending-products.index') }}">Pending products</a>
+                    </li>
+                    <li class="dropdown {{ setActive(['admin.reviews.*']) }} ">
+                        <a class="nav-link" href="{{ route('admin.reviews.index') }}"> Product reviews</a>
                     </li>
                 </ul>
             </li>

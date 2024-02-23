@@ -2,13 +2,14 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\StripeSettingController;
-use App\Http\Controllers\Fronend\UserOrderController;
+use App\Http\Controllers\Frontend\UserOrderController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsLetterController;
+use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\ShowProductController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
@@ -100,6 +101,10 @@ Route::get('coupon-calculation', [CartController::class, 'couponCalculation'])->
 // news letter ===========================================================================
 Route::post('newsletter-subscribe', [NewsLetterController::class, 'newsLetterSubscribe'])->name('newsletter-subscribe');
 Route::get('newsletter-verify/{token}', [NewsLetterController::class, 'newsLetterEmailVerification'])->name('newsletter-verify');
+
+//review =================================================================================
+Route::post('review', [ReviewController::class, 'create'])->name('review.create');
+Route::get('reviews', [ReviewController::class, 'index'])->name('review.index');
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/vendor.php';

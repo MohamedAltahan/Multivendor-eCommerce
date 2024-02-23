@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\VendorController;
 use App\Http\Controllers\Backend\VendorOrderController;
 use App\Http\Controllers\Backend\VendorProductController;
+use App\Http\Controllers\Backend\VendorProductReviewController;
 use App\Http\Controllers\Backend\vendorProductVariantController;
 use App\Http\Controllers\Backend\VendorProductVariantDetailsController;
 use App\Http\Controllers\Backend\VendorProfileController;
@@ -45,8 +46,10 @@ Route::group(['middleware' => ['auth', 'role:vendor'], 'prefix' => 'vendor', 'as
     Route::put('product/product-variant-details-update/{VariantDetailsId}', [VendorProductVariantDetailsController::class, 'update'])->name('product.product-variant-details.update');
     Route::delete('product/product-variant-details/{VariantDetailsId}/', [VendorProductVariantDetailsController::class, 'destroy'])->name('product.product-variant-details.destroy');
     Route::put('product/product-variant-details-status/change-status', [VendorProductVariantDetailsController::class, 'changeStatus'])->name('product.product-variant-details.change-status');
-    // orders===============================================================================
+    // orders=====================================================================================
     Route::get('orders', [VendorOrderController::class, 'index'])->name('orders.index');
     Route::get('orders/show/{id}', [VendorOrderController::class, 'show'])->name('orders.show');
     Route::get('orders/status/{id}', [VendorOrderController::class, 'orderStatus'])->name('orders.status');
+    // reviews=====================================================================================
+    Route::get('reivews', [VendorProductReviewController::class, 'index'])->name('reviews.index');
 });

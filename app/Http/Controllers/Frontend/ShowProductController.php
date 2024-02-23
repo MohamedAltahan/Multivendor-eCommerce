@@ -9,6 +9,7 @@ use App\Models\ChildCategory;
 use App\Models\FlashSale;
 use App\Models\Product;
 use App\Models\ProductImages;
+use App\Models\ProductReview;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -105,8 +106,8 @@ class ShowProductController extends Controller
         $product = Product::with(['brand', 'images', 'variants' => function ($query) {
             $query->with('type');
         }])->where('slug', $slug)->where('status', 'active')->first();
-
-        return view('frontend.pages.show-product-details', compact('product', 'flashSaleDate'));
+        $reviews = ProductReview::where(['product_id' => $product->id, 'status' => 'active'])->paginate(10);
+        return view('frontend.pages.show-product-details', compact('reviews', 'product', 'flashSaleDate'));
     }
     //================================================
     public function changeListView(Request $request)
