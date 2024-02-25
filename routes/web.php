@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsLetterController;
+use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\ShowProductController;
 use App\Http\Controllers\Frontend\UserAddressController;
@@ -112,6 +113,15 @@ Route::get('newsletter-verify/{token}', [NewsLetterController::class, 'newsLette
 Route::get('vendors', [HomeController::class, 'vendorPage'])->name('vendors.page');
 Route::get('vendor-products/{id}', [HomeController::class, 'vendorProducts'])->name('vendor-products');
 
+//About page===========================================================================
+Route::get('about', [PageController::class, 'about'])->name('about');
+
+//terms and conditions page===========================================================================
+Route::get('terms-and-conditions', [PageController::class, 'termsAndConditions'])->name('terms-and-conditions');
+
+//contact us========================================================================================
+Route::get('contact', [PageController::class, 'contact'])->name('contact');
+Route::post('contact', [PageController::class, 'handleContactForm'])->name('handle-contact-form');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

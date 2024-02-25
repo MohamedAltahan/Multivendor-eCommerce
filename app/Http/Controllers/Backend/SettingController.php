@@ -24,6 +24,8 @@ class SettingController extends Controller
             'currency_symbol' => ['required', 'max:20'],
             'layout' => ['required', 'max:200'],
             'contact_email' => ['required', 'max:200'],
+            'contact_phone' => ['max:50'],
+            'contact_address' => ['max:250'],
             'currency' => ['required', 'max:200'],
             'time_zone' => ['required', 'max:200'],
         ]);

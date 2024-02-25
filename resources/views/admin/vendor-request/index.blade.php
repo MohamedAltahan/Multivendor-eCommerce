@@ -1,8 +1,8 @@
 @extends('admin.layouts.master')
-@section('mainTitle', 'Transaction')
+@section('mainTitle', 'Pending vendor requests')
 @section('content')
     <div class="card-header">
-        <h4>All transactions</h4>
+        <h4>All request</h4>
     </div>
     <div class="card-body">
         {{ $dataTable->table() }}

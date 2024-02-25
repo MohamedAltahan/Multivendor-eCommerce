@@ -16,7 +16,10 @@ return new class extends Migration
             $table->string('site_name');
             $table->string('layout');
             $table->string('contact_email');
-            $table->string('currency');
+            $table->string('contact_phone');
+            $table->string('contact_address')->nullable();
+            $table->string('currency')->nullable();
+            $table->text('map')->nullable();
             $table->string('time_zone');
             $table->string('currency_symbol')->nullable();
             $table->timestamps();

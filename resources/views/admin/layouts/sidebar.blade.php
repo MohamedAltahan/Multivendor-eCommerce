@@ -56,7 +56,15 @@
             </li>
 
             {{-- Manage website---------------------------------------------------- --}}
-            <li class="dropdown {{ setActive(['admin.slider.*', 'admin.home-page-setting.*']) }}">
+            <li
+                class="dropdown {{ setActive([
+                    'admin.slider.*',
+                    'admin.slider.*',
+                    'admin.home-page-setting.*',
+                    'admin.vendor-condition.*',
+                    'admin.about.*',
+                    'admin.terms-and-conditions.*',
+                ]) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Manage website</span></a>
                 <ul class="dropdown-menu">
@@ -66,6 +74,18 @@
                 <ul class="dropdown-menu">
                     <li class="dropdown {{ setActive(['admin.home-page-setting.*']) }}"><a class="nav-link"
                             href="{{ route('admin.home-page-setting') }}">Home page setting</a></li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.vendor-condition.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.vendor-condition.index') }}">Vendor conditions</a></li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.about.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.about.index') }}">About</a></li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.terms-and-conditions.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.terms-and-conditions.index') }}">terms and conditons</a></li>
                 </ul>
             </li>
 
@@ -96,13 +116,26 @@
                 </ul>
             </li>
 
-            {{-- Manage footer---------------------------------------------------- --}}
-            <li class="dropdown {{ setActive([]) }}">
+            {{-- Manage users---------------------------------------------------- --}}
+            <li
+                class="dropdown {{ setActive(['admin.manage-user.*', 'admin.vendor-requests.*', 'admin.customers.*', 'admin.vendors.*']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
-                    <span>Vendor requests</span></a>
+                    <span>Users</span></a>
                 <ul class="dropdown-menu">
-                    <li class="dropdown {{ setActive(['admin.footer.index']) }}"><a class="nav-link"
-                            href="{{ route('admin.footer.index') }}"> Pending vendors</a></li>
+                    <li class="dropdown {{ setActive(['admin.vendor-requests.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.vendor-requests.index') }}"> Pending vendors</a></li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.customers.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.customers.index') }}">Customers</a></li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.vendors.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.vendors.index') }}">Vendors</a></li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.manage-user.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.manage-user') }}">Manage users</a></li>
                 </ul>
             </li>
 
@@ -118,7 +151,8 @@
                     'admin.pending-products.*',
                     'admin.reviews.*',
                 ]) }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                        class="fas fa-columns"></i>
                     <span>Manage products</span></a>
                 <ul class="dropdown-menu">
                     <li class="dropdown {{ setActive(['admin.brand.*']) }}"><a class="nav-link"

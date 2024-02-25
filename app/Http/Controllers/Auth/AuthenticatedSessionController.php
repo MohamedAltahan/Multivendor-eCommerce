@@ -26,6 +26,13 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
+        //check if user banned
+        if ($request->user()->status == 'inactive') {
+            Auth::guard('web')->logout();
+            $request->session()->regenerateToken();
+            toastr('Account has been banned from websit connet the support', 'error', 'Account banned');
+            return redirect('/');
+        }
 
         $request->session()->regenerate();
         //redirect depend on the type logged uer--------------------------------

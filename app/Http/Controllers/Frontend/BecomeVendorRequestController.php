@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Vendor;
+use App\Models\VendorCondition;
 use App\Traits\fileUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,8 @@ class BecomeVendorRequestController extends Controller
     use fileUploadTrait;
     function index()
     {
-        return view('frontend.dashboard.become-vendor-request.index');
+        $content = VendorCondition::first();
+        return view('frontend.dashboard.become-vendor-request.index', compact('content'));
     }
 
     function create(Request $request)
@@ -26,6 +28,9 @@ class BecomeVendorRequestController extends Controller
             'phone' => ['required', 'max:100'],
             'description' => ['required'],
         ]);
+        if (Auth::user()->role == 'vendor') {
+            return redirect()->back();
+        }
         $vendor = new Vendor();
         $vendorInfo = $request->except('banner');
         $vendorInfo['user_id'] = Auth::user()->id;

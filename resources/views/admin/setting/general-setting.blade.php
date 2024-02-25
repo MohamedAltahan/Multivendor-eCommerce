@@ -15,6 +15,20 @@
                 </div>
 
                 <div class="form-group">
+                    <x-form.input class="form-control" name="contact_phone" label='Contact phone'
+                        value="{{ @$setting->contact_phone }}" />
+                </div>
+
+                <div class="form-group">
+                    <x-form.input class="form-control" name="contact_address" label='Contact address'
+                        value="{{ @$setting->contact_address }}" />
+                </div>
+                <div class="form-group">
+                    <x-form.input class="form-control" name="map" label='map on google'
+                        value="{{ @$setting->map }}" />
+                </div>
+
+                <div class="form-group">
                     <x-form.input class="form-control" name="currency_symbol" label='Currency_symbol'
                         value="{{ @$setting->currency_symbol }}" />
                 </div>

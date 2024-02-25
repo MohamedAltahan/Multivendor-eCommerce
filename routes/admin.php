@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\AdminReviewController;
@@ -10,12 +11,14 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\childCategoryController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\CustomerListController;
 use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\FooterController;
 use App\Http\Controllers\Backend\FooterGridTwoLinkController;
 use App\Http\Controllers\Backend\FooterGridThreeLinkController;
 use App\Http\Controllers\Backend\FooterSocialController;
 use App\Http\Controllers\Backend\HomePageSettingController;
+use App\Http\Controllers\Backend\ManageUserController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentSettingController;
 use App\Http\Controllers\Backend\PaypalSettingContrller;
@@ -30,7 +33,11 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubscriberController;
+use App\Http\Controllers\Backend\TermsAndConditionController;
 use App\Http\Controllers\Backend\TransactionController;
+use App\Http\Controllers\Backend\VendorConditionController;
+use App\Http\Controllers\Backend\VendorListController;
+use App\Http\Controllers\Backend\VendorRequestController;
 use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -147,7 +154,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::put('products-slider-tree', [HomePageSettingController::class, 'updateProductsSliderThree'])->name('products-slider-three');
 
     //footer============================================================================================
-    //footer contact info
+    //footer contact info-----------------------------
     Route::resource('footer', FooterController::class);
     //footer social buttons---------------------------
     Route::put('change-status', [FooterSocialController::class, 'changeStatus'])->name('footer-socials.change-status');
@@ -171,4 +178,25 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     // reviews==================================================================================================
     Route::get('reviews', [AdminReviewController::class, 'index'])->name('reviews.index');
     Route::put('reviews/change-status', [AdminReviewController::class, 'changeStatus'])->name('reviews.change-status');
+    // vendor requests=============================================================================
+    Route::get('vendor-requests', [VendorRequestController::class, 'index'])->name('vendor-requests.index');
+    Route::get('vendor-requests/{id}/show', [VendorRequestController::class, 'show'])->name('vendor-requests.show');
+    Route::put('vendor-requests/{id}/change-status', [VendorRequestController::class, 'changeStatus'])->name('vendor-requests.change-status');
+    //all customer list==============================================================================
+    Route::get('customers', [CustomerListController::class, 'index'])->name('customers.index');
+    Route::put('customers/change-status', [CustomerListController::class, 'changeStatus'])->name('customers.change-status');
+    //all vendors list==============================================================================
+    Route::get('vendors', [VendorListController::class, 'index'])->name('vendors.index');
+    Route::put('vendors/change-status', [VendorListController::class, 'changeStatus'])->name('vendors.change-status');
+    //Vendor conditions==============================================================================
+    Route::get('vendor-condition', [VendorConditionController::class, 'index'])->name('vendor-condition.index');
+    Route::put('vendor-condition/update', [VendorConditionController::class, 'update'])->name('vendor-condition.update');
+    //About==============================================================================
+    Route::get('about', [AboutController::class, 'index'])->name('about.index');
+    Route::put('about/update', [AboutController::class, 'update'])->name('about.update');
+    //terms and conditions================================================================
+    Route::get('terms-and-conditions', [TermsAndConditionController::class, 'index'])->name('terms-and-conditions.index');
+    Route::put('terms-and-conditions/update', [TermsAndConditionController::class, 'update'])->name('terms-and-conditions.update');
+    //Manage users=======================================================================================
+    Route::get('manage-user', [ManageUserController::class, 'index'])->name('manage-user');
 });//end group
