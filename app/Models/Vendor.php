@@ -9,8 +9,9 @@ class Vendor extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'banner', 'phone', 'email',
-        'address', 'description', 'user_id', 'fb_link', 'tw_link', 'insta_link', 'shop_name',
+        'banner', 'phone', 'email', 'status',
+        'address', 'description', 'user_id', 'fb_link',
+        'tw_link', 'insta_link', 'shop_name',
     ];
 
     public function products()

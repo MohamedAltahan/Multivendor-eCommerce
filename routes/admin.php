@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\AdminListController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\AdminReviewController;
 use App\Http\Controllers\Backend\AdminVendorProfileContorller;
@@ -185,6 +186,12 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     //all customer list==============================================================================
     Route::get('customers', [CustomerListController::class, 'index'])->name('customers.index');
     Route::put('customers/change-status', [CustomerListController::class, 'changeStatus'])->name('customers.change-status');
+    Route::put('customers/change-status', [CustomerListController::class, 'changeStatus'])->name('customers.change-status');
+    //all vendors list==============================================================================
+    //all admin list==============================================================================
+    Route::get('admin', [AdminListController::class, 'index'])->name('admin.index');
+    Route::put('admin/change-status', [AdminListController::class, 'changeStatus'])->name('admin.change-status');
+    Route::delete('admin/destroy/{id}', [AdminListController::class, 'destroy'])->name('admin.destroy');
     //all vendors list==============================================================================
     Route::get('vendors', [VendorListController::class, 'index'])->name('vendors.index');
     Route::put('vendors/change-status', [VendorListController::class, 'changeStatus'])->name('vendors.change-status');
@@ -199,4 +206,5 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::put('terms-and-conditions/update', [TermsAndConditionController::class, 'update'])->name('terms-and-conditions.update');
     //Manage users=======================================================================================
     Route::get('manage-user', [ManageUserController::class, 'index'])->name('manage-user');
+    Route::post('manage-user', [ManageUserController::class, 'create'])->name('manage-user.create');
 });//end group
