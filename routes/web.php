@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsLetterController;
+use App\Http\Controllers\Frontend\OrderTrackController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\ShowProductController;
@@ -122,6 +123,10 @@ Route::get('terms-and-conditions', [PageController::class, 'termsAndConditions']
 //contact us========================================================================================
 Route::get('contact', [PageController::class, 'contact'])->name('contact');
 Route::post('contact', [PageController::class, 'handleContactForm'])->name('handle-contact-form');
+
+//order track========================================================================================
+Route::get('track-order', [OrderTrackController::class, 'index'])->name('track-order.index');
+// Route::get('track-order', [OrderTrackController::class, 'trackOrder'])->name('track-order');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

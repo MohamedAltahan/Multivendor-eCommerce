@@ -102,8 +102,8 @@
                             </div>
                             <div class="wsus__invoice_footer">
                                 <p><span>Sub total:</span>{{ $setting->currency }}{{ $order->sub_total }} </p>
-                                <p><span>Shipping cost(+):</span>{{ $setting->currency }}{{ $shipping->cost }} </p>
-                                <p><span>coupon(-):</span>{{ $setting->currency }}{{ $coupon->discount_value }} </p>
+                                <p><span>Shipping cost(+):</span>{{ $setting->currency }}{{ @$shipping->cost }} </p>
+                                <p><span>coupon(-):</span>{{ $setting->currency }}{{ @$coupon->discount_value ?: 0 }} </p>
                                 <p><span>Total Amount:</span>{{ $setting->currency }}{{ $order->final_total }} </p>
                             </div>
                         </div>

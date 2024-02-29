@@ -270,7 +270,7 @@
                                 </ul>
                             </form>
 
-                            <p class="brand_model"><span>brand :</span> {{ $product->brand->name }}</p>
+                            <p class="brand_model"><span>brand :</span> {{ @$product->brand->name }}</p>
 
                         </div>
                     </div>
@@ -419,7 +419,7 @@
                                                 <div class="col-xl-4 col-lg-5 mt-4 mt-lg-0">
                                                     @php
                                                         $isBrought = false;
-                                                        $orders = App\Models\Order::where(['user_id' => auth()->user()->id, 'order_status' => 'delivered'])->get();
+                                                        $orders = App\Models\Order::where(['user_id' => @auth()->user()->id, 'order_status' => 'delivered'])->get();
                                                         foreach ($orders as $key => $order) {
                                                             $isExist = $order
                                                                 ->orderProducts()
