@@ -27,6 +27,9 @@
         <link rel="stylesheet" href="{{ asset('backend/assets/css/sweetalert2.min.css') }}">
         <link rel="stylesheet" href="{{ asset('backend/assets/css/bootstrap-iconpicker.min.css') }}">
         <link rel="stylesheet" href="{{ asset('backend/assets/modules/select2/dist/css/select2.css') }}">
+        @if ($setting->layout == 'rtl')
+            <link rel="stylesheet" href="{{ asset('backend/assets/css/skins/rtl.css') }}">
+        @endif
 
         @stack('styles')
         <!-- Start GA -->

@@ -4,16 +4,20 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\EmailConfiguration;
+use App\Models\LogoSetting;
 use App\Models\Setting;
+use App\Traits\fileUploadTrait;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
+    use fileUploadTrait;
     public function index()
     {
+        $logoSetting = LogoSetting::first() ?: new LogoSetting();
         $setting = Setting::first();
         $emailSettings = EmailConfiguration::first();
-        return view('admin.setting.index', compact('setting', 'emailSettings'));
+        return view('admin.setting.index', compact('setting', 'emailSettings', 'logoSetting'));
     }
 
     //===============================================================
@@ -50,6 +54,35 @@ class SettingController extends Controller
         EmailConfiguration::updateOrCreate(
             ['id' => 1],
             $request->all()
+        );
+        toastr('Updated successfully', 'success', 'success');
+        return redirect()->back();
+    }
+
+    //================================================================
+    function logoSettingUpdate(Request $request)
+    {
+        $request->validate([
+            'main_logo' => ['required', 'image', 'max:3000'],
+            'icon' => ['required', 'image', 'max:3000'],
+        ]);
+        $oldLogos = LogoSetting::first() ?: new LogoSetting();
+
+        $logos = [];
+
+        if ($request->hasFile('main_logo')) {
+            $oldMainLogo = $oldLogos['main_logo'];
+            $logos['main_logo'] = $this->fileUpdate($request, 'myDisk', 'websiteLogo', 'main_logo', $oldMainLogo);
+        }
+
+        if ($request->hasFile('icon')) {
+            $oldIcon = $oldLogos['icon'];
+            $logos['icon'] = $this->fileUpdate($request, 'myDisk', 'websiteLogo', 'icon', $oldIcon);
+        }
+
+        LogoSetting::updateOrCreate(
+            ['id' => 1],
+            $logos
         );
         toastr('Updated successfully', 'success', 'success');
         return redirect()->back();

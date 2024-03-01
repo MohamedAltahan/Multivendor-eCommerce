@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\AllVendorsProductsController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\childCategoryController;
+use App\Http\Controllers\Backend\CodController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CustomerListController;
 use App\Http\Controllers\Backend\FlashSaleController;
@@ -121,6 +122,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     //settigs========================================================================================================
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('general-settnig-update', [SettingController::class, 'generalSettingUpdate'])->name('general-setting-update.index');
+    Route::put('logo-setting-update', [SettingController::class, 'logoSettingUpdate'])->name('logo-setting-update.update');
     //stmp email setting--------------------------------
     Route::put('stmp-setting-update', [SettingController::class, 'stmpSettingUpdate'])->name('stmp-setting-update');
 
@@ -135,6 +137,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
 
     // Payment setting=============================================================================================
     Route::get('payment-setting', [PaymentSettingController::class, 'index'])->name('payment-setting.index');
+    Route::put('cod-setting/{id}', [CodController::class, 'update'])->name('cod-setting.update');
     Route::resource('paypal-setting', PaypalSettingContrller::class);
     //Stripe ---------------------------------------------
     Route::put('stripe-setting/{id}', [StripeSettingController::class, 'update'])->name('stripe-setting.update');

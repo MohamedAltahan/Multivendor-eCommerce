@@ -8,7 +8,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
             rel="stylesheet">
         <title>@yield('title')</title>
-        <link rel="icon" type="image/png" href="">
+        <link rel="icon" type="image/png" href="{{ $logoSetting->icon }}">
         <link rel="stylesheet" href="{{ asset('frontend/css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/css/select2.min.css') }}">
@@ -29,7 +29,9 @@
         <link rel="stylesheet" href="{{ asset('backend/assets/css/jquery.dataTables.min.css') }}">
         <link rel="stylesheet" href="{{ asset('backend/assets/css/dataTables.bootstrap5.min.css') }}">
         @stack('styles')
-        <!-- <link rel="stylesheet" href="css/rtl.css"> -->
+        @if ($setting->layout == 'rtl')
+            <link rel="stylesheet" href="{{ asset('frontend/css/rtl.css') }}">
+        @endif
     </head>
 
     <body>

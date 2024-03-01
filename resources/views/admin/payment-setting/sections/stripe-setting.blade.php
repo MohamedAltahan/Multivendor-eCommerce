@@ -1,4 +1,4 @@
-<div class="tab-pane fade show active" id="list-stripe" role="tabpanel" aria-labelledby="list-stripe-list">
+<div class="tab-pane fade " id="list-stripe" role="tabpanel" aria-labelledby="list-stripe-list">
     <div class="card border">
         <div class="card-body">
             <form action="{{ route('admin.stripe-setting.update', 1) }}" method="POST">
@@ -25,7 +25,7 @@
 
                 <div class="form-group">
                     <label for="">Chose your Country</label>
-                    <select name="country" id="" class="form-control select2">
+                    <select name="country" id="" class="form-control ">
                         <option value="">Select </option>
                         @foreach (config('setting.country') as $country)
                             <option @selected(@$stripeSetting->country == $country) value="{{ $country }}">{{ $country }}

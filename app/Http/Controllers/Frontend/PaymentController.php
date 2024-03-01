@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Codsetting;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\PaypalSetting;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use Illuminate\Support\Str;
 
 class PaymentController extends Controller
 {
@@ -179,8 +181,18 @@ class PaymentController extends Controller
     }
 
     //stripe payment============================================================================
-    function payWithStripe(Request $request)
+    function payOnCod(Request $request)
     {
-        dd($request->all());
+        $cod = Codsetting::first();
+        $setting = Setting::first();
+        if ($cod->status == 'disable') {
+            toastr('COD is not available now', 'error', 'error');
+            return redirect()->back();
+        }
+        $total = finalPaymentAmount();
+        $total = round($total, 2);
+        $this->storeOrder('COD', 'pending', Str::random(10), $total, $setting->currency);
+        $this->clearSession();
+        return redirect()->route('user.payment.success');
     }
 }//end class
