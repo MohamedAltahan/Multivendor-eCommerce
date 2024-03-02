@@ -159,6 +159,7 @@
             });
         </script>
         <script>
+            // loop on laravel errors
             @if ($errors->any())
                 @foreach ($errors->all() as $error)
                     toastr.error("{{ $error }}")

@@ -72,10 +72,6 @@
                 <ul class="dropdown-menu">
                     <li class="{{ setActive(['admin.order.*']) }}"><a class="nav-link"
                             href="{{ route('admin.order.index') }}">All orders</a></li>
-                    <li class="{{ setActive(['admin.sub-category.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.sub-category.index') }}">Sub Category</a></li>
-                    <li class="{{ setActive(['admin.child-category.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.child-category.index') }}">Child Category</a></li>
                 </ul>
             </li>
 

@@ -71,7 +71,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'user', 'as' => 'user.'], fu
     Route::get('orders/show/{id}', [UserOrderController::class, 'show'])->name('orders.show');
     // wishlist===============================================================================
     Route::get('wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
-    Route::get('wishlist/add-product', [WishlistController::class, 'addToWishlist'])->name('wishlist.store');
     Route::get('wishlist/remove-product/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
     //review =================================================================================
     Route::post('review', [ReviewController::class, 'create'])->name('review.create');
@@ -80,9 +79,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'user', 'as' => 'user.'], fu
     Route::get('become-a-vendor-request', [BecomeVendorRequestController::class, 'index'])->name('become-a-vendor-request');
     Route::post('become-a-vendor-request', [BecomeVendorRequestController::class, 'create'])->name('become-a-vendor-request.create');
 }); //end group
-
-//login for admins=============================================================================
-Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
+//wish list=========================================================================================
+Route::get('wishlist/add-product', [WishlistController::class, 'addToWishlist'])->name('wishlist.store');
 
 //flash sale===================================================================================
 Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale');

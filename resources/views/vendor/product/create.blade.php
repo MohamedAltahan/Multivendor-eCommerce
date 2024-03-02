@@ -66,19 +66,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="">Product type</label>
-                                                <select name="product_type" class="form-control">
-                                                    <option value="">Select</option>
-                                                    <option @selected(old('product_type', $product->product_type) == 'new') value="new">New arrival</option>
-                                                    <option @selected(old('product_type', $product->product_type) == 'featured') value="featured">Featured</option>
-                                                    <option @selected(old('product_type', $product->product_type) == 'best') value="best">Best</option>
-                                                    <option @selected(old('product_type', $product->product_type) == 'top') value="top">Top</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
                                     </div>{{-- /row --}}
 
                                     <div class="row">
@@ -182,7 +169,7 @@
                                         </select>
                                     </div>
                                 </form>
-                                <button type="submit" form="main-form" class="btn btn-primary">Create</button>
+                                <button type="submit" form="main-form" class="btn btn-primary mt-3">Create</button>
 
                             </div>
                         </div>

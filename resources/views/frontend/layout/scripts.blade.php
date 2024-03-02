@@ -86,7 +86,7 @@
             e.preventDefault();
             let product_id = $(this).data('id');
             $.ajax({
-                url: "{{ route('user.wishlist.store') }}",
+                url: "{{ route('wishlist.store') }}",
                 data: {
                     product_id
                 },
