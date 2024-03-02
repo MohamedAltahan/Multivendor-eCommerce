@@ -35,7 +35,7 @@ class WishlistController extends Controller
 
     function destroy($id)
     {
-        $wishlistProduct = Wishlist::where(['id' => $id])->findOrFail();
+        $wishlistProduct = Wishlist::findOrFail($id);
 
         if (!$wishlistProduct->user_id == Auth::user()->id) {
             toastr('product not exist', 'error', 'error');

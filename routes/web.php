@@ -34,8 +34,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-
-
 // auth routes--------------------------------------------------------------------
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -44,7 +42,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // user routes==================================================================================
-Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {
+Route::group(['middleware' => ['auth'], 'prefix' => 'user', 'as' => 'user.'], function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
     Route::get('profile', [UserProfileController::class, 'index'])->name('profile');
     Route::put('profile', [UserProfileController::class, 'profileUpdate'])->name('profile.update');
@@ -128,7 +126,6 @@ Route::post('contact', [PageController::class, 'handleContactForm'])->name('hand
 
 //order track========================================================================================
 Route::get('track-order', [OrderTrackController::class, 'index'])->name('track-order.index');
-// Route::get('track-order', [OrderTrackController::class, 'trackOrder'])->name('track-order');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

@@ -3,6 +3,13 @@
     {{ $setting->site_name }} - Dashboard
 @endsection
 @section('content')
+    {{-- ========================================head bar===================== --}}
+    <div class="wsus__dashboard_menu">
+        <div class="wsusd__dashboard_user">
+            <img src="{{ asset('uploads/' . auth()->user()->image) }}" alt="img" class="img-fluid">
+            <p>{{ auth()->user()->name }}</p>
+        </div>
+    </div>
     <!--=============================dashbaord ==============================-->
     <section id="wsus__dashboard">
         <div class="container-fluid">

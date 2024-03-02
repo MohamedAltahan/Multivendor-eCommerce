@@ -54,9 +54,9 @@
                 @include('admin.layouts.sidebar')
                 <!-- Main Content -->
                 <div class="main-content">
-
                     <!-- Main Content -->
                     <section class="section">
+
                         <div class="section-header">
                             <h1>@yield('mainTitle')</h1>
                         </div>
@@ -96,7 +96,7 @@
         <script src="{{ asset('backend/assets/modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 
         <!-- Page Specific JS File -->
-        <script src="{{ asset('backend/assets/js/page/index-0.js') }}"></script>
+        {{-- <script src="{{ asset('backend/assets/js/page/index-0.js') }}"></script> --}}
 
         <!-- Template JS File -->
         <script src="{{ asset('backend/assets/js/scripts.js') }}"></script>

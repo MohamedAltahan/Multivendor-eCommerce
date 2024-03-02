@@ -34,14 +34,16 @@
             <div class="col-xl-12">
                 <div class="wsus__section_header">
                     <h3>{{ $category->name }}</h3>
-                    <a class="see_btn" href="#">see more <i class="fas fa-caret-right"></i></a>
+                    <a class="see_btn" href="{{ route('products.index', ['category' => $category->slug]) }}">see more <i
+                            class="fas fa-caret-right"></i></a>
                 </div>
             </div>
         </div>
         <div class="row flash_sell_slider">
             @foreach ($products as $product)
                 @php
-                    $productImage = App\Models\ProductImages::where('product_key', $product->product_key)->first()->name;
+                    $productImage = App\Models\ProductImages::where('product_key', $product->product_key)->first()
+                        ->name;
                 @endphp
                 <div class="col-xl-3 col-sm-6 col-lg-4">
                     <div class="wsus__product_item">

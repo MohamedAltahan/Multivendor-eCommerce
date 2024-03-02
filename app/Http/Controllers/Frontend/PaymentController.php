@@ -158,6 +158,10 @@ class PaymentController extends Controller
             $orderProduct->unit_price = $item->price;
             $orderProduct->qty = $item->qty;
             $orderProduct->save();
+            //update product quantity
+            $productNewQuantity = ($product->quantity - $item->qty);
+            $product->quantity = $productNewQuantity;
+            $product->save();
         }
 
         //transaction
@@ -180,7 +184,7 @@ class PaymentController extends Controller
         Session::forget('coupon');
     }
 
-    //stripe payment============================================================================
+    //cod payment============================================================================
     function payOnCod(Request $request)
     {
         $cod = Codsetting::first();

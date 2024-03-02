@@ -39,10 +39,11 @@
                                 <li><a href="{{ route('user.wishlist.index') }}"><i class="fal fa-heart"></i><span>
                                             @auth
                                                 {{ App\Models\Wishlist::where('user_id', auth()->user()->id)->count() }}
+                                            @else
+                                                0
                                             @endauth
                                         </span></a>
                                 </li>
-                                <li><a href="compare.html"><i class="fal fa-random"></i><span>03</span></a></li>
                                 <li><a class="wsus__cart_icon" href="#"><i class="fal fa-shopping-bag"></i><span
                                             class="cart-count-icon">{{ Cart::count() }}</span></a></li>
                             </ul>
@@ -83,10 +84,9 @@
                     <h5>sub total <span>{{ calcCartTotal() }}</span></h5>
                 </div>
 
-
                 <div class="wsus__minicart_btn_area">
                     <a class="common_btn" href="{{ route('cart-details') }}">view cart</a>
-                    <a class="common_btn" href="check_out.html">checkout</a>
+                    <a class="common_btn" href="{{ route('user.checkout') }}">checkout</a>
                 </div>
             </div>
 

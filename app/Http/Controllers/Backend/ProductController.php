@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\ProductImages;
 use App\Models\ProductVariant;
@@ -135,8 +137,10 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        // dd($id);
         $product = Product::findOrFail($id);
+        if (OrderProduct::where('product_id', $product->id)->count() > 0) {
+            return response(['status' => 'error', 'message' => 'This product has order, so you cannot delete it']);
+        }
         //delete product images
         ProductImages::where('product_key', $product->product_key)->delete();
         //delete variant details

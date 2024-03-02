@@ -114,9 +114,6 @@
                                     </div>
                                     <ul class="wsus__button_area">
                                         <li><a class="add_cart" href="#">add to cart</a></li>
-                                        <li><a class="buy_now" href="#">buy now</a></li>
-                                        <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="far fa-random"></i></a></li>
                                     </ul>
                                     <p class="brand_model"><span>model :</span> 12345670</p>
                                     <p class="brand_model"><span>brand :</span> The Northland</p>
@@ -194,7 +191,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xl-5 col-md-7 col-lg-7">
+                    <div class="col-xl-8 col-md-8 col-lg-8">
                         <div class="wsus__pro_details_text">
                             <a class="title" href="javascrip:;">{{ $product->name }}</a>
                             @if ($product->quantity > 0)
@@ -264,9 +261,6 @@
 
                                 <ul class="wsus__button_area">
                                     <li><button type="submit" class="add_cart">add to cart</button></li>
-                                    <li><a class="buy_now" href="#">buy now</a></li>
-                                    <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="far fa-random"></i></a></li>
                                 </ul>
                             </form>
 
@@ -274,43 +268,7 @@
 
                         </div>
                     </div>
-                    <div class="col-xl-3 col-md-12 mt-md-5 mt-lg-0">
-                        <div class="wsus_pro_det_sidebar" id="sticky_sidebar">
-                            <ul>
-                                <li>
-                                    <span><i class="fal fa-truck"></i></span>
-                                    <div class="text">
-                                        <h4>Return Available</h4>
-                                        <!-- <p>Lorem Ipsum is simply dummy text of the printing</p> -->
-                                    </div>
-                                </li>
-                                <li>
-                                    <span><i class="far fa-shield-check"></i></span>
-                                    <div class="text">
-                                        <h4>Secure Payment</h4>
-                                        <!-- <p>Lorem Ipsum is simply dummy text of the printing</p> -->
-                                    </div>
-                                </li>
-                                <li>
-                                    <span><i class="fal fa-envelope-open-dollar"></i></span>
-                                    <div class="text">
-                                        <h4>Warranty Available</h4>
-                                        <!-- <p>Lorem Ipsum is simply dummy text of the printing</p> -->
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="wsus__det_sidebar_banner">
-                                <img src="images/blog_1.jpg" alt="banner" class="img-fluid w-100">
-                                <div class="wsus__det_sidebar_banner_text_overlay">
-                                    <div class="wsus__det_sidebar_banner_text">
-                                        <p>Black Friday Sale</p>
-                                        <h4>Up To 70% Off</h4>
-                                        <a href="#" class="common_btn">shope now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
 
@@ -419,7 +377,10 @@
                                                 <div class="col-xl-4 col-lg-5 mt-4 mt-lg-0">
                                                     @php
                                                         $isBrought = false;
-                                                        $orders = App\Models\Order::where(['user_id' => @auth()->user()->id, 'order_status' => 'delivered'])->get();
+                                                        $orders = App\Models\Order::where([
+                                                            'user_id' => @auth()->user()->id,
+                                                            'order_status' => 'delivered',
+                                                        ])->get();
                                                         foreach ($orders as $key => $order) {
                                                             $isExist = $order
                                                                 ->orderProducts()
@@ -434,8 +395,8 @@
                                                     @if ($isBrought)
                                                         <div class="wsus__post_comment rev_mar" id="sticky_sidebar3">
                                                             <h4>write a Review</h4>
-                                                            <form action="{{ route('review.create') }}" method="POST"
-                                                                enctype="multipart/form-data">
+                                                            <form action="{{ route('user.review.create') }}"
+                                                                method="POST" enctype="multipart/form-data">
                                                                 @csrf
                                                                 <p class="rating">
                                                                     <span>select your rating : </span>

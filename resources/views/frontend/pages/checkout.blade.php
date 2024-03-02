@@ -27,8 +27,14 @@
             <div class="row">
                 <div class="col-xl-8 col-lg-7">
                     <div class="wsus__check_form">
-                        <h5>Shipping Details <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">add
-                                new address</a></h5>
+                        <div class="d-flex">
+
+                            <h5>Shipping addresses : </h5>
+                            <a href="#" class="common_btn" style="margin-left:auto" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">add
+                                new address</a>
+                        </div>
+
                         <div class="row">
                             @foreach ($addresses as $address)
                                 <div class="col-xl-6">
