@@ -149,44 +149,44 @@
     </section>
     <!--========================== PRODUCT MODAL VIEW END ===========================-->
 
-    {{-- banner-slider --}}
+    {{-- banner-slider --------------------------- --}}
     @include('frontend.home.sections.banner-slider')
     {{-- end banner-slider --}}
 
-    {{-- flash sale  --}}
+    {{-- flash sale  ---------------------------- --}}
     @include('frontend.home.sections.flash-sale')
     {{-- end flash sale  --}}
 
-    {{-- top category products --}}
-    @include('frontend.home.sections.top-category-products')
+    {{-- top category products --------------------- --}}
+    {{-- @include('frontend.home.sections.top-category-products') --}}
     {{-- end top category products --}}
 
-    {{-- brand-slider --}}
-    @include('frontend.home.sections.brand-slider')
+    {{-- brand-slider -------------------------- --}}
+    {{-- @include('frontend.home.sections.brand-slider') --}}
     {{-- end brand-slider --}}
 
-    {{-- single banner --}}
-    @include('frontend.home.sections.single-banner')
+    {{-- single banner -------------------------- --}}
+    {{-- @include('frontend.home.sections.single-banner') --}}
     {{-- end single banner --}}
 
     {{-- hot deals --}}
     {{-- @include('frontend.home.sections.hot-deals') --}}
     {{-- end hot deals --}}
 
-    {{-- category-product-slider-one --}}
-    @include('frontend.home.sections.category-product-slider-one')
+    {{-- category-product-slider-one --------------------- --}}
+    {{-- @include('frontend.home.sections.category-product-slider-one') --}}
     {{-- end category-product-slider-one --}}
 
-    {{-- category-product-slider-two --}}
-    @include('frontend.home.sections.category-product-slider-two')
+    {{-- category-product-slider-two ------------------- --}}
+    {{-- @include('frontend.home.sections.category-product-slider-two') --}}
     {{-- end category-product-slider-two --}}
 
     {{-- large banner --}}
     {{-- @include('frontend.home.sections.large-banner') --}}
     {{-- end large banner --}}
 
-    {{-- weekly best items --}}
-    @include('frontend.home.sections.weekly-best-items')
+    {{-- weekly best items ------------------------- --}}
+    {{-- @include('frontend.home.sections.weekly-best-items') --}}
     {{-- end weekly best items --}}
 
     {{-- services --}}

@@ -191,6 +191,20 @@
                 </ul>
             </li>
 
+            {{-- withdraw methods======================================================= --}}
+            <li class="dropdown {{ setActive(['admin.withdraw-transaction.*', 'admin.withdraw-method.*']) }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-wallet"></i>
+                    <span>Withdraw payments</span></a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.withdraw-method.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.withdraw-method.index') }}">Withdraw method</a></li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.withdraw-transaction.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.withdraw-transaction.index') }}">Withdraw requests</a></li>
+                </ul>
+            </li>
+
             {{-- settings================================================================= --}}
             <li class="{{ setActive(['admin.settings.*']) }}"><a href="{{ route('admin.settings.index') }}"
                     class="nav-link "><i class="fas fa-cog"></i><span>Settings</span></a></li>

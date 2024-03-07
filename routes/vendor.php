@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\vendorProductVariantController;
 use App\Http\Controllers\Backend\VendorProductVariantDetailsController;
 use App\Http\Controllers\Backend\VendorProfileController;
 use App\Http\Controllers\Backend\VendorShopProfileController;
+use App\Http\Controllers\Backend\VendorWithdrawController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth', 'role:vendor'], 'prefix' => 'vendor', 'as' => 'vendor.'], function () {
@@ -52,4 +53,7 @@ Route::group(['middleware' => ['auth', 'role:vendor'], 'prefix' => 'vendor', 'as
     Route::get('orders/status/{id}', [VendorOrderController::class, 'orderStatus'])->name('orders.status');
     // reviews=====================================================================================
     Route::get('reivews', [VendorProductReviewController::class, 'index'])->name('reviews.index');
+    // withdraw=====================================================================================
+    Route::get('withdraw-request-details/{id}', [VendorWithdrawController::class, 'showRequestDetails'])->name('withdraw-request-details.show');
+    Route::resource('withdraw', VendorWithdrawController::class);
 });

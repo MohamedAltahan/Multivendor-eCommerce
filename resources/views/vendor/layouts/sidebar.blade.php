@@ -22,6 +22,9 @@
         <li><a class="{{ setActive(['vendor.reviews.*']) }}" href="{{ route('vendor.reviews.index') }}"><i
                     class="fas fa-star"></i> review</a>
         </li>
+        <li><a class="{{ setActive(['vendor.withdraw.*']) }}" href="{{ route('vendor.withdraw.index') }}"><i
+                    class="fas fa-dollar-sign"></i> My withdraw</a>
+        </li>
 
         <li>
             <form method="POST" action="{{ route('logout') }}">

@@ -40,6 +40,8 @@ use App\Http\Controllers\Backend\TransactionController;
 use App\Http\Controllers\Backend\VendorConditionController;
 use App\Http\Controllers\Backend\VendorListController;
 use App\Http\Controllers\Backend\VendorRequestController;
+use App\Http\Controllers\Backend\WithdrawMethodController;
+use App\Http\Controllers\Backend\WithdrawTransactionController;
 use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -210,4 +212,10 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     //Manage users=======================================================================================
     Route::get('manage-user', [ManageUserController::class, 'index'])->name('manage-user');
     Route::post('manage-user', [ManageUserController::class, 'create'])->name('manage-user.create');
+    //withdraw methods==================================================================================
+    Route::resource('withdraw-method', WithdrawMethodController::class);
+    //withdraw trasanctons==================================================================================
+    Route::get('withdraw-transaction', [WithdrawTransactionController::class, 'index'])->name('withdraw-transaction.index');
+    Route::get('withdraw-transaction/{id}', [WithdrawTransactionController::class, 'show'])->name('withdraw-transaction.show');
+    Route::put('withdraw-transaction/{id}', [WithdrawTransactionController::class, 'update'])->name('withdraw-transaction.update');
 });//end group

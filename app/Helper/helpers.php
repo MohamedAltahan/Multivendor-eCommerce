@@ -1,6 +1,7 @@
 <?php
 //set sidebar acive
 
+use App\Models\Setting;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
@@ -109,4 +110,10 @@ function  finalPaymentAmount()
 function limitText($text, $limit = 20)
 {
     return Str::limit($text, $limit);
+}
+
+//limit text
+function getCurrency()
+{
+    return Setting::first()->currency;
 }

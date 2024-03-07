@@ -20,4 +20,9 @@ class OrderProduct extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    function order()
+    {
+        return $this->belongsTo(order::class);
+    }
 }

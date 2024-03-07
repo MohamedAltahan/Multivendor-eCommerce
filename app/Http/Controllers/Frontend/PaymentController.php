@@ -157,6 +157,7 @@ class PaymentController extends Controller
             $orderProduct->variants = json_encode($item->options->variants);
             $orderProduct->unit_price = $item->price;
             $orderProduct->qty = $item->qty;
+            $orderProduct->variants_total = json_encode($item->options->variants_total_price);
             $orderProduct->save();
             //update product quantity
             $productNewQuantity = ($product->quantity - $item->qty);
