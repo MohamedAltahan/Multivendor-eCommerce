@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\ShowProductController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
+use App\Http\Controllers\Frontend\UserMessageController;
 use App\Http\Controllers\Frontend\UserProfileController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\ProfileController;
@@ -78,6 +79,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'user', 'as' => 'user.'], fu
     //become a vendor request===============================================================
     Route::get('become-a-vendor-request', [BecomeVendorRequestController::class, 'index'])->name('become-a-vendor-request');
     Route::post('become-a-vendor-request', [BecomeVendorRequestController::class, 'create'])->name('become-a-vendor-request.create');
+    // messages===============================================================
+    Route::get('messages', [UserMessageController::class, 'index'])->name('messages.index');
+    Route::get('get-messages', [UserMessageController::class, 'getMessages'])->name('get-messages');
+    Route::post('send-message', [UserMessageController::class, 'sendMessage'])->name('send-message');
 }); //end group
 //wish list=========================================================================================
 Route::get('wishlist/add-product', [WishlistController::class, 'addToWishlist'])->name('wishlist.store');

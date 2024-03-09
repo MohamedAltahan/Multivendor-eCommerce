@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\VendorController;
+use App\Http\Controllers\Backend\VendorMessageController;
 use App\Http\Controllers\Backend\VendorOrderController;
 use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\VendorProductReviewController;
@@ -56,4 +57,6 @@ Route::group(['middleware' => ['auth', 'role:vendor'], 'prefix' => 'vendor', 'as
     // withdraw=====================================================================================
     Route::get('withdraw-request-details/{id}', [VendorWithdrawController::class, 'showRequestDetails'])->name('withdraw-request-details.show');
     Route::resource('withdraw', VendorWithdrawController::class);
+    // messages===============================================================
+    Route::get('messages', [VendorMessageController::class, 'index'])->name('messages.index');
 });

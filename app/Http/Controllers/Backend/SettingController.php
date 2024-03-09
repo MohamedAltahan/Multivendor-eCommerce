@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\EmailConfiguration;
 use App\Models\LogoSetting;
+use App\Models\PusherSetting;
 use App\Models\Setting;
 use App\Traits\fileUploadTrait;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class SettingController extends Controller
         $logoSetting = LogoSetting::first() ?: new LogoSetting();
         $setting = Setting::first();
         $emailSettings = EmailConfiguration::first();
-        return view('admin.setting.index', compact('setting', 'emailSettings', 'logoSetting'));
+        $pusherSetting = PusherSetting::first();
+        return view('admin.setting.index', compact('setting', 'emailSettings', 'logoSetting', 'pusherSetting'));
     }
 
     //===============================================================
@@ -85,6 +87,24 @@ class SettingController extends Controller
             $logos
         );
         toastr('Updated successfully', 'success', 'success');
+        return redirect()->back();
+    }
+    /** Pusher settings update ====================================================================*/
+    function pusherSettingUpdate(Request $request)
+    {
+        $validatedData = $request->validate([
+            'pusher_app_id' => ['required'],
+            'pusher_key' => ['required'],
+            'pusher_secret' => ['required'],
+            'pusher_cluster' => ['required'],
+        ]);
+
+        PusherSetting::updateOrCreate(
+            ['id' => 1],
+            $validatedData
+        );
+
+        toastr('Updated successfully!', 'success', 'success');
         return redirect()->back();
     }
 }

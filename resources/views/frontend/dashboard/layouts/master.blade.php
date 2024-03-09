@@ -106,6 +106,7 @@
         <script src="{{ asset('backend/assets/js/toastr.min.js') }}"></script>
         <script src="{{ asset('backend/assets/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('backend/assets/js/dataTables.bootstrap5.min.js') }}"></script>
+        @vite(['resources\js\bootstrap.js', 'resources\js\frontend.js'])
         {{-- toastr notifications --}}
         <script>
             @if ($errors->any())
@@ -164,6 +165,13 @@
                     });
                 })
             });
+        </script>
+        <script>
+            const USER = {
+                name: "{{ auth()->user()->name }}",
+                id: "{{ auth()->user()->id }}",
+                image: "{{ asset('uploads/' . auth()->user()->image) }}",
+            }
         </script>
         @stack('scripts')
     </body>

@@ -21,6 +21,7 @@ use App\Http\Controllers\Backend\FooterGridThreeLinkController;
 use App\Http\Controllers\Backend\FooterSocialController;
 use App\Http\Controllers\Backend\HomePageSettingController;
 use App\Http\Controllers\Backend\ManageUserController;
+use App\Http\Controllers\Backend\MessageController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentSettingController;
 use App\Http\Controllers\Backend\PaypalSettingContrller;
@@ -125,6 +126,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('general-settnig-update', [SettingController::class, 'generalSettingUpdate'])->name('general-setting-update.index');
     Route::put('logo-setting-update', [SettingController::class, 'logoSettingUpdate'])->name('logo-setting-update.update');
+    Route::put('pusher-setting-update', [SettingController::class, 'pusherSettingUpdate'])->name('pusher-setting-update.update');
     //stmp email setting--------------------------------
     Route::put('stmp-setting-update', [SettingController::class, 'stmpSettingUpdate'])->name('stmp-setting-update');
 
@@ -218,4 +220,9 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::get('withdraw-transaction', [WithdrawTransactionController::class, 'index'])->name('withdraw-transaction.index');
     Route::get('withdraw-transaction/{id}', [WithdrawTransactionController::class, 'show'])->name('withdraw-transaction.show');
     Route::put('withdraw-transaction/{id}', [WithdrawTransactionController::class, 'update'])->name('withdraw-transaction.update');
+
+    //message ================================================================================================
+    Route::get('messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::get('get-messages', [MessageController::class, 'getMessages'])->name('get-messages');
+    Route::post('send-message', [MessageController::class, 'sendMessage'])->name('send-message');
 });//end group

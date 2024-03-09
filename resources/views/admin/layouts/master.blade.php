@@ -107,7 +107,7 @@
         <script src="{{ asset('backend/assets/js/sweetalert2.all.min.js') }}"></script>
         <script src="{{ asset('backend/assets/js/bootstrap-iconpicker.bundle.min.js') }}"></script>
         <script src="{{ asset('backend/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
-
+        @vite(['resources\js\bootstrap.js', 'resources\js\admin.js'])
         {{-- toastr notifications --}}
 
         {{-- dynamic delete alert from sweet alert --}}
@@ -165,6 +165,13 @@
                     toastr.error("{{ $error }}")
                 @endforeach
             @endif
+        </script>
+        <script>
+            const USER = {
+                name: "{{ auth()->user()->name }}",
+                id: "{{ auth()->user()->id }}",
+                image: "{{ asset('uploads/' . auth()->user()->image) }}",
+            }
         </script>
         @stack('scripts')
     </body>

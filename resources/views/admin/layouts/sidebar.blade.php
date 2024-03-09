@@ -205,6 +205,10 @@
                 </ul>
             </li>
 
+            {{-- messages================================================================= --}}
+            <li class="{{ setActive(['admin.messages.*']) }}"><a href="{{ route('admin.messages.index') }}"
+                    class="nav-link "><i class="fab fa-facebook-messenger"></i><span>Message</span></a></li>
+
             {{-- settings================================================================= --}}
             <li class="{{ setActive(['admin.settings.*']) }}"><a href="{{ route('admin.settings.index') }}"
                     class="nav-link "><i class="fas fa-cog"></i><span>Settings</span></a></li>
