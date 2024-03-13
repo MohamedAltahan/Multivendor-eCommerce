@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Events\MessageEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
 use Illuminate\Http\Request;
-use Symfony\Component\Mailer\Event\MessageEvent;
+
 
 class MessageController extends Controller
 {

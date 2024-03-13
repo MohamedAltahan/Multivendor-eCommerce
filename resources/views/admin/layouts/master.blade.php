@@ -107,7 +107,6 @@
         <script src="{{ asset('backend/assets/js/sweetalert2.all.min.js') }}"></script>
         <script src="{{ asset('backend/assets/js/bootstrap-iconpicker.bundle.min.js') }}"></script>
         <script src="{{ asset('backend/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
-        @vite(['resources\js\bootstrap.js', 'resources\js\admin.js'])
         {{-- toastr notifications --}}
 
         {{-- dynamic delete alert from sweet alert --}}
@@ -174,6 +173,8 @@
             }
         </script>
         @stack('scripts')
+        {{-- @vite(['resources\js\bootstrap.js', 'resources\js\admin.js']) --}}
+
     </body>
 
 </html>

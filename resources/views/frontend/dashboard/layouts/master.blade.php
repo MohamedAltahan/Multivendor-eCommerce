@@ -32,6 +32,8 @@
         @if ($setting->layout == 'rtl')
             <link rel="stylesheet" href="{{ asset('frontend/css/rtl.css') }}">
         @endif
+        @vite(['resources\js\bootstrap.js', 'resources\js\frontend.js'])
+
     </head>
 
     <body>
@@ -106,7 +108,6 @@
         <script src="{{ asset('backend/assets/js/toastr.min.js') }}"></script>
         <script src="{{ asset('backend/assets/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('backend/assets/js/dataTables.bootstrap5.min.js') }}"></script>
-        @vite(['resources\js\bootstrap.js', 'resources\js\frontend.js'])
         {{-- toastr notifications --}}
         <script>
             @if ($errors->any())
@@ -174,6 +175,7 @@
             }
         </script>
         @stack('scripts')
+
     </body>
 
 </html>

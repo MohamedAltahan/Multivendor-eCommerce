@@ -24,7 +24,6 @@ class MessageEvent implements ShouldBroadcast
         $this->receiver_id = $receiver_id;
         $this->dateTime = $dateTime;
     }
-
     /**
      * Get the channels the event should broadcast on.
      *
