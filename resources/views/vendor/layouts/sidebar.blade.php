@@ -20,7 +20,7 @@
         <li><a class="{{ setActive(['vendor.profile']) }}" href="{{ route('vendor.profile') }}"><i
                     class="far fa-user"></i> Vendor Profile</a></li>
 
-        <li><a class="{{ setActive(['vendor.messages.*']) }}" href="{{ route('vendor.messages.index') }}"><i
+        <li><a class="{{ setActive(['vendor.messages.*']) }}" href="{{ route('view-me') }}"><i
                     class="fab fa-facebook-messenger"></i> Messages</a></li>
 
         <li><a class="{{ setActive(['vendor.orders.*']) }}" href="{{ route('vendor.orders.index') }}"><i

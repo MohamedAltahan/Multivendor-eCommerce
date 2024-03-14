@@ -17,6 +17,6 @@ class VendorMessageController extends Controller
             ->groupBy('sender_id')
             ->get();
 
-        return view('vendor.m');
+        return view('frontend.dashboard.messenger.index');
     }
 }
