@@ -58,5 +58,5 @@ Route::group(['middleware' => ['auth', 'role:vendor'], 'prefix' => 'vendor', 'as
     Route::get('withdraw-request-details/{id}', [VendorWithdrawController::class, 'showRequestDetails'])->name('withdraw-request-details.show');
     Route::resource('withdraw', VendorWithdrawController::class);
     // messages===============================================================
-    Route::get('view-messages', [VendorMessageController::class, 'index'])->name('view-messages.index');
+    Route::post('view-messages', [VendorMessageController::class, 'index'])->name('view-messages.index');
 });
