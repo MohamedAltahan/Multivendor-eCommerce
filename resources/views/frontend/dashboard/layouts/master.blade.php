@@ -32,7 +32,7 @@
         @if ($setting->layout == 'rtl')
             <link rel="stylesheet" href="{{ asset('frontend/css/rtl.css') }}">
         @endif
-        @vite(['resources\js\bootstrap.js', 'resources\js\frontend.js'])
+        @vite(['resources/js/app.js', 'resources/js/frontend.js'])
 
     </head>
 

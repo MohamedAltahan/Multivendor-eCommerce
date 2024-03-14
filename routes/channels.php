@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Broadcast;
 //     return (int) $user->id === (int) $id;
 // });
 
+//$id-> we get it from channel
 Broadcast::channel('message.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });

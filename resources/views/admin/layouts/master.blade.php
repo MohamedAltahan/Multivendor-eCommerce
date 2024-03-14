@@ -45,6 +45,9 @@
             gtag('config', 'UA-94034622-3');
         </script>
         <!-- /END GA -->
+
+        @vite(['resources/js/app.js', 'resources/js/admin.js'])
+
     </head>
 
     <body>
@@ -173,7 +176,6 @@
             }
         </script>
         @stack('scripts')
-        {{-- @vite(['resources\js\bootstrap.js', 'resources\js\admin.js']) --}}
 
     </body>
 

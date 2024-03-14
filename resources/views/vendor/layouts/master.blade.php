@@ -35,6 +35,7 @@
 
         @stack('styles')
         <!-- <link rel="stylesheet" href="css/rtl.css"> -->
+        {{-- @vite(['resources/js/app.js']) --}}
     </head>
 
     <body>
@@ -159,6 +160,13 @@
                     toastr.error("{{ $error }}")
                 @endforeach
             @endif
+        </script>
+        <script>
+            const USER = {
+                name: "{{ auth()->user()->name }}",
+                id: "{{ auth()->user()->id }}",
+                image: "{{ asset('uploads/' . auth()->user()->image) }}",
+            }
         </script>
         @stack('scripts')
     </body>

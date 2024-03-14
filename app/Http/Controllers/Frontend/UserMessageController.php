@@ -17,11 +17,10 @@ class UserMessageController extends Controller
             ->where('receiver_id', '!=', $userId)
             ->groupBy('receiver_id')
             ->get();
-        return view('frontend.dashboard.messanger.index', compact('chatUsers'));
+        return view('frontend.dashboard.messenger.index', compact('chatUsers'));
     }
     function sendMessage(Request $request)
     {
-        dd('kdsj');
         $request->validate([
             'message' => ['required'],
             'receiver_id' => ['required']

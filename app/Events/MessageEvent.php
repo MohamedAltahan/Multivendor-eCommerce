@@ -20,6 +20,7 @@ class MessageEvent implements ShouldBroadcast
      */
     public function __construct($message, $receiver_id, $dateTime)
     {
+
         $this->message = $message;
         $this->receiver_id = $receiver_id;
         $this->dateTime = $dateTime;
@@ -35,14 +36,15 @@ class MessageEvent implements ShouldBroadcast
             new PrivateChannel('message.' . $this->receiver_id),
         ];
     }
+    //send this data with broadcast to pusher
     public function broadcastWith(): array
     {
         return [
             'message' => $this->message,
             'receiver_id' => $this->receiver_id,
             'sender_id' => auth()->user()->id,
-            'sender_image' => auth()->user()->image,
-            'date_time' => asset('uploads/' . $this->dateTime),
+            'sender_image' => asset('uploads/' . auth()->user()->image),
+            'date_time' => $this->dateTime,
         ];
     }
 }
