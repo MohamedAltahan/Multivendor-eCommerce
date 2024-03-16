@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('mainTitle', 'Product Varint details')
+@section('mainTitle', 'Varint details')
 @section('content')
 
     <div class="card-header">
@@ -9,7 +9,7 @@
     </div>
 
     <div class="card-body">
-        <form action="{{ route('admin.product.product-variant-details.store') }}" method="POST">
+        <form action="{{ route('admin.product.variant-details.store') }}" method="POST">
             @csrf
 
             <div class="form-group">

@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\ProductVariantDetails;
+use App\Models\VariantDetails;
 use App\Models\VendorProductVariantDetail;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -30,7 +30,7 @@ class VendorProductVariantDetailsDataTable extends DataTable
                 return $editBtn . $deleteBtn;
             })
             ->addColumn('variant_name', function ($query) {
-                return $query->productVariant->name;
+                return $query->Variant->name;
             })
             ->addColumn('is_default', function ($query) {
                 if ($query->is_default == 'yes') {
@@ -58,7 +58,7 @@ class VendorProductVariantDetailsDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(ProductVariantDetails $model): QueryBuilder
+    public function query(VariantDetails $model): QueryBuilder
     {
         return $model->where('product_variant_type_id', request()->variantId)->where('product_id', request()->productId)->newQuery();
     }

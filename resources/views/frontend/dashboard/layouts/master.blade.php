@@ -32,7 +32,20 @@
         @if ($setting->layout == 'rtl')
             <link rel="stylesheet" href="{{ asset('frontend/css/rtl.css') }}">
         @endif
-        @vite(['resources/js/app.js', 'resources/js/frontend.js'])
+        <script>
+            const USER = {
+                name: "{{ auth()->user()->name }}",
+                id: "{{ auth()->user()->id }}",
+                image: "{{ asset('uploads/' . auth()->user()->image) }}",
+            }
+        </script>
+        <script>
+            const PUSHER = {
+                key: "{{ $pusherSetting->pusher_key }}",
+                cluster: "{{ $pusherSetting->pusher_cluster }}"
+            }
+        </script>
+        {{-- @vite(['resources/js/app.js', 'resources/js/frontend.js']) --}}
 
     </head>
 
@@ -167,13 +180,7 @@
                 })
             });
         </script>
-        <script>
-            const USER = {
-                name: "{{ auth()->user()->name }}",
-                id: "{{ auth()->user()->id }}",
-                image: "{{ asset('uploads/' . auth()->user()->image) }}",
-            }
-        </script>
+
         @stack('scripts')
 
     </body>

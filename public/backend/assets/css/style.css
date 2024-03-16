@@ -3936,9 +3936,5 @@ body:not(.sidebar-mini)
 .msg-notification {
     border: 5px solid #08c !important;
 }
-.wsus__chat_area_footer {
-    width: 100% !important;
-    bottom: 0 !important;
-    /* position: absolute !important; */
-}
+
 /*# sourceMappingURL=style.css.map */

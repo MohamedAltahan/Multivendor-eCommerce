@@ -16,7 +16,7 @@
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
 
-                                <form action="{{ route('vendor.product-variant.update', $variant->id) }}" method="POST">
+                                <form action="{{ route('vendor.variant.update', $variant->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
 

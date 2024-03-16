@@ -4,7 +4,9 @@ namespace App\DataTables;
 
 use App\Models\ProductImages;
 use App\Models\ProductVariant;
+use App\Models\Variant;
 use App\Models\ProductVariantType;
+use App\Models\Setting;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
@@ -17,6 +19,14 @@ use Yajra\DataTables\Services\DataTable;
 
 class ProductVariantDataTable extends DataTable
 {
+    public $currency;
+    //get currency to be the name of the column
+    public function __construct()
+    {
+        $currency = Setting::first()->currency;
+        $currency = 'price' . "(" . strtolower($currency) . ")";
+        $this->currency = $currency;
+    }
     /**
      * Build the DataTable class.
      *
@@ -24,40 +34,31 @@ class ProductVariantDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-
         return (new EloquentDataTable($query))
+            ->addColumn('Variant name', function ($query) {
+                return $query->type->name;
+            })
+            ->addColumn('Variant value', function ($query) {
+                return $query->values->variant_value;
+            })
+            ->addColumn("$this->currency", function ($query) {
+                return $query->variant_price;
+            })
             ->addColumn('action', function ($query) {
-                $variantOptions = "<a href='" . route('admin.product.product-variant-details', ['productId' => request()->product_id, 'variantId' => $query->id])  . "'class='btn btn-sm ml-1 my-1 btn-success'><i class='far fa-edit'></i>Add variant</a>";
-                $editBtn = "<a href='" . route('admin.product-variant.edit', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-edit'></i>Edit</a>";
                 $deleteBtn = "<a href='" . route('admin.product-variant.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
 
-                return $editBtn . $deleteBtn . $variantOptions;
+                return  $deleteBtn;
             })
-            ->addColumn('status', function ($query) {
-                if ($query->status == 'active') {
-                    $button = '<label class="custom-switch mt-2">
-                        <input checked type="checkbox" name="custom-switch-checkbox" data-id="' . $query->id . '" class="change-status custom-switch-input">
-                        <span class="custom-switch-indicator"></span>
-                      </label>';
-                } else {
-                    $button = '<label class="custom-switch mt-2">
-                        <input type="checkbox" name="custom-switch-checkbox" data-id="' . $query->id . '" class="change-status custom-switch-input ">
-                        <span class="custom-switch-indicator"></span>
-                      </label>';
-                }
-
-                return $button;
-            })
-            ->rawColumns(['action', 'status'])
+            ->rawColumns(['action'])
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(ProductVariantType $model): QueryBuilder
+    public function query(ProductVariant $model): QueryBuilder
     {
-        return $model->where('vendor_id', Auth::user()->vendor->id)->newQuery();
+        return $model->where('product_id', $this->productId)->orderBy('product_variant_type_id')->newQuery();
     }
 
     /**
@@ -66,12 +67,11 @@ class ProductVariantDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('productvariant-table')
+            ->setTableId('variant-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(0)
             //->dom('Bfrtip')
-            ->orderBy(1)
+            ->orderBy(2)
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
@@ -90,12 +90,13 @@ class ProductVariantDataTable extends DataTable
     {
         return [
             Column::make('id')->width(80),
-            Column::make('name')->width(180),
-            Column::make('status')->width(200),
+            Column::make('Variant name'),
+            Column::make('Variant value'),
+            Column::make("$this->currency"),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(180)
+                ->width(230)
                 ->addClass('text-center'),
         ];
     }

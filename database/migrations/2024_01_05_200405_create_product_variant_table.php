@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('product_variants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products');
-            $table->string('product_variant_type_id');
+            $table->foreignId('product_variant_detail_id')->constrained('variant_details');
+            $table->foreignId('product_variant_type_id');
+            $table->unsignedFloat('variant_price')->nullable();
+            $table->text('variant_image')->nullable();
             $table->timestamps();
         });
     }

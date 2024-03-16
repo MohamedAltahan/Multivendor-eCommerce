@@ -14,8 +14,6 @@ trait fileUploadTrait
         }
         //it returns object of uploaded file object
         $file = $request->file($inputName);
-        //takes (folderName,name of the disk )to store the file and returns the path
-        // store() creates random rename to the file
         $path = $file->store($folderName, ['disk' => $diskName]);
         return $path;
     }
@@ -25,10 +23,7 @@ trait fileUploadTrait
         if (!$request->hasFile($inputName)) {
             return $oldFileName;
         }
-        //it returns object of uploaded file object
         $file = $request->file($inputName);
-        //takes (folderName,name of the disk )to store the file and returns the path
-        // store() creates random rename to the file
         $path = $file->store($folderName, ['disk' => $diskName]);
         //delete the old file from storage if exist
         if ($oldFileName != null && Storage::disk($diskName)->exists($oldFileName)) {

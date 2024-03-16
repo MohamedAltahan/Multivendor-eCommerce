@@ -45,8 +45,20 @@
             gtag('config', 'UA-94034622-3');
         </script>
         <!-- /END GA -->
-
-        @vite(['resources/js/app.js', 'resources/js/admin.js'])
+        <script>
+            const USER = {
+                name: "{{ auth()->user()->name }}",
+                id: "{{ auth()->user()->id }}",
+                image: "{{ asset('uploads/' . auth()->user()->image) }}",
+            }
+        </script>
+        <script>
+            const PUSHER = {
+                key: "{{ $pusherSetting->pusher_key }}",
+                cluster: "{{ $pusherSetting->pusher_cluster }}"
+            }
+        </script>
+        {{-- @vite(['resources/js/app.js', 'resources/js/admin.js']) --}}
 
     </head>
 
@@ -168,13 +180,7 @@
                 @endforeach
             @endif
         </script>
-        <script>
-            const USER = {
-                name: "{{ auth()->user()->name }}",
-                id: "{{ auth()->user()->id }}",
-                image: "{{ asset('uploads/' . auth()->user()->image) }}",
-            }
-        </script>
+
         @stack('scripts')
 
     </body>

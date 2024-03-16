@@ -25,19 +25,10 @@ class ProductDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $editBtn = "<a href='" . route('admin.products.edit', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-edit'></i>Edit</a>";
+                $editBtn = "<a href='" . route('admin.products.edit', $query->id) . "'class='btn btn-sm btn-primary'><i class='far fa-edit'></i>Edit</a>";
                 $deleteBtn = "<a href='" . route('admin.products.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
-                $moreButton = '<div class="dropdown dropleft ml-1 d-inline show">
-                      <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <i class="fas fa-cog"></i>
-                      </button>
-                      <div class="dropdown-menu " x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 29px, 0px); top: 0px; left: 0px; will-change: transform;">
-                        <a class="dropdown-item has-icon" href="' . route('admin.product-variant.index', ['product_id' => $query->id]) . '"><i class="far fa-heart"></i> Variant</a>
-                        <a class="dropdown-item has-icon" href="#"><i class="far fa-file"></i> Another action</a>
-                        <a class="dropdown-item has-icon" href="#"><i class="far fa-clock"></i> Something else here</a>
-                      </div>
-                    </div>';
-                return $editBtn . $deleteBtn . $moreButton;
+                $variantButton = "<a href='" . route('admin.product-variant.index', ['productId' => $query->id]) . "'class='btn btn-sm btn-success my-1 mx-1'><i class='fas fa-plus'></i> Add variant</a>";
+                return $editBtn . $deleteBtn . $variantButton;
             })
             ->addColumn('image', function ($query) {
                 $productImage = ProductImages::where('product_key', $query->product_key)->first();
@@ -129,7 +120,7 @@ class ProductDataTable extends DataTable
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(190)
+                ->width(250)
                 ->addClass('text-center'),
         ];
     }

@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductVariantDetails extends Model
+class VariantDetails extends Model
 {
     use HasFactory;
-    protected $fillable = ['product_variant_type_id', 'product_id', 'variant_value', 'price', 'status', 'is_default'];
+    protected $fillable = ['product_variant_type_id',  'variant_value',  'status'];
 
 
     public function variantType()

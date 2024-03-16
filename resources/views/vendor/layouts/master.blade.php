@@ -35,7 +35,20 @@
 
         @stack('styles')
         <!-- <link rel="stylesheet" href="css/rtl.css"> -->
-        {{-- @vite(['resources/js/app.js']) --}}
+        <script>
+            const USER = {
+                name: "{{ auth()->user()->name }}",
+                id: "{{ auth()->user()->id }}",
+                image: "{{ asset('uploads/' . auth()->user()->image) }}",
+            }
+        </script>
+        <script>
+            const PUSHER = {
+                key: "{{ $pusherSetting->pusher_key }}",
+                cluster: "{{ $pusherSetting->pusher_cluster }}"
+            }
+        </script>
+        {{-- @vite(['resources/js/app.js', 'resources/js/frontend.js']) --}}
     </head>
 
     <body>
@@ -161,13 +174,7 @@
                 @endforeach
             @endif
         </script>
-        <script>
-            const USER = {
-                name: "{{ auth()->user()->name }}",
-                id: "{{ auth()->user()->id }}",
-                image: "{{ asset('uploads/' . auth()->user()->image) }}",
-            }
-        </script>
+
         @stack('scripts')
     </body>
 

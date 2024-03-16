@@ -27,7 +27,7 @@ use App\Http\Controllers\Backend\PaymentSettingController;
 use App\Http\Controllers\Backend\PaypalSettingContrller;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductVariantController;
-use App\Http\Controllers\Backend\ProductVariantDetailsController;
+use App\Http\Controllers\Backend\VariantDetailsController;
 use App\Http\Controllers\Backend\ProductVariantTypesController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\ShippingRule;
@@ -38,6 +38,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubscriberController;
 use App\Http\Controllers\Backend\TermsAndConditionController;
 use App\Http\Controllers\Backend\TransactionController;
+use App\Http\Controllers\Backend\VariantController;
 use App\Http\Controllers\Backend\VendorConditionController;
 use App\Http\Controllers\Backend\VendorListController;
 use App\Http\Controllers\Backend\VendorRequestController;
@@ -88,25 +89,30 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::get('product/get-child-categories', [ProductController::class, 'getChildCategories'])->name('product.get-child-categories');
     Route::put('product/change-status', [ProductController::class, 'changeStatus'])->name('product.change-status');
     Route::resource('products', ProductController::class);
-    //product get attribute values ajaxz
+    //product get attribute values ajax
     Route::get('product/get-attribute-values', [ProductVariantTypesController::class, 'getProductAttributesValues'])->name('product.get-attribute-values');
     //product get attributes types ajax
     Route::get('product/get-attributes', [ProductVariantTypesController::class, 'getProductAttributes'])->name('product.get-attributes');
-    //product variant types
+
+    //product variant types============================================================================================
     Route::resource('product-variant-types', ProductVariantTypesController::class);
 
+    // variant==============================================================================================
+    Route::put('variant-status/change-status', [VariantController::class, 'changeStatus'])->name('variant.change-status');
+    Route::resource('variant', VariantController::class);
+
     //product variant==============================================================================================
-    Route::put('product-variant-status/change-status', [ProductVariantController::class, 'changeStatus'])->name('product-variant.change-status');
+    Route::get('get-variant-details', [ProductVariantController::class, 'getVariantDetails'])->name('get-variant-details');
     Route::resource('product-variant', ProductVariantController::class);
 
-    //product variant details==============================================================================================
-    Route::get('product/product-variant-details/{productId}/{variantId}', [ProductVariantDetailsController::class, 'index'])->name('product.product-variant-details');
-    Route::get('product/product-variant-details/create/{productId}/{variantId}', [ProductVariantDetailsController::class, 'create'])->name('product.product-variant-details.create');
-    Route::post('product/product-variant-details', [ProductVariantDetailsController::class, 'store'])->name('product.product-variant-details.store');
-    Route::get('product/product-variant-details-edit/{VariantDetailsId}', [ProductVariantDetailsController::class, 'edit'])->name('product.product-variant-details.edit');
-    Route::put('product/product-variant-details-update/{VariantDetailsId}', [ProductVariantDetailsController::class, 'update'])->name('product.product-variant-details.update');
-    Route::delete('product/product-variant-details/{VariantDetailsId}/', [ProductVariantDetailsController::class, 'destroy'])->name('product.product-variant-details.destroy');
-    Route::put('product/product-variant-details-status/change-status', [ProductVariantDetailsController::class, 'changeStatus'])->name('product.product-variant-details.change-status');
+    // variant details==============================================================================================
+    Route::get('product/variant-details/{variantId}', [VariantDetailsController::class, 'index'])->name('product.variant-details');
+    Route::get('product/variant-details/create/{variantId}', [VariantDetailsController::class, 'create'])->name('product.variant-details.create');
+    Route::post('product/variant-details', [VariantDetailsController::class, 'store'])->name('product.variant-details.store');
+    Route::get('product/variant-details-edit/{VariantDetailsId}', [VariantDetailsController::class, 'edit'])->name('product.variant-details.edit');
+    Route::put('product/variant-details-update/{VariantDetailsId}', [VariantDetailsController::class, 'update'])->name('product.variant-details.update');
+    Route::delete('product/variant-details/{VariantDetailsId}/', [VariantDetailsController::class, 'destroy'])->name('product.variant-details.destroy');
+    Route::put('product/variant-details-status/change-status', [VariantDetailsController::class, 'changeStatus'])->name('product.variant-details.change-status');
 
     //all vendors products=================================================================================================
     Route::get('product/all-vendors', [AllVendorsProductsController::class, 'index'])->name('all-vendors-products.index');

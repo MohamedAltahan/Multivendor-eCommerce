@@ -37,8 +37,8 @@ Route::group(['middleware' => ['auth', 'role:vendor'], 'prefix' => 'vendor', 'as
     Route::get('product/get-child-categories', [ProductController::class, 'getChildCategories'])->name('product.get-child-categories');
 
     //product variant==============================================================================================
-    Route::put('product-variant-status/change-status', [vendorProductVariantController::class, 'changeStatus'])->name('product-variant.change-status');
-    Route::resource('product-variant', vendorProductVariantController::class);
+    Route::put('variant-status/change-status', [vendorProductVariantController::class, 'changeStatus'])->name('variant.change-status');
+    Route::resource('variant', vendorProductVariantController::class);
 
     //product variant details==============================================================================================
     Route::get('product/product-variant-details/{productId}/{variantId}', [VendorProductVariantDetailsController::class, 'index'])->name('product.product-variant-details.index');
@@ -58,5 +58,7 @@ Route::group(['middleware' => ['auth', 'role:vendor'], 'prefix' => 'vendor', 'as
     Route::get('withdraw-request-details/{id}', [VendorWithdrawController::class, 'showRequestDetails'])->name('withdraw-request-details.show');
     Route::resource('withdraw', VendorWithdrawController::class);
     // messages===============================================================
-    Route::post('view-messages', [VendorMessageController::class, 'index'])->name('view-messages.index');
+    Route::get('messages', [VendorMessageController::class, 'index'])->name('messages.index');
+    Route::get('get-messages', [VendorMessageController::class, 'getMessages'])->name('get-messages');
+    Route::post('send-message', [VendorMessageController::class, 'sendMessage'])->name('send-message');
 });

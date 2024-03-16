@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\ProductImages;
-use App\Models\ProductVariantDetails;
+use App\Models\VariantDetails;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -30,7 +30,7 @@ class CartController extends Controller
         if ($request->has('variants_id')) {
 
             foreach ($request->variants_id as $varinatId) {
-                $variantValue = ProductVariantDetails::with('variantType')->where('id', $varinatId)->first();
+                $variantValue = VariantDetails::with('variantType')->where('id', $varinatId)->first();
                 $variantDetials[$variantValue->variantType->name]['name'] = $variantValue->variant_value;
                 $variantDetials[$variantValue->variantType->name]['price'] = $variantValue->price;
                 //all varaints price together

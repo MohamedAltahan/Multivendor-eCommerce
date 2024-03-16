@@ -14,7 +14,7 @@
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
 
-                                <form action="{{ route('vendor.product-variant.store') }}" method="POST">
+                                <form action="{{ route('vendor.variant.store') }}" method="POST">
                                     @csrf
 
                                     <div class="form-group">

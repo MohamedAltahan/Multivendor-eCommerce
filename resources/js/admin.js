@@ -17,11 +17,13 @@ function scrollTobottom() {
 }
 
 window.Echo.private("message." + USER.id).listen("MessageEvent", (e) => {
-    console.log(e);
     let mainChatBox = $(".chat-content");
     if (mainChatBox.attr("data-inbox") == e.sender_id) {
         var message = `
-                <div class="chat-item chat-left" style=""><img src="${
+                <div class="chat-item chat-left" style=""><img
+                style="height: 50px;
+                                 "
+                src="${
                     e.sender_image
                 }"><div class="chat-details"><div class="chat-text">${
             e.message

@@ -11,8 +11,8 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\ProductImages;
-use App\Models\ProductVariant;
-use App\Models\ProductVariantDetails;
+use App\Models\Variant;
+use App\Models\VariantDetails;
 use App\Models\SubCategory;
 use App\Traits\fileUploadTrait;
 use Illuminate\Http\Request;
@@ -144,7 +144,7 @@ class ProductController extends Controller
         //delete product images
         ProductImages::where('product_key', $product->product_key)->delete();
         //delete variant details
-        $variants = ProductVariantDetails::where('product_id', $product->id)->delete();
+        $variants = VariantDetails::where('product_id', $product->id)->delete();
         //delete product itself
         $product->delete();
         return response(['status' => 'success', 'message' => 'Deleted successfully']);
@@ -159,7 +159,6 @@ class ProductController extends Controller
     {
         if ($request->hasFile('file')) {
             $imagePath = $this->fileUplaod($request, 'myDisk', 'prodctsGallery', 'file');
-
             $productImages = new ProductImages();
             $productImages['name'] = $imagePath;
             $productImages['product_key'] = $id;

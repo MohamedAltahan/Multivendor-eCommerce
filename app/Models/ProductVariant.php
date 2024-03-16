@@ -8,13 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ProductVariant extends Model
 {
     use HasFactory;
-    protected $fillable = ['product_id', 'name', 'status', 'vendor_id'];
+    protected $fillable = ['product_id', 'variant_price', 'variant_image', 'product_variant_type_id', 'product_variant_detail_id'];
 
-
-    // public function productVariantDetails()
-    // {
-    //     return $this->hasMany(ProductVariantDetails::class, 'product_variant_type_id', 'id');
-    // }
 
     public function type()
     {
@@ -23,6 +18,6 @@ class ProductVariant extends Model
 
     public function values()
     {
-        return $this->hasMany(ProductVariantDetails::class, 'product_variant_type_id', 'product_variant_type_id');
+        return $this->belongsTo(VariantDetails::class, 'product_variant_detail_id', 'id');
     }
 }

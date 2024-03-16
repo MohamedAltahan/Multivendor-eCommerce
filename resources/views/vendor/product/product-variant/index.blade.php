@@ -14,7 +14,7 @@
                         <h6> Product name : <span class="btn-danger">{{ $product->name }}</span></h6>
                         <a href="{{ route('vendor.products.index') }}" class="btn btn-warning mt-2">Back</a>
                         <div class="right">
-                            <a href="{{ route('vendor.product-variant.create', ['product_id' => $product->id]) }}"
+                            <a href="{{ route('vendor.variant.create', ['product_id' => $product->id]) }}"
                                 class="btn btn-primary">+
                                 Create new variant</a>
                         </div>
@@ -41,7 +41,7 @@
                     let id = $(this).data('id');
                     $.ajax({
                         method: 'PUT',
-                        url: "{{ route('vendor.product-variant.change-status') }}",
+                        url: "{{ route('vendor.variant.change-status') }}",
                         data: {
                             // status is the name of the value "ischecked" in you php function
                             status: isChecked,

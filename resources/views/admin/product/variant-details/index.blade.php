@@ -1,12 +1,11 @@
 @extends('admin.layouts.master')
-@section('mainTitle', 'Variants')
+@section('mainTitle', 'variant details')
 @section('content')
-
     <div class="card-header">
-        <h4>All variants</h4>
-        <div class="card-header-action">
-            <a href="{{ route('admin.variant.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>
-                Create new variant</a>
+        <h4> variant values for : <span style="color: royalblue">{{ $variant->name }}</span> </h4>
+        <div class="card-header-action ">
+            <a href="{{ route('admin.product.variant-details.create', ['variantId' => $variant->id]) }}"
+                class="btn btn-primary">+Create New</a>
         </div>
     </div>
     <div class="card-body">
@@ -16,14 +15,14 @@
     @push('scripts')
         {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
         <script>
-            // change status===========================================================
+            // change status-------------------------------------------------------
             $(document).ready(function() {
                 $('body').on('click', '.change-status', function() {
                     let isChecked = $(this).is(':checked');
                     let id = $(this).data('id');
                     $.ajax({
                         method: 'PUT',
-                        url: "{{ route('admin.variant.change-status') }}",
+                        url: "{{ route('admin.product.variant-details.change-status') }}",
                         data: {
                             // status is the name of the value "ischecked" in you php function
                             status: isChecked,
@@ -36,6 +35,8 @@
                         error: function(error) {
                             toastr.error('Not updated')
                         }
+
+
                     })
                 })
             })

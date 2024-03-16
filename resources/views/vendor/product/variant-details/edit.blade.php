@@ -22,7 +22,7 @@
                                     @method('PUT')
                                     <div class="my-2">
                                         <x-form.input name="name" readonly label="Variant Name"
-                                            value="{{ $variantDetails->productVariant->name }}" class="form-control" />
+                                            value="{{ $variantDetails->Variant->name }}" class="form-control" />
                                     </div>
 
                                     <div class="my-2">

@@ -9,7 +9,7 @@ use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\Product;
 use App\Models\ProductImages;
-use App\Models\ProductVariantDetails;
+use App\Models\VariantDetails;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Traits\fileUploadTrait;
@@ -145,7 +145,7 @@ class VendorProductController extends Controller
         //delete product images
         ProductImages::where('product_key', $product->product_key)->delete();
         //delete variant details
-        $variants = ProductVariantDetails::where('product_id', $product->id)->delete();
+        $variants = VariantDetails::where('product_id', $product->id)->delete();
         //delete product itself
         $product->delete();
         return response(['status' => 'success', 'message' => 'Deleted successfully']);

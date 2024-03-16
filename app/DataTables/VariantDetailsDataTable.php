@@ -3,7 +3,7 @@
 namespace App\DataTables;
 
 
-use App\Models\ProductVariantDetails;
+use App\Models\VariantDetails;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -13,7 +13,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ProductVariantDetailsDataTable extends DataTable
+class VariantDetailsDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -24,21 +24,12 @@ class ProductVariantDetailsDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $editBtn = "<a href='" . route('admin.product.product-variant-details.edit', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-edit'></i>Edit</a>";
-                $deleteBtn = "<a href='" . route('admin.product.product-variant-details.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
+                $editBtn = "<a href='" . route('admin.product.variant-details.edit', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-edit'></i>Edit</a>";
+                $deleteBtn = "<a href='" . route('admin.product.variant-details.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
 
                 return $editBtn . $deleteBtn;
             })
-            ->addColumn('variant_name', function ($query) {
-                return $query->variantType->name;
-            })
-            ->addColumn('is_default', function ($query) {
-                if ($query->is_default == 'yes') {
-                    return '<i class="badge badge-success">Yes</i>';
-                } else {
-                    return '<i class="badge badge-danger">No</i>';
-                }
-            })
+
             ->addColumn('status', function ($query) {
                 if ($query->status == 'active') {
                     $button = '<label class="custom-switch mt-2">
@@ -54,16 +45,16 @@ class ProductVariantDetailsDataTable extends DataTable
 
                 return $button;
             })
-            ->rawColumns(['action', 'status', 'is_default'])
+            ->rawColumns(['action', 'status'])
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(ProductVariantDetails $model): QueryBuilder
+    public function query(VariantDetails $model): QueryBuilder
     {
-        return $model->where('product_variant_type_id', request()->variantId)->where('product_id', request()->productId)->newQuery();
+        return $model->where('product_variant_type_id', request()->variantId)->newQuery();
     }
 
     /**
@@ -72,7 +63,7 @@ class ProductVariantDetailsDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('productvariantdetails-table')
+            ->setTableId('VariantDetails-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
@@ -96,9 +87,6 @@ class ProductVariantDetailsDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('variant_value'),
-            Column::make('variant_name'),
-            Column::make('price'),
-            Column::make('is_default'),
             Column::make('status'),
             Column::computed('action')
                 ->exportable(false)

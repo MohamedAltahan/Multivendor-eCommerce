@@ -28,7 +28,7 @@ class VendorProductDataTable extends DataTable
             ->addColumn('action', function ($query) {
                 $editBtn = "<a href='" . route('vendor.products.edit', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-edit'></i>Edit</a>";
                 $deleteBtn = "<a href='" . route('vendor.products.destroy', $query->id)  . "'class='btn btn-sm mx-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
-                $moreButton = '<a class="btn btn-sm btn-dark" href="' . route('vendor.product-variant.index', ['product_id' => $query->id]) . '"><i class="fas fa-heart"></i>Variant</a>';
+                $moreButton = '<a class="btn btn-sm btn-dark" href="' . route('vendor.variant.index', ['product_id' => $query->id]) . '"><i class="fas fa-heart"></i>Variant</a>';
                 return $editBtn . $deleteBtn . $moreButton;
             })
             ->addColumn('image', function ($query) {
