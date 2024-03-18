@@ -44,12 +44,27 @@ class ProductVariantDataTable extends DataTable
             ->addColumn("$this->currency", function ($query) {
                 return $query->variant_price;
             })
+            ->addColumn('status', function ($query) {
+                if ($query->status == 'active') {
+                    $button = '<label class="custom-switch mt-2">
+                        <input checked type="checkbox" name="custom-switch-checkbox" data-id="' . $query->id . '" class="change-status custom-switch-input">
+                        <span class="custom-switch-indicator"></span>
+                      </label>';
+                } else {
+                    $button = '<label class="custom-switch mt-2">
+                        <input type="checkbox" name="custom-switch-checkbox" data-id="' . $query->id . '" class="change-status custom-switch-input ">
+                        <span class="custom-switch-indicator"></span>
+                      </label>';
+                }
+
+                return $button;
+            })
             ->addColumn('action', function ($query) {
                 $deleteBtn = "<a href='" . route('admin.product-variant.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
 
                 return  $deleteBtn;
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['action', 'status'])
             ->setRowId('id');
     }
 
@@ -93,6 +108,7 @@ class ProductVariantDataTable extends DataTable
             Column::make('Variant name'),
             Column::make('Variant value'),
             Column::make("$this->currency"),
+            Column::make("status"),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

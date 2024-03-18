@@ -18,7 +18,6 @@ class ShowProductController extends Controller
 {
     public function productsIndex(Request $request)
     {
-        // dd($request->all());
         if ($request->has('category')) {
             $category = Category::where('slug', $request->category)->firstOrFail();
             $products = Product::where([
@@ -103,10 +102,12 @@ class ShowProductController extends Controller
     public function showProductDetails(string $slug)
     {
         $flashSaleDate = FlashSale::first();
-        $product = Product::with(['brand', 'images', 'variants' => function ($query) {
+        $product = Product::withAvg('reviews', 'rating')->with(['brand', 'images', 'variants' => function ($query) {
             $query->with('type');
         }])->where('slug', $slug)->where('status', 'active')->first();
+
         $reviews = ProductReview::where(['product_id' => $product->id, 'status' => 'active'])->paginate(10);
+
         return view('frontend.pages.show-product-details', compact('reviews', 'product', 'flashSaleDate'));
     }
     //================================================

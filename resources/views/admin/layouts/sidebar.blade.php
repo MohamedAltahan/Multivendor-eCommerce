@@ -35,7 +35,6 @@
                     'admin.brand.*',
                     'admin.products.*',
                     'admin.variant.*',
-                    'admin.product.product-variant-details.*',
                     'admin.get-vendor-products*',
                     'admin.all-vendors-products.*',
                     'admin.pending-products.*',

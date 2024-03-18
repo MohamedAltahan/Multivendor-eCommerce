@@ -1664,14 +1664,14 @@ PRODUCT MODAL VIEW END
     object-fit: cover;
 }
 
-.wsus__product_item .wsus__pro_link .img_1 {
+/* .wsus__product_item .wsus__pro_link .img_1 {
     transition: all linear 0.5s;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
-}
-
+} */
+/*
 .wsus__product_item .wsus__pro_link .img_2 {
     position: absolute;
     top: 0;
@@ -1694,7 +1694,7 @@ PRODUCT MODAL VIEW END
     opacity: 1;
     visibility: visible;
     transform: scale(1.1);
-}
+} */
 
 .wsus__single_pro_icon {
     position: absolute;
@@ -9461,4 +9461,13 @@ a:not([href]):not([class]):hover {
     width: 100% !important;
     bottom: 0 !important;
     /* position: absolute !important; */
+}
+
+select {
+    /*webkit browsers */
+    -webkit-appearance: menulist;
+    /*Firefox */
+    -moz-appearance: menulist;
+    /* modern browsers */
+    appearance: menulist;
 }

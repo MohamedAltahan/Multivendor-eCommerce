@@ -14,11 +14,8 @@ return new class extends Migration
         Schema::create('variant_details', function (Blueprint $table) {
             $table->id();
             $table->integer('product_variant_type_id');
-            $table->integer('product_id');
             $table->string('variant_value');
-            $table->float('price');
             $table->enum('status', ['active', 'inactive']);
-            $table->enum('is_default', ['yes', 'no']);
             $table->timestamps();
         });
     }

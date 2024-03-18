@@ -26,13 +26,9 @@ class HomeController extends Controller
         $brands = Brand::where('status', 'active')->get();
         $typebasedProducts = $this->getTypeBaseProducts();
         //get flash sale with product details and its first image
-        $flashSaleProducts = FlashSaleItem::where('show_at_home', 'yes')->where('status', 'active')->with(
-            [
-                'product' => function ($query) {
-                    $query->with('images');
-                }
-            ]
-        )->get();
+        $flashSaleItems = FlashSaleItem::where('show_at_home', 'yes')->where('status', 'active')->pluck('product_id');
+        $flashSaleProducts = Product::whereIn('id', $flashSaleItems)
+            ->with('firstImage', 'category')->withAvg('reviews', 'rating')->paginate();
 
         $banner1 = Advertisement::where('key', 'homepage_banner1')->first();
         $banner1 = @json_decode($banner1->value, true);

@@ -183,4 +183,15 @@ class VendorProductController extends Controller
         $productImages = ProductImages::where('product_key', $request->product_key)->get();
         return view('admin.product.images', compact('productImages'));
     }
+
+    //change status============================================
+    public function changeStatus(Request $request)
+    {
+
+        $product = Product::findOrFail($request->id);
+        // dd($request->status);
+        $product->status = $request->status == 'true' ? 'active' : 'inactive';
+        $product->save();
+        return response(['status' => 'success', 'message' => 'Updated successfully']);
+    }
 }

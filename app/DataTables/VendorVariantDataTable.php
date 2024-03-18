@@ -14,7 +14,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class VendorProductVariantDataTable extends DataTable
+class VendorVariantDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -25,7 +25,7 @@ class VendorProductVariantDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $variantOptions = "<a href='" . route('vendor.product.product-variant-details.index', ['productId' => request()->product_id, 'variantId' => $query->id])  . "'class='btn btn-sm ml-1 my-1 btn-success'><i class='far fa-edit'></i>Add variant</a>";
+                $variantOptions = "<a href='" . route('vendor.product.variant-details.index', ['productId' => request()->product_id, 'variantId' => $query->id])  . "'class='btn btn-sm ml-1 my-1 btn-success'><i class='far fa-edit'></i>Add variant</a>";
                 $editBtn = "<a href='" . route('vendor.variant.edit', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-edit'></i>Edit</a>";
                 $deleteBtn = "<a href='" . route('vendor.variant.destroy', $query->id)  . "'class='btn btn-sm mx-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\ProductImages;
+use App\Models\ProductVariant;
 use App\Models\VariantDetails;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -15,30 +16,49 @@ class CartController extends Controller
 {
     public function addToCart(Request $request)
     {
-
         $product = Product::findOrFail($request->product_id);
-        //check product availablity in stock
+
+        //if request is comming from 'main card'===============================================================
+        if ($request->submit_source == 'main_card') {
+            $request['quantity'] = 1;
+            $productVariants = ProductVariant::where(["product_id" => $request->product_id, 'status' => 'active'])
+                ->get()->groupBy('product_variant_type_id');
+            if ($productVariants->count() > 0) {
+                //get first(default) value of each variant
+                foreach ($productVariants as $variantDetails) {
+                    $defaultProductVariants[] =  $variantDetails->first();
+                }
+                $variants = $defaultProductVariants;
+            }
+            //if request is comming from 'product page details'
+        } elseif ($request->submit_source == 'details_page') {
+            if (count($request->variants_id) > 0) {
+                $variants = ProductVariant::whereIn('id', $request->variants_id)->get();
+            }
+        } else {
+            return response(['message' => 'Something went wrong, try again', 'status' => 'error']);
+        }
+
+        //check product availablity in stock===================================================
         if ($product->quantity == 0) {
             return response(['status' => 'error', 'message' => 'product out of stock']);
         } elseif ($product->quantity < $request->quantity) {
             return response(['status' => 'error', 'message' => 'This quantity is not available in stock']);
         }
 
-        //to store total summation of all variants
+        //to store total summation of all variants==============================
         $variantsTotalPrice = 0;
         $variantDetials = [];
-        if ($request->has('variants_id')) {
-
-            foreach ($request->variants_id as $varinatId) {
-                $variantValue = VariantDetails::with('variantType')->where('id', $varinatId)->first();
-                $variantDetials[$variantValue->variantType->name]['name'] = $variantValue->variant_value;
-                $variantDetials[$variantValue->variantType->name]['price'] = $variantValue->price;
+        if (isset($variants)) {
+            foreach ($variants as $variant) {
+                $variantDetials[$variant->type->name]['name'] = $variant->values->variant_value;
+                $variantDetials[$variant->type->name]['price'] = $variant->variant_price;
                 //all varaints price together
-                $variantsTotalPrice += $variantValue->price;
+                $variantsTotalPrice += $variant->variant_price;
             }
         }
 
-        //check discount
+        //check discount===========================================================
         $productTotalPrice = 0;
         if (checkDiscount($product)) {
             $productTotalPrice = $product->offer_price + $variantsTotalPrice;
@@ -46,6 +66,7 @@ class CartController extends Controller
             $productTotalPrice = $product->price + $variantsTotalPrice;
         }
 
+        // dd($productTotalPrice);
         $cartValues = [];
         $cartValues['id'] = $product->id;
         $cartValues['name'] = $product->name;

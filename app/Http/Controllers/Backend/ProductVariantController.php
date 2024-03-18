@@ -15,8 +15,9 @@ class ProductVariantController extends Controller
     function index(Request $request, ProductVariantDataTable $dataTable)
     {
         $product = Product::findOrFail($request->productId);
-        $variantTypes = ProductVariantType::where('vendor_id', auth()->user()->vendor->id)->get();
-        return $dataTable->with(['productId' => $product->id])->render('admin.product.product-variant-details.index', compact('product', 'variantTypes'));
+        $venorId = auth()->user()->vendor->id;
+        $variantTypes = ProductVariantType::where(['vendor_id' => $venorId, 'status' => 'active'])->get();
+        return $dataTable->with(['productId' => $product->id])->render('admin.product.variant-details.index', compact('product', 'variantTypes'));
     }
     //=================================================================
     function store(Request $request)
@@ -26,6 +27,10 @@ class ProductVariantController extends Controller
             'product_variant_type_id' => ['integer', 'required'],
             'product_variant_detail_id' => ['integer', 'required'],
             'variant_price' => ['numeric'],
+            'is_default' => ['in:yes,no'],
+            'status' => ['required', 'in:active,inactive'],
+            'quantity' => ['numeric']
+
         ]);
         $productVariant = new ProductVariant();
         $productVariant->create($request->all());
@@ -35,7 +40,7 @@ class ProductVariantController extends Controller
     //======================================================================
     function getVariantDetails(Request $request)
     {
-        return  VariantDetails::where('product_variant_type_id', $request->id)->get();
+        return  VariantDetails::where(['product_variant_type_id' => $request->id, 'status' => 'active'])->get();
     }
 
     //destroy=================================================================

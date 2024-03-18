@@ -61,7 +61,7 @@ class VariantDetailsController extends Controller
     //change status using ajax request--------------------------------------------------
     public function changeStatus(Request $request)
     {
-        $variant = VariantDetails::findOrFail($request->id);
+        $variant = ProductVariant::findOrFail($request->id);
 
         $request->status == "true" ? $variant->status = 'active' : $variant->status = 'inactive';
         $variant->save();

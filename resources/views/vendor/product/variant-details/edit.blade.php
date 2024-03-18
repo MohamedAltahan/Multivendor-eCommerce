@@ -9,14 +9,13 @@
             @include('vendor.layouts.sidebar')
             <div class="row">
                 <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
-                    {{-- <a href="{{ route('vendor.product.product-variant-details.index', ['productId' => $product->id, 'variantId' => $variant->id]) }}"
+                    {{-- <a href="{{ route('vendor.product.variant-details.index', ['productId' => $product->id, 'variantId' => $variant->id]) }}"
                         class="btn btn-warning mt-2">Back</a> --}}
                     <div class="dashboard_content mt-2 mt-md-0">
                         <h3><i class="far fa-user"></i>Create variant value</h3>
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
-                                <form
-                                    action="{{ route('vendor.product.product-variant-details.update', $variantDetails->id) }}"
+                                <form action="{{ route('vendor.product.variant-details.update', $variantDetails->id) }}"
                                     method="POST">
                                     @csrf
                                     @method('PUT')

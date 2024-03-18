@@ -210,7 +210,7 @@
                                         </select>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="submit" class="btn btn-primary my-3">Update</button>
                                 </form>
 
                             </div>

@@ -1,6 +1,6 @@
 @extends('vendor.layouts.master')
 @section('title')
-    {{ $setting->site_name }} - Product Variant Details
+    {{ $setting->site_name }} - Product Variant
 @endsection
 @section('content')
     <!--============================= DASHBOARD START  ==============================-->
@@ -10,14 +10,13 @@
             <div class="row">
                 <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
                     <div class="dashboard_content mt-2 mt-md-0">
-                        <a href="{{ route('vendor.variant.index', ['product_id' => $product->id]) }}"
-                            class="btn btn-warning mb-4"><i class="fas fa-arrow-left"></i> Back</a>
-                        <h3><i class="far fa-user"></i>Product variant details</h3>
-                        <h6> Variang name : <span class="btn-danger">{{ $variant->name }}</span></h6>
+                        <h3><i class="far fa-user"></i>Product variant</h3>
+                        <h6> Product name : <span class="btn-danger">{{ $product->name }}</span></h6>
+                        <a href="{{ route('vendor.products.index') }}" class="btn btn-warning mt-2">Back</a>
                         <div class="right">
-                            <a href="{{ route('vendor.product.variant-details.create', ['productId' => $product->id, 'variantId' => $variant->id]) }}"
+                            <a href="{{ route('vendor.variant.create', ['product_id' => $product->id]) }}"
                                 class="btn btn-primary">+
-                                Create new variant details</a>
+                                Create new variant</a>
                         </div>
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
@@ -42,7 +41,7 @@
                     let id = $(this).data('id');
                     $.ajax({
                         method: 'PUT',
-                        url: "{{ route('vendor.product.variant-details.change-status') }}",
+                        url: "{{ route('vendor.variant.change-status') }}",
                         data: {
                             // status is the name of the value "ischecked" in you php function
                             status: isChecked,
@@ -55,6 +54,8 @@
                         error: function(error) {
                             toastr.error('Not updated')
                         }
+
+
                     })
                 })
             })

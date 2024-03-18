@@ -12,6 +12,9 @@
                     <div class="dashboard_content mt-2 mt-md-0">
                         <h3><i class="far fa-user"></i>Products</h3>
                         <div class="right">
+                            <a href="{{ route('vendor.products.create') }}" class="btn btn-primary">My Variants</a>
+                        </div>
+                        <div class="right">
                             <a href="{{ route('vendor.products.create') }}" class="btn btn-primary">+Create New</a>
                         </div>
                         <div class="wsus__dashboard_profile">
@@ -37,7 +40,7 @@
                     let id = $(this).data('id');
                     $.ajax({
                         method: 'PUT',
-                        url: "{{ route('admin.product.product-variant-details.change-status') }}",
+                        url: "{{ route('vendor.product.change-status') }}",
                         data: {
                             // status is the name of the value "ischecked" in you php function
                             status: isChecked,

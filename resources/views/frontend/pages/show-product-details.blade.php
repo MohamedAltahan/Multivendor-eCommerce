@@ -12,7 +12,7 @@
                         <h4>products details</h4>
                         <ul>
                             <li><a href="#">home</a></li>
-                            <li><a href="#">peoduct</a></li>
+                            <li><a href="#">product</a></li>
                             <li><a href="#">product details</a></li>
                         </ul>
                     </div>
@@ -61,7 +61,7 @@
                             @if ($product->quantity > 0)
                                 <p class="wsus__stock_area"><span class="in_stock">in stock</span>
                                     ({{ $product->quantity }} item in stock)</p>
-                            @elseif($product->name == 0)
+                            @elseif($product->quantity == 0)
                                 <p class="wsus__stock_area"><span class="in_stock">out of stock</span>
                                     ({{ $product->quantity }} item in stock)</p>
                             @endif
@@ -74,43 +74,45 @@
                                 </h4>
                             @endif
                             <p class="review">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>20 review</span>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= round($product->reviews_avg_rating))
+                                        <i class="fas fa-star"></i>
+                                    @else
+                                        <i class="far fa-star"></i>
+                                    @endif
+                                @endfor
+                                <span>{{ count($product->reviews) }} review</span>
                             </p>
                             <p class="description">{!! $product->short_description !!}</p>
                             <div class="wsus_pro_hot_deals">
                                 <h5>offer ending time: : </h5>
                                 <div class="simply-countdown simply-countdown-one"></div>
                             </div>
+                            {{-- submit using ajax in scripts file --}}
                             <form class="shopping-cart-form" action="">
+                                <input type="hidden" name='submit_source' value="details_page">
                                 <div class="wsus__selectbox">
                                     <div class="row">
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                        {{-- inorder to not repeat variant type you have groupby 'variant type id ' --}}
-                                        @foreach ($product->variants()->get()->groupBy('product_variant_type_id') as $key => $variant)
-                                            @php
-                                                // to convert collection to object
-                                                $variant = $variant->first();
-                                            @endphp
-                                            @if ($variant->status != 'inactive')
-                                                <div class="col-xl-6 col-sm-6">
-                                                    <div class="mb-2">select
-                                                        {{ $variant->type()->where('id', $key)->value('name') }} :</div>
-                                                    <select class="form-control" name="variants_id[]">
-                                                        {{-- using relation values --}}
-                                                        @foreach ($variant->values()->where('product_id', $product->id)->get() as $value)
-                                                            <option value="{{ $value->id }}">
-                                                                {{ $value->variant_value }}
-                                                                (+{{ $setting->currency . $value->price }})
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            @endif
+                                        @foreach ($product->variants()->where('status', 'active')->get()->groupBy('product_variant_type_id') as $key => $variants)
+                                            <div class="col-md-5 my-1 mx-1 form-group">
+                                                @php
+                                                    $variantTypeName = \App\Models\ProductVariantType::where(
+                                                        'id',
+                                                        $key,
+                                                    )->value('name');
+                                                @endphp
+                                                <div class="mb-2">select {{ $variantTypeName }} :</div>
+                                                <select class="form-select" name="variants_id[]">
+                                                    {{-- using relation values --}}
+                                                    @foreach ($variants as $variant)
+                                                        <option value="{{ $variant->id }}">
+                                                            {{ $variant->values->variant_value }}
+                                                            (+{{ $setting->currency . $variant->variant_price }})
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         @endforeach
                                     </div>
                                 </div>
@@ -198,7 +200,7 @@
                                                         <i class="fas fa-star"></i>
                                                         <i class="fas fa-star"></i>
                                                         <i class="fas fa-star"></i>
-                                                        <span>(41 review)</span>
+                                                        <span>({{ count($product->reviews) }} review)</span>
                                                     </p>
                                                     <p><span>Store Name:</span>{{ $product->vendor->shop_name }}</p>
                                                     <p><span>Address:</span>{{ $product->vendor->address }}</p>
@@ -260,7 +262,6 @@
                                                                 $isBrought = true;
                                                             }
                                                         }
-
                                                     @endphp
                                                     @if ($isBrought)
                                                         <div class="wsus__post_comment rev_mar" id="sticky_sidebar3">
@@ -296,9 +297,6 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="">
-                                                                    <x-form.input type="file" name="image[]"
-                                                                        multiple />
-
                                                                     <x-form.input type='hidden' name='product_id'
                                                                         value="{{ $product->id }}" />
                                                                     <x-form.input type='hidden' name='vendor_id'
@@ -326,8 +324,8 @@
         </div>
     </section>
     <!--============================PRODUCT DETAILS END==============================-->
-    <!--==========================PRODUCT MODAL VIEW START===========================-->
-    <!-- Modal -->
+    <!--==========================send message to vendor modal===========================-->
+
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -349,7 +347,7 @@
             </div>
         </div>
     </div>
-    <!--========================== PRODUCT MODAL VIEW END ===========================-->
+    <!--================================================================ ===========================-->
 @endsection
 @push('scripts')
     <script>

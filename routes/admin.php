@@ -60,7 +60,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::resource('slider', SliderController::class);
 
     //category routes==========================================================================================
-    Route::put('change-status', [CategoryController::class, 'changeStatus'])->name('category.change-status');
+    Route::put('category/change-status', [CategoryController::class, 'changeStatus'])->name('category.change-status');
     Route::resource('category', CategoryController::class);
 
     //sub category routes=======================================================================================

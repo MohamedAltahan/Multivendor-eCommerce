@@ -37,10 +37,21 @@
                             value="0" />
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <button type="submit" class="btn btn-primary" style="margin-top: 30px"> Add </button>
-                </div>
             </div> {{-- /row --}}
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">status</label>
+                        <select name="status" id="inputStatus" class="form-control">
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary" style="margin-top: 30px"> Add </button>
+            </div>
 
         </form>
         <br>
@@ -78,6 +89,30 @@
                     error: function() {
                         alert("Error");
                     }
+                })
+            })
+
+            //change status=============================================
+            $('body').on('click', '.change-status', function() {
+                let isChecked = $(this).is(':checked');
+                let id = $(this).data('id');
+                $.ajax({
+                    method: 'PUT',
+                    url: "{{ route('admin.product.variant-details.change-status') }}",
+                    data: {
+                        // status is the name of the value "ischecked" in you php function
+                        status: isChecked,
+                        id,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(data) {
+                        toastr.success(data.message)
+                    },
+                    error: function(error) {
+                        toastr.error('Not updated')
+                    }
+
+
                 })
             })
         </script>

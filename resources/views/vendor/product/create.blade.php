@@ -169,7 +169,7 @@
                                         </select>
                                     </div>
                                 </form>
-                                <button type="submit" form="main-form" class="btn btn-primary mt-3">Create</button>
+                                <button type="submit" form="main-form" class="btn btn-primary my-3">Create</button>
 
                             </div>
                         </div>
