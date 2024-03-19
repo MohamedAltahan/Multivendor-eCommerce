@@ -9,10 +9,8 @@
             @include('vendor.layouts.sidebar')
             <div class="row">
                 <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
-                    {{-- <a href="{{ route('vendor.product.variant-details.index', ['productId' => $product->id, 'variantId' => $variant->id]) }}"
-                        class="btn btn-warning mt-2">Back</a> --}}
                     <div class="dashboard_content mt-2 mt-md-0">
-                        <h3><i class="far fa-user"></i>Create variant value</h3>
+                        <h3><i class="far fa-user"></i>edit variant </h3>
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
                                 <form action="{{ route('vendor.product.variant-details.update', $variantDetails->id) }}"
@@ -21,25 +19,12 @@
                                     @method('PUT')
                                     <div class="my-2">
                                         <x-form.input name="name" readonly label="Variant Name"
-                                            value="{{ $variantDetails->Variant->name }}" class="form-control" />
+                                            value="{{ $variantDetails->variantType->name }}" class="form-control" />
                                     </div>
 
                                     <div class="my-2">
                                         <x-form.input name="variant_value" label="Variant value"
                                             value="{{ $variantDetails->variant_value }}" class="form-control" />
-                                    </div>
-
-                                    <div class="my-2">
-                                        <x-form.input name="price" label="Price (Set 0 for make it free)"
-                                            value="{{ $variantDetails->price }}" class="form-control" />
-                                    </div>
-
-                                    <div class="my-2">
-                                        <label for="">Is default</label>
-                                        <select name="is_default" class="form-control">
-                                            <option @selected($variantDetails->is_default == 'yes') value="yes">Yes</option>
-                                            <option @selected($variantDetails->is_default == 'no') value="no">No</option>
-                                        </select>
                                     </div>
 
                                     <div class="my-2">

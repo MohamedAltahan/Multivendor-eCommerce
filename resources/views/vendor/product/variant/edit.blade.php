@@ -11,8 +11,6 @@
                 <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
                     <div class="dashboard_content mt-2 mt-md-0">
                         <h3><i class="far fa-user"></i>Create variant</h3>
-                        <a href="{{ route('vendor.products.index', ['product_id' => $variant->product_id]) }}"
-                            class="btn btn-warning my-4">Back</a>
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
 

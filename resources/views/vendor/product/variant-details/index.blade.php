@@ -1,6 +1,6 @@
 @extends('vendor.layouts.master')
 @section('title')
-    {{ $setting->site_name }} - Product Variant Details
+    {{ $setting->site_name }} - Variant Values
 @endsection
 @section('content')
     <!--============================= DASHBOARD START  ==============================-->
@@ -10,14 +10,10 @@
             <div class="row">
                 <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
                     <div class="dashboard_content mt-2 mt-md-0">
-                        <a href="{{ route('vendor.variant.index', ['product_id' => $product->id]) }}"
-                            class="btn btn-warning mb-4"><i class="fas fa-arrow-left"></i> Back</a>
-                        <h3><i class="far fa-user"></i>Product variant details</h3>
-                        <h6> Variang name : <span class="btn-danger">{{ $variant->name }}</span></h6>
+                        <h3><i class="far fa-user"></i> Variant values</h3>
                         <div class="right">
-                            <a href="{{ route('vendor.product.variant-details.create', ['productId' => $product->id, 'variantId' => $variant->id]) }}"
-                                class="btn btn-primary">+
-                                Create new variant details</a>
+                            <a href="{{ route('vendor.product.variant-details.create', ['variantId' => $variant->id]) }}"
+                                class="btn btn-primary"><i class="fas fa-plus"></i> Create new value</a>
                         </div>
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">

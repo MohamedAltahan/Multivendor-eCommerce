@@ -102,6 +102,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::resource('variant', VariantController::class);
 
     //product variant==============================================================================================
+    Route::put('product-variant/change-status', [ProductVariantController::class, 'changeStatus'])->name('product-variant.change-status');
     Route::get('get-variant-details', [ProductVariantController::class, 'getVariantDetails'])->name('get-variant-details');
     Route::resource('product-variant', ProductVariantController::class);
 

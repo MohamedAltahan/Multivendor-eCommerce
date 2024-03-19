@@ -58,10 +58,11 @@ class VariantDetailsController extends Controller
         toastr('Updated successfully');
         return redirect()->route('admin.product.variant-details', ['variantId' => $variantValue->product_variant_type_id]);
     }
-    //change status using ajax request--------------------------------------------------
+
+    //change status using ajax request===================================================
     public function changeStatus(Request $request)
     {
-        $variant = ProductVariant::findOrFail($request->id);
+        $variant = VariantDetails::findOrFail($request->id);
 
         $request->status == "true" ? $variant->status = 'active' : $variant->status = 'inactive';
         $variant->save();

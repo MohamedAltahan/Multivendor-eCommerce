@@ -9,10 +9,8 @@
             @include('vendor.layouts.sidebar')
             <div class="row">
                 <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
-                    <a href="{{ route('vendor.product.variant-details.index', ['productId' => $product->id, 'variantId' => $variant->id]) }}"
-                        class="btn btn-warning mt-2">Back</a>
                     <div class="dashboard_content mt-2 mt-md-0">
-                        <h3><i class="far fa-user"></i>Create variant value</h3>
+                        <h4>Create value :</h4><br>
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
 
@@ -30,25 +28,7 @@
                                     </div>
 
                                     <div class="form-group my-2">
-                                        <x-form.input name="product_id" type="hidden" value="{{ $product->id }}"
-                                            class="form-control" />
-                                    </div>
-
-                                    <div class="form-group my-2">
                                         <x-form.input name="variant_value" label="Variant value" class="form-control" />
-                                    </div>
-
-                                    <div class="form-group my-2">
-                                        <x-form.input name="price" label="Price (Set 0 for make it free) "
-                                            class="form-control" />
-                                    </div>
-
-                                    <div class="form-group my-2">
-                                        <label for="">Is default</label>
-                                        <select name="is_default" id="inputStatus" class="form-control">
-                                            <option value="yes">Yes</option>
-                                            <option value="no">No</option>
-                                        </select>
                                     </div>
 
                                     <div class="form-group my-2">

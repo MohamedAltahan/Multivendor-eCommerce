@@ -14,10 +14,11 @@ class ProductVariantController extends Controller
 {
     function index(Request $request, ProductVariantDataTable $dataTable)
     {
+
         $product = Product::findOrFail($request->productId);
         $venorId = auth()->user()->vendor->id;
         $variantTypes = ProductVariantType::where(['vendor_id' => $venorId, 'status' => 'active'])->get();
-        return $dataTable->with(['productId' => $product->id])->render('admin.product.variant-details.index', compact('product', 'variantTypes'));
+        return $dataTable->with(['productId' => $product->id])->render('admin.product.product-variant-details.index', compact('product', 'variantTypes'));
     }
     //=================================================================
     function store(Request $request)
@@ -49,5 +50,16 @@ class ProductVariantController extends Controller
         $productVariant = ProductVariant::findOrFail($id);
         $productVariant->delete();
         return response(['status' => 'success', 'message' => 'Deleted successfully']);
+    }
+
+    //change status using ajax request===================================================
+    public function changeStatus(Request $request)
+    {
+        $variant = ProductVariant::findOrFail($request->id);
+
+        $request->status == "true" ? $variant->status = 'active' : $variant->status = 'inactive';
+        $variant->save();
+
+        return response(['message' => 'Status has been updated']);
     }
 }

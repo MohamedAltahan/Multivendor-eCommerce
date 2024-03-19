@@ -2,7 +2,9 @@
 
 namespace App\DataTables;
 
-use App\Models\VariantDetails;
+use App\Models\ProductVariant;
+use App\Models\ProductVariantDetails;
+use App\Models\Setting;
 use App\Models\VendorProductVariantDetail;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -13,8 +15,16 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class VendorProductVariantDetailsDataTable extends DataTable
+class VendorProductVariantDataTable extends DataTable
 {
+    public $currency;
+    //get currency to be the name of the column
+    public function __construct()
+    {
+        $currency = Setting::first()->currency;
+        $currency = 'price' . "(" . strtolower($currency) . ")";
+        $this->currency = $currency;
+    }
     /**
      * Build the DataTable class.
      *
@@ -24,29 +34,27 @@ class VendorProductVariantDetailsDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $editBtn = "<a href='" . route('vendor.product.variant-details.edit', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-edit'></i>Edit</a>";
-                $deleteBtn = "<a href='" . route('vendor.product.variant-details.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
+                $deleteBtn = "<a href='" . route('vendor.product-variant.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 mx-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
 
-                return $editBtn . $deleteBtn;
+                return $deleteBtn;
             })
             ->addColumn('variant_name', function ($query) {
-                return $query->Variant->name;
+                return $query->type->name;
             })
-            ->addColumn('is_default', function ($query) {
-                if ($query->is_default == 'yes') {
-                    return '<i class="badge bg-success">Default</i>';
-                } else {
-                    return '<i class="badge bg-danger">No</i>';
-                }
+            ->addColumn('Variant value', function ($query) {
+                return $query->values->variant_value;
+            })
+            ->addColumn("$this->currency", function ($query) {
+                return $query->variant_price;
             })
             ->addColumn('status', function ($query) {
                 if ($query->status == 'active') {
                     $button = '<div class="form-check form-switch">
-                        <input checked class="form-check-input change-status" type="checkbox" data-id="' . $query->id . '" role="switch" id="flexSwitchCheckDefault">
+                        <input checked class="form-check-input change-status" type="checkbox" data-id="' . $query->id . '" role="switch" >
                         </div>';
                 } else {
                     $button = '<div class="form-check form-switch">
-                        <input class="form-check-input change-status" type="checkbox" data-id="' . $query->id . '" role="switch" id="flexSwitchCheckDefault">
+                        <input class="form-check-input change-status" type="checkbox" data-id="' . $query->id . '" role="switch" >
                         </div>';
                 }
                 return $button;
@@ -58,9 +66,9 @@ class VendorProductVariantDetailsDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(VariantDetails $model): QueryBuilder
+    public function query(ProductVariant $model): QueryBuilder
     {
-        return $model->where('product_variant_type_id', request()->variantId)->where('product_id', request()->productId)->newQuery();
+        return $model->where('product_id', $this->productId)->orderBy('product_variant_type_id')->newQuery();
     }
 
     /**
@@ -92,10 +100,9 @@ class VendorProductVariantDetailsDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('variant_value'),
             Column::make('variant_name'),
-            Column::make('price'),
-            Column::make('is_default'),
+            Column::make('Variant value'),
+            Column::make("$this->currency"),
             Column::make('status'),
             Column::computed('action')
                 ->exportable(false)

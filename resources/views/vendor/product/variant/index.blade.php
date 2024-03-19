@@ -11,11 +11,8 @@
                 <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
                     <div class="dashboard_content mt-2 mt-md-0">
                         <h3><i class="far fa-user"></i>Product variant</h3>
-                        <h6> Product name : <span class="btn-danger">{{ $product->name }}</span></h6>
-                        <a href="{{ route('vendor.products.index') }}" class="btn btn-warning mt-2">Back</a>
                         <div class="right">
-                            <a href="{{ route('vendor.variant.create', ['product_id' => $product->id]) }}"
-                                class="btn btn-primary">+
+                            <a href="{{ route('vendor.variant.create') }}" class="btn btn-primary">+
                                 Create new variant</a>
                         </div>
                         <div class="wsus__dashboard_profile">

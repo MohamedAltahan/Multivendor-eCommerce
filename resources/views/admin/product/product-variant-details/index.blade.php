@@ -15,7 +15,7 @@
                         <select name="product_variant_type_id" class="form-control variant-type">
                             <option value="">select</option>
                             @foreach ($variantTypes as $variant)
-                                <option value="{{ $variant->id }}" @selected(old('category_id') == $variant->id)>{{ $variant->name }}
+                                <option value="{{ $variant->id }}" @selected(old('product_variant_type_id') == $variant->id)>{{ $variant->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -62,7 +62,7 @@
     @push('scripts')
         {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
         <script>
-            //get sub categories-----------------------------------------------------
+            //get variant details==========================================================
             $('body').on('change', '.variant-type', function(e) {
                 let id = $(this).val();
                 $.ajax({
@@ -92,13 +92,13 @@
                 })
             })
 
-            //change status=============================================
+            //change status===============================================================
             $('body').on('click', '.change-status', function() {
                 let isChecked = $(this).is(':checked');
                 let id = $(this).data('id');
                 $.ajax({
                     method: 'PUT',
-                    url: "{{ route('admin.product.variant-details.change-status') }}",
+                    url: "{{ route('admin.product-variant.change-status') }}",
                     data: {
                         // status is the name of the value "ischecked" in you php function
                         status: isChecked,
