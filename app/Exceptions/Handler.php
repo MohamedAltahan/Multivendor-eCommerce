@@ -23,6 +23,7 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
+        //in log file (if return false will not be shown in log file)
         $this->reportable(function (Throwable $e) {
             //
         });

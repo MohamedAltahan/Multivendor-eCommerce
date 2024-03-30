@@ -1,10 +1,10 @@
 @php
-    $footerInfo = App\models\Footer::first();
-    $footerSocialButtons = App\models\FooterSocial::where('status', 'active')->get();
+    $footerInfo = App\Models\Footer::first();
+    $footerSocialButtons = App\Models\FooterSocial::where('status', 'active')->get();
     $footerSectionTwolinks = App\Models\FooterGridTwoLink::where('status', 'active')->get();
-    $footerSectionTwoTitle = App\models\FooterTitle::first();
-    $footerSectionThreelinks = App\Models\FooterGridThreeLink::where('status', 'active')->get();
-    $footerSectionThreeTitle = App\models\FooterTitle::first();
+    $footerSectionTwoTitle = App\Models\FooterTitle::first();
+    $footerSectionThreelinks = App\Models\footerGridThreeLink::where('status', 'active')->get();
+    $footerSectionThreeTitle = App\Models\footerTitle::first();
 @endphp
 <!--============================ FOOTER PART START ==============================-->
 <footer class="footer_2">

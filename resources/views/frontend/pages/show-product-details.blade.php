@@ -276,7 +276,7 @@
 
                                                                     <div class="col-xl-12 mb-4">
                                                                         <div class="wsus__single_com">
-                                                                            <select name="rating" class="form-control"
+                                                                            <select name="rating" class="form-select"
                                                                                 id="">
                                                                                 <option value="">select rating
                                                                                 </option>

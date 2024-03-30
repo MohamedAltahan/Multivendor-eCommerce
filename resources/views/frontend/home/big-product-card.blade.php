@@ -45,7 +45,7 @@
             @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
             <input type="hidden" name="submit_source" value="main_card">
-            <button type="submit" class="add_cart" href="#">add to cart</button>
+            <button type="submit" style="border:none;" class="add_cart" href="#">add to cart</button>
         </form>
     </div>
 </div>

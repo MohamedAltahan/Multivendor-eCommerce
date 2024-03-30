@@ -57,7 +57,8 @@
                     </ul>
 
                     <ul class="wsus__menu_item">
-                        <li><a class="{{ setActive(['home']) }}" href="{{ url('/') }}">Home</a></li>
+                        <li><a class="{{ setActive(['home']) }}" href="{{ url('/') }}">{{ __('Home') }}</a>
+                        </li>
 
                         <li><a class="{{ setActive(['vendors.page']) }}"
                                 href="{{ route('vendors.page') }}">Vendors</a></li>
