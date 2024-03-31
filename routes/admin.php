@@ -10,7 +10,7 @@ use App\Http\Controllers\Backend\AdvertisementController;
 use App\Http\Controllers\Backend\AllVendorsProductsController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
-use App\Http\Controllers\Backend\childCategoryController;
+use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CodController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CustomerListController;
@@ -30,7 +30,6 @@ use App\Http\Controllers\Backend\ProductVariantController;
 use App\Http\Controllers\Backend\VariantDetailsController;
 use App\Http\Controllers\Backend\ProductVariantTypesController;
 use App\Http\Controllers\Backend\SettingController;
-use App\Http\Controllers\Backend\ShippingRule;
 use App\Http\Controllers\Backend\ShippingRuleController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\StripeSettingController;
@@ -44,8 +43,6 @@ use App\Http\Controllers\Backend\VendorListController;
 use App\Http\Controllers\Backend\VendorRequestController;
 use App\Http\Controllers\Backend\WithdrawMethodController;
 use App\Http\Controllers\Backend\WithdrawTransactionController;
-use App\Models\Brand;
-use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
