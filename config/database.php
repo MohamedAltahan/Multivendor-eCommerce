@@ -33,7 +33,7 @@ return [
     |
     */
 
-    'connections' => [
+    'fonnections' => [
 
         'sqlite' => [
             'driver' => 'sqlite',
