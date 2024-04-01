@@ -7,7 +7,7 @@
     $footerSectionThreeTitle = App\Models\footerTitle::first();
 @endphp
 <!--============================ FOOTER PART START ==============================-->
-<footer class="footer_2">
+<footer class=" footer_2">
     <div class="container">
         <div class="row justify-content-between">
             <div class="col-xl-3 col-sm-7 col-md-6 col-lg-3">
