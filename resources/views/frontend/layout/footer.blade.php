@@ -3,8 +3,8 @@
     $footerSocialButtons = App\Models\FooterSocial::where('status', 'active')->get();
     $footerSectionTwolinks = App\Models\FooterGridTwoLink::where('status', 'active')->get();
     $footerSectionTwoTitle = App\Models\FooterTitle::first();
-    $footerSectionThreelinks = App\Models\footerGridThreeLink::where('status', 'active')->get();
-    $footerSectionThreeTitle = App\Models\footerTitle::first();
+    $footerSectionThreelinks = App\Models\FooterGridThreeLink::where('status', 'active')->get();
+    $footerSectionThreeTitle = App\Models\FooterTitle::first();
 @endphp
 <!--============================ FOOTER PART START ==============================-->
 <footer class="footer_2">
