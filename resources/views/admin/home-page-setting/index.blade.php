@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-12 col-sm-12 col-md-3">
                         <div class="list-group" id="list-tab" role="tablist">
                             <a class="list-group-item list-group-item-action active" id="list-profile-list" data-toggle="list"
                                 href="#list-profile" role="tab">Populay category section</a>
@@ -17,7 +17,7 @@
                                 href="#list-slider-three" role="tab">products slider three</a>
                         </div>
                     </div>
-                    <div class="col-10">
+                    <div class="col-12 col-sm-12 col-md-9">
                         <div class="tab-content" id="nav-tabContent">
                             @include('admin.home-page-setting.sections.popular-category')
                             @include('admin.home-page-setting.sections.product-slider-one')

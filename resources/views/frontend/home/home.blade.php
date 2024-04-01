@@ -169,7 +169,7 @@
     @include('frontend.home.sections.single-banner')
     {{-- end single banner --}}
 
-    {{-- hot deals --}}
+    {{-- hot deals it works but need some modifications --}}
     {{-- @include('frontend.home.sections.hot-deals') --}}
     {{-- end hot deals --}}
 
@@ -181,19 +181,7 @@
     @include('frontend.home.sections.category-product-slider-two')
     {{-- end category-product-slider-two --}}
 
-    {{-- large banner --}}
-    {{-- @include('frontend.home.sections.large-banner') --}}
-    {{-- end large banner --}}
-
     {{-- weekly best items ------------------------- --}}
     @include('frontend.home.sections.weekly-best-items')
     {{-- end weekly best items --}}
-
-    {{-- services --}}
-    {{-- @include('frontend.home.sections.services') --}}
-    {{-- end services --}}
-
-    {{-- blog --}}
-    {{-- @include('frontend.home.sections.blog') --}}
-    {{-- end blog --}}
 @endsection

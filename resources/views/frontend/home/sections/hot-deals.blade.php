@@ -58,7 +58,7 @@
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star-half-alt"></i>
-                                            <span>(133 review)</span>
+                                            <span>(1333333333333333 review)</span>
                                         </p>
                                         <a class="wsus__pro_name"
                                             href="{{ route('show-product-details', $product->slug) }}">{{ $product->name }}</a>
