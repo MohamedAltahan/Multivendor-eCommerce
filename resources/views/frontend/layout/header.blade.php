@@ -17,6 +17,7 @@
                         </div>
                     </div>
 
+
                     <div class="col-xl-5 col-md-6 col-lg-4 d-none d-lg-block">
                         <div class="wsus__search">
                             <form action="{{ route('products.index') }}">
