@@ -43,7 +43,7 @@
             @foreach ($products as $product)
                 @php
                     $productImage = App\Models\ProductImages::where('product_key', $product->product_key)->first()
-                        ->name;
+                        ?->name;
                 @endphp
                 <div class="col-xl-3 col-sm-6 col-lg-4">
                     <div class="wsus__product_item">

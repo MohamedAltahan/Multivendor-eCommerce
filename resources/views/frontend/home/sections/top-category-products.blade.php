@@ -67,7 +67,10 @@
                         @foreach ($products as $key => $product)
                             @foreach ($product as $item)
                                 @php
-                                    $productImage = App\Models\ProductImages::where('product_key', $item->product_key)->first()->name;
+                                    $productImage = App\Models\ProductImages::where(
+                                        'product_key',
+                                        $item->product_key,
+                                    )->first()?->name;
                                 @endphp
                                 <div class="col-xl-2  col-sm-6 col-md-4 col-lg-3  category-{{ $key }}">
                                     <a class="wsus__hot_deals__single"

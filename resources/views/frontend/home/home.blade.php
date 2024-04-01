@@ -158,15 +158,15 @@
     {{-- end flash sale  --}}
 
     {{-- top category products --------------------- --}}
-    {{-- @include('frontend.home.sections.top-category-products') --}}
+    @include('frontend.home.sections.top-category-products')
     {{-- end top category products --}}
 
     {{-- brand-slider -------------------------- --}}
-    {{-- @include('frontend.home.sections.brand-slider') --}}
+    @include('frontend.home.sections.brand-slider')
     {{-- end brand-slider --}}
 
     {{-- single banner -------------------------- --}}
-    {{-- @include('frontend.home.sections.single-banner') --}}
+    @include('frontend.home.sections.single-banner')
     {{-- end single banner --}}
 
     {{-- hot deals --}}
@@ -174,11 +174,11 @@
     {{-- end hot deals --}}
 
     {{-- category-product-slider-one --------------------- --}}
-    {{-- @include('frontend.home.sections.category-product-slider-one') --}}
+    @include('frontend.home.sections.category-product-slider-one')
     {{-- end category-product-slider-one --}}
 
     {{-- category-product-slider-two ------------------- --}}
-    {{-- @include('frontend.home.sections.category-product-slider-two') --}}
+    @include('frontend.home.sections.category-product-slider-two')
     {{-- end category-product-slider-two --}}
 
     {{-- large banner --}}
@@ -186,7 +186,7 @@
     {{-- end large banner --}}
 
     {{-- weekly best items ------------------------- --}}
-    {{-- @include('frontend.home.sections.weekly-best-items') --}}
+    @include('frontend.home.sections.weekly-best-items')
     {{-- end weekly best items --}}
 
     {{-- services --}}
