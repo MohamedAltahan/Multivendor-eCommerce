@@ -230,3 +230,8 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::get('get-messages', [MessageController::class, 'getMessages'])->name('get-messages');
     Route::post('send-message', [MessageController::class, 'sendMessage'])->name('send-message');
 });//end group
+
+
+            // 'database' =>'u155276431_mulivendor',
+            // 'username' => 'u155276431_multivendor',
+            // 'password' => 'Mm453192$#$',
