@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-2">
+                    <div class=" col-sm-12 col-md-3">
                         <div class="list-group" id="list-tab" role="tablist">
                             <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
                                 href="#list-home" role="tab">General Setting</a>
@@ -15,10 +15,9 @@
                                 href="#list-messages" role="tab">Logo and icon</a>
                             <a class="list-group-item list-group-item-action" id="list-pusher-list" data-toggle="list"
                                 href="#pusher-setting" role="tab">Pusher setting</a>
-
                         </div>
                     </div>
-                    <div class="col-10">
+                    <div class=" col-sm-12 col-md-9">
                         <div class="tab-content" id="nav-tabContent">
                             @include('admin.setting.general-setting')
                             @include('admin.setting.email-configuration')

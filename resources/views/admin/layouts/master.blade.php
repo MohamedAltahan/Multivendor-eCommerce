@@ -58,7 +58,7 @@
                 cluster: "{{ $pusherSetting->pusher_cluster }}"
             }
         </script>
-        {{-- @vite(['resources/js/app.js', 'resources/js/admin.js']) --}}
+        @vite(['resources/js/app.js', 'resources/js/admin.js'])
 
     </head>
 

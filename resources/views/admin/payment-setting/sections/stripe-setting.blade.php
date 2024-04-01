@@ -37,7 +37,7 @@
 
                 <div class="form-group">
                     <label for="">Stripe Currency</label>
-                    <select name="currency" id="" class="form-control select2">
+                    <select name="currency" id="" class="form-control">
                         <option value="">Select Currency</option>
                         @foreach (config('setting.currency_list') as $currency => $symbol)
                             <option @selected(@$stripeSetting->currency == $symbol) value="{{ $symbol }}">{{ $currency }}

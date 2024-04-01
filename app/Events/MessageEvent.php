@@ -10,6 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
+//------------use implements ShouldBroadcast
 class MessageEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
@@ -20,7 +21,6 @@ class MessageEvent implements ShouldBroadcast
      */
     public function __construct($message, $receiver_id, $dateTime)
     {
-
         $this->message = $message;
         $this->receiver_id = $receiver_id;
         $this->dateTime = $dateTime;
@@ -33,6 +33,7 @@ class MessageEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
+            //write the channel name
             new PrivateChannel('message.' . $this->receiver_id),
         ];
     }

@@ -32,6 +32,7 @@ class UserMessageController extends Controller
         $message->message = $request->message;
         $message->save();
 
+        // dd($message);
         // broadcast(new MessageEvent($message->message, $message->receiver_id, $message->created_at));
         MessageEvent::dispatch($message->message, $message->receiver_id, $message->created_at);
         return response(['status' => 'success', 'message' => 'message sent successfully']);

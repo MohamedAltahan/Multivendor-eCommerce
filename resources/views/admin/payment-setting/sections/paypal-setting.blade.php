@@ -26,7 +26,7 @@
 
                 <div class="form-group">
                     <label for="">Chose your Country</label>
-                    <select name="country" id="" class="form-control select2">
+                    <select name="country" id="" class="form-control ">
                         <option value="">Select </option>
                         @foreach (config('setting.country') as $country)
                             <option @selected(@$paypalSetting->country == $country) value="{{ $country }}">{{ $country }}
@@ -38,7 +38,7 @@
 
                 <div class="form-group">
                     <label for="">Paypal Currency</label>
-                    <select name="currency" id="" class="form-control select2">
+                    <select name="currency" id="" class="form-control ">
                         <option value="">Select Currency</option>
                         @foreach (config('setting.currency_list') as $currency => $symbol)
                             <option @selected(@$paypalSetting->currency == $symbol) value="{{ $symbol }}">{{ $currency }}
