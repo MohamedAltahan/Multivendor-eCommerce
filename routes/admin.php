@@ -169,7 +169,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     //footer contact info-----------------------------
     Route::resource('footer', FooterController::class);
     //footer social buttons---------------------------
-    Route::put('change-status', [FooterSocialController::class, 'changeStatus'])->name('footer-socials.change-status');
+    Route::put('footer-socials/change-status', [FooterSocialController::class, 'changeStatus'])->name('footer-socials.change-status');
     Route::resource('footer-socials', FooterSocialController::class);
     //footer section2---------------------------------
     Route::put('change-status', [FooterGridTwoLinkController::class, 'changeStatus'])->name('footer-grid-two.change-status');

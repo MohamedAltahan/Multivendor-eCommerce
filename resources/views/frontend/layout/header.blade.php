@@ -7,6 +7,7 @@
                             <span class="wsus__mobile_menu_icon"><i class="fal fa-bars"></i></span>
                         </div>
                     </div>
+
                     <div class="col-xl-2 col-7 col-md-8 col-lg-2">
                         <div class="wsus_logo_area">
                             <a class="wsus__header_logo" href="{{ url('/') }}">
@@ -15,6 +16,7 @@
                             </a>
                         </div>
                     </div>
+
                     <div class="col-xl-5 col-md-6 col-lg-4 d-none d-lg-block">
                         <div class="wsus__search">
                             <form action="{{ route('products.index') }}">

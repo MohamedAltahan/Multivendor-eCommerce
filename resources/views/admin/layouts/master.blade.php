@@ -117,12 +117,13 @@
         <script src="{{ asset('backend/assets/js/scripts.js') }}"></script>
         <script src="{{ asset('backend/assets/js/custom.js') }}"></script>
         <script src="{{ asset('backend/assets/js/toastr.min.js') }}"></script>
-        <script src="{{ asset('backend/assets/js/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('backend/assets/js/dataTables.bootstrap5.min.js') }}"></script>
         <script src="{{ asset('backend/assets/js/sweetalert2.all.min.js') }}"></script>
         <script src="{{ asset('backend/assets/js/bootstrap-iconpicker.bundle.min.js') }}"></script>
         <script src="{{ asset('backend/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
         {{-- toastr notifications --}}
+        {{-- <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script> --}}
+        <script src="{{ asset('backend/assets/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('backend/assets/js/dataTables.bootstrap5.min.js') }}"></script>
 
         {{-- dynamic delete alert from sweet alert --}}
         <script>
