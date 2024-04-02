@@ -407,10 +407,9 @@ header {
 }
 
 .wsus__call_text p {
-    text-transform: capitalize;
     font-weight: 500;
     font-size: 15px;
-    color: #fff;
+    color: #ffffff;
 }
 
 .wsus__call_text a {

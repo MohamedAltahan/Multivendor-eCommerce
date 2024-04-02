@@ -27,6 +27,10 @@
             </div>
 
             <div class="form-group">
+                <x-form.input name="url" label="Brand url" value='{{ $brand->url }}' class="form-control" />
+            </div>
+
+            <div class="form-group">
                 <label for="">Is Featured</label>
                 <select name="featured" id="inputStatus" class="form-control">
                     <option @selected(old('featured', $brand->featured) == 'yes') value="yes">Yes</option>

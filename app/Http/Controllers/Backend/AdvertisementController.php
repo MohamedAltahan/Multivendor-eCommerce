@@ -55,9 +55,10 @@ class AdvertisementController extends Controller
         toastr('Updated successfully', 'success', 'success');
         return redirect()->back();
     }
-
+    //---------------------------------------------------------------------------------
     function homePageBanner2(Request $request)
     {
+
         $request->validate([
             'banner1' => ['image'],
             'banner2' => ['image'],
@@ -80,11 +81,12 @@ class AdvertisementController extends Controller
             $value['banner1']['banner1'] =  $this->fileUpdate($request, 'myDisk', 'homeBanner', 'banner1');
         } else {
             $banner2 = Advertisement::where('key', 'homepage_banner2')->first();
-            $oldbannerPath = @json_decode($banner2->value)->banner2->banner1;
+            $oldbannerPath = json_decode($banner2->value)->banner1->banner1;
             if (!empty($oldbannerPath)) {
                 $value['banner1']['banner1'] = $oldbannerPath;
             }
         }
+
         //right image--------------------------
         if ($request->hasFile('banner2')) {
             $value['banner2']['banner2'] =  $this->fileUpdate($request, 'myDisk', 'homeBanner', 'banner2');

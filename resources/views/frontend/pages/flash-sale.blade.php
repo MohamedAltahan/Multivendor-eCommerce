@@ -25,7 +25,7 @@
     <section id="wsus__daily_deals">
         <div class="container">
             <div class="wsus__offer_details_area">
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-xl-6 col-md-6">
                         <div class="wsus__offer_details_banner">
                             <img src="{{ asset('frontend/images/offer_banner_2.png') }}" alt="offrt img"
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="row">
                     <div class="col-xl-12">

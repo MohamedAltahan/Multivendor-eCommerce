@@ -25,6 +25,7 @@
                     'admin.vendor-condition.*',
                     'admin.about.*',
                     'admin.terms-and-conditions.*',
+                    'admin.advertisement.*',
                 ]) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-wrench"></i>
                     <span>Frontend setting</span></a>
@@ -33,6 +34,12 @@
                     <li class="dropdown {{ setActive(['admin.home-page-setting*', 'admin.slider.*']) }}"><a
                             class="nav-link" href="{{ route('admin.home-page-setting') }}">Home page setting</a></li>
                 </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.advertisement.*']) }}"><a
+                            href="{{ route('admin.advertisement.index') }}" class="nav-link ">
+                            <span>Advertisement</span></a></li>
+                </ul>
+
                 <ul class="dropdown-menu">
                     <li class="dropdown {{ setActive(['admin.vendor-condition.*']) }}"><a class="nav-link"
                             href="{{ route('admin.vendor-condition.index') }}">Vendor conditions</a></li>
@@ -46,6 +53,35 @@
                             href="{{ route('admin.terms-and-conditions.index') }}">terms and conditons</a></li>
                 </ul>
             </li>
+
+            {{-- Manage footer------------------------------------------------------- --}}
+            <li
+                class="dropdown {{ setActive(['admin.subscribers.*', 'admin.footer.*', 'admin.footer-socials.*', 'admin.footer-grid-two.*', 'admin.footer-grid-three.*']) }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                        class="fas fa-shoe-prints"></i>
+                    <span>Website footer</span></a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.footer.index']) }}"><a class="nav-link"
+                            href="{{ route('admin.footer.index') }}">footer contact info</a></li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.footer-socials.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.footer-socials.index') }}"> social buttons</a></li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.footer-grid-two.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.footer-grid-two.index') }}"> section two</a></li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.footer-grid-three.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.footer-grid-three.index') }}"> section three</a></li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.subscribers.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.subscribers.index') }}"> Subscribers</a></li>
+                </ul>
+            </li>
+
             {{-- Manage E-commerce------------------------------------------------------- --}}
             <li
                 class="dropdown {{ setActive(['admin.coupons.*', 'admin.shipping-rule.*', 'admin.payment-setting.*', 'admin.flash-sale.index']) }}">
@@ -146,36 +182,6 @@
                 </ul>
             </li>
 
-
-
-            {{-- Manage footer------------------------------------------------------- --}}
-            <li
-                class="dropdown {{ setActive(['admin.subscribers.*', 'admin.footer.*', 'admin.footer-socials.*', 'admin.footer-grid-two.*', 'admin.footer-grid-three.*']) }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                        class="fas fa-shoe-prints"></i>
-                    <span>Website footer</span></a>
-                <ul class="dropdown-menu">
-                    <li class="dropdown {{ setActive(['admin.footer.index']) }}"><a class="nav-link"
-                            href="{{ route('admin.footer.index') }}"> contact info</a></li>
-                </ul>
-                <ul class="dropdown-menu">
-                    <li class="dropdown {{ setActive(['admin.footer-socials.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.footer-socials.index') }}"> social buttons</a></li>
-                </ul>
-                <ul class="dropdown-menu">
-                    <li class="dropdown {{ setActive(['admin.footer-grid-two.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.footer-grid-two.index') }}"> section two</a></li>
-                </ul>
-                <ul class="dropdown-menu">
-                    <li class="dropdown {{ setActive(['admin.footer-grid-three.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.footer-grid-three.index') }}"> section three</a></li>
-                </ul>
-                <ul class="dropdown-menu">
-                    <li class="dropdown {{ setActive(['admin.subscribers.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.subscribers.index') }}"> Subscribers</a></li>
-                </ul>
-            </li>
-
             {{-- Manage users------------------------------------------------------- --}}
             <li
                 class="dropdown {{ setActive([
@@ -209,6 +215,10 @@
                 </ul>
             </li>
 
+            {{-- messages----------------------------------------------------------------- --}}
+            <li class="{{ setActive(['admin.messages.*']) }}"><a href="{{ route('admin.messages.index') }}"
+                    class="nav-link "><i class="fab fa-facebook-messenger"></i><span>Message</span></a></li>
+
             {{-- withdraw methods------------------------------------------------------- --}}
             <li class="dropdown {{ setActive(['admin.withdraw-transaction.*', 'admin.withdraw-method.*']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-wallet"></i>
@@ -222,18 +232,6 @@
                             href="{{ route('admin.withdraw-transaction.index') }}">Withdraw requests</a></li>
                 </ul>
             </li>
-
-            {{-- messages----------------------------------------------------------------- --}}
-            <li class="{{ setActive(['admin.messages.*']) }}"><a href="{{ route('admin.messages.index') }}"
-                    class="nav-link "><i class="fab fa-facebook-messenger"></i><span>Message</span></a></li>
-
-
-
-            {{-- advertisement----------------------------------------------------------------- --}}
-            <li class="{{ setActive(['admin.advertisement.*']) }}"><a
-                    href="{{ route('admin.advertisement.index') }}" class="nav-link "><i
-                        class="fas fa-ad"></i><span>Advertisement</span></a></li>
-
             {{-- transactions----------------------------------------------------------------- --}}
             <li class="{{ setActive(['admin.transaction']) }}"><a href="{{ route('admin.transaction') }}"
                     class="nav-link"><i class="fas fa-dollar-sign"></i><span>Transactions</span></a></li>

@@ -38,7 +38,8 @@ class BrandController extends Controller
             'logo' => ['image', 'required', 'max:2048'],
             'name' => ['required', 'max:200'],
             'is_featured' => ['in:yes,no'],
-            'status' => ['in:active,inactive']
+            'status' => ['in:active,inactive'],
+            'url' => ['url']
         ]);
         $brand = $request->except('logo');
         $brand['logo'] = $this->fileUplaod($request, 'myDisk', 'brand', 'logo');
@@ -78,7 +79,9 @@ class BrandController extends Controller
             'logo' => ['image', 'max:2048'],
             'name' => ['required', 'max:200'],
             'is_featured' => ['in:yes,no'],
-            'status' => ['in:active,inactive']
+            'status' => ['in:active,inactive'],
+            'url' => ['url']
+
         ]);
         $brand = Brand::find($id);
         $oldLogePath = $brand->logo;

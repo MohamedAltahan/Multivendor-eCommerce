@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
             $table->text('logo');
+            $table->text('url');
             $table->string('name');
             $table->string('slug');
             $table->enum('featured', ['yes', 'no']);

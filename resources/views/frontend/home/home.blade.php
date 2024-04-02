@@ -11,11 +11,11 @@
     @include('frontend.home.sections.flash-sale')
     {{-- end flash sale  --}}
 
-    {{-- top category products --------------------- --}}
+    {{-- advertisement banner1 --------------------- --}}
     @include('frontend.home.sections.top-category-products')
     {{-- end top category products --}}
 
-    {{-- single banner -------------------------- --}}
+    {{-- advertisement banner divided into two pices-------------------------- --}}
     @include('frontend.home.sections.single-banner')
     {{-- end single banner --}}
 
