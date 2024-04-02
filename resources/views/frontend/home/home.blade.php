@@ -15,10 +15,6 @@
     @include('frontend.home.sections.top-category-products')
     {{-- end top category products --}}
 
-    {{-- brand-slider -------------------------- --}}
-    @include('frontend.home.sections.brand-slider')
-    {{-- end brand-slider --}}
-
     {{-- single banner -------------------------- --}}
     @include('frontend.home.sections.single-banner')
     {{-- end single banner --}}
@@ -38,4 +34,8 @@
     {{-- weekly best items ------------------------- --}}
     @include('frontend.home.sections.weekly-best-items')
     {{-- end weekly best items --}}
+
+    {{-- brand-slider -------------------------- --}}
+    @include('frontend.home.sections.brand-slider')
+    {{-- end brand-slider --}}
 @endsection

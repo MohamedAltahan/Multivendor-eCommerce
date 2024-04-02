@@ -18,6 +18,7 @@
         <a class="wsus__category" href="{{ route('products.index', ['category' => $product->category->slug]) }}">
             {{ $product->category->name }}
         </a>
+
         <p class="wsus__pro_rating">
             @for ($i = 1; $i <= 5; $i++)
                 @if ($i <= round($product->reviews_avg_rating))
@@ -28,6 +29,7 @@
             @endfor
             <span>({{ $product->reviews->count() }} review)</span>
         </p>
+
         <a class="wsus__pro_name" href="{{ route('show-product-details', $product->slug) }}">{{ $product->name }}</a>
 
         @if (checkDiscount($product))

@@ -54,7 +54,7 @@ $(function () {
         slidesToShow: 6,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 4000,
+        autoplaySpeed: 800,
         dots: false,
         arrows: true,
         nextArrow: '<i class="fas fa-chevron-right nxt_arr"></i>',

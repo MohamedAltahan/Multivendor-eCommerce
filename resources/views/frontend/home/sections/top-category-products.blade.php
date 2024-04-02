@@ -5,7 +5,7 @@
     <section id="wsus__monthly_top" class="wsus__monthly_top_2">
         <div class="container">
             <div class="row">
-                <div class="col-xl-12 col-lg-12">
+                <div class=" col-xl-12 col-lg-12">
                     <div class="wsus__monthly_top_banner">
                         <div class="wsus__monthly_top_banner_img">
                             <a href="{{ @$banner1['banner1']['url'] }}">
@@ -64,40 +64,9 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12">
                     <div class="row grid">
-                        @foreach ($products as $key => $product)
-                            @foreach ($product as $item)
-                                @php
-                                    $productImage = App\Models\ProductImages::where(
-                                        'product_key',
-                                        $item->product_key,
-                                    )->first()?->name;
-                                @endphp
-                                <div class="col-xl-2  col-sm-6 col-md-4 col-lg-3  category-{{ $key }}">
-                                    <a class="wsus__hot_deals__single"
-                                        href="{{ route('show-product-details', $item->slug) }}">
-                                        <div class="wsus__hot_deals__single_img">
-                                            <img src="{{ asset('uploads/' . $productImage) }}" alt="bag"
-                                                class="img-fluid w-100">
-                                        </div>
-                                        <div class="wsus__hot_deals__single_text">
-                                            <h5>{!! limitText($item->name) !!}</h5>
-                                            <p class="wsus__rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star-half-alt"></i>
-                                            </p>
-                                            @if (checkDiscount($item))
-                                                <p class="wsus__tk">{{ $setting->currency }}{{ $item->offer_price }}
-                                                    <del>{{ $setting->currency }}{{ $item->price }}</del>
-                                                </p>
-                                            @else
-                                                <p class="wsus__tk">{{ $setting->currency }}{{ $item->price }}</p>
-                                            @endif
-                                        </div>
-                                    </a>
-                                </div>
+                        @foreach ($products as $key => $productGroup)
+                            @foreach ($productGroup as $product)
+                                @include('frontend.home.small-product-card')
                             @endforeach
                         @endforeach
 
