@@ -6,13 +6,18 @@
                     <div class="offer_time" style="background: url({{ asset('frontend/images/flash_sell_bg.jpg') }}">
                         <div class="wsus__flash_coundown">
                             <span class=" end_text">flash sale</span>
-                            <div class="simply-countdown simply-countdown-one"></div>
+
+                            <div style="width: 70%">
+                                <div class="simply-countdown simply-countdown-one"></div>
+                            </div>
+
                             <a class="common_btn" href="{{ route('flash-sale') }}">see more <i
                                     class="fas fa-caret-right"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
+            {{-- products under flashSale banner --}}
             <div class="row flash_sell_slider">
                 @foreach ($flashSaleProducts as $product)
                     <div class="col-xl-4 col-sm-6">
