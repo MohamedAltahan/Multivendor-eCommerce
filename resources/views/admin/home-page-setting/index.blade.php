@@ -14,6 +14,8 @@
                         href="#list-settings" role="tab">products slider two</a>
                     <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list"
                         href="#list-slider-three" role="tab">products slider three</a>
+                    <a class="list-group-item list-group-item-action" href="{{ route('admin.slider.index') }}">Main large
+                        slider </a>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-9">
