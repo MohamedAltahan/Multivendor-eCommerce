@@ -1,11 +1,8 @@
 @extends('admin.layouts.master')
-@section('mainTitle', 'Vendor profile')
+@section('mainTitle', 'Admin shop profile')
 @section('content')
     <div class="card-header">
-        <h4>Update vendor profile</h4>
-        <div class="card-header-action">
-            <a href="{{ route('admin.vendor-profile.store') }}" class="btn btn-primary">+ Create New</a>
-        </div>
+        <h4>Update admin's shop profile</h4>
     </div>
 
     <div class="card-body">

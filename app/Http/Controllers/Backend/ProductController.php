@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\ProductImages;
+use App\Models\ProductVariant;
 use App\Models\Variant;
 use App\Models\VariantDetails;
 use App\Models\SubCategory;
@@ -139,12 +140,12 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         if (OrderProduct::where('product_id', $product->id)->count() > 0) {
-            return response(['status' => 'error', 'message' => 'This product has order, so you cannot delete it']);
+            return response(['status' => 'error', 'message' => 'This product belongs to an order, you can archive only ']);
         }
-        //delete product images
+        //delete images
         ProductImages::where('product_key', $product->product_key)->delete();
-        //delete variant details
-        $variants = VariantDetails::where('product_id', $product->id)->delete();
+        //delete variant
+        ProductVariant::where('product_id', $product->id)->delete();
         //delete product itself
         $product->delete();
         return response(['status' => 'success', 'message' => 'Deleted successfully']);

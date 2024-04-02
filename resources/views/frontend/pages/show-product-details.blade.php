@@ -206,17 +206,12 @@
                                                     <p><span>Address:</span>{{ $product->vendor->address }}</p>
                                                     <p><span>Phone:</span> {{ $product->vendor->phone }}</p>
                                                     <p><span>mail:</span>{{ $product->vendor->email }}</p>
+                                                    <p>{!! $product->vendor->description !!}</p>
                                                     <a href="{{ route('vendor-products', $product->vendor->id) }}"
                                                         class="see_btn">visit store</a>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-12">
-                                                <div class="wsus__vendor_details">
-                                                    <p>
-                                                        {!! $product->vendor->description !!}
-                                                    </p>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>

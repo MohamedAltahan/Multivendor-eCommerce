@@ -114,7 +114,7 @@
                     <span><i class="fas fa-store-alt"></i>Admin's shop</span></a>
                 <ul class="dropdown-menu">
                     <li class="dropdown {{ setActive(['admin.vendor-profile.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.vendor-profile.index') }}">My Shop</a></li>
+                            href="{{ route('admin.vendor-profile.index') }}">{{ __('My Shop profile') }}</a></li>
                     <li class="dropdown {{ setActive(['admin.products*', 'admin.product-variant.*']) }}">
                         <a class="nav-link" href="{{ route('admin.products.index') }}">My shop products</a>
                     </li>
