@@ -7,7 +7,7 @@
                         <div class="wsus__flash_coundown">
                             <span class=" end_text">flash sale</span>
 
-                            <div style="width: 70%">
+                            <div style="width: 20rem">
                                 <div class="simply-countdown simply-countdown-one"></div>
                             </div>
 
