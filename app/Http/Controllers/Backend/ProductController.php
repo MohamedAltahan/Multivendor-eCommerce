@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
+use App\Models\FlashSaleItem;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
@@ -139,9 +140,14 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::findOrFail($id);
+        if ($product->vendor_id != Auth::user()->vendor->id) {
+            abort(404);
+        }
         if (OrderProduct::where('product_id', $product->id)->count() > 0) {
             return response(['status' => 'error', 'message' => 'This product belongs to an order, you can archive only ']);
         }
+        //delete form flash sale
+        FlashSaleItem::where('product_id', $product->id)->delete();
         //delete images
         ProductImages::where('product_key', $product->product_key)->delete();
         //delete variant

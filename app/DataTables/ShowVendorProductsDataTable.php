@@ -24,11 +24,10 @@ class ShowVendorProductsDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function ($query) {
-                $editBtn = "<a href='" . route('vendor.products.edit', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-edit'></i>Edit</a>";
-                $deleteBtn = "<a href='" . route('vendor.products.destroy', $query->id)  . "'class='btn btn-sm mx-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
-                $moreButton = '<a class="btn btn-sm btn-dark" href="' . route('vendor.variant.index', ['product_id' => $query->id]) . '"><i class="fas fa-heart"></i>Variant</a>';
-                return $editBtn . $deleteBtn . $moreButton;
+
+            ->addColumn('name', function ($query) {
+
+                return  "<a href='" . route('show-product-details', $query->slug) . "'> $query->name</a>";
             })
             ->addColumn('image', function ($query) {
                 $productImage = ProductImages::where('product_key', $query->product_key)->first();
@@ -77,7 +76,7 @@ class ShowVendorProductsDataTable extends DataTable
                 <option value='pending'>Pending</option>
                 </select>";
             })
-            ->rawColumns(['action', 'image', 'type', 'status', 'Approval'])
+            ->rawColumns(['name', 'image', 'type', 'status', 'Approval'])
             ->setRowId('id');
     }
 
@@ -124,12 +123,7 @@ class ShowVendorProductsDataTable extends DataTable
             Column::make('Approval')->width(100),
             Column::make('type')->width(100),
             Column::make('status'),
-            // Column::make('image'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(250)
-                ->addClass('text-center'),
+
         ];
     }
 

@@ -53,7 +53,22 @@
                             href="{{ route('admin.terms-and-conditions.index') }}">terms and conditons</a></li>
                 </ul>
             </li>
-
+            {{-- Manage E-commerce------------------------------------------------------- --}}
+            <li
+                class="dropdown {{ setActive(['admin.coupons.*', 'admin.shipping-rule.*', 'admin.payment-setting.*', 'admin.flash-sale.index']) }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-tasks"></i>
+                    <span>Ecommerce</span></a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.flash-sale.index']) }}"><a class="nav-link"
+                            href="{{ route('admin.flash-sale.index') }}">Flash Sale</a></li>
+                    <li class="dropdown {{ setActive(['admin.coupons.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.coupons.index') }}">Coupons</a></li>
+                    <li class="dropdown {{ setActive(['admin.shipping-rule.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.shipping-rule.index') }}">Shipping rule</a></li>
+                    <li class="dropdown {{ setActive(['admin.payment-setting.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.payment-setting.index') }}">Payment Setting</a></li>
+                </ul>
+            </li>
             {{-- Manage footer------------------------------------------------------- --}}
             <li
                 class="dropdown {{ setActive(['admin.subscribers.*', 'admin.footer.*', 'admin.footer-socials.*', 'admin.footer-grid-two.*', 'admin.footer-grid-three.*']) }}">
@@ -79,23 +94,6 @@
                 <ul class="dropdown-menu">
                     <li class="dropdown {{ setActive(['admin.subscribers.*']) }}"><a class="nav-link"
                             href="{{ route('admin.subscribers.index') }}"> Subscribers</a></li>
-                </ul>
-            </li>
-
-            {{-- Manage E-commerce------------------------------------------------------- --}}
-            <li
-                class="dropdown {{ setActive(['admin.coupons.*', 'admin.shipping-rule.*', 'admin.payment-setting.*', 'admin.flash-sale.index']) }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-tasks"></i>
-                    <span>Ecommerce</span></a>
-                <ul class="dropdown-menu">
-                    <li class="dropdown {{ setActive(['admin.flash-sale.index']) }}"><a class="nav-link"
-                            href="{{ route('admin.flash-sale.index') }}">Flash Sale</a></li>
-                    <li class="dropdown {{ setActive(['admin.coupons.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.coupons.index') }}">Coupons</a></li>
-                    <li class="dropdown {{ setActive(['admin.shipping-rule.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.shipping-rule.index') }}">Shipping rule</a></li>
-                    <li class="dropdown {{ setActive(['admin.payment-setting.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.payment-setting.index') }}">Payment Setting</a></li>
                 </ul>
             </li>
 

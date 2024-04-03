@@ -6,11 +6,12 @@
                 @method('PUT')
                 <h6>Status</h6>
 
-                <label class="custom-switch mt-2">
-                    <input type="checkbox" name="status" class="custom-switch-input"
-                        {{ @$banner1['banner1']['status'] == 'on' ? 'checked' : '' }}>
-                    <span class="custom-switch-indicator"></span>
-                </label>
+                <div class="div form-group">
+                    <select name="status" class="form-control">
+                        <option @selected(@$banner1['banner1']['status'] == 'on' ? 'selected' : '') value="on">ON</option>
+                        <option @selected(@$banner1['banner1']['status'] == 'off' ? 'selected' : '') value="off">OFF</option>
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <x-form.input class="form-control" name="url" label='Banner Url'
@@ -23,7 +24,7 @@
                     <x-form.input type="file" class="form-control" name="banner" label='Banner Image' />
                 </div>
 
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Save settings</button>
             </form>
         </div>
     </div>
