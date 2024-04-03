@@ -128,6 +128,7 @@
         {{-- dynamic delete alert from sweet alert --}}
         <script>
             $(document).ready(function() {
+
                 $('body').on('click', '.delete-item', function(event) {
                     $.ajaxSetup({
                         headers: {

@@ -7,6 +7,18 @@
             <h4>Flash Sale End Date</h4>
         </div>
         <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="status-on-frontend" style="color: red">show (Flash sale) on the Home page:</label>
+                </div>
+                <div class="col-md-2 ">
+                    <label class="custom-switch ">
+                        <input type="checkbox" name="status" id='status' class="custom-switch-input status-on-frontend"
+                            {{ @$sectionStatus == 'active' ? 'checked' : '' }}>
+                        <span class="custom-switch-indicator"></span>
+                    </label>
+                </div>
+            </div>
             <form action="{{ route('admin.flash-sale.update') }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -127,3 +139,31 @@
         <script src="{{ asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     @endpush
 @endsection
+@push('scripts')
+    <script>
+        // change status-------------------------------------------------------
+        $(document).ready(function() {
+            $('body').on('click', '.status-on-frontend', function() {
+                let isChecked = $(this).is(':checked');
+                $.ajax({
+                    method: 'PUT',
+                    url: "{{ route('admin.frontend-section.change-status') }}",
+                    data: {
+                        // status is the name of the value "ischecked" in you php function
+                        status: isChecked,
+                        sectionName: 'flashSale',
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(data) {
+                        toastr.success(data.message)
+                    },
+                    error: function(error) {
+                        toastr.error('Not updated')
+                    }
+
+
+                })
+            })
+        })
+    </script>
+@endpush

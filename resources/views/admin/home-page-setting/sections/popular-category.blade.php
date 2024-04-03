@@ -4,6 +4,20 @@
 <div class="tab-pane fade show active" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
     <div class="card border">
         <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="status1" style="color: red">show (popular category ) on the Home
+                        page:</label>
+                </div>
+                <div class="col-md-1 ">
+                    <label class="custom-switch ">
+                        <input type="checkbox" name="status" id='status1' data-sectionname="popularCategory"
+                            class="custom-switch-input change-status"
+                            {{ @$sectionStatus->popularCategory == 'active' ? 'checked' : '' }}>
+                        <span class="custom-switch-indicator"></span>
+                    </label>
+                </div>
+            </div>
             <form action="{{ route('admin.popular-category-section') }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -26,7 +40,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @php
-                                $subCategories = App\Models\SubCategory::where('category_id', $popularCategorySection[0]->main_category)->get();
+                                $subCategories = App\Models\SubCategory::where(
+                                    'category_id',
+                                    $popularCategorySection[0]->main_category,
+                                )->get();
                             @endphp
                             <label for="">Sub Category</label>
                             <select name="sub_category_one" id="" class="form-control sub-category">
@@ -42,7 +59,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @php
-                                $childCategories = App\Models\ChildCategory::where('sub_category_id', $popularCategorySection[0]->sub_category)->get();
+                                $childCategories = App\Models\ChildCategory::where(
+                                    'sub_category_id',
+                                    $popularCategorySection[0]->sub_category,
+                                )->get();
                             @endphp
                             <label for="">Child Category</label>
                             <select name="child_category_one" id="" class="form-control child-category">
@@ -76,7 +96,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @php
-                                $subCategories = App\Models\SubCategory::where('category_id', $popularCategorySection[1]->main_category)->get();
+                                $subCategories = App\Models\SubCategory::where(
+                                    'category_id',
+                                    $popularCategorySection[1]->main_category,
+                                )->get();
                             @endphp
                             <label for="">Sub Category</label>
                             <select name="sub_category_two" id="" class="form-control sub-category">
@@ -92,7 +115,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @php
-                                $childCategories = App\Models\ChildCategory::where('sub_category_id', $popularCategorySection[1]->sub_category)->get();
+                                $childCategories = App\Models\ChildCategory::where(
+                                    'sub_category_id',
+                                    $popularCategorySection[1]->sub_category,
+                                )->get();
                             @endphp
                             <label for="">Child Category</label>
                             <select name="child_category_two" id="" class="form-control child-category">
@@ -125,7 +151,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @php
-                                $subCategories = App\Models\SubCategory::where('category_id', $popularCategorySection[2]->main_category)->get();
+                                $subCategories = App\Models\SubCategory::where(
+                                    'category_id',
+                                    $popularCategorySection[2]->main_category,
+                                )->get();
                             @endphp
                             <label for="">Sub Category</label>
                             <select name="sub_category_three" id="" class="form-control sub-category">
@@ -141,7 +170,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @php
-                                $childCategories = App\Models\ChildCategory::where('sub_category_id', $popularCategorySection[2]->sub_category)->get();
+                                $childCategories = App\Models\ChildCategory::where(
+                                    'sub_category_id',
+                                    $popularCategorySection[2]->sub_category,
+                                )->get();
                             @endphp
                             <label for="">Child Category</label>
                             <select name="child_category_three" id="" class="form-control child-category">
@@ -174,7 +206,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @php
-                                $subCategories = App\Models\SubCategory::where('category_id', $popularCategorySection[3]->main_category)->get();
+                                $subCategories = App\Models\SubCategory::where(
+                                    'category_id',
+                                    $popularCategorySection[3]->main_category,
+                                )->get();
                             @endphp
                             <label for="">Sub Category</label>
                             <select name="sub_category_four" id="" class="form-control sub-category">
@@ -190,7 +225,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @php
-                                $childCategories = App\Models\ChildCategory::where('sub_category_id', $popularCategorySection[3]->sub_category)->get();
+                                $childCategories = App\Models\ChildCategory::where(
+                                    'sub_category_id',
+                                    $popularCategorySection[3]->sub_category,
+                                )->get();
                             @endphp
                             <label for="">Child Category</label>
                             <select name="child_category_four" id="" class="form-control child-category">

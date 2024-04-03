@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\DataTables\SliderDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\FrontendSection;
 use App\Models\Slider;
 use App\Traits\fileUploadTrait;
 use Illuminate\Http\Request;
@@ -17,7 +18,10 @@ class SliderController extends Controller
      */
     public function index(SliderDataTable $dataTable)
     {
-        return $dataTable->render('admin.slider.index');
+        $section = FrontendSection::first()->value;
+        $sectionStatus = @json_decode($section)->mainBanner;
+
+        return $dataTable->render('admin.slider.index', compact('sectionStatus'));
     }
 
     /**

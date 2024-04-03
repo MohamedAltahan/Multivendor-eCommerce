@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class FrontendSection extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'status'];
+    protected $fillable = ['value'];
 }

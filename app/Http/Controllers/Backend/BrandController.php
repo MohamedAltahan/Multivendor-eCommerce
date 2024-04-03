@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\DataTables\BrandDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\FrontendSection;
 use App\Models\Product;
 use App\Traits\fileUploadTrait;
 use Illuminate\Http\Request;
@@ -18,7 +19,9 @@ class BrandController extends Controller
      */
     public function index(BrandDataTable $dataTabel)
     {
-        return $dataTabel->render('admin.brand.index');
+        $section = FrontendSection::first()->value;
+        $sectionStatus = @json_decode($section)->brandSlider;
+        return $dataTabel->render('admin.brand.index', compact('sectionStatus'));
     }
 
     /**

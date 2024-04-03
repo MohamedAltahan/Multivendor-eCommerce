@@ -24,6 +24,7 @@
                     'admin.home-page-setting*',
                     'admin.vendor-condition.*',
                     'admin.about.*',
+                    'admin.brand.*',
                     'admin.terms-and-conditions.*',
                     'admin.advertisement.*',
                 ]) }}">
@@ -39,7 +40,10 @@
                             href="{{ route('admin.advertisement.index') }}" class="nav-link ">
                             <span>Advertisement</span></a></li>
                 </ul>
-
+                <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.brand.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.brand.index') }}">Brands</a></li>
+                </ul>
                 <ul class="dropdown-menu">
                     <li class="dropdown {{ setActive(['admin.vendor-condition.*']) }}"><a class="nav-link"
                             href="{{ route('admin.vendor-condition.index') }}">Vendor conditions</a></li>
@@ -144,12 +148,7 @@
 
             {{-- Manage product------------------------------------------------------- --}}
             <li
-                class="dropdown {{ setActive([
-                    'admin.brand.*',
-                    'admin.get-vendor-products*',
-                    'admin.all-vendors-products.*',
-                    'admin.pending-products.*',
-                ]) }}">
+                class="dropdown {{ setActive(['admin.get-vendor-products*', 'admin.all-vendors-products.*', 'admin.pending-products.*']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-box"></i>
                     <span>Manage all products</span></a>
                 <ul class="dropdown-menu">
@@ -164,8 +163,7 @@
                         <a class="nav-link" href="{{ route('admin.pending-products.index') }}">Pending products</a>
                     </li>
 
-                    <li class="dropdown {{ setActive(['admin.brand.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.brand.index') }}">Brands</a></li>
+
                 </ul>
             </li>
 

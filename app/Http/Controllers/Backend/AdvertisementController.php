@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Advertisement;
+use App\Models\FrontendSection;
 use App\Traits\fileUploadTrait;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,10 @@ class AdvertisementController extends Controller
         $banner2 = Advertisement::where('key', 'homepage_banner2')->first();
         $banner2 = @json_decode($banner2->value, true);
 
-        return view('admin.advertisement.index', compact('banner1', 'banner2'));
+        $section = FrontendSection::first()->value;
+        $sectionStatus = @json_decode($section)->doubleBanner;
+
+        return view('admin.advertisement.index', compact('banner1', 'banner2', 'sectionStatus'));
     }
 
     function homePageBanner1(Request $request)

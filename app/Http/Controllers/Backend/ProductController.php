@@ -41,7 +41,7 @@ class ProductController extends Controller
 
         $product = new Product();
         $categories = Category::get();
-        $brands = Brand::get();
+        $brands = Brand::where('status', 'active')->get();
         //used to connect the product with its images
         $product_key = uniqid();
         return view('admin.product.create', compact('categories', 'brands', 'product', 'product_key'));

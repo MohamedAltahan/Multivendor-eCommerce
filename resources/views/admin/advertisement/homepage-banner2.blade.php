@@ -1,21 +1,31 @@
 <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
     <div class="card border">
         <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="status1" style="color: red">show this(Advertise banner) on Home
+                        page:</label>
+                </div>
+                <div class="col-md-1 ">
+                    <label class="custom-switch ">
+                        <input type="checkbox" name="status" id='status1' data-sectionname="doubleBanner"
+                            class="custom-switch-input change-status"
+                            {{ @$sectionStatus == 'active' ? 'checked' : '' }}>
+                        <span class="custom-switch-indicator"></span>
+                    </label>
+                </div>
+            </div>
+
             <form action="{{ route('admin.homepage-banner2') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+
+                <br>
                 <div class="row">
                     <div class="col-md-6">
                         {{-- ========================left banner================== --}}
                         <h5 style="color: rgb(114, 114, 255)">left banner</h5>
                         @method('PUT')
-                        <h6>Status</h6>
-
-                        <div class="div form-group">
-                            <select name="status1" class="form-control">
-                                <option @selected(@$banner2['banner1']['status1'] == 'on' ? 'selected' : '') value="on">ON</option>
-                                <option @selected(@$banner2['banner1']['status1'] == 'off' ? 'selected' : '') value="off">OFF</option>
-                            </select>
-                        </div>
 
                         <div class="form-group">
                             <x-form.input class="form-control" name="url1" label='Banner Url'
@@ -35,13 +45,6 @@
                         {{-- ========================right banner================== --}}
                         <h5 style="color: rgb(114, 114, 255)">Right banner</h5>
                         @method('PUT')
-                        <h6>Status</h6>
-                        <div class="div form-group">
-                            <select name="status2" class="form-control">
-                                <option @selected(@$banner2['banner2']['status2'] == 'on' ? 'selected' : '') value="on">ON</option>
-                                <option @selected(@$banner2['banner2']['status2'] == 'off' ? 'selected' : '') value="off">OFF</option>
-                            </select>
-                        </div>
 
                         <div class="form-group">
                             <x-form.input class="form-control" name="url2" label='Banner Url'

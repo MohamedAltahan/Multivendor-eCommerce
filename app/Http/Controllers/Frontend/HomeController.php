@@ -7,6 +7,7 @@ use App\Models\Advertisement;
 use App\Models\Brand;
 use App\Models\FlashSale;
 use App\Models\FlashSaleItem;
+use App\Models\FrontendSection;
 use App\Models\HomePageSetting;
 use App\Models\Product;
 use App\Models\Slider;
@@ -23,7 +24,7 @@ class HomeController extends Controller
         $sliders = Slider::where('status', 'active')->orderBy('serial', 'ASC')->get();
         $flashSaleDate = FlashSale::first();
         $popularCategories = HomePageSetting::where('key', 'popular_category_section')->first();
-        $brands = Brand::where('status', 'active')->get();
+        $brands = Brand::where('featured', 'yes')->get();
         $typebasedProducts = $this->getTypeBaseProducts();
         //get flash sale with product details and its first image
         $flashSaleItems = FlashSaleItem::where('show_at_home', 'yes')->where('status', 'active')->pluck('product_id');
@@ -32,8 +33,13 @@ class HomeController extends Controller
 
         $banner1 = Advertisement::where('key', 'homepage_banner1')->first();
         $banner1 = @json_decode($banner1->value, true);
+
         $banner2 = Advertisement::where('key', 'homepage_banner2')->first();
         $banner2 = @json_decode($banner2->value, true);
+
+        $frontendSections = FrontendSection::first();
+        $frontendSections = @json_decode($frontendSections->value);
+
         return view('frontend.home.home', compact(
             'productsSliderTwo',
             'productsSliderOne',
@@ -46,6 +52,7 @@ class HomeController extends Controller
             'popularCategories',
             'banner1',
             'banner2',
+            'frontendSections'
         ));
     }
 

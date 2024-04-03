@@ -28,8 +28,34 @@
             </div>
         </div>
     </div>
-
-
-
-
 @endsection
+
+@push('scripts')
+    <script>
+        // change status-------------------------------------------------------
+        $(document).ready(function() {
+            $('body').on('click', '.change-status', function() {
+                let isChecked = $(this).is(':checked');
+                let sectionName = $(this).data('sectionname');
+                $.ajax({
+                    method: 'PUT',
+                    url: "{{ route('admin.frontend-section.change-status') }}",
+                    data: {
+                        // status is the name of the value "ischecked" in you php function
+                        status: isChecked,
+                        sectionName,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(data) {
+                        toastr.success(data.message)
+                    },
+                    error: function(error) {
+                        toastr.error('Not updated')
+                    }
+
+
+                })
+            })
+        })
+    </script>
+@endpush

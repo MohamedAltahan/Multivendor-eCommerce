@@ -19,6 +19,7 @@ use App\Http\Controllers\Backend\FooterController;
 use App\Http\Controllers\Backend\FooterGridTwoLinkController;
 use App\Http\Controllers\Backend\FooterGridThreeLinkController;
 use App\Http\Controllers\Backend\FooterSocialController;
+use App\Http\Controllers\Backend\FrontendSectionStatus;
 use App\Http\Controllers\Backend\HomePageSettingController;
 use App\Http\Controllers\Backend\ManageUserController;
 use App\Http\Controllers\Backend\MessageController;
@@ -229,9 +230,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::get('messages', [MessageController::class, 'index'])->name('messages.index');
     Route::get('get-messages', [MessageController::class, 'getMessages'])->name('get-messages');
     Route::post('send-message', [MessageController::class, 'sendMessage'])->name('send-message');
+
+    //change status of sections on frontend page
+    Route::put('frontend-section/change-status', [HomePageSettingController::class, 'changeStatus'])->name('frontend-section.change-status');
 });//end group
-
-
-            // 'database' =>'u155276431_mulivendor',
-            // 'username' => 'u155276431_multivendor',
-            // 'password' => 'Mm453192$#$',

@@ -6,6 +6,7 @@ use App\DataTables\FlashSaleItemDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\FlashSale;
 use App\Models\FlashSaleItem;
+use App\Models\FrontendSection;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,9 @@ class FlashSaleController extends Controller
     {
         $flashSaleDate = FlashSale::first();
         $products = Product::where('is_approved', 'yes')->where('status', 'active')->orderBy('id', 'DESC')->get();
-        return $dataTable->render('admin.flash-sale.index', compact('flashSaleDate', 'products'));
+        $section = FrontendSection::first()->value;
+        $sectionStatus = @json_decode($section)->flashSale;
+        return $dataTable->render('admin.flash-sale.index', compact('sectionStatus', 'flashSaleDate', 'products'));
     }
 
     public function update(Request $request)

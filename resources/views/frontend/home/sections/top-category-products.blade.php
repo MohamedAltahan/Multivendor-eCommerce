@@ -5,16 +5,18 @@
     <section id="wsus__monthly_top" class="wsus__monthly_top_2">
         <div class="container">
             <div class="row">
-                <div class=" col-xl-12 col-lg-12">
-                    <div class="wsus__monthly_top_banner">
-                        <div class="wsus__monthly_top_banner_img">
-                            <a href="{{ @$banner1['banner1']['url'] }}">
-                                <img class="img-fluid w-100"
-                                    src="{{ asset('uploads/' . @$banner1['banner1']['banner']) }}" alt="">
-                            </a>
+                @if ($banner1['banner1']['status'] == 'on')
+                    <div class=" col-xl-12 col-lg-12">
+                        <div class="wsus__monthly_top_banner">
+                            <div class="wsus__monthly_top_banner_img">
+                                <a href="{{ @$banner1['banner1']['url'] }}">
+                                    <img class="img-fluid w-100"
+                                        src="{{ asset('uploads/' . @$banner1['banner1']['banner']) }}" alt="">
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
             <div class="row">
                 <div class="col-xl-12">

@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('frontend_section', function (Blueprint $table) {
+        Schema::create('frontend_sections', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->enum('status', ['active', 'inactive']);
+            $table->json('value');
             $table->timestamps();
         });
     }

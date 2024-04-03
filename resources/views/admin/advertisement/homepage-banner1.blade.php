@@ -4,8 +4,8 @@
             <form action="{{ route('admin.homepage-banner1') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+                <h6>This will be show above (popular categories section on home page)</h6>
                 <h6>Status</h6>
-
                 <div class="div form-group">
                     <select name="status" class="form-control">
                         <option @selected(@$banner1['banner1']['status'] == 'on' ? 'selected' : '') value="on">ON</option>

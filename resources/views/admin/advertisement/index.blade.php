@@ -1,7 +1,8 @@
 @extends('admin.layouts.master')
-@section('mainTitle', 'Settings')
+@section('mainTitle', 'Advertisements')
 @section('content')
     <div class="card-body">
+
         <div class="row">
             <div class="col-12 col-sm-12 col-md-2">
                 <div class="list-group" id="list-tab" role="tablist">
@@ -22,3 +23,31 @@
 
 
 @endsection
+@push('scripts')
+    <script>
+        // change status-------------------------------------------------------
+        $(document).ready(function() {
+            $('body').on('click', '.change-status', function() {
+                let isChecked = $(this).is(':checked');
+                $.ajax({
+                    method: 'PUT',
+                    url: "{{ route('admin.frontend-section.change-status') }}",
+                    data: {
+                        // status is the name of the value "ischecked" in you php function
+                        status: isChecked,
+                        sectionName: 'doubleBanner',
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(data) {
+                        toastr.success(data.message)
+                    },
+                    error: function(error) {
+                        toastr.error('Not updated')
+                    }
+
+
+                })
+            })
+        })
+    </script>
+@endpush

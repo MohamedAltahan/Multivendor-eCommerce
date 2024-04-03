@@ -4,6 +4,20 @@
 <div class="tab-pane fade" id="list-slider-three" role="tabpanel" aria-labelledby="list-settings-list">
     <div class="card border">
         <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="status1" style="color: red">show (product slider three ) on Home
+                        page:</label>
+                </div>
+                <div class="col-md-1 ">
+                    <label class="custom-switch ">
+                        <input type="checkbox" name="status" id='status1'
+                            data-sectionname="singleCategorySliderThree" class="custom-switch-input change-status"
+                            {{ @$sectionStatus->singleCategorySliderThree == 'active' ? 'checked' : '' }}>
+                        <span class="custom-switch-indicator"></span>
+                    </label>
+                </div>
+            </div>
             <form action="{{ route('admin.products-slider-three') }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -25,7 +39,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @php
-                                $subCategories = App\Models\SubCategory::where('category_id', @$productCategorySectionThree->main_category)->get();
+                                $subCategories = App\Models\SubCategory::where(
+                                    'category_id',
+                                    @$productCategorySectionThree->main_category,
+                                )->get();
                             @endphp
                             <label for="">Sub Category</label>
                             <select name="sub_category3" id="" class="form-control sub-category">
@@ -41,7 +58,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @php
-                                $childCategories = App\Models\ChildCategory::where('sub_category_id', @$productCategorySectionThree->sub_category)->get();
+                                $childCategories = App\Models\ChildCategory::where(
+                                    'sub_category_id',
+                                    @$productCategorySectionThree->sub_category,
+                                )->get();
                             @endphp
                             <label for="">Child Category</label>
                             <select name="child_category3" id="" class="form-control child-category">

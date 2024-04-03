@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\FrontendSection;
 use App\Models\HomePageSetting;
 use Illuminate\Http\Request;
 
@@ -16,12 +17,16 @@ class HomePageSettingController extends Controller
         $productCategorySectionThree = HomePageSetting::where('key', 'products_slider_three')->first();
         $categories = Category::where('status', 'active')->get();
         $popularCategorySection = HomePageSetting::where('key', 'popular_category_section')->first();
+
+        $section = FrontendSection::first()->value;
+        $sectionStatus = @json_decode($section);
         return view('admin.home-page-setting.index', compact(
             'productCategorySectionOne',
             'productCategorySectionTwo',
             'categories',
             'popularCategorySection',
             'productCategorySectionThree',
+            'sectionStatus'
         ));
     }
 
@@ -135,5 +140,20 @@ class HomePageSettingController extends Controller
         );
         toastr('Updated successfully', 'success', 'success');
         return redirect()->back();
+    }
+
+    //change status using ajax request--------------------------------------------------
+    public function changeStatus(Request $request)
+    {
+        $Sections = FrontendSection::first();
+        $section = $Sections->value;
+        $section = json_decode($section, true);
+
+        $request->status == "true" ? $section[$request->sectionName] = 'active' : $section[$request->sectionName] = 'inactive';
+        $section = json_encode($section);
+
+        $Sections->update(['value' => $section]);
+
+        return response(['message' => 'Status has been updated']);
     }
 }
