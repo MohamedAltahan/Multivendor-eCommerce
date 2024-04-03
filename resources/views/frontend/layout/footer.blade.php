@@ -54,8 +54,7 @@
             <div class="col-xl-4 col-sm-7 col-md-8 col-lg-5">
                 <div class="wsus__footer_content wsus__footer_content_2">
                     <h3>Subscribe To Our Newsletter</h3>
-                    <p>Get all the latest information on Events, Sales and Offers.
-                        Get all the latest information on Events.</p>
+                    <p>Get all the latest information on Events, Sales and Offers.</p>
                     <form action="{{ route('newsletter-subscribe') }}" method="POST" id="newsLetterForm">
                         @csrf
                         <input type="text" class="newsletter" placeholder="Email" name="subscriber_email">
