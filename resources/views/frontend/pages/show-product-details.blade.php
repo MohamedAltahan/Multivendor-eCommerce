@@ -39,7 +39,7 @@
                                     @endif
                                     <ul class='exzoom_img_ul'>
                                         @foreach ($product->images as $image)
-                                            <li><img class="zoom ing-fluid w-100"
+                                            <li><img class="zoom img-fluid w-100"
                                                     src="{{ asset('uploads/' . $image->name) }}" alt="product"></li>
                                         @endforeach
                                     </ul>

@@ -49,14 +49,13 @@
                                         <div class="wsus__login_input">
 
                                             <i class="fas fa-user-tie"></i>
-                                            <x-form.input type="email" id="email" name="email" placeholder="Email"
+                                            <input type="email" id="email" name="email" placeholder="Email"
                                                 autofocus />
                                         </div>
 
                                         <div class="wsus__login_input">
                                             <i class="fas fa-key"></i>
-                                            <x-form.input type="password" id="password" name="password"
-                                                placeholder="Password" />
+                                            <input type="password" id="password" name="password" placeholder="Password" />
                                         </div>
 
                                         <div class="wsus__login_save">

@@ -128,7 +128,7 @@ $(function () {
             {
                 breakpoint: 576,
                 settings: {
-                    slidesToShow: 1,
+                    slidesToShow: 2,
                     slidesToScroll: 1,
                 },
             },
@@ -532,7 +532,7 @@ $(function () {
 
     //*==========TEAM SLIDER=========
     $(".weekly_best2").slick({
-        slidesToShow: 3,
+        slidesToShow: 5,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 4000,

@@ -78,8 +78,10 @@ class HomeController extends Controller
 
     function vendorProducts($id)
     {
-        $products = Product::where(['vendor_id' => $id, 'is_approved' => 'yes', 'status' => 'active'])->paginate(16);
-        $vendor = Vendor::findOrFail($id);
+        $products = Product::where(['vendor_id' => $id, 'is_approved' => 'yes', 'status' => 'active'])
+            ->withAvg('reviews', 'rating')->paginate(16);
+        // dd($products);
+        $vendor = Vendor::where('id', $id)->withAvg('reviews', 'rating')->first();
         return view('frontend.pages.vendor-products', compact('products', 'vendor'));
     }
 }

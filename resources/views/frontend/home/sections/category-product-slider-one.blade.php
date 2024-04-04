@@ -41,7 +41,7 @@
         </div>
         <div class="row flash_sell_slider">
             @foreach ($products as $product)
-                <div class="col-xl-4 col-sm-6">
+                <div class="col-xl-2 col-sm-2">
                     @include('frontend.home.big-product-card')
                 </div>
             @endforeach

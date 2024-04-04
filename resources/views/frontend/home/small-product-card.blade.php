@@ -1,4 +1,4 @@
-<div class="col-xl-2  col-sm-6 col-md-4 col-lg-3 category-{{ @$key }}">
+<div class="col-xl-2  col-sm-6 col-md-4 col-lg-6 category-{{ @$key }}">
     <a class="wsus__hot_deals__single" href="{{ route('show-product-details', $product->slug) }}">
         <div class="wsus__hot_deals__single_img">
             <img src="{{ asset('uploads/' . @$product->firstImage->name) }}" alt="bag" class="img-fluid w-100">

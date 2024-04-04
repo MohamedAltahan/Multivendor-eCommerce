@@ -12,7 +12,7 @@
                         <h4>vendor products</h4>
                         <ul>
                             <li><a href="{{ url('/') }}">home</a></li>
-                            <li><a href="#">peoduct</a></li>
+                            <li><a href="#">vendor products</a></li>
                         </ul>
                     </div>
                 </div>
@@ -33,14 +33,17 @@
                             <div class="wsus__vendor_text_center">
                                 <h4>{{ $vendor->shop_name }}</h4>
                                 <p class="wsus__vendor_rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= round($vendor->reviews_avg_rating))
+                                            <i class="fas fa-star"></i>
+                                        @else
+                                            <i class="far fa-star"></i>
+                                        @endif
+                                    @endfor
+                                    <span>({{ $vendor->reviews->count() }} review)</span>
                                 </p>
-                                <a href="callto:+962555544411"><i class="far fa-phone-alt"></i> {{ $vendor->phone }}</a>
-                                <a href="mailto:example@gmail.com"><i class="far fa-envelope"></i> {{ $vendor->email }}</a>
+                                <a href="{{ $vendor->phone }}"><i class="far fa-phone-alt"></i> {{ $vendor->phone }}</a>
+                                <a href="{{ $vendor->email }}"><i class="far fa-envelope"></i> {{ $vendor->email }}</a>
                                 <p class="wsus__vendor_location"><i class="fal fa-map-marker-alt"></i>
                                     {{ $vendor->address }}</p>
                                 <ul class="d-flex">
@@ -87,55 +90,7 @@
                                 <div class="row">
                                     @foreach ($products as $product)
                                         <div class="col-xl-3  col-sm-6">
-                                            <div class="wsus__product_item">
-                                                <span class="wsus__new">{{ $product->product_type }}</span>
-                                                @if (checkDiscount($product))
-                                                    <span class="wsus__minus">
-                                                        -{{ calcDiscountPercentage($product->price, $product->offer_price) }}%
-                                                    </span>
-                                                @endif
-
-                                                <a class="wsus__pro_link"
-                                                    href="{{ route('show-product-details', $product->slug) }}">
-                                                    <img src="{{ asset('uploads/' . @$product->firstImage->name) }}"
-                                                        alt="product" class="img-fluid w-100 img_1" />
-                                                </a>
-
-                                                <ul class="wsus__single_pro_icon">
-                                                    <li><a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModal"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                                    <li><a href="#"><i class="far fa-random"></i></a>
-                                                </ul>
-                                                <div class="wsus__product_details">
-                                                    <a class="wsus__category" href="#">{{ $product->category->name }}
-                                                    </a>
-                                                    <p class="wsus__pro_rating">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star-half-alt"></i>
-                                                        <span>(133 review)</span>
-                                                    </p>
-                                                    <a class="wsus__pro_name"
-                                                        href="{{ route('show-product-details', $product->slug) }}">{{ limitText($product->name, 50) }}</a>
-
-                                                    @if (checkDiscount($product))
-                                                        <p class="wsus__price"><span
-                                                                class="currency_color">{{ $setting->currency }}</span>{{ $product->offer_price }}
-                                                            <del>{{ $setting->currency }}{{ $product->price }}</del>
-                                                        </p>
-                                                    @else
-                                                        <p class="wsus__price"><span
-                                                                class="currency_color">{{ $setting->currency }}</span>{{ $product->price }}
-                                                        </p>
-                                                    @endif
-
-                                                    <a class="add_cart" href="#">add to cart</a>
-                                                </div>
-                                            </div>
+                                            @include('frontend.home.big-product-card')
                                         </div>
                                     @endforeach
                                 </div>
@@ -156,49 +111,8 @@
                                     @foreach ($products as $product)
                                         <div class="col-xl-12">
                                             <div class="wsus__product_item wsus__list_view">
-                                                <span class="wsus__new">{{ $product->product_type }}</span>
-                                                <span class="wsus__minus">
-                                                    -{{ calcDiscountPercentage($product->price, $product->offer_price) }}%
-                                                </span>
-                                                <a class="wsus__pro_link"
-                                                    href="{{ route('show-product-details', $product->slug) }}">
-                                                    <img src="{{ asset('uploads/' . @$product->firstImage->name) }}"
-                                                        alt="product" class="img-fluid w-100 img_1" />
+                                                @include('frontend.home.big-product-card')
 
-                                                </a>
-                                                <div class="wsus__product_details">
-                                                    <a class="wsus__category"
-                                                        href="#">{{ $product->category->name }}
-                                                    </a>
-                                                    <p class="wsus__pro_rating">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star-half-alt"></i>
-                                                        <span>(17 review)</span>
-                                                    </p>
-                                                    <a class="wsus__pro_name"
-                                                        href="{{ route('show-product-details', $product->slug) }}">{{ $product->name }}</a>
-                                                    @if (checkDiscount($product))
-                                                        <p class="wsus__price"><span
-                                                                class="currency_color">{{ $setting->currency }}</span>{{ $product->offer_price }}
-                                                            <del>{{ $setting->currency }}{{ $product->price }}</del>
-                                                        </p>
-                                                    @else
-                                                        <p class="wsus__price"><span
-                                                                class="currency_color">{{ $setting->currency }}</span>{{ $product->price }}
-                                                        </p>
-                                                    @endif
-                                                    <p class="list_description">{{ $product->short_description }}</p>
-                                                    <ul class="wsus__single_pro_icon">
-                                                        <li><a class="add_cart" href="#">add to cart</a>
-                                                        </li>
-                                                        <li><a href="#"><i class="far fa-heart"></i></a>
-                                                        </li>
-                                                        <li><a href="#"><i class="far fa-random"></i></a>
-                                                    </ul>
-                                                </div>
                                             </div>
                                         </div>
                                     @endforeach
