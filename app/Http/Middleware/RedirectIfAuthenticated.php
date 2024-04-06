@@ -20,13 +20,17 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
+
+            //if logged user is admin
+            if (Auth::guard($guard)->check() && $guard == 'admin') {
+                return redirect()->route('admin.dashboard');
+            }
+            //default gaurd is web(you don't have to send it)
             if (Auth::guard($guard)->check()) {
-                if ($request->user()->role == 'vendor') {
+                if ($request->user()->role == 'user') {
+                    return redirect()->route('/');
+                } elseif ($request->user()->role == 'vendor') {
                     return redirect()->route('vendor.dashboard');
-                } elseif ($request->user()->role == 'admin') {
-                    return redirect()->route('admin.dashboard');
-                } else {
-                    return redirect(RouteServiceProvider::HOME);
                 }
             }
         }

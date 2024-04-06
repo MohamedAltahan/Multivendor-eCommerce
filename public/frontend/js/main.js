@@ -94,7 +94,7 @@ $(function () {
 
     //*==========FLASH SELL SLIDER=========
     $(".flash_sell_slider").slick({
-        slidesToShow: 4,
+        slidesToShow: 5,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 4000,

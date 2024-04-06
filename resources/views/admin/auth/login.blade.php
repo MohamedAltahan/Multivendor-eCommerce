@@ -49,28 +49,28 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <form method="POST" action="{{ route('login') }}" class="needs-validation"
+                                    <form method="POST" action="{{ route('admin.login') }}" class="needs-validation"
                                         novalidate="">
                                         @csrf
 
 
                                         <!-- Email Address -->
                                         <div class="form-group">
+
+                                            <x-form.input label="Email" id="email" type="email" name="email"
+                                                lable='email' required autofocus />
+                                        </div>
+                                        <!-- password Address -->
+                                        <div class="form-group">
                                             <div class="d-block">
-                                                <label for="password" class="control-label">Password</label>
                                                 <div class="float-right">
-                                                    <a href="{{ route('password.request') }}" class="text-small">
+                                                    <a href="{{ route('admin.password.request') }}" class="text-small">
                                                         Forgot Password?
                                                     </a>
                                                 </div>
                                             </div>
-                                            <x-form.input id="email" type="email" name="email" lable='email'
-                                                required autofocus />
-                                        </div>
-                                        <!-- password Address -->
-                                        <div class="form-group">
                                             <x-form.input id="password" type="password" name="password"
-                                                lable='password' required />
+                                                label="Password" lable='password' required />
                                         </div>
 
                                         <div class="form-group">

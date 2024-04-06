@@ -16,12 +16,13 @@ Route::middleware('guest')->group(function () {
     // Route::get('register', [RegisteredUserController::class, 'create'])
     //             ->name('register');
     //login for admins=============================================================================
-    Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
+    // Route::get('login', [AdminController::class, 'login'])->name('admin.login');
     Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
 
+    //login page for normal user
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
-
+    //login page for normal user
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])

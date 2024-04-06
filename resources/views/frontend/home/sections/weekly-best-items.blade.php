@@ -28,16 +28,18 @@
     }
 @endphp
 <!--============================WEEKLY BEST ITEM START==============================-->
-<section id="wsus__weekly_best" class="home2_wsus__weekly_best_2 ">
+<section id="wsus__electronic" class=" ">
     <div class="container">
         <div class="row">
             <div class="col-xl-12 col-sm-12">
                 <div class="wsus__section_header">
                     <h3>{{ $category->name }}</h3>
                 </div>
-                <div class="row weekly_best2">
+                <div class="row flash_sell_slider">
                     @foreach ($products as $product)
-                        @include('frontend.home.small-product-card')
+                        <div class="col-xl-4 col-sm-6">
+                            @include('frontend.home.big-product-card')
+                        </div>
                     @endforeach
                 </div>
             </div>

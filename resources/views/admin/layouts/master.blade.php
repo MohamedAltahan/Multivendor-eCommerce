@@ -47,9 +47,9 @@
         <!-- /END GA -->
         <script>
             const USER = {
-                name: "{{ auth()->user()->name }}",
-                id: "{{ auth()->user()->id }}",
-                image: "{{ asset('uploads/' . auth()->user()->image) }}",
+                name: "{{ auth('admin')->user()->name }}",
+                id: "{{ auth('admin')->user()->id }}",
+                image: "{{ asset('uploads/' . auth('admin')->user()->image) }}",
             }
         </script>
         <script>

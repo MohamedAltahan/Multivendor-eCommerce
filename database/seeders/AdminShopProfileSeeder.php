@@ -7,7 +7,7 @@ use App\Models\Vendor;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class AdminProfileSeeder extends Seeder
+class AdminShopProfileSeeder extends Seeder
 {
     /**
      * Run the database seeds.

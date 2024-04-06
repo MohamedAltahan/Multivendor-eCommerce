@@ -46,7 +46,9 @@ use App\Http\Controllers\Backend\WithdrawMethodController;
 use App\Http\Controllers\Backend\WithdrawTransactionController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
+
+
+Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('dashboard', [AdminController::class, 'dashboard'])
         ->name('dashboard');
     //profile routes==========================================================================================
@@ -233,4 +235,7 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
 
     //change status of sections on frontend page
     Route::put('frontend-section/change-status', [HomePageSettingController::class, 'changeStatus'])->name('frontend-section.change-status');
-});//end group
+}); //end group
+
+//auth routes for admin-----------------------------------------------------------------------------------------
+require __DIR__ . '/adminAuth.php';

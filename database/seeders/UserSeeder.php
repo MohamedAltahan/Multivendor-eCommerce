@@ -14,14 +14,14 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            [
-                'name' => 'Admin',
-                'username' => 'adminuser',
-                'email' => 'admin@gmail.com',
-                'role' => 'admin',
-                'status' => 'active',
-                'password' => bcrypt('password')
-            ],
+            // [
+            //     'name' => 'Admin',
+            //     'username' => 'adminuser',
+            //     'email' => 'admin@gmail.com',
+            //     'role' => 'admin',
+            //     'status' => 'active',
+            //     'password' => bcrypt('password')
+            // ],
             [
                 'name' => 'Vendor',
                 'username' => 'vendoruser',

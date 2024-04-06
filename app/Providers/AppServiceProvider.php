@@ -34,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
         $pusherSetting = PusherSetting::first();
         //============================================================================
         //set mail configuration (it will overwrite .env or default setting)
+        config::set('mail.from.address', $mailSetting->sender_email);
         config::set('mail.mailers.smtp.host', $mailSetting->host);
         config::set('mail.mailers.smtp.port', $mailSetting->port);
         config::set('mail.mailers.smtp.encryption', $mailSetting->encryption);
