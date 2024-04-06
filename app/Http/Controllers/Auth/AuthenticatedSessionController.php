@@ -25,6 +25,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+
         $request->authenticate();
         //check if user banned
         if ($request->user()->status == 'inactive') {
@@ -35,10 +36,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         $request->session()->regenerate();
-        //redirect depend on the type logged uer--------------------------------
-        if ($request->user()->role == 'admin') {
-            return redirect()->intended('admin/dashboard');
-        }
+
         if ($request->user()->role == 'vendor') {
             return redirect()->intended('vendor/dashboard');
         }
