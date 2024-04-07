@@ -32,7 +32,7 @@ class CartController extends Controller
             }
             //if request is comming from 'product page details'
         } elseif ($request->submit_source == 'details_page') {
-            if (count($request->variants_id) > 0) {
+            if (isset($request->variants_id) && (count($request->variants_id) > 0)) {
                 $variants = ProductVariant::whereIn('id', $request->variants_id)->get();
             }
         } else {

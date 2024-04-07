@@ -117,11 +117,11 @@
                 <ul class="dropdown-menu">
                     <li class="dropdown {{ setActive(['admin.vendor-profile.*']) }}"><a class="nav-link"
                             href="{{ route('admin.vendor-profile.index') }}">{{ __('My Shop profile') }}</a></li>
-                    <li class="dropdown {{ setActive(['admin.products*', 'admin.product-variant.*']) }}">
-                        <a class="nav-link" href="{{ route('admin.products.index') }}">My shop products</a>
-                    </li>
                     <li class="dropdown {{ setActive(['admin.variant.*', 'admin.product.variant-details*']) }}">
                         <a class="nav-link" href="{{ route('admin.variant.index') }}">Product variants</a>
+                    </li>
+                    <li class="dropdown {{ setActive(['admin.products*', 'admin.product-variant.*']) }}">
+                        <a class="nav-link" href="{{ route('admin.products.index') }}">My shop products</a>
                     </li>
                     <li class="dropdown {{ setActive(['admin.reviews.*']) }} ">
                         <a class="nav-link" href="{{ route('admin.reviews.index') }}"> Product reviews</a>

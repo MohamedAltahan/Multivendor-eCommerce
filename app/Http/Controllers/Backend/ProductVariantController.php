@@ -16,7 +16,7 @@ class ProductVariantController extends Controller
     {
 
         $product = Product::findOrFail($request->productId);
-        $venorId = auth()->user()->vendor->id;
+        $venorId = auth('admin')->user()->vendor->id;
         $variantTypes = ProductVariantType::where(['vendor_id' => $venorId, 'status' => 'active'])->get();
         return $dataTable->with(['productId' => $product->id])->render('admin.product.product-variant-details.index', compact('product', 'variantTypes'));
     }

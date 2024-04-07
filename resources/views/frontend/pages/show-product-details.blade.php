@@ -104,7 +104,6 @@
                                                 @endphp
                                                 <div class="mb-2">select {{ $variantTypeName }} :</div>
                                                 <select class="form-select" name="variants_id[]">
-                                                    {{-- using relation values --}}
                                                     @foreach ($variants as $variant)
                                                         <option value="{{ $variant->id }}">
                                                             {{ $variant->values->variant_value }}
@@ -121,7 +120,7 @@
                                     <h5>quentity :</h5>
                                     <div class="select_number">
                                         <input class="number_area" name="quantity" type="text" min="1"
-                                            max="100" value="1" />
+                                            max="500" value="1" />
                                     </div>
                                 </div>
 
@@ -193,7 +192,7 @@
                                             </div>
                                             <div class="col-xl-6 col-xxl-7 col-md-6 mt-4 mt-md-0">
                                                 <div class="wsus__pro_det_vendor_text">
-                                                    <h4>{{ $product->vendor->user->name }}</h4>
+                                                    <h4>{{ $product->vendor->name }}</h4>
                                                     <p class="rating">
                                                         <i class="fas fa-star"></i>
                                                         <i class="fas fa-star"></i>

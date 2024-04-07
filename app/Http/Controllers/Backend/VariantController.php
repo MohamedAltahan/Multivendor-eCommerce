@@ -41,7 +41,7 @@ class VariantController extends Controller
             'name' => ['required', 'max:200'],
             'status' => ['required']
         ]);
-        $request['vendor_id'] = Auth::user()->vendor->id;
+        $request['vendor_id'] = Auth::guard('admin')->user()->vendor->id;
         $variant = new ProductVariantType();
         $variant->create($request->all());
         toastr('Created successfully');

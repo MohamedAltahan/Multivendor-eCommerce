@@ -16,7 +16,7 @@ class AdminVendorProfileContorller extends Controller
      */
     public function index()
     {
-        $profile =  Vendor::where('user_id', Auth::user()->id)->first();
+        $profile =  Vendor::where('user_id', Auth::guard('admin')->user()->id)->first();
         return view('admin.vendor-profile.index', compact('profile'));
     }
 
@@ -44,7 +44,7 @@ class AdminVendorProfileContorller extends Controller
             'insta_link' => ['nullable', 'url'],
             'tw_link' => ['nullable', 'url'],
         ]);
-        $vendor = Vendor::where('user_id', Auth::user()->id)->first();
+        $vendor = Vendor::where('user_id', Auth::guard('admin')->user()->id)->first();
         $vendorData = $request->except('banner');
         if ($request->hasFile('banner')) {
             $oldBannerPath = $vendor->banner;

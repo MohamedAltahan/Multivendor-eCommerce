@@ -21,11 +21,11 @@ class AdminProfileController extends Controller
 
         $request->validate([
             'name' => ['required', 'max:100'],
-            'email' => ['required', 'email', 'unique:users,email,' . Auth::user()->id],
+            'email' => ['required', 'email', 'unique:users,email,' . Auth::guard('admin')->user()->id],
             'image' => ['image', 'max:2048']
         ]);
 
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
         $profileData = $request->except('image', '_token'); //array
         //get the old image name
         $oldImage = $user->image;
@@ -34,7 +34,7 @@ class AdminProfileController extends Controller
         if ($request->hasFile('image')) {
             $profileData['image'] = $newImage;
         }
-        User::where('id', Auth::user()->id)->update($profileData);
+        User::where('id', Auth::guard('admin')->user()->id)->update($profileData);
         if ($oldImage && $newImage) {
             Storage::disk('myDisk')->delete($oldImage);
         }

@@ -93,7 +93,7 @@
                         }
                     },
                     error: function(data) {
-                        console.log(data);
+                        alert(data);
                     }
                 })
             })
@@ -115,7 +115,7 @@
                         }
                     },
                     error: function(data) {
-                        console.log(data);
+                        alert(data);
                     }
                 })
             })

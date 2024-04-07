@@ -39,7 +39,7 @@ class AllVendorsDataTable extends DataTable
      */
     public function query(Vendor $model): QueryBuilder
     {
-        return $model->where('id', '!=', Auth::user()->vendor->id)->newQuery();
+        return $model->where('id', '!=', Auth::guard('admin')->user()->vendor->id)->newQuery();
     }
 
     /**

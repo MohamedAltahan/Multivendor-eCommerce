@@ -15,7 +15,8 @@
 
                     <div class="card-body">
                         <div class="form-group mx-1 ">
-                            <img width='200px' src="{{ asset('uploads/' . Auth::user()->image) }}" alt="image">
+                            <img width='200px' src="{{ asset('uploads/' . Auth::guard('admin')->user()->image) }}"
+                                alt="image">
                         </div>
 
 
@@ -25,12 +26,12 @@
 
                         <div class="form-group  col-md-12">
                             <x-form.input lable="UserName" name='name' placeholder='Your name'
-                                value="{{ Auth::user()->name }}" />
+                                value="{{ Auth::guard('admin')->user()->name }}" />
                         </div>
 
                         <div class="form-group  col-md-12">
                             <x-form.input lable="Email" name='email' placeholder='your Email'
-                                value="{{ Auth::user()->email }}" />
+                                value="{{ Auth::guard('admin')->user()->email }}" />
                         </div>
 
                         <div class="card-footer text-right">

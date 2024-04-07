@@ -20,7 +20,7 @@ class AdminReviewDataTable extends DataTable
      *
      * @param QueryBuilder $query Results from query() method.
      */
-    public function dataTable(QueryBuilder $query): EloquentDataTable
+    public function dataTable(QueryBuilder $query)
     {
         return (new EloquentDataTable($query))
             // ->addColumn('action', 'userproductreviews.action')

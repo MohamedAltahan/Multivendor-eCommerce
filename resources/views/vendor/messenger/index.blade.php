@@ -115,7 +115,7 @@
                         $('#chat-inbox-title').text(`Chat With ${chatUserName}`)
                     },
                     success: function(response) {
-                        console.log(response);
+                        alert(response);
                         $.each(response, function(index, value) {
 
                             if (value.sender_id == USER.id) {

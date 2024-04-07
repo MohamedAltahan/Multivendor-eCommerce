@@ -8,23 +8,20 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\FlashSaleItem;
-use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\ProductImages;
 use App\Models\ProductVariant;
-use App\Models\Variant;
-use App\Models\VariantDetails;
 use App\Models\SubCategory;
 use App\Traits\fileUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
     use fileUploadTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -71,19 +68,11 @@ class ProductController extends Controller
         // $productData['image'] = $this->fileUplaod($request, 'myDisk', 'product', 'image');
         $productData['product_key'] = $request->product_key;
         $productData['slug'] = Str::slug($request->name);
-        $productData['vendor_id'] = Auth::user()->vendor->id;
+        $productData['vendor_id'] = Auth::guard('admin')->user()->vendor->id;
         $productData['is_approved'] = 'yes';
         $product->create($productData);
         toastr('Created successfully');
         return redirect()->route('admin.products.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**
@@ -92,6 +81,10 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         $product = Product::findOrFail($id);
+        // if ($product->vendor_id != $this->userId) {
+        //     return abort(403);
+        // }
+
         $categories = Category::get();
         $subCategories = SubCategory::where('category_id', $product->category_id)->get();
         $childCategories = ChildCategory::where('sub_category_id', $product->sub_category_id)->get();
@@ -140,7 +133,7 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::findOrFail($id);
-        if ($product->vendor_id != Auth::user()->vendor->id) {
+        if ($product->vendor_id != Auth::guard('admin')->user()->vendor->id) {
             abort(404);
         }
         if (OrderProduct::where('product_id', $product->id)->count() > 0) {

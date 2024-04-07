@@ -57,7 +57,7 @@ class VariantDataTable extends DataTable
      */
     public function query(ProductVariantType $model): QueryBuilder
     {
-        return $model->where('vendor_id', Auth::user()->vendor->id)->newQuery();
+        return $model->where('vendor_id', Auth::guard('admin')->user()->vendor->id)->newQuery();
     }
 
     /**
