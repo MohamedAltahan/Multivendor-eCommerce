@@ -17,6 +17,7 @@ use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Traits\fileUploadTrait;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class VendorProductController extends Controller
@@ -63,7 +64,6 @@ class VendorProductController extends Controller
         ]);
         $product = new Product();
         $productData = $request->except('image');
-        // $productData['image'] = $this->fileUplaod($request, 'myDisk', 'product', 'image');
         $productData['product_key'] = $request->product_key;
         $productData['is_approved'] = 'pending';
         $productData['slug'] = Str::slug($request->name);
@@ -74,23 +74,17 @@ class VendorProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
 
         $product = Product::findOrFail($id);
-        if ($product->vendor_id != Auth::user()->vendor->id) {
-            abort(404);
+
+        if (!Gate::allows('update', $product)) {
+            abort(403);
         }
+
         $categories = Category::get();
         $subCategories = SubCategory::where('category_id', $product->category_id)->get();
         $childCategories = ChildCategory::where('sub_category_id', $product->sub_category_id)->get();
@@ -105,6 +99,12 @@ class VendorProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $product = Product::find($id);
+
+        if (!Gate::allows('update', $product)) {
+            abort(403);
+        }
+
         $request->validate([
             'image' => ['image', 'max:3000'],
             'name' => ['required', 'max:200'],
@@ -118,18 +118,9 @@ class VendorProductController extends Controller
             'seo_description' => ['nullable', 'max:250'],
             'status' => ['required']
         ]);
-        $product = Product::find($id);
-        if ($product->vendor_id != Auth::user()->vendor->id) {
-            abort(404);
-        }
-        $productData = $request->except('image');
 
-        // if ($request->hasFile('image')) {
-        //     $oldImagePath = $product->image;
-        //     $productData['image'] = $this->fileUpdate($request, 'myDisk', 'product', 'image', $oldImagePath);
-        // }
+        $productData = $request->except('image');
         $productData['slug'] = Str::slug($request->name);
-        $productData['vendor_id'] = Auth::user()->vendor->id;
         $productData['is_approved'] = $product->is_approved;
         $product->update($productData);
         toastr('Updated successfully');
@@ -142,6 +133,9 @@ class VendorProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::findOrFail($id);
+        if (!Gate::allows('update', $product)) {
+            abort(403);
+        }
         if ($product->vendor_id != Auth::user()->vendor->id) {
             abort(404);
         }
@@ -185,6 +179,11 @@ class VendorProductController extends Controller
     //get Product Images using ajax---------------------------------------------------------
     public function deleteProductImage(Request $request)
     {
+        $product_key = ProductImages::where('id', $request->id)->first()->product_key;
+        $product = Product::where('product_key', $product_key)->first();
+        if (!Gate::allows('delete', $product)) {
+            abort(403);
+        }
         $product_image = ProductImages::findOrFail($request->id);
         $product_image->delete();
         $this->deleteFile('myDisk', $product_image->name);
@@ -195,9 +194,11 @@ class VendorProductController extends Controller
     //change status============================================
     public function changeStatus(Request $request)
     {
-
         $product = Product::findOrFail($request->id);
-        // dd($request->status);
+        if (!Gate::allows('update', $product)) {
+            abort(403);
+        }
+
         $product->status = $request->status == 'true' ? 'active' : 'inactive';
         $product->save();
         return response(['status' => 'success', 'message' => 'Updated successfully']);

@@ -80,6 +80,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
+
         $product = Product::findOrFail($id);
         // if ($product->vendor_id != $this->userId) {
         //     return abort(403);
