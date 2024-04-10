@@ -15,6 +15,7 @@
                             <div class="col-md-6">
                                 <a href="{{ route('vendor.variant.index') }}" class="btn btn-warning">My Variants</a>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="right">
                                     <a href="{{ route('vendor.products.create') }}" class="btn btn-primary">+Create New</a>
@@ -23,7 +24,11 @@
                         </div>
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
-
+                                <div class="col-md-4">
+                                    <a href="{{ route('vendor.product.trash') }}" class="btn btn-danger"><i
+                                            class="fas fa-trash"></i> Trash</a>
+                                </div>
+                                <br>
                                 {{ $dataTable->table() }}
 
                             </div>

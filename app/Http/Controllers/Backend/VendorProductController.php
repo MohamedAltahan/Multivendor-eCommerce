@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\DataTables\VendorProductDataTable;
+use App\DataTables\VendorProductTrashDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
@@ -136,18 +137,10 @@ class VendorProductController extends Controller
         if (!Gate::allows('update', $product)) {
             abort(403);
         }
-        if ($product->vendor_id != Auth::user()->vendor->id) {
-            abort(404);
-        }
+
         if (OrderProduct::where('product_id', $product->id)->count() > 0) {
             return response(['status' => 'error', 'message' => 'This product belongs to an order, you can archive only ']);
         }
-        //delete form flash sale
-        FlashSaleItem::where('product_id', $product->id)->delete();
-        //delete product images
-        ProductImages::where('product_key', $product->product_key)->delete();
-        //delete variant details
-        ProductVariant::where('product_id', $product->id)->delete();
         //delete product itself
         $product->delete();
         return response(['status' => 'success', 'message' => 'Deleted successfully']);
@@ -202,5 +195,37 @@ class VendorProductController extends Controller
         $product->status = $request->status == 'true' ? 'active' : 'inactive';
         $product->save();
         return response(['status' => 'success', 'message' => 'Updated successfully']);
+    }
+
+    //trash-----------------------------------------------------
+    public function trash(VendorProductTrashDataTable $dataTable)
+    {
+        return $dataTable->render('vendor.product.trash.index');
+    }
+
+    //trash-----------------------------------------------------
+    public function forceDelete($id)
+    {
+
+        $product = Product::onlyTrashed()->findOrFail($id);
+        $product->forceDelete();
+
+        //delete product images
+        ProductImages::where('product_key', $product->product_key)->delete();
+        //delete form flash sale
+        FlashSaleItem::where('product_id', $product->id)->delete();
+        //delete variant details
+        ProductVariant::where('product_id', $product->id)->delete();
+        toastr('deleted successfully');
+        return redirect()->back();
+    }
+
+    //trash-----------------------------------------------------
+    public function trashRestore($id)
+    {
+        $product = Product::onlyTrashed()->findOrFail($id);
+        $product->restore();
+        toastr('Restored successfully');
+        return redirect()->route('vendor.products.index');
     }
 }

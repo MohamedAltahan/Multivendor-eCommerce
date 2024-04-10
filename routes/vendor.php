@@ -33,6 +33,9 @@ Route::group(['middleware' => ['auth', 'role:vendor'], 'prefix' => 'vendor', 'as
     Route::delete('products/delete-product-image', [VendorProductController::class, 'deleteProductImage'])->name('product.delete-product-image');
     Route::get('products/get-prodcut-images', [VendorProductController::class, 'getProductImages'])->name('product.get-product-images');
     Route::post('products/product-images-uplaod/{product}', [VendorProductController::class, 'uploadProductImages'])->name('product.upload.images');
+    Route::get('products/trash', [VendorProductController::class, 'trash'])->name('product.trash');
+    Route::get('products/{product}/restore', [VendorProductController::class, 'trashRestore'])->name('product.trash.restore');
+    Route::get('products/{product}/force-delete', [VendorProductController::class, 'forceDelete'])->name('product.trash.force-delete');
     Route::resource('products', VendorProductController::class);
 
     //subcategories and child categories===============================================

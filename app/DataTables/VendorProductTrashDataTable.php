@@ -4,9 +4,9 @@ namespace App\DataTables;
 
 use App\Models\Product;
 use App\Models\ProductImages;
-use App\Models\VendorProduct;
+use App\Models\VendorProductTrash;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -15,7 +15,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class VendorProductDataTable extends DataTable
+class VendorProductTrashDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -26,10 +26,11 @@ class VendorProductDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $editBtn = "<a href='" . route('vendor.products.edit', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-edit'></i>Edit</a>";
-                $deleteBtn = "<a href='" . route('vendor.products.destroy', $query->id)  . "'class='btn btn-sm mx-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
-                $moreButton = '<a class="btn btn-sm btn-warning" href="' . route('vendor.product-variant.index', ['product_id' => $query->id]) . '"><i class="fas fa-heart"></i>Variant</a>';
-                return $editBtn . $deleteBtn . $moreButton;
+                $deleteBtn = "<a href='" . route('vendor.product.trash.force-delete', $query->id)  . "
+                'class='btn btn-sm mx-1 my-1 btn-danger '><i class='fas fa-ban'></i> Delete</a>";
+                $restoreBtn = "<a href='" . route('vendor.product.trash.restore', $query->id)  . "
+                'class='btn btn-sm mx-1 my-1 btn-success '><i class='fas fa-trash-undo'></i> Restore</a>";
+                return $deleteBtn . $restoreBtn;
             })
             ->addColumn('image', function ($query) {
                 $productImage = ProductImages::where('product_key', $query->product_key)->first();
@@ -37,37 +38,6 @@ class VendorProductDataTable extends DataTable
                     return 'no image';
                 }
                 return "<img width='100px' src='" . asset('uploads/' . $productImage->name) . "'></img>";
-            })
-            ->addColumn('type', function ($query) {
-                switch ($query->product_type) {
-                    case 'new':
-                        return '<i class="badge bg-success">New</i>';
-                        break;
-                    case 'featured':
-                        return '<i class="badge bg-success">Featured</i>';
-                        break;
-                    case 'top':
-                        return '<i class="badge bg-warning">Top</i>';
-                        break;
-                    case 'best':
-                        return '<i class="badge bg-danger">Best</i>';
-                        break;
-                    default:
-                        return '<i class="badge bg-dark">None</i>';
-                }
-            })
-            ->addColumn('status', function ($query) {
-                if ($query->status == 'active') {
-                    $button = '<div class="form-check form-switch">
-                        <input checked class="form-check-input change-status" type="checkbox" data-id="' . $query->id . '" role="switch" >
-                        </div>';
-                } else {
-                    $button = '<div class="form-check form-switch">
-                        <input class="form-check-input change-status" type="checkbox" data-id="' . $query->id . '" role="switch">
-                        </div>';
-                }
-
-                return $button;
             })
             ->addColumn('is_approved', function ($query) {
                 if ($query->is_approved == 'pending') {
@@ -78,6 +48,9 @@ class VendorProductDataTable extends DataTable
                     return '<i class="badge bg-danger">No</i>';
                 }
             })
+            ->addColumn('deleted', function ($query) {
+                return Carbon::createFromTimeStamp(strtotime($query->deleted_at))->diffForHumans();
+            })
             ->rawColumns(['action', 'image', 'type', 'status', 'is_approved'])
             ->setRowId('id');
     }
@@ -85,9 +58,9 @@ class VendorProductDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(Product $model): QueryBuilder
+    public function query(Product $model)
     {
-        return $model->where('vendor_id', Auth::user()->vendor->id)->newQuery();
+        return $model->onlyTrashed()->newQuery();
     }
 
     /**
@@ -96,7 +69,7 @@ class VendorProductDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('vendorproduct-table')
+            ->setTableId('vendorproducttrash-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
@@ -119,18 +92,18 @@ class VendorProductDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('image')->width(130),
+            Column::make('image')->width(150),
             Column::make('name'),
             Column::make('price'),
-            Column::make('is_approved')->width(80),
-            Column::make('type')->width(50),
-            Column::make('status'),
+            Column::make('is_approved')->width(100),
             // Column::make('image'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(300)
+                ->width(220)
                 ->addClass('text-center'),
+            Column::make('deleted'),
+
         ];
     }
 
@@ -139,6 +112,6 @@ class VendorProductDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'VendorProduct_' . date('YmdHis');
+        return 'VendorProductTrash_' . date('YmdHis');
     }
 }
