@@ -8,12 +8,7 @@
         <img src="{{ asset('uploads/' . @$product->firstImage->name) }}" alt="No-image" class="img-fluid w-100 img_1" />
 
     </a>
-    <ul class="wsus__single_pro_icon">
-        <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="far fa-eye"></i></a>
-        </li>
-        <li><a href="#"><i class="far fa-heart"></i></a></li>
-        <li><a href="#"><i class="far fa-random"></i></a>
-    </ul>
+
     <div class="wsus__product_details">
         <a class="wsus__category" href="{{ route('products.index', ['category' => $product->category->slug]) }}">
             {{ $product->category->name }}
@@ -27,7 +22,7 @@
                     <i class="far fa-star"></i>
                 @endif
             @endfor
-            <span>({{ $product->reviews->count() }} review)</span>
+
         </p>
 
         <a class="wsus__pro_name" href="{{ route('show-product-details', $product->slug) }}">{{ $product->name }}</a>
