@@ -12,7 +12,7 @@
                         <h4>products</h4>
                         <ul>
                             <li><a href="#">home</a></li>
-                            <li><a href="#">peoduct</a></li>
+                            <li><a href="#">products</a></li>
                         </ul>
                     </div>
                 </div>
@@ -26,19 +26,6 @@
     <section id="wsus__product_page">
         <div class="container">
             <div class="row">
-                <div class="col-xl-12">
-                    <div class="wsus__pro_page_bammer">
-                        <img src="images/pro_banner_1.jpg" alt="banner" class="img-fluid w-100">
-                        <div class="wsus__pro_page_bammer_text">
-                            <div class="wsus__pro_page_bammer_text_center">
-                                <p>up to <span>70% off</span></p>
-                                <h5>wemen's jeans Collection</h5>
-                                <h3>fashion for wemen's</h3>
-                                <a href="#" class="add_cart">Discover Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-xl-3 col-lg-4">
                     <div class="wsus__sidebar_filter ">
                         <p>filter</p>
