@@ -29,7 +29,7 @@ class DeleteExpireProducts implements ShouldQueue
      */
     public function handle(): void
     {
-        $thirtyDaysAgo = now()->toDateTimeString();
+        $thirtyDaysAgo = now()->subDays(30)->toDateTimeString();
         $products = Product::onlyTrashed()->where('deleted_at', '<', $thirtyDaysAgo)->get();
         $this->forceDelete($products);
     }
@@ -39,11 +39,8 @@ class DeleteExpireProducts implements ShouldQueue
     {
         foreach ($products as $product) {
             $product->forceDelete();
-            //delete product images
             ProductImages::where('product_key', $product->product_key)->delete();
-            //delete form flash sale
             FlashSaleItem::where('product_id', $product->id)->delete();
-            //delete variant details
             ProductVariant::where('product_id', $product->id)->delete();
         }
     }

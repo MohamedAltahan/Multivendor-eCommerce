@@ -67,7 +67,22 @@
                                             </div>
                                             <a class="forget_p" href="{{ route('password.request') }}">forget password ?</a>
                                         </div>
+                                        <div class="text-center row justify-content-around">
 
+                                            <a type="button" href="{{ route('github.login') }}"
+                                                class=" col-md-3 btn btn-dark my-1"><i class="fab fa-github "></i>
+                                                Github</a>
+
+                                            <a type="button" href="{{ route('facebook.login') }}"
+                                                class="btn btn-primary col-md-3 my-1  "><i class="fab fa-facebook"></i>
+                                                Facebook</a>
+
+                                            <a type="button" href="{{ route('google.login') }}"
+                                                class=" my-1 btn btn-outline-success col-md-3"><i class="fab fa-google"></i>
+                                                Google</a>
+
+                                        </div>
+                                        <br>
                                         <button class="common_btn" type="submit">login</button>
 
                                     </form>
@@ -104,6 +119,7 @@
                                             <x-form.input id="password_confirmation" type="password"
                                                 name="password_confirmation" placeholder="Confirm Password" />
                                         </div>
+
 
                                         <button class="common_btn my-4" type="submit">signup</button>
                                     </form>

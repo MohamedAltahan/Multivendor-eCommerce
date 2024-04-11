@@ -23,7 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'status'
+        'status',
+        'provider_id'
     ];
 
     // protected $guarded = ['_method', '_token'];
