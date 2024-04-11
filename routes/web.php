@@ -148,7 +148,7 @@ Route::prefix('facebook')->as('facebook.')->controller(SocialiteController::clas
 
 //login with google ___________________________________________________________________________________
 Route::prefix('google')->as('google.')->controller(SocialiteController::class)->group(function () {
-    Route::get('/login', 'facebookgoogleLogin')->name('login');
+    Route::get('/login', 'googleLogin')->name('login');
     Route::get('/redirect', 'googleRedirect')->name('redirect');
 });
 

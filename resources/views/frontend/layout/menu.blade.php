@@ -110,13 +110,10 @@
                 </span></a></li>
         <li>
             @auth
-
                 @if (auth()->user()->role == 'user')
             <li><a href="{{ route('user.dashboard') }}"><i class="far fa-user"></i></a></li>
         @elseif (auth()->user()->role == 'vendor')
             <li><a href="{{ route('vendor.dashboard') }}"><i class="far fa-user"></i></a></li>
-        @elseif (auth()->user()->role == 'admin')
-            <li><a href="{{ route('admin.dashboard') }}"><i class="far fa-user"></i></a></li>
             @endif
 
             <li> <a style="width: 65px" href="javascript:$('#logout_form').submit();" class=""> Logout
@@ -166,7 +163,9 @@
                                         <div class="accordion-body">
                                             <ul>
                                                 @foreach ($category->subCategories as $subCategory)
-                                                    <li><a href="#">{{ $subCategory->name }}</a></li>
+                                                    <li><a
+                                                            href="{{ route('products.index', ['subCategory' => $subCategory->slug]) }}">{{ $subCategory->name }}</a>
+                                                    </li>
                                                 @endforeach
 
                                             </ul>
