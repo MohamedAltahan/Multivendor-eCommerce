@@ -40,9 +40,6 @@ class SliderController extends Controller
 
         $request->validate([
             'banner_image' => ['required', 'image', 'max:2048'],
-            'type' => ['string', 'max:200'],
-            'title' => ['string', 'max:200'],
-            'staring_price' => ['max:200'],
             'banner_url' => ['url'],
             'serial' => ['required', 'integer'],
             'status' => ['required'],
@@ -55,13 +52,6 @@ class SliderController extends Controller
         return redirect()->route('admin.slider.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -81,9 +71,6 @@ class SliderController extends Controller
 
         $request->validate([
             'banner_image' => ['nullable', 'image', 'max:2048'],
-            'type' => ['string', 'max:200'],
-            'title' => ['string', 'max:200'],
-            'staring_price' => ['max:200'],
             'banner_url' => ['url'],
             'serial' => ['required', 'integer'],
             'status' => ['required'],

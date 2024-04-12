@@ -14,15 +14,6 @@
             </div>
 
             <div class="form-group">
-                <x-form.input name="type" label="type" class="form-control" />
-            </div>
-            <div class="form-group">
-                <x-form.input name="title" label="title" class="form-control" />
-            </div>
-            <div class="form-group">
-                <x-form.input name="starting_price" label="starting price" class="form-control" />
-            </div>
-            <div class="form-group">
                 <x-form.input name="banner_url" label="Button URL" class="form-control" />
             </div>
 

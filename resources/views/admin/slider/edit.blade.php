@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('mainTitle','Slider')
+@section('mainTitle', 'Slider')
 @section('content')
     <div class="card-header">
         <h4>Edit slider</h4>
@@ -18,16 +18,6 @@
                     value={{ null }} class="form-control" />
             </div>
 
-            <div class="form-group">
-                <x-form.input value="{{ $slider->type }}" name="type" label="type" class="form-control" />
-            </div>
-            <div class="form-group">
-                <x-form.input value="{!! $slider->title !!}" name="title" label="title" class="form-control" />
-            </div>
-            <div class="form-group">
-                <x-form.input value="{{ $slider->starting_price }}" name="starting_price" label="starting price"
-                    class="form-control" />
-            </div>
             <div class="form-group">
                 <x-form.input value="{{ $slider->banner_url }}" name="banner_url" label="Button URL" class="form-control" />
             </div>
