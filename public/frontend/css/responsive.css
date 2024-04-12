@@ -3848,9 +3848,8 @@
     .wsus__single_slider {
         background-size: contain !important;
         background-repeat: no-repeat !important;
-
         width: 100% !important;
-        padding: 100px 1px !important;
+        padding: 70px 1px !important;
     }
 
     .wsus__single_slider_text h3 {
