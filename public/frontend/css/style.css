@@ -1387,11 +1387,11 @@ PRODUCT MODAL VIEW END
 }
 
 .wsus__single_slider {
-    background-size: cover !important;
+    background-size: contain !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     padding: 160px 100px;
-    width: 100%;
+    width: 100% !important;
 }
 
 .wsus__single_slider_text h3 {
@@ -1404,7 +1404,7 @@ PRODUCT MODAL VIEW END
 .wsus__single_slider_text h1 {
     text-transform: capitalize;
     font-weight: 800;
-    color: #985959;
+    color: #000000;
     margin: 10px 0px;
     font-size: 50px;
 }
