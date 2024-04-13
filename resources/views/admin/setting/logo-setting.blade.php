@@ -10,7 +10,7 @@
                     <x-form.input type="file" class="form-control" name="main_logo" label='Main logo' />
                 </div>
 
-                <img src="{{ asset('uploads/' . @$logoSetting->icon) }}" width="200px" alt="icon">
+                <img src="{{ asset('uploads/' . @$logoSetting->icon) }}" width="100px" alt="icon">
                 <div class="form-group">
                     <x-form.input type="file" class="form-control" name="icon" label='Wesite icon'
                         value="{{ @$logoSetting->icon }}" />
