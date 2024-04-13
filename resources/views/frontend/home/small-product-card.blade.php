@@ -14,7 +14,6 @@
                         <i class="far fa-star"></i>
                     @endif
                 @endfor
-                <span>({{ $product->reviews->count() }} review)</span>
             </p>
 
             @if (checkDiscount($product))
