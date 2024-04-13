@@ -58,7 +58,7 @@
                                     }
                                 @endphp
 
-                                <button class="col-md-2 {{ $loop->index == 0 ? 'auto_click active' : '' }}"
+                                <button class=" {{ $loop->index == 0 ? 'auto_click active' : '' }}"
                                     data-filter=".category-{{ $loop->index }}">{{ $category->name }}</button>
                             @endforeach
                         </div>
