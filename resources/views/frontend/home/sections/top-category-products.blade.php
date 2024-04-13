@@ -73,7 +73,6 @@
                                 @include('frontend.home.small-product-card')
                             @endforeach
                         @endforeach
-
                     </div>
                 </div>
             </div>
