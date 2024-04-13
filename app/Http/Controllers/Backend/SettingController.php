@@ -65,8 +65,8 @@ class SettingController extends Controller
     function logoSettingUpdate(Request $request)
     {
         $request->validate([
-            'main_logo' => ['required', 'image', 'max:3000'],
-            'icon' => ['required', 'image', 'max:3000'],
+            'main_logo' => ['image', 'max:3000'],
+            'icon' => ['image', 'max:3000'],
         ]);
         $oldLogos = LogoSetting::first() ?: new LogoSetting();
 
