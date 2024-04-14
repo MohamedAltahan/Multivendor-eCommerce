@@ -5,18 +5,13 @@
     <div id="product_images">
         <div class="card">
             <div class="card-body">
-                <div class="gallery gallery-md">
+                <div class=" ">
                     @foreach ($productImages as $productImage)
-                        <div style="display:inline-block; height: 100px ;width:100px; background: url({!! asset('uploads/' . $productImage->name) !!}); "
-                            class="mx-1 my-1">
+                        <div style="display:inline-block; background-repeat: no-repeat; height: 100px ;width:100px;background-size: contain;  background-image: url({!! asset('uploads/' . $productImage->name) !!}); "
+                            class="mx-1 my-1 gallery-item">
                             <button id="{{ $productImage->id }}" class="fas fa-times-circle delete-image"
                                 style="color: red; font-size:25px; background-color: transparent;  border: none;cursor:pointer;"></button>
                         </div>
-                        {{-- <form method="POST" action="{{ route('admin.product.delete-product-image', $productImage->id) }}"
-                    id="delete-form">
-                    @csrf
-                    @method('delete')
-                </form> --}}
                     @endforeach
                 </div>
             </div>
