@@ -53,6 +53,10 @@
                             href="{{ route('admin.about.index') }}">About</a></li>
                 </ul>
                 <ul class="dropdown-menu">
+                    <li class="dropdown {{ setActive(['admin.become-vendor.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.become-vendor.index') }}">become vendor info</a></li>
+                </ul>
+                <ul class="dropdown-menu">
                     <li class="dropdown {{ setActive(['admin.terms-and-conditions.*']) }}"><a class="nav-link"
                             href="{{ route('admin.terms-and-conditions.index') }}">terms and conditons</a></li>
                 </ul>

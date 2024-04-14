@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\AdminReviewController;
 use App\Http\Controllers\Backend\AdminVendorProfileContorller;
 use App\Http\Controllers\Backend\AdvertisementController;
 use App\Http\Controllers\Backend\AllVendorsProductsController;
+use App\Http\Controllers\Backend\BecomeVendorController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
@@ -215,6 +216,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     //About==============================================================================
     Route::get('about', [AboutController::class, 'index'])->name('about.index');
     Route::put('about/update', [AboutController::class, 'update'])->name('about.update');
+
+    //become-vendor _______________________________________________________________________________________
+    Route::get('become-vendor', [BecomeVendorController::class, 'index'])->name('become-vendor.index');
+    Route::put('become-vendor/update', [BecomeVendorController::class, 'update'])->name('become-vendor.update');
+
     //terms and conditions================================================================
     Route::get('terms-and-conditions', [TermsAndConditionController::class, 'index'])->name('terms-and-conditions.index');
     Route::put('terms-and-conditions/update', [TermsAndConditionController::class, 'update'])->name('terms-and-conditions.update');

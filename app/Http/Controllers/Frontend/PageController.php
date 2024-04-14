@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Mail\Contact;
 use App\Models\About;
+use App\Models\BecomeVendor;
 use App\Models\EmailConfiguration;
 use App\Models\TermsAndCondition;
 use Illuminate\Http\Request;
@@ -16,6 +17,12 @@ class PageController extends Controller
     {
         $about = About::first();
         return view('frontend.pages.about', compact('about'));
+    }
+
+    function becomeVendor()
+    {
+        $content = BecomeVendor::first();
+        return view('frontend.pages.about', compact('content'));
     }
 
     function termsAndConditions()

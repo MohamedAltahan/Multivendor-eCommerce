@@ -124,6 +124,9 @@ Route::get('vendor-products/{id}', [HomeController::class, 'vendorProducts'])->n
 //About page___________________________________________________________________________
 Route::get('about', [PageController::class, 'about'])->name('about');
 
+//be a vendor page___________________________________________________________________________
+Route::get('become-vendor', [PageController::class, 'becomeVendor'])->name('become-vendor');
+
 //terms and conditions page___________________________________________________________________________
 Route::get('terms-and-conditions', [PageController::class, 'termsAndConditions'])->name('terms-and-conditions');
 
