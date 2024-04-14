@@ -109,7 +109,7 @@
                     'admin.vendor-profile.*',
                     'admin.products*',
                     'admin.variant.*',
-                    'admin.product.variant-details*',
+                    'admin.product-variant.*',
                     'admin.reviews.index',
                 ]) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
