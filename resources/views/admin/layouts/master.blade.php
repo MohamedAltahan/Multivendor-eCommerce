@@ -51,13 +51,13 @@
                 id: "{{ auth('admin')->user()->id }}",
                 image: "{{ asset('uploads/' . auth('admin')->user()->image) }}",
             }
-            console.log(USER);
         </script>
         <script>
             const PUSHER = {
                 key: "{{ $pusherSetting->pusher_key }}",
                 cluster: "{{ $pusherSetting->pusher_cluster }}"
             }
+            console.log(PUSHER.cluster);
         </script>
         @vite(['resources/js/app.js', 'resources/js/admin.js'])
 

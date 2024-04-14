@@ -12,8 +12,19 @@ class Chat extends Model
     {
         return $this->belongsTo(User::class, 'receiver_id', 'id')->select('id', 'image', 'name');
     }
+
+    function adminReceiverProfile()
+    {
+        return $this->belongsTo(User::class, 'receiver_id', 'id')->select('id', 'image', 'name');
+    }
+
     function senderProfile()
     {
         return $this->belongsTo(User::class, 'sender_id', 'id')->select('id', 'image', 'name');
+    }
+
+    function adminSenderProfile()
+    {
+        return $this->belongsTo(Admin::class, 'sender_id', 'id')->select('id', 'image', 'name');
     }
 }
