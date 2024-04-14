@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,7 @@ class AdminProfileController extends Controller
 
         $request->validate([
             'name' => ['required', 'max:100'],
-            'email' => ['required', 'email', 'unique:users,email,' . Auth::guard('admin')->user()->id],
+            'email' => ['required', 'email', 'unique:admins,email,' . Auth::guard('admin')->user()->id],
             'image' => ['image', 'max:2048']
         ]);
 
@@ -34,13 +35,14 @@ class AdminProfileController extends Controller
         if ($request->hasFile('image')) {
             $profileData['image'] = $newImage;
         }
-        User::where('id', Auth::guard('admin')->user()->id)->update($profileData);
+        Admin::where('id', Auth::guard('admin')->user()->id)->update($profileData);
         if ($oldImage && $newImage) {
             Storage::disk('myDisk')->delete($oldImage);
         }
         toastr()->success('Profile updated successfully');
         return redirect()->back();
     }
+
     //Admin update password ----------------------------------------------------------------
     public function passwordUpdate(Request $request)
     {
@@ -50,7 +52,7 @@ class AdminProfileController extends Controller
             'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
-        $request->user()->update([
+        $request->user('admin')->update([
             'password' => bcrypt($request->password)
         ]);
         toastr()->success('Password updated successfully');
