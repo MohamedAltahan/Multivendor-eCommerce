@@ -56,7 +56,7 @@ class SubCategoryDataTable extends DataTable
      */
     public function query(SubCategory $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->orderby('category_id')->newQuery();
     }
 
     /**
