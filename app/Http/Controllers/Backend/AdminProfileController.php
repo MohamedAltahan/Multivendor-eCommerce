@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class AdminProfileController extends Controller
@@ -46,16 +47,24 @@ class AdminProfileController extends Controller
     //Admin update password ----------------------------------------------------------------
     public function passwordUpdate(Request $request)
     {
-        dd('fkd');
         $request->validate([
             //current_password ->check the current user password from database
-            'current_password' => ['required', 'current_password'],
+            'current_password' => ['required'],
             'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
-        $request->user('admin')->update([
-            'password' => bcrypt($request->password)
-        ]);
+        $userId = Auth::guard('admin')->user()->id;
+        $password = Admin::where('id', $userId)->first()->password;
+
+        if (Hash::check($request->current_password, $password)) {
+            $request->user('admin')->update([
+                'password' => bcrypt($request->password)
+            ]);
+        } else {
+            toastr()->error('worng current password');
+            return redirect()->back();
+        }
+
         toastr()->success('Password updated successfully');
         return redirect()->back();
     }
