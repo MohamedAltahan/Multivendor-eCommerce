@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreignId('brand_id')->constrained('brands');
             $table->integer('quantity');
             $table->text('short_description');
-            $table->text('long_description');
+            $table->text('long_description')->nullable();
             $table->text('video_link')->nullable();
             $table->string('sku')->nullable();
             $table->float('price');
