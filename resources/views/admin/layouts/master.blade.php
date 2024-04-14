@@ -33,7 +33,7 @@
 
         @stack('styles')
         <!-- Start GA -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+        {{-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script> --}}
         <script>
             window.dataLayer = window.dataLayer || [];
 
@@ -51,6 +51,7 @@
                 id: "{{ auth('admin')->user()->id }}",
                 image: "{{ asset('uploads/' . auth('admin')->user()->image) }}",
             }
+            console.log(USER);
         </script>
         <script>
             const PUSHER = {

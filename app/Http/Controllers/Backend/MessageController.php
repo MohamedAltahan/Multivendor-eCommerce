@@ -13,7 +13,7 @@ class MessageController extends Controller
 
     function index()
     {
-        $userId = auth()->user()->id;
+        $userId = auth('admin')->user()->id;
 
         $chatUsers = Chat::with('senderProfile')->select(['sender_id'])
             ->where('receiver_id', $userId)
@@ -25,7 +25,7 @@ class MessageController extends Controller
 
     function getMessages(Request $request)
     {
-        $senderId = auth()->user()->id;
+        $senderId = auth('admin')->user()->id;
         $receiverId = $request->receiver_id;
 
         $messages = Chat::whereIn('receiver_id', [$senderId, $receiverId])
@@ -46,7 +46,7 @@ class MessageController extends Controller
         ]);
 
         $message = new Chat();
-        $message->sender_id = auth()->user()->id;
+        $message->sender_id = auth('admin')->user()->id;
         $message->receiver_id = $request->receiver_id;
         $message->message = $request->message;
         $message->save();

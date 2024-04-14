@@ -18,7 +18,7 @@
                                     @php
                                         $unseenMessages = \App\Models\Chat::where([
                                             'sender_id' => $chatUser->senderProfile->id,
-                                            'receiver_id' => auth()->user()->id,
+                                            'receiver_id' => auth('admin')->user()->id,
                                             'seen' => 0,
                                         ])->exists();
                                     @endphp
