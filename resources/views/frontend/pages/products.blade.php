@@ -100,7 +100,7 @@
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseThree3" aria-expanded="false"
                                         aria-controls="collapseThree">
-                                        brand
+                                        Brand
                                     </button>
                                 </h2>
                                 <div id="collapseThree3" class="accordion-collapse collapse show"
@@ -150,58 +150,7 @@
                                 id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                 <div class="row">
                                     @foreach ($products as $product)
-                                        <div class="col-xl-4  col-sm-6">
-                                            <div class="wsus__product_item">
-                                                <span class="wsus__new">{{ $product->product_type }}</span>
-                                                @if (checkDiscount($product))
-                                                    <span class="wsus__minus">
-                                                        -{{ calcDiscountPercentage($product->price, $product->offer_price) }}%
-                                                    </span>
-                                                @endif
-
-                                                <a class="wsus__pro_link"
-                                                    href="{{ route('show-product-details', $product->slug) }}">
-                                                    <img src="{{ asset('uploads/' . @$product->firstImage->name) }}"
-                                                        alt="product" class="img-fluid w-100 img_1" />
-                                                </a>
-
-                                                <ul class="wsus__single_pro_icon">
-                                                    <li><a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModal"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                                    <li><a href="#"><i class="far fa-random"></i></a>
-                                                </ul>
-                                                <div class="wsus__product_details">
-                                                    <a class="wsus__category"
-                                                        href="#">{{ $product->category->name }}
-                                                    </a>
-                                                    <p class="wsus__pro_rating">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star-half-alt"></i>
-                                                        <span>(133 review)</span>
-                                                    </p>
-                                                    <a class="wsus__pro_name"
-                                                        href="{{ route('show-product-details', $product->slug) }}">{{ limitText($product->name, 50) }}</a>
-
-                                                    @if (checkDiscount($product))
-                                                        <p class="wsus__price"><span
-                                                                class="currency_color">{{ $setting->currency }}</span>{{ $product->offer_price }}
-                                                            <del>{{ $setting->currency }}{{ $product->price }}</del>
-                                                        </p>
-                                                    @else
-                                                        <p class="wsus__price"><span
-                                                                class="currency_color">{{ $setting->currency }}</span>{{ $product->price }}
-                                                        </p>
-                                                    @endif
-
-                                                    <a class="add_cart" href="#">add to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @include('frontend.home.big-product-card')
                                     @endforeach
                                 </div>
                                 @if (count($products) == 0)
