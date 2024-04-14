@@ -46,6 +46,7 @@ class AdminProfileController extends Controller
     //Admin update password ----------------------------------------------------------------
     public function passwordUpdate(Request $request)
     {
+        dd('fkd');
         $request->validate([
             //current_password ->check the current user password from database
             'current_password' => ['required', 'current_password'],
