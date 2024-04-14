@@ -17,6 +17,7 @@ function scrollTobottom() {
 }
 
 window.Echo.private("message." + USER.id).listen("MessageEvent", (e) => {
+    console.log(e);
     let mainChatBox = $(".chat-content");
     if (mainChatBox.attr("data-inbox") == e.sender_id) {
         var message = `
