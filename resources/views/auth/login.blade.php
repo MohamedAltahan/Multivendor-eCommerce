@@ -104,13 +104,12 @@
                                         <!-- Email Address -->
                                         <div class="wsus__login_input">
                                             <i class="far fa-envelope"></i>
-                                            <x-form.input id="email" type="email" name="email"
-                                                placeholder="Email" />
+                                            <input id="email" type="email" name="email" placeholder="Email" />
                                         </div>
                                         <!-- Password -->
                                         <div class="wsus__login_input">
                                             <i class="fas fa-key"></i>
-                                            <x-form.input id="password" type="password" name="password"
+                                            <input id="password" type="password" name="password"
                                                 placeholder="Password" />
                                         </div>
                                         <!-- Confirm Password -->
