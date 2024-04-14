@@ -90,7 +90,6 @@ class SubCategoryDataTable extends DataTable
 
             Column::make('id'),
             Column::make('name'),
-            Column::make('slug'),
             Column::make('Parent category'),
             Column::make('status'),
             Column::computed('action')
