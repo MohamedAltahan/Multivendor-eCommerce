@@ -14,9 +14,9 @@
 
     {{-- scripts ----------------------------------------------------------- --}}
     @push('scripts')
-        {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
         <script>
             $(document).ready(function() {
+                {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
 
                 $('body').on('click', '.change-status', function() {
                     let isChecked = $(this).is(':checked');
