@@ -15,7 +15,7 @@ class Chat extends Model
 
     function adminReceiverProfile()
     {
-        return $this->belongsTo(User::class, 'receiver_id', 'id')->select('id', 'image', 'name');
+        return $this->belongsTo(Admin::class, 'receiver_id', 'id')->select('id', 'image', 'name');
     }
 
     function senderProfile()

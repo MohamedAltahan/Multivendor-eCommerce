@@ -19,23 +19,26 @@
                                                 @foreach ($chatUsers as $chatUser)
                                                     @php
                                                         $unseenMessages = \App\Models\Chat::where([
-                                                            'sender_id' => $chatUser->receiverProfile->id,
+                                                            'sender_id' =>
+                                                                $chatUser->receiverProfile->id ??
+                                                                $chatUser->adminReceiverProfile->id,
                                                             'receiver_id' => auth()->user()->id,
                                                             'seen' => 0,
                                                         ])->exists();
                                                     @endphp
                                                     <button class="nav-link chat-user-profile"
-                                                        data-id="{{ $chatUser->receiverProfile->id }}" data-bs-toggle="pill"
-                                                        data-bs-target="#v-pills-home" type="button" role="tab"
-                                                        aria-controls="v-pills-home" aria-selected="true">
+                                                        data-id="{{ $chatUser->receiverProfile->id ?? $chatUser->adminReceiverProfile->id }}"
+                                                        data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button"
+                                                        role="tab" aria-controls="v-pills-home" aria-selected="true">
                                                         <div
                                                             class="wsus_chat_list_img {{ $unseenMessages ? 'msg-notification' : '' }}">
-                                                            <img src="{{ asset('uploads/' . $chatUser->receiverProfile->image) }}"
+                                                            <img src="{{ asset('uploads/') . ($chatUser->receiverProfile->image ?? $chatUser->adminReceiverProfile->image) }}"
                                                                 alt="user" class="img-fluid">
                                                             <span class="pending d-none" id="pending-6">0</span>
                                                         </div>
                                                         <div class="wsus_chat_list_text">
-                                                            <h4>{{ $chatUser->receiverProfile->name }}</h4>
+                                                            <h4>{{ $chatUser->receiverProfile->name ?? $chatUser->adminReceiverProfile->name }}
+                                                            </h4>
                                                         </div>
                                                     </button>
                                                 @endforeach
