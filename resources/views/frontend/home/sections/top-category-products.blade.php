@@ -39,19 +39,19 @@
                                         $category = App\Models\Category::find($lastKey['main_category']);
                                         $products[] = App\Models\Product::where('category_id', $category->id)
                                             ->orderBy('id', 'DESC')
-                                            ->take(12)
+                                            ->take(6)
                                             ->get();
                                     } elseif (array_keys($lastKey)[0] == 'sub_category') {
                                         $category = App\Models\SubCategory::find($lastKey['sub_category']);
                                         $products[] = App\Models\Product::where('sub_category_id', $category->id)
                                             ->orderBy('id', 'DESC')
-                                            ->take(12)
+                                            ->take(6)
                                             ->get();
                                     } else {
                                         $category = App\Models\ChildCategory::find($lastKey['child_category']);
                                         $products[] = App\Models\Product::where('child_category_id', $category->id)
                                             ->orderBy('id', 'DESC')
-                                            ->take(12)
+                                            ->take(6)
                                             ->get();
                                     }
                                 @endphp
