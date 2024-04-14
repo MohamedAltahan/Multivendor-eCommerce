@@ -10,8 +10,7 @@
 
         <li class="dropdown"><a href="#" data-toggle="dropdown"
                 class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="logo" style="width: 40px;height: 40px;object-fit: cover;"
-                    src="{{ asset('uploads/' . Auth::guard('admin')->user()->image) }}" class="rounded-circle mr-1">
+                <img alt="logo" style="width: 40px;height: 40px;object-fit: cover;" class="rounded-circle mr-1">
                 <div class="d-sm-none d-lg-inline-block">{{ Auth::guard('admin')->user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
