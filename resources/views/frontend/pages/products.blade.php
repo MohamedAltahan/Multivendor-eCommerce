@@ -150,7 +150,9 @@
                                 id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                 <div class="row">
                                     @foreach ($products as $product)
-                                        @include('frontend.home.big-product-card')
+                                        <div class="col-xl-4  col-sm-6">
+                                            @include('frontend.home.big-product-card')
+                                        </div>
                                     @endforeach
                                 </div>
                                 @if (count($products) == 0)
