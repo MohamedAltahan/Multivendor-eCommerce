@@ -70,7 +70,7 @@
                                         <div class="text-center row justify-content-around">
 
                                             <a type="button" href="{{ route('github.login') }}"
-                                                class=" col-md-3 btn btn-dark "><i class="fab fa-github "></i>
+                                                class=" col-md-3 btn btn-dark my-1"><i class="fab fa-github "></i>
                                                 Github</a>
 
                                             <a type="button" href="{{ route('facebook.login') }}"
@@ -78,7 +78,7 @@
                                                 Facebook</a>
 
                                             <a type="button" href="{{ route('google.login') }}"
-                                                class="  btn btn-outline-success col-md-3"><i class="fab fa-google"></i>
+                                                class=" my-1 btn btn-outline-success col-md-3"><i class="fab fa-google"></i>
                                                 Google</a>
 
                                         </div>
