@@ -57,7 +57,7 @@ class ProductController extends Controller
             'offer_price' => ['nullable', 'lt:price'],
             'quantity' => ['required'],
             'short_description' => ['required', 'max: 600'],
-            'long_description' => ['required'],
+            'long_description' => ['nullable'],
             'seo_title' => ['nullable', 'max:200'],
             'seo_description' => ['nullable', 'max:250'],
             'status' => ['required']
@@ -108,7 +108,7 @@ class ProductController extends Controller
             'offer_end_date' => ['after:offer_start_date', 'nullable'],
             'quantity' => ['required'],
             'short_description' => ['required', 'max: 600'],
-            'long_description' => ['required'],
+            'long_description' => ['nullable'],
             'seo_title' => ['nullable', 'max:200'],
             'seo_description' => ['nullable', 'max:250'],
             'status' => ['required']
