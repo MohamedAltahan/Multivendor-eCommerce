@@ -57,7 +57,6 @@
                 key: "{{ $pusherSetting->pusher_key }}",
                 cluster: "{{ $pusherSetting->pusher_cluster }}"
             }
-            console.log(PUSHER.cluster);
         </script>
         @vite(['resources/js/app.js', 'resources/js/admin.js'])
 
