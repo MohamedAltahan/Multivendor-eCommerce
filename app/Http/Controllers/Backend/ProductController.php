@@ -53,7 +53,6 @@ class ProductController extends Controller
         $request->validate([
             'name' => ['required', 'max:200'],
             'category_id' => ['required'],
-            'brand_id' => ['required'],
             'price' => ['required', 'numeric'],
             'offer_price' => ['nullable', 'lt:price'],
             'quantity' => ['required'],
@@ -82,9 +81,9 @@ class ProductController extends Controller
     {
 
         $product = Product::findOrFail($id);
-        // if ($product->vendor_id != $this->userId) {
-        //     return abort(403);
-        // }
+        if ($product->vendor_id != Auth::guard('admin')->user()->vendor->id) {
+            abort(404);
+        }
 
         $categories = Category::get();
         $subCategories = SubCategory::where('category_id', $product->category_id)->get();
@@ -103,7 +102,6 @@ class ProductController extends Controller
             'image' => ['image', 'max:3000'],
             'name' => ['required', 'max:200'],
             'category_id' => ['required'],
-            'brand_id' => ['required'],
             'price' => ['required'],
             'offer_price' => ['nullable', 'lt:price'],
             'offer_start_date' => ['before:offer_end_date', 'nullable'],
