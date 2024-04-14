@@ -91,7 +91,7 @@ class ProductDataTable extends DataTable
             ->setTableId('product-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            //->dom('Bfrtip')
+            ///->dom('Bfrtip')
             ->orderBy(0, 'asc')
             ->selectStyleSingle()
             ->buttons([
