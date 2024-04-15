@@ -20,8 +20,8 @@
             </div>
         </li>
     @empty
-        <h5 class="text-primary " style="justify-content: center">Cart is empty</h5>
+        <h5 class="text-primary " style="justify-content: center">{{ __('Cart is empty') }}</h5>
     @endforelse
 
 </ul>
-<h5>sub total <span>{{ $totalCartPrice }}</span></h5>
+<h5>{{ __('Sub total') }}<span>{{ $totalCartPrice }}</span></h5>

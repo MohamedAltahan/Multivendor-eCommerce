@@ -61,33 +61,35 @@
                         </li>
 
                         <li><a class="{{ setActive(['vendors.page']) }}"
-                                href="{{ route('vendors.page') }}">Vendors</a></li>
+                                href="{{ route('vendors.page') }}">{{ __('Vendors') }}</a></li>
 
                         <li><a class="{{ setActive(['track-order.index']) }}"
-                                href="{{ route('track-order.index') }}">track
-                                order</a></li>
-                        <li><a class="{{ setActive(['about']) }}" href="{{ route('about') }}">About</a></li>
-                        <li><a class="{{ setActive(['contact']) }}" href="{{ route('contact') }}">Contact us</a></li>
+                                href="{{ route('track-order.index') }}">{{ __('Track order') }}</a></li>
+                        <li><a class="{{ setActive(['about']) }}" href="{{ route('about') }}">{{ __('About') }}</a>
+                        </li>
+                        <li><a class="{{ setActive(['contact']) }}"
+                                href="{{ route('contact') }}">{{ __('Contact Us') }}</a></li>
                     </ul>
                     <ul class="wsus__menu_item wsus__menu_item_right">
                         @auth
 
                             @if (auth()->user()->role == 'user')
-                                <li><a href="{{ route('user.dashboard') }}">my account</a></li>
+                                <li><a href="{{ route('user.dashboard') }}">{{ __('My account') }}</a></li>
                             @elseif (auth()->user()->role == 'vendor')
-                                <li><a href="{{ route('vendor.dashboard') }}">Vendor dashboard</a></li>
+                                <li><a href="{{ route('vendor.dashboard') }}">{{ __('Vendor dashboard') }}</a></li>
                             @elseif (auth()->user()->role == 'admin')
-                                <li><a href="{{ route('admin.dashboard') }}">Admin dashboard</a></li>
+                                <li><a href="{{ route('admin.dashboard') }}">{{ __('Admin dashboard') }}</a></li>
                             @endif
 
                             <li> <a href="javascript:$('#logout_form').submit();" class=""><i
-                                        class="fas fa-sign-out-alt"> Logout </i></a></li>
+                                        class="fas fa-sign-out-alt"> {{ __('Logout') }} </i></a></li>
 
                             <form method="post" id="logout_form" action="{{ route('logout') }}">
                                 @csrf
                             </form>
                         @else
-                            <li><a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"> login</i></a></li>
+                            <li><a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"> {{ __('Login') }}</i></a>
+                            </li>
                         @endauth
                     </ul>
                 </div>
@@ -116,14 +118,14 @@
             <li><a href="{{ route('vendor.dashboard') }}"><i class="far fa-user"></i></a></li>
             @endif
 
-            <li> <a style="width: 65px" href="javascript:$('#logout_form').submit();" class=""> Logout
+            <li> <a style="width: 65px" href="javascript:$('#logout_form').submit();" class=""> {{ __('Logout') }}
                     </i></a></li>
 
             <form method="post" id="logout_form" action="{{ route('logout') }}">
                 @csrf
             </form>
         @else
-            <li><a style="width: 60px" href="{{ route('login') }}">login</i></a></li>
+            <li><a style="width: 60px" href="{{ route('login') }}">{{ __('Login') }}</i></a></li>
         @endauth
         </li>
     </ul>
@@ -135,11 +137,11 @@
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
-                role="tab" aria-controls="pills-home" aria-selected="true">Categories</button>
+                role="tab" aria-controls="pills-home" aria-selected="true">{{ __('Categories') }}</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
-                role="tab" aria-controls="pills-profile" aria-selected="false">main menu</button>
+                role="tab" aria-controls="pills-profile" aria-selected="false">{{ __('Main Menu') }}</button>
         </li>
     </ul>
     <div class="tab-content" id="pills-tabContent">
@@ -183,11 +185,11 @@
             <div class="wsus__mobile_menu_main_menu">
                 <div class="accordion accordion-flush" id="accordionFlushExample2">
                     <ul>
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="{{ route('about') }}">About us</a></li>
-                        <li><a href="{{ route('contact') }}">Contact us</a></li>
-                        <li><a href="{{ route('vendors.page') }}">vendor</a></li>
-                        <li><a href="{{ route('track-order.index') }}">track order</a></li>
+                        <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+                        <li><a href="{{ route('about') }}">{{ __('About') }}</a></li>
+                        <li><a href="{{ route('contact') }}">{{ __('Contact Us') }}</a></li>
+                        <li><a href="{{ route('vendors.page') }}">{{ __('Vendors') }}</a></li>
+                        <li><a href="{{ route('track-order.index') }}">{{ __('Track order') }}</a></li>
                     </ul>
                 </div>
             </div>

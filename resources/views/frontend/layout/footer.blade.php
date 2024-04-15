@@ -53,15 +53,15 @@
             </div>
             <div class="col-xl-4 col-sm-7 col-md-8 col-lg-5">
                 <div class="wsus__footer_content wsus__footer_content_2">
-                    <h3>Subscribe To Our Newsletter</h3>
-                    <p>Get all the latest information on Events, Sales and Offers.</p>
+                    <h3>{{ __('Subscribe To Our Newsletter') }}</h3>
+                    <p>{{ __('Get all the latest information on Sales and Offers') }}</p>
                     <form action="{{ route('newsletter-subscribe') }}" method="POST" id="newsLetterForm">
                         @csrf
                         <input type="text" class="newsletter" placeholder="Email" name="subscriber_email">
-                        <button type="submit" class="common_btn subscribe_btn">subscribe</button>
+                        <button type="submit" class="common_btn subscribe_btn">{{ __('Subscribe') }}</button>
                     </form>
                     <div class="footer_payment">
-                        <p>We're using safe payment for :</p>
+                        <p>{{ __("We're using safe payment for:") }} </p>
                         <img src="{{ asset('frontend/images/Payment-Icons.jpg') }}" alt="card" class="img-fluid">
                     </div>
                 </div>

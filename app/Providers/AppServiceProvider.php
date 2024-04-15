@@ -7,6 +7,7 @@ use App\Models\LogoSetting;
 use App\Models\PusherSetting;
 use App\Models\Setting;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -26,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        //set language_______________________________________________________________
+        App::setLocale('ar');
+
         Paginator::useBootstrap();
         //set time zone
         $setting = Setting::first();

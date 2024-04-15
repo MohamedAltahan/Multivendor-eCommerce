@@ -15,8 +15,8 @@ class PageController extends Controller
 {
     function about()
     {
-        $about = About::first();
-        return view('frontend.pages.about', compact('about'));
+        $content = About::first();
+        return view('frontend.pages.about', compact('content'));
     }
 
     function becomeVendor()

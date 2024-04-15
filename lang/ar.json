@@ -1,3 +1,24 @@
 {
-    "Home": "الرئيسية"
+    "Home": "الرئيسية",
+    "Vendors": "البائعين",
+    "Track order": "تتبع الشحنة",
+    "About": "من نحن",
+    "Contact Us": "تواصل معنا",
+    "My account": "حسابي",
+    "Vendor dashboard": "لوحة التحكم",
+    "Admin dashboard": "لوحة التحكم",
+    "Logout": "الخروج",
+    "Login": "الدخول",
+    "Categories": "الفئات",
+    "Main Menu": "القائمة الرئيسية",
+    "Subscribe To Our Newsletter": "الاشتراك فى نشرة الاخبار",
+    "Get all the latest information on Sales and Offers": "للحصول على اجدد العروض والخصومات",
+    "Subscribe": "اشتراك",
+    "We're using safe payment for:": ": نستخدم طرق دفع امنة",
+    "Shopping cart": "سلة المشتريات",
+    "Cart is empty": "السلة فارغة",
+    "Sub total": "المجموع الفرعي",
+    "View cart": "عرض السلة",
+    "Checkout": "الدفع",
+    "": ""
 }

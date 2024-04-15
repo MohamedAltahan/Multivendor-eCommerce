@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ar',
 
     /*
     |--------------------------------------------------------------------------
@@ -95,7 +95,7 @@ return [
     | the language folders that are provided through your application.
     |
     */
-
+    //work only with php files not json
     'fallback_locale' => 'en',
 
     /*

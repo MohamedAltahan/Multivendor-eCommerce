@@ -56,7 +56,8 @@
             </div>
 
             <div class="wsus__mini_cart">
-                <h4>shopping cart <span class="wsus_close_mini_cart"><i class="far fa-times"></i></span></h4>
+                <h4>{{ __('Shopping cart') }} <span class="wsus_close_mini_cart"><i class="far fa-times"></i></span>
+                </h4>
                 <div class="side_cart_wrapper">
                     <ul>
                         @forelse (Cart::content() as $item)
@@ -81,15 +82,15 @@
                             </li>
 
                         @empty
-                            <h5 class="text-primary " style="justify-content: center">Cart is empty</h5>
+                            <h5 class="text-primary " style="justify-content: center">{{ __('Cart is empty') }}</h5>
                         @endforelse
                     </ul>
-                    <h5>sub total <span>{{ calcCartTotal() }}</span></h5>
+                    <h5>{{ __('Sub total') }}<span>{{ calcCartTotal() }}</span></h5>
                 </div>
 
                 <div class="wsus__minicart_btn_area">
-                    <a class="common_btn" href="{{ route('cart-details') }}">view cart</a>
-                    <a class="common_btn" href="{{ route('user.checkout') }}">checkout</a>
+                    <a class="common_btn" href="{{ route('cart-details') }}">{{ __('View cart') }}</a>
+                    <a class="common_btn" href="{{ route('user.checkout') }}">{{ __('Checkout') }}</a>
                 </div>
             </div>
 
