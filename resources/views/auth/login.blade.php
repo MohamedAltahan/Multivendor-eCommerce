@@ -85,7 +85,7 @@
 
                                         </div>
                                         <br>
-                                        <button class="common_btn" type="submit">login</button>
+                                        <button class="common_btn" type="submit">{{ __('Login') }}</button>
 
                                     </form>
                                 </div>
@@ -100,29 +100,31 @@
                                         <!-- Name -->
                                         <div class="wsus__login_input">
                                             <i class="fas fa-user-tie"></i>
-                                            <x-form.input id="name" type="text" name="name" placeholder="Name"
-                                                autofocus />
+                                            <x-form.input id="name" type="text" name="name"
+                                                placeholder="{{ __('Name') }}" autofocus />
                                         </div>
                                         <!-- Email Address -->
                                         <div class="wsus__login_input">
                                             <i class="far fa-envelope"></i>
-                                            <input id="email" type="email" name="email" placeholder="Email" />
+                                            <input id="email" type="email" name="email"
+                                                placeholder="{{ __('Email') }}" />
                                         </div>
                                         <!-- Password -->
                                         <div class="wsus__login_input">
                                             <i class="fas fa-key"></i>
                                             <input id="password" type="password" name="password"
-                                                placeholder="Password" />
+                                                placeholder="{{ __('Password') }}" />
                                         </div>
                                         <!-- Confirm Password -->
                                         <div class="wsus__login_input">
                                             <i class="fas fa-key"></i>
                                             <x-form.input id="password_confirmation" type="password"
-                                                name="password_confirmation" placeholder="Confirm Password" />
+                                                name="password_confirmation"
+                                                placeholder="{{ __('Confirm Password') }}" />
                                         </div>
 
 
-                                        <button class="common_btn my-4" type="submit">signup</button>
+                                        <button class="common_btn my-4" type="submit">{{ __('Signup') }}</button>
                                     </form>
                                 </div>
                             </div>
