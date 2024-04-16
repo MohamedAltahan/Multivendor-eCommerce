@@ -1,6 +1,6 @@
 @extends('frontend.dashboard.layouts.master')
 @section('title')
-    {{ $setting->site_name }} - Profile
+    {{ $setting->site_name }} - {{ __('Profile') }}
 @endsection
 @section('content')
     <!--=============================  DASHBOARD START  ==============================-->
@@ -10,10 +10,10 @@
             <div class="row">
                 <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
                     <div class="dashboard_content mt-2 mt-md-0">
-                        <h3><i class="far fa-user"></i> profile</h3>
+                        <h3><i class="far fa-user"></i> {{ __('Profile') }}</h3>
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
-                                <h4>basic information</h4>
+                                <h4>{{ __('Basic information') }}</h4>
                                 {{-- first form --------------------------------------- --}}
                                 <form action="{{ route('user.profile.update') }}" method="post"
                                     enctype="multipart/form-data">
@@ -39,7 +39,7 @@
                                         <div class="col-md-6">
                                             <div class="wsus__dash_pro_single">
                                                 <i class="fas fa-user-tie"></i>
-                                                <x-form.input name="name" placeholder="Your Name"
+                                                <x-form.input name="name" placeholder="{{ __('Your Name') }}"
                                                     value="{{ Auth::user()->name }}" />
                                             </div>
                                         </div>
@@ -47,18 +47,18 @@
                                         <div class=" col-md-6">
                                             <div class="wsus__dash_pro_single">
                                                 <i class="fal fa-envelope-open"></i>
-                                                <x-form.input type="email" name="email" placeholder="Email"
-                                                    value="{{ Auth::user()->email }}" />
+                                                <x-form.input type="email" name="email"
+                                                    placeholder="{{ __('Email') }}" value="{{ Auth::user()->email }}" />
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-xl-12">
-                                        <button class="common_btn mb-4 mt-2" type="submit">Update data</button>
+                                        <button class="common_btn mb-4 mt-2" type="submit">{{ __('Update') }}</button>
                                     </div>
                                 </form>
                                 {{-- second form(update password) ------------------------------------------ --}}
-                                <h4>Update password</h4>
+                                <h4>{{ __('Update password') }}</h4>
                                 <form action="{{ route('user.password.update') }}" method="POST">
                                     @csrf
                                     <div class="wsus__dash_pass_change mt-2">
@@ -68,7 +68,7 @@
                                                 <div class="wsus__dash_pro_single">
                                                     <i class="fas fa-unlock-alt"></i>
                                                     <x-form.input name="current_password" type="password"
-                                                        placeholder="Current Password" />
+                                                        placeholder="{{ __('Current Password') }}" />
                                                 </div>
                                             </div>
 
@@ -76,7 +76,7 @@
                                                 <div class="wsus__dash_pro_single">
                                                     <i class="fas fa-lock-alt"></i>
                                                     <x-form.input name="password" type="password"
-                                                        placeholder="New Password" />
+                                                        placeholder="{{ __('New Password') }}" />
                                                 </div>
                                             </div>
 
@@ -84,12 +84,13 @@
                                                 <div class="wsus__dash_pro_single">
                                                     <i class="fas fa-lock-alt"></i>
                                                     <x-form.input name="password_confirmation" type="password"
-                                                        placeholder="Confirm Password" />
+                                                        placeholder="{{ __('Confirm Password') }}" />
                                                 </div>
                                             </div>
 
                                             <div class="col-xl-12">
-                                                <button class="common_btn" type="submit">Update password</button>
+                                                <button class="common_btn"
+                                                    type="submit">{{ __('Update password') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -104,6 +105,6 @@
         </div>
     </section>
     <!--=============================
-                                                                                                                                                                                                                                                                                                                DASHBOARD START
-                                                                                                                                                                                                                                                                                                              ==============================-->
+                                                                                                                                                                                                                                                                                                                                        DASHBOARD START
+                                                                                                                                                                                                                                                                                                                                      ==============================-->
 @endsection

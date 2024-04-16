@@ -1,6 +1,6 @@
 @extends('frontend.dashboard.layouts.master')
 @section('title')
-    {{ $setting->site_name }} - Reviews
+    {{ $setting->site_name }} - {{ __('Be a vendor') }}
 @endsection
 @section('content')
     <!--============================= DASHBOARD START  ==============================-->
@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
                     <div class="dashboard_content mt-2 mt-md-0">
-                        <h3><i class="far fa-user"></i>Make request to be a vendor</h3>
+                        <h3><i class="far fa-user"></i>{{ __('Make request to be a vendor') }}</h3>
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
                                 {!! @$content->content !!}
@@ -35,11 +35,11 @@
                                         </div>
                                     </div>
                                     <x-form.input class="mb-2" name="address" label="Shop address" />
-                                    <label for="">About your store</label>
+                                    <label for="">{{ __('About your store') }}</label>
                                     <div class="wsus__dash_pro_single">
                                         <textarea name="description" class="form control" placeholder="About your store"></textarea>
                                     </div>
-                                    <button class="btn btn-primary">Submit</button>
+                                    <button class="btn btn-primary">{{ __('Submit') }}</button>
                                 </form>
                             </div>
                         </div>

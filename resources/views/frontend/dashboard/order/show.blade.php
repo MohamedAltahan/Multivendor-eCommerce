@@ -15,7 +15,7 @@
             @include('vendor.layouts.sidebar')
             <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
                 <div class="dashboard_content mt-2 mt-md-0">
-                    <h3><i class="far fa-user"></i>Details</h3>
+                    <h3><i class="far fa-user"></i>{{ __('Details') }}</h3>
                     <!--============================ INVOICE PAGE START ==============================-->
                     <section class="invoice-print">
                         <div class="wsus__invoice_area">
@@ -24,7 +24,7 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-5 mb-md-0">
                                             <div class="wsus__invoice_single">
-                                                <h5>Shipping info</h5>
+                                                <h5>{{ __('Shipping info') }}</h5>
                                                 <h6>{{ $address->name }}</h6>
                                                 <p>{{ $address->email }}</p>
                                                 <p>{{ $address->phone }}</p>
@@ -37,11 +37,12 @@
 
                                         <div class=" col-md-6">
                                             <div class="wsus__invoice_single text-md-end">
-                                                <h5>Order id: # {{ $order->invoice_id }}</h5>
-                                                <h6>Order status: {{ $order->order_status }}</h6>
-                                                <p>Payment method: {{ $order->payment_method }}</p>
-                                                <p>Payment status: {{ $order->payment_status }}</p>
-                                                <p>Transaction id: {{ @$order->transaction->transaction_id }}</p>
+                                                <h5>{{ __('Order id') }} : # {{ $order->invoice_id }}</h5>
+                                                <h6>{{ __('Order status') }} : {{ $order->order_status }}</h6>
+                                                <p>{{ __('Payment method') }} : {{ $order->payment_method }}</p>
+                                                <p>{{ __('Payment status') }} : {{ $order->payment_status }}</p>
+                                                <p>{{ __('Transaction id') }} : {{ @$order->transaction->transaction_id }}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -52,20 +53,20 @@
                                             <tr>
 
                                                 <th class="name">
-                                                    product
+                                                    {{ __('product') }}
 
                                                 </th>
                                                 <th class="amount">
-                                                    Shop name
+                                                    {{ __('Shop name') }}
                                                 </th>
                                                 <th class="amount">
-                                                    Unit price
+                                                    {{ __('Unit price') }}
                                                 </th>
                                                 <th class="quentity">
-                                                    quentity
+                                                    {{ __('Quentity') }}
                                                 </th>
                                                 <th class="total">
-                                                    total
+                                                    {{ __('Total') }}
                                                 </th>
                                             </tr>
 
@@ -101,10 +102,14 @@
                                 </div>
                             </div>
                             <div class="wsus__invoice_footer">
-                                <p><span>Sub total:</span>{{ $setting->currency }}{{ $order->sub_total }} </p>
-                                <p><span>Shipping cost(+):</span>{{ $setting->currency }}{{ @$shipping->cost }} </p>
-                                <p><span>coupon(-):</span>{{ $setting->currency }}{{ @$coupon->discount_value ?: 0 }} </p>
-                                <p><span>Total Amount:</span>{{ $setting->currency }}{{ $order->final_total }} </p>
+                                <p><span>{{ __('Sub total') }} :</span>{{ $setting->currency }}{{ $order->sub_total }}
+                                </p>
+                                <p><span>{{ __('Shipping cost(+)') }}
+                                        :</span>{{ $setting->currency }}{{ @$shipping->cost }} </p>
+                                <p><span>{{ __('coupon(-)') }}
+                                        :</span>{{ $setting->currency }}{{ @$coupon->discount_value ?: 0 }} </p>
+                                <p><span>{{ __('Total Amount') }}
+                                        :</span>{{ $setting->currency }}{{ $order->final_total }} </p>
                             </div>
                         </div>
 
@@ -112,7 +117,7 @@
                     <!--============================= INVOICE PAGE END ================================-->
                     <div class="col-md-8">
                         <div class="mt-2 text-start">
-                            <button class="btn btn-warning print-invoice">Print</button>
+                            <button class="btn btn-warning print-invoice">{{ __('Print') }}</button>
                         </div>
                     </div>
                 </div>

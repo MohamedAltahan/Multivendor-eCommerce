@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('title')
-    {{ $setting->site_name }} - Cart Details
+    {{ $setting->site_name }} - {{ __('Cart Details') }}
 @endsection
 @section('content')
     <!--============================ BREADCRUMB START==============================-->
@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4>cart View</h4>
+                        <h4>{{ __('cart View') }}</h4>
                         <ul>
                             <li><a href="#">home</a></li>
                             <li><a href="#">peoduct</a></li>
@@ -33,27 +33,27 @@
                                 <tbody>
                                     <tr class="d-flex">
                                         <th class="wsus__pro_img">
-                                            product item
+                                            {{ __('Item') }}
                                         </th>
 
                                         <th class="wsus__pro_name">
-                                            product details
+                                            {{ __('Product details') }}
                                         </th>
 
                                         <th class="wsus__pro_tk">
-                                            Unit Price
+                                            {{ __('Unit Price') }}
                                         </th>
 
                                         <th class="wsus__pro_select">
-                                            quantity
+                                            {{ __('Quantity') }}
                                         </th>
 
                                         <th class=" wsus__pro_select">
-                                            Total
+                                            {{ __('Total') }}
                                         </th>
 
                                         <th class="wsus__pro_icon">
-                                            <a href="#" class="common_btn clear_cart">clear cart</a>
+                                            <a href="#" class="common_btn clear_cart">{{ __('Clear cart') }}</a>
                                         </th>
                                     </tr>
                                     @forelse ($cartItems as $item)
@@ -97,7 +97,7 @@
                                     @empty
                                         <tr class="d-flex">
                                             <td class="wsus__pro_icon" style="width: 100%">
-                                                Cart is empty!
+                                                {{ __('Cart is empty') }}
                                             </td>
                                         </tr>
                                         {{ session()->forget('coupon') }}
@@ -110,22 +110,25 @@
                 </div>
                 <div class="col-xl-3">
                     <div class="wsus__cart_list_footer_button" id="sticky_sidebar">
-                        <h6>total cart</h6>
-                        <p>subtotal: <span class="cart_subtotal"> {{ $setting->currency }} {{ calcCartTotal() }}</span>
+                        <h6>{{ __('Total') }}</h6>
+                        <p>{{ __('Subtotal:') }} <span class="cart_subtotal"> {{ $setting->currency }}
+                                {{ calcCartTotal() }}</span>
                         </p>
-                        <p>Coupon(-): <span id="cart_discount">{{ $setting->currency }}{{ getMainCartDiscount() }}</span>
+                        <p>{{ __('Coupon(-)') }}: <span
+                                id="cart_discount">{{ $setting->currency }}{{ getMainCartDiscount() }}</span>
                         </p>
-                        <p class="total"><span>total:</span> <span
+                        <p class="total"><span>{{ __('Total:') }}</span> <span
                                 id="cart_total">{{ $setting->currency }}{{ getMainCartTotal() }}</span></p>
 
                         <form id="coupon_form">
                             <input type="text" placeholder="Coupon Code" name="coupon_code"
                                 value="{{ session()->has('coupon') ? session()->get('coupon')['code'] : '' }}">
-                            <button type="submit" class="common_btn">apply</button>
+                            <button type="submit" class="common_btn">{{ __('Apply') }}</button>
                         </form>
-                        <a class="common_btn mt-4 w-100 text-center" href="{{ route('user.checkout') }}">checkout</a>
+                        <a class="common_btn mt-4 w-100 text-center"
+                            href="{{ route('user.checkout') }}">{{ __('Checkout') }}</a>
                         <a class="common_btn mt-1 w-100 text-center" href="{{ url('/') }}"><i
-                                class="fab fa-shopify"></i> go shop</a>
+                                class="fab fa-shopify"></i> {{ __('Go shop') }}</a>
                     </div>
                 </div>
             </div>

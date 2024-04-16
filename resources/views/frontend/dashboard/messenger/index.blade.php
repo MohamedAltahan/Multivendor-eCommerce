@@ -7,14 +7,14 @@
             <div class="row">
                 <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
                     <div class="dashboard_content mt-2 mt-md-0">
-                        <h3><i class="far fa-star" aria-hidden="true"></i> Message</h3>
+                        <h3><i class="far fa-star" aria-hidden="true"></i> {{ __('Messages') }}</h3>
                         <div class="wsus__dashboard_review">
                             <div class="row">
                                 <div class="col-xl-4 col-md-5">
                                     <div class="wsus__chatlist d-flex align-items-start">
                                         <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist"
                                             aria-orientation="vertical">
-                                            <h2>Seller List</h2>
+                                            <h2>{{ __('Vendors list') }}</h2>
                                             <div class="wsus__chatlist_body">
                                                 @foreach ($chatUsers as $chatUser)
                                                     @php

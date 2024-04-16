@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('title')
-    {{ $setting->site_name }} - become vendor
+    {{ $setting->site_name }} - {{ __('Be a vendor') }}
 @endsection
 @section('content')
     <!--============================  BREADCRUMB START ==============================-->
@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4>be a vendor</h4>
+                        <h4>{{ __('Be a vendor') }}</h4>
                         <ul>
                             <li><a href="{{ route('home') }}">home</a></li>
                             <li><a href="#">Be vendor</a></li>

@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('title')
-    {{ $setting->site_name }} - About
+    {{ $setting->site_name }} - {{ __('About') }}
 @endsection
 @section('content')
     <!--============================  BREADCRUMB START ==============================-->
@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4>About</h4>
+                        <h4>{{ __('About') }}</h4>
                         <ul>
                             <li><a href="{{ route('home') }}">home</a></li>
                             <li><a href="#">About</a></li>
