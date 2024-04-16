@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('title')
-    {{ $setting->site_name }} - Payment
+    {{ $setting->site_name }} - {{ __('Payment') }}
 @endsection
 @section('content')
     <!--============================  BREADCRUMB START ==============================-->
@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4>payment</h4>
+                        <h4>{{ __('Payment') }}</h4>
                         <ul>
                             <li><a href="{{ route('home') }}">home</a></li>
                             <li><a href="#">payment</a></li>
@@ -32,7 +32,7 @@
                                 aria-orientation="vertical">
                                 <button class="nav-link common_btn active" id="v-pills-home-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-cod" type="button" role="tab" aria-controls="v-pills-cod"
-                                    aria-selected="true">COD (cash on delivery)</button>
+                                    aria-selected="true">{{ __('COD (cash on delivery)') }}</button>
 
                                 <button class="nav-link common_btn " id="v-pills-home-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-paypal" type="button" role="tab"
@@ -54,8 +54,7 @@
                                     <div class="col-xl-12 m-auto">
                                         <div class="wsus__payment_area">
                                             <a href="{{ route('user.paypal.payment') }}"
-                                                class="nav-link common_btn text-center">Pay
-                                                with paypal</a>
+                                                class="nav-link common_btn text-center">{{ __('Pay with') }} paypal</a>
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +64,7 @@
                                 <div class="row">
                                     <div class="col-xl-12 m-auto">
                                         <div class="wsus__payment_area">
-                                            <button class="nav-link common_btn">Pay with Stripe</button>
+                                            <button class="nav-link common_btn">{{ __('Pay with') }} Stripe</button>
                                         </div>
                                     </div>
                                 </div>
@@ -75,8 +74,8 @@
                                 <div class="row">
                                     <div class="col-xl-12 m-auto">
                                         <div class="wsus__payment_area">
-                                            <a href="{{ route('user.cod.payment') }}" class="nav-link common_btn">Proceed
-                                                ></a>
+                                            <a href="{{ route('user.cod.payment') }}" class="nav-link common_btn">
+                                                {{ __('Proceed') }} > </a>
                                         </div>
                                     </div>
                                 </div>
@@ -102,18 +101,20 @@
                                         <option>low to high </option>
                                         <option>high to low</option>
                                     </select>
-                                    <button type="submit" class="common_btn mt-4">confirm</button>
+                                    <button type="submit" class="common_btn mt-4">Confirm</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4">
                         <div class="wsus__pay_booking_summary" id="sticky_sidebar2">
-                            <h5>Order Summary</h5>
-                            <p>subtotal: <span>{{ $setting->currency }}{{ calcCartTotal() }}</span></p>
-                            <p>shipping fee(+) : <span>{{ $setting->currency }}{{ getShippingFee() }}</span></p>
-                            <p>Coupon(-) : <span>{{ $setting->currency }}{{ getMainCartDiscount() }}</span></p>
-                            <h6>total <span>{{ $setting->currency }}{{ finalPaymentAmount() }}</span></h6>
+                            <h5>{{ __('Order Summary') }}</h5>
+                            <p>{{ __('Subtotal ') }} : <span>{{ $setting->currency }}{{ calcCartTotal() }}</span></p>
+                            <p>{{ __('Shipping fee(+)') }} : <span>{{ $setting->currency }}{{ getShippingFee() }}</span>
+                            </p>
+                            <p>{{ __('Coupon(-)') }} : <span>{{ $setting->currency }}{{ getMainCartDiscount() }}</span>
+                            </p>
+                            <h6>{{ __('Total') }} <span>{{ $setting->currency }}{{ finalPaymentAmount() }}</span></h6>
                         </div>
                     </div>
                 </div>

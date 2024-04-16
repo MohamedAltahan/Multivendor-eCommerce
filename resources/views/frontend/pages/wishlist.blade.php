@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('title')
-    {{ $setting->site_name }} - wishlist
+    {{ $setting->site_name }} - {{ __('Wishlist') }}
 @endsection
 @section('content')
     <!--============================BREADCRUMB START==============================-->
@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4>wishlist</h4>
+                        <h4>{{ __('Wishlist') }}</h4>
                         <ul>
                             <li><a href="#">home</a></li>
                             <li><a href="#">peoduct</a></li>
@@ -34,23 +34,23 @@
                                 <tbody>
                                     <tr class="d-flex">
                                         <th class="wsus__pro_img">
-                                            product item
+                                            {{ __('Item') }}
                                         </th>
 
                                         <th class="wsus__pro_name" style="width:580px">
-                                            product details
+                                            {{ __('Details') }}
                                         </th>
 
                                         <th class="wsus__pro_status">
-                                            quantity
+                                            {{ __('Quantity') }}
                                         </th>
 
                                         <th class="wsus__pro_tk">
-                                            price
+                                            {{ __('Price') }}
                                         </th>
 
                                         <th class="wsus__pro_icon">
-                                            action
+                                            {{ __('Action') }}
                                         </th>
                                     </tr>
                                     @foreach ($wishlistProducts as $item)

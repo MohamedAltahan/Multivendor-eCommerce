@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('title')
-    {{ $setting->site_name }} - vendors
+    {{ $setting->site_name }} - {{ __('Vendors') }}
 @endsection
 @section('content')
     <!--============================     BREADCRUMB START  ==============================-->
@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4>vendors</h4>
+                        <h4>{{ __('Vendors') }}</h4>
                         <ul>
                             <li><a href="{{ url('/') }}">home</a></li>
                             <li><a href="#">vendors</a></li>
@@ -46,8 +46,8 @@
                                                 {{ $vendor->phone }}</a>
                                             <a href="mailto:example@gmail.com"><i class="fal fa-envelope"></i>
                                                 {{ $vendor->email }}</a>
-                                            <a href="{{ route('vendor-products', $vendor->id) }}" class="common_btn">visit
-                                                store</a>
+                                            <a href="{{ route('vendor-products', $vendor->id) }}"
+                                                class="common_btn">{{ __('Visit store') }}</a>
                                         </div>
                                     </div>
                                 </div>

@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('title')
-    {{ $setting->site_name }} - Checkout
+    {{ $setting->site_name }} - {{ __('Checkout') }}
 @endsection
 @section('content')
     <!--============================BREADCRUMB START==============================-->
@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4>check out</h4>
+                        <h4>{{ __('Checkout') }}</h4>
                         <ul>
                             <li><a href="route('home')">home</a></li>
                             <li><a href="#">check out</a></li>
@@ -29,10 +29,9 @@
                     <div class="wsus__check_form">
                         <div class="d-flex">
 
-                            <h5>Shipping addresses : </h5>
+                            <h5>{{ __('Shipping addresses :') }} </h5>
                             <a href="#" class="common_btn" style="margin-left:auto" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">add
-                                new address</a>
+                                data-bs-target="#exampleModal">{{ __('Add new address') }}</a>
                         </div>
 
                         <div class="row">
@@ -44,17 +43,17 @@
                                                 name="flexRadioDefault" data-id="{{ $address->id }}"
                                                 id="Radio{{ $address->id }}">
                                             <label class="form-check-label" for="Radio{{ $address->id }}">
-                                                Select Address
+                                                {{ __('Select Address') }}
                                             </label>
                                         </div>
                                         <ul>
-                                            <li><span>Name :</span> {{ $address->name }}</li>
-                                            <li><span>Phone :</span> {{ $address->phone }}</li>
-                                            <li><span>Email :</span> {{ $address->email }}</li>
-                                            <li><span>Country :</span> {{ $address->country }}</li>
-                                            <li><span>City :</span> {{ $address->city }}</li>
-                                            <li><span>Zip Code :</span> {{ $address->zip_code }}</li>
-                                            <li><span>Address :</span> {{ $address->address }}</li>
+                                            <li><span>{{ __('Name :') }}</span> {{ $address->name }}</li>
+                                            <li><span>{{ __('Phone :') }}</span> {{ $address->phone }}</li>
+                                            <li><span>{{ __('Email :') }}</span> {{ $address->email }}</li>
+                                            <li><span>{{ __('Country :') }}</span> {{ $address->country }}</li>
+                                            <li><span>{{ __('City :') }}</span> {{ $address->city }}</li>
+                                            <li><span>{{ __('Zip Code :') }}</span> {{ $address->zip_code }}</li>
+                                            <li><span>{{ __('Address :') }}</span> {{ $address->address }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -64,7 +63,7 @@
                 </div>
                 <div class="col-xl-4 col-lg-5">
                     <div class="wsus__order_details" id="sticky_sidebar">
-                        <p class="wsus__product">shipping Methods</p>
+                        <p class="wsus__product">{{ __('Shipping Methods') }}</p>
                         @foreach ($shippingMethods as $shippingMethod)
                             @if ($shippingMethod->type == 'min_cost' && calcCartTotal() >= $shippingMethod->min_cost)
                                 <div class="form-check">
@@ -90,13 +89,13 @@
                         @endforeach
 
                         <div class="wsus__order_details_summery">
-                            <p>subtotal: <span class="cart_subtotal"> {{ $setting->currency }}
+                            <p>{{ __('Subtotal') }} :<span class="cart_subtotal"> {{ $setting->currency }}
                                     {{ calcCartTotal() }}</span></p>
-                            <p>shipping fee(+): <span id="shipping_fee">{{ $setting->currency }}0</span></p>
-                            <p>Coupon(-): <span
+                            <p>{{ __('Shipping fee(+)') }} :<span id="shipping_fee">{{ $setting->currency }}0</span></p>
+                            <p>{{ __('Coupon(-)') }} :<span
                                     id="cart_discount">{{ $setting->currency }}{{ getMainCartDiscount() }}</span>
                             </p>
-                            <p><b>total:</b> <span></span>
+                            <p><b>{{ __('Total') }} :</b> <span></span>
                                 <b id="total_price" data-id="{{ getMainCartTotal() }}">
                                     {{ $setting->currency }}{{ getMainCartTotal() }}</b></span>
                             </p>
@@ -106,7 +105,8 @@
                                 <input class="form-check-input check-agree" type="checkbox" value=""
                                     id="flexCheckChecked3" checked>
                                 <label class="form-check-label" for="flexCheckChecked3">
-                                    I have read and agree to the website <a href="#">terms and conditions
+                                    {{ __('I have read and agree to the website') }} <a
+                                        href="#">{{ __('terms and conditions') }}
                                         *</a>
                                 </label>
                             </div>
@@ -114,7 +114,7 @@
                         <form id="checkout_form">
                             <input type="hidden" name="shipping_method_id" id="shipping_method_id" value="">
                             <input type="hidden" name="shipping_address_id" id="shipping_address_id" value="">
-                            <a href="" id="submit_checkout_form" class="common_btn">Place Order</a>
+                            <a href="" id="submit_checkout_form" class="common_btn">{{ __('Place order') }}</a>
                         </form>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">add new address</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{ __('Add new address') }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-0">
@@ -137,23 +137,26 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="wsus__check_single_form">
-                                            <x-form.input name="name" type="text" placeholder="Name *" />
+                                            <x-form.input name="name" type="text"
+                                                placeholder="{{ __('Name') }}" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="wsus__check_single_form">
-                                            <x-form.input name="phone" type="text" placeholder="Phone *" />
+                                            <x-form.input name="phone" type="text"
+                                                placeholder="{{ __('Phone') }}" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="wsus__check_single_form">
-                                            <x-form.input name="email" type="email" placeholder="Email *" />
+                                            <x-form.input name="email" type="email"
+                                                placeholder="{{ __('Email') }}" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="wsus__check_single_form">
                                             <select class="select_2" name="country">
-                                                <option value=""> Select Country</option>
+                                                <option value=""> {{ __('Select Country') }}</option>
                                                 @foreach (config('setting.country') as $country)
                                                     <option @selected(old('country') == $country ? 'selected' : '') value="{{ $country }}">
                                                         {{ $country }}</option>
@@ -164,27 +167,31 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="wsus__check_single_form">
-                                            <x-form.input name="city" type="text" placeholder=" City *" />
+                                            <x-form.input name="city" type="text"
+                                                placeholder=" {{ __('City') }}" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="wsus__check_single_form">
-                                            <x-form.input name="state" type="text" placeholder="State *" />
+                                            <x-form.input name="state" type="text"
+                                                placeholder="{{ __('State') }}" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="wsus__check_single_form">
-                                            <x-form.input name="zip_code" type="text" placeholder="Zip *" />
+                                            <x-form.input name="zip_code" type="text"
+                                                placeholder="{{ __('zip code') }}" />
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="wsus__check_single_form">
-                                            <x-form.input name="address" type="text" placeholder="Address" />
+                                            <x-form.input name="address" type="text"
+                                                placeholder="{{ __('Address') }}" />
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
                                         <div class="wsus__check_single_form">
-                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                            <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
                                         </div>
                                     </div>
                                 </div>

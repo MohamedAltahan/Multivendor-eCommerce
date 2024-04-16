@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('title')
-    {{ $setting->site_name }} - Login
+    {{ $setting->site_name }} - {{ __('Login') }}
 @endsection
 @section('content')
     <!--============================ BREADCRUMB START ==============================-->
@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4>login / register</h4>
+                        <h4>{{ __('Login') }} / {{ __('Register') }}</h4>
                         <ul>
                             <li><a href="#">home</a></li>
                             <li><a href="#">login / register</a></li>
@@ -31,12 +31,12 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="pills-home-tab2" data-bs-toggle="pill"
                                     data-bs-target="#pills-homes" type="button" role="tab" aria-controls="pills-homes"
-                                    aria-selected="true">login</button>
+                                    aria-selected="true">{{ __('Login') }}</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="pills-profile-tab2" data-bs-toggle="pill"
                                     data-bs-target="#pills-profiles" type="button" role="tab"
-                                    aria-controls="pills-profiles" aria-selected="true">signup</button>
+                                    aria-controls="pills-profiles" aria-selected="true">{{ __('Signup') }}</button>
                             </li>
                         </ul>
                         <div class="tab-content" id="pills-tabContent2">
@@ -49,23 +49,25 @@
                                         <div class="wsus__login_input">
 
                                             <i class="fas fa-user-tie"></i>
-                                            <input type="email" id="email" name="email" placeholder="Email"
-                                                autofocus />
+                                            <input type="email" id="email" name="email"
+                                                placeholder="{{ __('Email') }}" autofocus />
                                         </div>
 
                                         <div class="wsus__login_input">
                                             <i class="fas fa-key"></i>
-                                            <input type="password" id="password" name="password" placeholder="Password" />
+                                            <input type="password" id="password" name="password"
+                                                placeholder="{{ __('Password') }}" />
                                         </div>
 
                                         <div class="wsus__login_save">
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" name="remember"
                                                     id="remember_me">
-                                                <label class="form-check-label" for="flexSwitchCheckDefault">Remember
-                                                    me</label>
+                                                <label class="form-check-label"
+                                                    for="flexSwitchCheckDefault">{{ __('Remember me') }}</label>
                                             </div>
-                                            <a class="forget_p" href="{{ route('password.request') }}">forget password ?</a>
+                                            <a class="forget_p"
+                                                href="{{ route('password.request') }}">{{ __('Forget password') }} ?</a>
                                         </div>
                                         <div class="text-center row justify-content-around">
 

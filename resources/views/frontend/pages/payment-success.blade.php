@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('title')
-    {{ $setting->site_name }} - Payment
+    {{ $setting->site_name }} - {{ __('Payment') }}
 @endsection
 @section('content')
     <!--============================  BREADCRUMB START ==============================-->
@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4>payment</h4>
+                        <h4>{{ __('payment') }}</h4>
                         <ul>
                             <li><a href="{{ route('home') }}">home</a></li>
                             <li><a href="#">payment</a></li>
@@ -27,7 +27,7 @@
         <div class="container">
             <div class="wsus__pay_info_area">
                 <div class="row">
-                    <h1>Paid successfully</h1>
+                    <h1>{{ __('Paid successfully') }}</h1>
                 </div>
             </div>
         </div>

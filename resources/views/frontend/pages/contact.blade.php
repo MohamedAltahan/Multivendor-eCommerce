@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('title')
-    {{ $setting->site_name }} - About
+    {{ $setting->site_name }} - {{ __('Contact us') }}
 @endsection
 @section('content')
     <!--============================  BREADCRUMB START==============================-->
@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4>contact us</h4>
+                        <h4>{{ __('Contact us') }}</h4>
                         <ul>
                             <li><a href="#">home</a></li>
                             <li><a href="#">contact us</a></li>
@@ -33,7 +33,7 @@
                                 <div class="col-xl-12">
                                     <div class="wsus__contact_single">
                                         <i class="fal fa-envelope"></i>
-                                        <h5>mail address</h5>
+                                        <h5>{{ __('Email') }}</h5>
                                         <a href="mailto:{{ $setting->contact_email }}">{{ $setting->contact_email }}</a>
                                         <span><i class="fal fa-envelope"></i></span>
                                     </div>
@@ -44,7 +44,7 @@
                                 <div class="col-xl-12">
                                     <div class="wsus__contact_single">
                                         <i class="far fa-phone-alt"></i>
-                                        <h5>phone number</h5>
+                                        <h5>{{ __('Phone number') }}</h5>
                                         <a href="macallto:{{ $setting->contact_phone }}">{{ $setting->contact_phone }}</a>
                                         <span><i class="far fa-phone-alt"></i></span>
                                     </div>
@@ -55,7 +55,7 @@
                                 <div class="col-xl-12">
                                     <div class="wsus__contact_single">
                                         <i class="fal fa-map-marker-alt"></i>
-                                        <h5>contact address</h5>
+                                        <h5>{{ __('Contact address') }}</h5>
                                         <a href="">{{ $setting->contact_address }}</a>
                                         <span><i class="fal fa-map-marker-alt"></i></span>
                                     </div>
@@ -66,34 +66,35 @@
 
                     <div class="col-xl-8">
                         <div class="wsus__contact_question">
-                            <h5>Send Us a Message</h5>
+                            <h5>{{ __('Send us a message') }}</h5>
                             <form id="contact-form">
                                 <div class="row">
                                     <div class="col-xl-12">
                                         <div class="wsus__con_form_single">
-                                            <input type="text" placeholder="Your Name" name="name">
+                                            <input type="text" placeholder="{{ __('Your Name') }}" name="name">
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
                                         <div class="wsus__con_form_single">
-                                            <input type="email" placeholder="Email" name="email">
+                                            <input type="email" placeholder="{{ __('Email') }}" name="email">
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="wsus__con_form_single">
-                                            <input type="text" placeholder="Phone" name="phone">
+                                            <input type="text" placeholder="{{ __('Phone') }}" name="phone">
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="wsus__con_form_single">
-                                            <input type="text" placeholder="Subject" name="subject">
+                                            <input type="text" placeholder="{{ __('Subject') }}" name="subject">
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
                                         <div class="wsus__con_form_single">
-                                            <textarea cols="3" rows="5" placeholder="Message" name="message"></textarea>
+                                            <textarea cols="3" rows="5" placeholder="{{ __('Message') }}" name="message"></textarea>
                                         </div>
-                                        <button type="submit" id="submit" class="common_btn">send now</button>
+                                        <button type="submit" id="submit"
+                                            class="common_btn">{{ __('Send now') }}</button>
                                     </div>
                                 </div>
                             </form>
