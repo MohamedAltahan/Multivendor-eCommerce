@@ -152,25 +152,25 @@
         @endauth
         </li>
 
-        <li>
-            <div class="dropdown ">
-                <a style="width: 95px" class="btn btn-primary dropdown-toggle" href="#" role="button"
-                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ session('locale') == 'ar' ? 'العربية' : 'English' }}
-                </a>
+    </ul>
+    <ul class="mx-3">
+        <div class="dropdown ">
+            <a style="width: 95px" class="btn btn-primary dropdown-toggle" href="#" role="button"
+                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ session('locale') == 'ar' ? 'العربية' : 'English' }}
+            </a>
 
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                        <li class="form-control">
-                            <a style="width: 70px" rel="alternate" hreflang="{{ $localeCode }}"
-                                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                {{ $properties['native'] }}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        </li>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                    <li class="form-control">
+                        <a style="width: 70px" rel="alternate" hreflang="{{ $localeCode }}"
+                            href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                            {{ $properties['native'] }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
     </ul>
 
     <form action="{{ route('products.index') }}">
