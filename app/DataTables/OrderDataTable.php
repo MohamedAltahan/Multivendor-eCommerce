@@ -25,9 +25,8 @@ class OrderDataTable extends DataTable
             ->addColumn('action', function ($query) {
                 $editBtn = "<a href='" . route('admin.order.show', $query->id)  . "'class='btn btn-sm btn-primary'><i class='far fa-eye'></i>Details</a>";
                 $deleteBtn = "<a href='" . route('admin.order.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-danger delete-item'><i class='fas fa-trash'></i>Delete</a>";
-                $statusBtn = "<a href='" . route('admin.variant.destroy', $query->id)  . "'class='btn btn-sm ml-1 my-1 btn-warning delete-item'><i class='fas fa-truck'></i></a>";
 
-                return $editBtn . $deleteBtn . $statusBtn;
+                return $editBtn . $deleteBtn;
             })
             ->addColumn('customer', function ($query) {
                 return $query->user->name;
