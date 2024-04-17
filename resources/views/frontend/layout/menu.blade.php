@@ -70,6 +70,27 @@
                         <li><a class="{{ setActive(['contact']) }}"
                                 href="{{ route('contact') }}">{{ __('Contact Us') }}</a></li>
                     </ul>
+
+                    <ul class="wsus__menu_item mx-4">
+                        <div class="dropdown ">
+                            <a class="btn btn-primary dropdown-toggle" href="#" role="button"
+                                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ session('locale') == 'ar' ? 'العربية' : 'English' }}
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    <li>
+                                        <a rel="alternate" hreflang="{{ $localeCode }}"
+                                            href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                            {{ $properties['native'] }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </ul>
+
                     <ul class="wsus__menu_item wsus__menu_item_right">
                         @auth
 
@@ -109,7 +130,9 @@
                     @else
                         0
                     @endauth
-                </span></a></li>
+                </span></a>
+        </li>
+
         <li>
             @auth
                 @if (auth()->user()->role == 'user')
@@ -128,7 +151,28 @@
             <li><a style="width: 60px" href="{{ route('login') }}">{{ __('Login') }}</i></a></li>
         @endauth
         </li>
+
+        <li>
+            <div class="dropdown ">
+                <a style="width: 95px" class="btn btn-primary dropdown-toggle" href="#" role="button"
+                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ session('locale') == 'ar' ? 'العربية' : 'English' }}
+                </a>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <li class="form-control">
+                            <a style="width: 70px" rel="alternate" hreflang="{{ $localeCode }}"
+                                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                {{ $properties['native'] }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </li>
     </ul>
+
     <form action="{{ route('products.index') }}">
         <input type="text" placeholder="Search" name="search" value="{{ request()->search }}">
         <button type="submit"><i class="far fa-search"></i></button>

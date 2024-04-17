@@ -11,8 +11,8 @@
                     <div class="col-12">
                         <h4>{{ __('Login') }} / {{ __('Register') }}</h4>
                         <ul>
-                            <li><a href="#">home</a></li>
-                            <li><a href="#">login / register</a></li>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Login / Register</a></li>
                         </ul>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                                                     for="flexSwitchCheckDefault">{{ __('Remember me') }}</label>
                                             </div>
                                             <a class="forget_p"
-                                                href="{{ route('password.request') }}">{{ __('Forget password') }} ?</a>
+                                                href="{{ route('password.request') }}">{{ __('Forget password?') }}</a>
                                         </div>
                                         <div class="text-center row justify-content-around">
 

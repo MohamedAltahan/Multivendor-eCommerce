@@ -18,7 +18,7 @@
                     </div>
 
 
-                    <div class="col-xl-5 col-md-6 col-lg-4 d-none d-lg-block">
+                    <div class="col-xl-4 col-md-5 col-lg-3 d-none d-lg-block">
                         <div class="wsus__search">
                             <form action="{{ route('products.index') }}">
                                 <input type="text" placeholder="Search...." name="search"
@@ -27,6 +27,8 @@
                             </form>
                         </div>
                     </div>
+
+
                     <div class="col-xl-5 col-3 col-md-3 col-lg-6">
                         <div class="wsus__call_icon_area">
                             <div class="wsus__call_area">
@@ -38,6 +40,7 @@
                                     <p>{{ $setting->contact_phone }}</p>
                                 </div>
                             </div>
+
                             <ul class="wsus__icon_area">
                                 <li><a href="{{ route('user.wishlist.index') }}"><i class="fal fa-heart"></i><span>
                                             @auth
@@ -54,6 +57,7 @@
                     </div>
                 </div>
             </div>
+
 
             <div class="wsus__mini_cart">
                 <h4>{{ __('Shopping cart') }} <span class="wsus_close_mini_cart"><i class="far fa-times"></i></span>
