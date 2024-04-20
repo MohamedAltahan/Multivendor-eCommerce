@@ -79,7 +79,7 @@ class ProductDataTable extends DataTable
      */
     public function query(Product $model): QueryBuilder
     {
-        return $model->where('vendor_id', Auth::guard('admin')->user()->vendor->id)->newQuery();
+        return $model->where('vendor_id', Auth::guard('admin')->user()->vendor->id)->orderBy('id', 'DESC')->newQuery();
     }
 
     /**
