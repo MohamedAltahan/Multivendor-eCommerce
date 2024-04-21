@@ -52,36 +52,36 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('dashboard', [AdminController::class, 'dashboard'])
         ->name('dashboard');
-    //profile routes==========================================================================================
+    //profile routes__________________________________________________________________________________________
     Route::get('profile', [AdminProfileController::class, 'index'])->name('profile');
     Route::post('profile/update', [AdminProfileController::class, 'profileUpdate'])->name('profile.update');
     Route::post('profile/update/password', [AdminProfileController::class, 'passwordUpdate'])->name('password.update');
 
-    //slider routes============================================================================================
+    //slider routes____________________________________________________________________________________________
     Route::resource('slider', SliderController::class);
 
-    //category routes==========================================================================================
+    //category routes__________________________________________________________________________________________
     Route::put('category/change-status', [CategoryController::class, 'changeStatus'])->name('category.change-status');
     Route::resource('category', CategoryController::class);
 
-    //sub category routes=======================================================================================
+    //sub category routes_______________________________________________________________________________________
     Route::put('sub-category/change-status', [SubCategoryController::class, 'changeStatus'])->name('sub-category.change-status');
     Route::resource('sub-category', SubCategoryController::class);
 
-    //child category routes=====================================================================================
+    //child category routes_____________________________________________________________________________________
     Route::get('get-sub-categories', [ChildCategoryController::class, 'getSubCategories'])->name('get-sub-categories');
     Route::put('child-category/change-status', [ChildCategoryController::class, 'changeStatus'])->name('child-category.change-status');
     Route::resource('child-category', ChildCategoryController::class);
 
-    //brand routes===============================================================================================
+    //brand routes_______________________________________________________________________________________________
     Route::put('brand/change-status', [BrandController::class, 'changeStatus'])->name('brand.change-status');
     Route::resource('brand', BrandController::class);
 
-    //vendor Profile routes======================================================================================
+    //vendor Profile routes______________________________________________________________________________________
     // Route::put('vendor/change-status', [BrandController::class, 'changeStatus'])->name('brand.change-status');
     Route::resource('vendor-profile', AdminVendorProfileContorller::class);
 
-    //products routes============================================================================================
+    //products routes____________________________________________________________________________________________
     //product images**
     Route::get('products/get-prodcut-images', [ProductController::class, 'getProductImages'])->name('product.get-product-images');
     Route::delete('products/delete-product-image', [ProductController::class, 'deleteProductImage'])->name('product.delete-product-image');
@@ -95,19 +95,19 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     //product get attributes types ajax
     Route::get('product/get-attributes', [ProductVariantTypesController::class, 'getProductAttributes'])->name('product.get-attributes');
 
-    //product variant types============================================================================================
+    //product variant types____________________________________________________________________________________________
     Route::resource('product-variant-types', ProductVariantTypesController::class);
 
-    // variant==============================================================================================
+    // variant______________________________________________________________________________________________
     Route::put('variant-status/change-status', [VariantController::class, 'changeStatus'])->name('variant.change-status');
     Route::resource('variant', VariantController::class);
 
-    //product variant==============================================================================================
+    //product variant______________________________________________________________________________________________
     Route::put('product-variant/change-status', [ProductVariantController::class, 'changeStatus'])->name('product-variant.change-status');
     Route::get('get-variant-details', [ProductVariantController::class, 'getVariantDetails'])->name('get-variant-details');
     Route::resource('product-variant', ProductVariantController::class);
 
-    // variant details==============================================================================================
+    // variant details______________________________________________________________________________________________
     Route::get('product/variant-details/{variantId}', [VariantDetailsController::class, 'index'])->name('product.variant-details');
     Route::get('product/variant-details/create/{variantId}', [VariantDetailsController::class, 'create'])->name('product.variant-details.create');
     Route::post('product/variant-details', [VariantDetailsController::class, 'store'])->name('product.variant-details.store');
@@ -116,13 +116,13 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     Route::delete('product/variant-details/{VariantDetailsId}/', [VariantDetailsController::class, 'destroy'])->name('product.variant-details.destroy');
     Route::put('product/variant-details-status/change-status', [VariantDetailsController::class, 'changeStatus'])->name('product.variant-details.change-status');
 
-    //all vendors products=================================================================================================
+    //all vendors products_________________________________________________________________________________________________
     Route::get('product/all-vendors', [AllVendorsProductsController::class, 'index'])->name('all-vendors-products.index');
     Route::get('vendor-products/{vendorId}', [AllVendorsProductsController::class, 'getVendorProducts'])->name('get-vendor-products');
     Route::get('pending-products', [AllVendorsProductsController::class, 'pendingProducts'])->name('pending-products.index');
     Route::put('change-approval-status', [AllVendorsProductsController::class, 'changeApprovalStatus'])->name('change-approval-status');
 
-    //flash sale===========================================================================================================
+    //flash sale___________________________________________________________________________________________________________
     Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale.index');
     Route::put('flash-sale', [FlashSaleController::class, 'update'])->name('flash-sale.update');
     Route::post('flash-sale/add-product', [FlashSaleController::class, 'addProduct'])->name('flash-sale.add-product');
@@ -130,7 +130,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     Route::put('flash-sale/status', [FlashSaleController::class, 'changeStatus'])->name('flash-sale.change-status');
     Route::delete('flash-sale/{id}', [FlashSaleController::class, 'destroy'])->name('flash-sale.destroy');
 
-    //settigs========================================================================================================
+    //settigs________________________________________________________________________________________________________
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('general-settnig-update', [SettingController::class, 'generalSettingUpdate'])->name('general-setting-update.index');
     Route::put('logo-setting-update', [SettingController::class, 'logoSettingUpdate'])->name('logo-setting-update.update');
@@ -139,37 +139,37 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     Route::put('stmp-setting-update', [SettingController::class, 'stmpSettingUpdate'])->name('stmp-setting-update');
 
 
-    //Coupons========================================================================================================
+    //Coupons________________________________________________________________________________________________________
     Route::put('coupons/change-status', [CouponController::class, 'changeStatus'])->name('coupons.change-status');
     Route::resource('coupons', CouponController::class);
 
-    //shipping========================================================================================================
+    //shipping________________________________________________________________________________________________________
     Route::put('shipping-rule/change-status', [ShippingRuleController::class, 'changeStatus'])->name('shipping-rule.change-status');
     Route::resource('shipping-rule', ShippingRuleController::class);
 
-    // Payment setting=============================================================================================
+    // Payment setting_____________________________________________________________________________________________
     Route::get('payment-setting', [PaymentSettingController::class, 'index'])->name('payment-setting.index');
     Route::put('cod-setting/{id}', [CodController::class, 'update'])->name('cod-setting.update');
     Route::resource('paypal-setting', PaypalSettingContrller::class);
     //Stripe ---------------------------------------------
     Route::put('stripe-setting/{id}', [StripeSettingController::class, 'update'])->name('stripe-setting.update');
 
-    //Order=========================================================================================================
+    //Order_________________________________________________________________________________________________________
     Route::resource('order', OrderController::class);
     Route::get('order-status', [OrderController::class, 'changeOrderStatus'])->name('order.status');
     Route::get('payment-status', [OrderController::class, 'changePaymentStatus'])->name('payment.status');
 
-    //order transaction=========================================================================================================
+    //order transaction_________________________________________________________________________________________________________
     Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
 
-    //Home page setting=========================================================================================================
+    //Home page setting_________________________________________________________________________________________________________
     Route::get('home-page-setting', [HomePageSettingController::class, 'index'])->name('home-page-setting');
     Route::put('popular-category-section', [HomePageSettingController::class, 'updatePopularCategorySection'])->name('popular-category-section');
     Route::put('products-slider-one', [HomePageSettingController::class, 'updateProductsSliderOne'])->name('products-slider-one');
     Route::put('products-slider-two', [HomePageSettingController::class, 'updateProductsSlidertwo'])->name('products-slider-two');
     Route::put('products-slider-tree', [HomePageSettingController::class, 'updateProductsSliderThree'])->name('products-slider-three');
 
-    //footer============================================================================================
+    //footer____________________________________________________________________________________________
     //footer contact info-----------------------------
     Route::resource('footer', FooterController::class);
     //footer social buttons---------------------------
@@ -187,33 +187,33 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     Route::get('subscribers', [SubscriberController::class, 'index'])->name('subscribers.index');
     Route::delete('subscribers/{id}', [SubscriberController::class, 'destroy'])->name('subscribers.destroy');
     Route::post('subscribers-send-mail', [SubscriberController::class, 'sendMail'])->name('subscribers-send-mail');
-    //advertisement==========================================================================================
+    //advertisement__________________________________________________________________________________________
     Route::get('advertisement', [AdvertisementController::class, 'index'])->name('advertisement.index');
     Route::put('advertisement/homepage-banner1', [AdvertisementController::class, 'homePageBanner1'])->name('homepage-banner1');
     Route::put('advertisement/homepage-banner2', [AdvertisementController::class, 'homePageBanner2'])->name('homepage-banner2');
-    // reviews==================================================================================================
+    // reviews__________________________________________________________________________________________________
     Route::get('reviews', [AdminReviewController::class, 'index'])->name('reviews.index');
     Route::put('reviews/change-status', [AdminReviewController::class, 'changeStatus'])->name('reviews.change-status');
-    // vendor requests=============================================================================
+    // vendor requests_____________________________________________________________________________
     Route::get('vendor-requests', [VendorRequestController::class, 'index'])->name('vendor-requests.index');
     Route::get('vendor-requests/{id}/show', [VendorRequestController::class, 'show'])->name('vendor-requests.show');
     Route::put('vendor-requests/{id}/change-status', [VendorRequestController::class, 'changeStatus'])->name('vendor-requests.change-status');
-    //all customer list==============================================================================
+    //all customer list______________________________________________________________________________
     Route::get('customers', [CustomerListController::class, 'index'])->name('customers.index');
     Route::put('customers/change-status', [CustomerListController::class, 'changeStatus'])->name('customers.change-status');
     Route::put('customers/change-status', [CustomerListController::class, 'changeStatus'])->name('customers.change-status');
-    //all vendors list==============================================================================
-    //all admin list==============================================================================
+    //all vendors list______________________________________________________________________________
+    //all admin list______________________________________________________________________________
     Route::get('admin', [AdminListController::class, 'index'])->name('admin.index');
     Route::put('admin/change-status', [AdminListController::class, 'changeStatus'])->name('admin.change-status');
     Route::delete('admin/destroy/{id}', [AdminListController::class, 'destroy'])->name('admin.destroy');
-    //all vendors list==============================================================================
+    //all vendors list______________________________________________________________________________
     Route::get('vendors', [VendorListController::class, 'index'])->name('vendors.index');
     Route::put('vendors/change-status', [VendorListController::class, 'changeStatus'])->name('vendors.change-status');
-    //Vendor conditions==============================================================================
+    //Vendor conditions______________________________________________________________________________
     Route::get('vendor-condition', [VendorConditionController::class, 'index'])->name('vendor-condition.index');
     Route::put('vendor-condition/update', [VendorConditionController::class, 'update'])->name('vendor-condition.update');
-    //About==============================================================================
+    //About______________________________________________________________________________
     Route::get('about', [AboutController::class, 'index'])->name('about.index');
     Route::put('about/update', [AboutController::class, 'update'])->name('about.update');
 
@@ -221,20 +221,20 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     Route::get('become-vendor', [BecomeVendorController::class, 'index'])->name('become-vendor.index');
     Route::put('become-vendor/update', [BecomeVendorController::class, 'update'])->name('become-vendor.update');
 
-    //terms and conditions================================================================
+    //terms and conditions________________________________________________________________
     Route::get('terms-and-conditions', [TermsAndConditionController::class, 'index'])->name('terms-and-conditions.index');
     Route::put('terms-and-conditions/update', [TermsAndConditionController::class, 'update'])->name('terms-and-conditions.update');
-    //Manage users=======================================================================================
+    //Manage users_______________________________________________________________________________________
     Route::get('manage-user', [ManageUserController::class, 'index'])->name('manage-user');
     Route::post('manage-user', [ManageUserController::class, 'create'])->name('manage-user.create');
-    //withdraw methods==================================================================================
+    //withdraw methods__________________________________________________________________________________
     Route::resource('withdraw-method', WithdrawMethodController::class);
-    //withdraw trasanctons==================================================================================
+    //withdraw trasanctons__________________________________________________________________________________
     Route::get('withdraw-transaction', [WithdrawTransactionController::class, 'index'])->name('withdraw-transaction.index');
     Route::get('withdraw-transaction/{id}', [WithdrawTransactionController::class, 'show'])->name('withdraw-transaction.show');
     Route::put('withdraw-transaction/{id}', [WithdrawTransactionController::class, 'update'])->name('withdraw-transaction.update');
 
-    //message ================================================================================================
+    //message ________________________________________________________________________________________________
     Route::get('messages', [MessageController::class, 'index'])->name('messages.index');
     Route::get('get-messages', [MessageController::class, 'getMessages'])->name('get-messages');
     Route::post('send-message', [MessageController::class, 'sendMessage'])->name('send-message');
