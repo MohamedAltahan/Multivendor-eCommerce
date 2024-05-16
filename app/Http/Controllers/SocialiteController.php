@@ -21,7 +21,8 @@ class SocialiteController extends Controller
         $userData = Socialite::driver('github')->user();
         $userName = $userData->getName() ?? $userData->getNickname();
         $user = User::updateOrCreate([
-            'provider_id' => $userData->getId()
+            // 'provider_id' => $userData->getId()
+            'email' => $userData->getEmail()
         ], [
             'name' => $userName,
             'email' => $userData->getEmail(),
@@ -44,7 +45,8 @@ class SocialiteController extends Controller
         $userData = Socialite::driver('facebook')->user();
         $userName = $userData->getName() ?? $userData->getNickname();
         $user = User::updateOrCreate([
-            'provider_id' => $userData->getId()
+            // 'provider_id' => $userData->getId()
+            'email' => $userData->getEmail()
         ], [
             'name' => $userName,
             'email' => $userData->getEmail(),
@@ -67,7 +69,8 @@ class SocialiteController extends Controller
         $userData = Socialite::driver('google')->user();
         $userName = $userData->getName() ?? $userData->getNickname();
         $user = User::updateOrCreate([
-            'provider_id' => $userData->getId()
+            // 'provider_id' => $userData->getId()
+            'email' => $userData->getEmail()
         ], [
             'name' => $userName,
             'email' => $userData->getEmail(),

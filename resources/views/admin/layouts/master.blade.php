@@ -71,11 +71,9 @@
                 <div class="main-content">
                     <!-- Main Content -->
                     <section class="section">
-
                         <div class="section-header">
                             <h1>@yield('mainTitle')</h1>
                         </div>
-
                         <div class="section-body">
                             <div class="row">
                                 <div class="col-12 ">
@@ -86,8 +84,6 @@
                             </div>
                         </div>
                     </section>
-
-
                 </div>
                 @include('admin.layouts.footer')
             </div>

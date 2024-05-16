@@ -43,8 +43,6 @@
         @include('frontend.layout.menu')
         {{-- end main menu --}}
 
-
-
         {{-- main content --}}
         @yield('content')
         {{-- end main content --}}

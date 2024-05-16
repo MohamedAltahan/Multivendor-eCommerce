@@ -101,7 +101,6 @@
                             @elseif (auth()->user()->role == 'admin')
                                 <li><a href="{{ route('admin.dashboard') }}">{{ __('Admin dashboard') }}</a></li>
                             @endif
-
                             <li> <a href="javascript:$('#logout_form').submit();" class=""><i
                                         class="fas fa-sign-out-alt"> {{ __('Logout') }} </i></a></li>
 

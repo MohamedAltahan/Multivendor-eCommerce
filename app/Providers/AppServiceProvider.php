@@ -53,7 +53,6 @@ class AppServiceProvider extends ServiceProvider
         Config::set('broadcasting.connections.pusher.app_id', $pusherSetting->pusher_app_id);
         Config::set('broadcasting.connections.pusher.options.host', "api-" . $pusherSetting->pusher_cluster . ".pusher.com");
 
-
         //share variable in all views
         View::composer('*', function ($view) use ($setting, $logoSetting, $pusherSetting) {
             $view->with(['setting' => $setting, 'logoSetting' => $logoSetting, 'pusherSetting' => $pusherSetting]);

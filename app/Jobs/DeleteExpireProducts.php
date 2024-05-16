@@ -34,7 +34,7 @@ class DeleteExpireProducts implements ShouldQueue
         $this->forceDelete($products);
     }
 
-    //trash-----------------------------------------------------
+    //force delete trash____________________________________________________________
     public function forceDelete($products)
     {
         foreach ($products as $product) {

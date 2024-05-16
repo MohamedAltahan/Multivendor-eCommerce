@@ -175,7 +175,7 @@ class ProductController extends Controller
         return view('admin.product.images', compact('productImages'));
     }
 
-    //get Product Images using ajax---------------------------------------------------------
+    //delete Product Images using ajax---------------------------------------------------------
     public function deleteProductImage(Request $request)
     {
         $product_image = ProductImages::findOrFail($request->id);
