@@ -57,8 +57,6 @@
                         error: function(error) {
                             toastr.error('Not updated')
                         }
-
-
                     })
                 })
             })

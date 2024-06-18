@@ -88,6 +88,7 @@
                                 <h5>offer ending time: : </h5>
                                 <div class="simply-countdown simply-countdown-one"></div>
                             </div>
+
                             {{-- submit using ajax in scripts file --}}
                             <form class="shopping-cart-form" action="">
                                 <input type="hidden" name='submit_source' value="details_page">

@@ -37,6 +37,7 @@ class MessageEvent implements ShouldBroadcast
             new PrivateChannel('message.' . $this->receiver_id),
         ];
     }
+
     //send this data with broadcast to pusher
     public function broadcastWith(): array
     {

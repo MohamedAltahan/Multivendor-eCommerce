@@ -14,6 +14,7 @@ class ProductPolicy
      */
     public function view(User $user, Product $product): bool
     {
+
         return $user->vendor->id == $product->vendor_id;
     }
 
