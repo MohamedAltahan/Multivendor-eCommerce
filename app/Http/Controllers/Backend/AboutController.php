@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\About;
 use Illuminate\Http\Request;
 
+
 class AboutController extends Controller
 {
     function index()
@@ -16,6 +17,7 @@ class AboutController extends Controller
     //============================================================
     function update(Request $request)
     {
+
         $request->validate([
             'content' => ['required']
         ]);

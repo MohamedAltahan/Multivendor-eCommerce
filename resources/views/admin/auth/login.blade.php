@@ -58,7 +58,7 @@
                                         <div class="form-group">
 
                                             <x-form.input label="Email" id="email" type="email" name="email"
-                                                lable='email' required autofocus />
+                                                lable='email' value='admin@gmail.com' required autofocus />
                                         </div>
                                         <!-- password Address -->
                                         <div class="form-group">
@@ -70,7 +70,7 @@
                                                 </div>
                                             </div>
                                             <x-form.input id="password" type="password" name="password"
-                                                label="Password" lable='password' required />
+                                                value='password' lable='password' required />
                                         </div>
 
                                         <div class="form-group">
